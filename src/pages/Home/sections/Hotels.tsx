@@ -52,15 +52,16 @@ function Hotels() {
   return (
     <section
       id="hotels"
+      className="container-pad section-pad-y"
       style={{
         maxWidth: 1240,
-        margin: '110px auto 0',
-        padding: '0 48px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
       }}
     >
       <div
         ref={revealRef}
-        className="reveal"
+        className="reveal hotels-header"
         style={{
           display: 'flex',
           alignItems: 'flex-end',
@@ -82,11 +83,11 @@ function Hotels() {
             NOS ADRESSES SÉLECTIONNÉES
           </span>
           <h2
+            className="section-title"
             style={{
               margin: '12px 0 0',
               fontFamily: "'Cormorant Garamond',serif",
               fontWeight: 600,
-              fontSize: 44,
               lineHeight: 1.1,
               color: '#F5EFE6',
             }}
@@ -110,13 +111,7 @@ function Hotels() {
         </a>
       </div>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3,1fr)',
-          gap: 20,
-        }}
-      >
+      <div className="grid-3">
         {hotels.map((hotel) => (
           <a
             key={hotel.title}

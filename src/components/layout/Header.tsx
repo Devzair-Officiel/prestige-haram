@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import logoHaramain from '../../assets/logo_haramain.png';
 
 type MenuKey = 'hotels' | 'services' | null;
 
@@ -15,6 +16,16 @@ const servicesMenu = [
 ];
 
 const simpleLinks = [
+  { label: 'À propos', href: '#apropos' },
+  { label: 'Témoignages', href: '#temoignages' },
+  { label: 'FAQ', href: '#faq' },
+  { label: 'Contact', href: '#contact' },
+];
+
+const mobileNav = [
+  { label: 'Accueil', href: '#' },
+  { label: 'Hôtels', href: '#hotels' },
+  { label: 'Services', href: '#services' },
   { label: 'À propos', href: '#apropos' },
   { label: 'Témoignages', href: '#temoignages' },
   { label: 'FAQ', href: '#faq' },
@@ -56,9 +67,11 @@ function menuStyle(open: boolean): React.CSSProperties {
 
 function Header() {
   const [menu, setMenu] = useState<MenuKey>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <header
+      className="header-pad"
       style={{
         position: 'sticky',
         top: 0,
@@ -66,8 +79,7 @@ function Header() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        gap: 24,
-        padding: '16px 48px',
+        gap: 16,
         background: 'rgba(20,17,14,0.82)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
@@ -83,29 +95,16 @@ function Header() {
           color: 'inherit',
         }}
       >
-        <div
+        <img
+          src={logoHaramain}
+          alt="Haramain Prestige"
           style={{
-            width: 40,
-            height: 40,
-            borderRadius: 9,
-            background: 'linear-gradient(135deg,#EBCE82,#C09A44)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            width: 44,
+            height: 44,
+            objectFit: 'contain',
+            flexShrink: 0,
           }}
-        >
-          <span
-            style={{
-              fontFamily: "'Cormorant Garamond',serif",
-              fontWeight: 700,
-              fontSize: 21,
-              color: '#14110E',
-              letterSpacing: '0.5px',
-            }}
-          >
-            HP
-          </span>
-        </div>
+        />
         <div
           style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}
         >
@@ -135,8 +134,8 @@ function Header() {
       </a>
 
       <nav
+        className="nav-desktop"
         style={{
-          display: 'flex',
           alignItems: 'center',
           gap: 4,
           fontSize: 13.5,
@@ -224,33 +223,121 @@ function Header() {
         ))}
       </nav>
 
-      <a
-        href="#devis"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 8,
-          padding: '11px 20px',
-          borderRadius: 10,
-          background: 'linear-gradient(135deg,#EBCE82,#C09A44)',
-          color: '#14110E',
-          fontWeight: 700,
-          fontSize: 13.5,
-          whiteSpace: 'nowrap',
-        }}
-      >
-        Obtenir un devis
-        <svg width="14" height="14" viewBox="0 0 16 16">
-          <path
-            d="M3 8h9M9 4l4 4-4 4"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </a>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <a
+          href="#devis"
+          className="header-cta hide-mobile"
+          style={{
+            alignItems: 'center',
+            gap: 8,
+            padding: '11px 20px',
+            borderRadius: 10,
+            background: 'linear-gradient(135deg,#EBCE82,#C09A44)',
+            color: '#14110E',
+            fontWeight: 700,
+            fontSize: 13.5,
+            whiteSpace: 'nowrap',
+          }}
+        >
+          Obtenir un devis
+          <svg width="14" height="14" viewBox="0 0 16 16">
+            <path
+              d="M3 8h9M9 4l4 4-4 4"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </a>
+
+        <button
+          type="button"
+          aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+          aria-expanded={mobileOpen}
+          onClick={() => setMobileOpen((v) => !v)}
+          className="nav-toggle"
+          style={{
+            width: 42,
+            height: 42,
+            borderRadius: 10,
+            border: '1px solid rgba(245,239,230,0.16)',
+            background: 'rgba(20,17,14,0.6)',
+            color: '#F5EFE6',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          {mobileOpen ? (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              />
+            </svg>
+          ) : (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M4 7h16M4 12h16M4 17h16"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              />
+            </svg>
+          )}
+        </button>
+      </div>
+
+      <div className={`mobile-menu${mobileOpen ? ' open' : ''}`}>
+        {mobileNav.map((item) => (
+          <a
+            key={item.label}
+            href={item.href}
+            onClick={() => setMobileOpen(false)}
+            style={{
+              padding: '13px 6px',
+              fontSize: 15,
+              fontWeight: 600,
+              color: '#F5EFE6',
+              borderBottom: '1px solid rgba(245,239,230,0.06)',
+            }}
+          >
+            {item.label}
+          </a>
+        ))}
+        <a
+          href="#devis"
+          onClick={() => setMobileOpen(false)}
+          style={{
+            marginTop: 14,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 8,
+            padding: '14px 20px',
+            borderRadius: 12,
+            background: 'linear-gradient(135deg,#EBCE82,#C09A44)',
+            color: '#14110E',
+            fontWeight: 700,
+            fontSize: 14,
+          }}
+        >
+          Obtenir un devis
+          <svg width="14" height="14" viewBox="0 0 16 16">
+            <path
+              d="M3 8h9M9 4l4 4-4 4"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </a>
+      </div>
     </header>
   );
 }

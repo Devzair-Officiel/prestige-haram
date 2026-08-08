@@ -1,3 +1,5 @@
+import logoHaramain from '../../assets/logo_haramain.png';
+
 const navigationLinks = [
   { label: 'À propos', href: '#apropos' },
   { label: 'Hôtels', href: '#hotels' },
@@ -66,40 +68,24 @@ function Footer() {
       }}
     >
       <div
+        className="footer-grid footer-pad"
         style={{
           maxWidth: 1240,
           margin: '0 auto',
-          padding: '52px 48px',
-          display: 'grid',
-          gridTemplateColumns: '1.8fr 1fr 1fr 1fr',
-          gap: 40,
-          alignItems: 'start',
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div
+            <img
+              src={logoHaramain}
+              alt="Haramain Prestige"
               style={{
-                width: 38,
-                height: 38,
-                borderRadius: 9,
-                background: 'linear-gradient(135deg,#EBCE82,#C09A44)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                width: 42,
+                height: 42,
+                objectFit: 'contain',
+                flexShrink: 0,
               }}
-            >
-              <span
-                style={{
-                  fontFamily: "'Cormorant Garamond',serif",
-                  fontWeight: 700,
-                  fontSize: 19,
-                  color: '#14110E',
-                }}
-              >
-                HP
-              </span>
-            </div>
+            />
             <div style={{ lineHeight: 1 }}>
               <span
                 style={{
@@ -178,9 +164,10 @@ function Footer() {
       </div>
 
       <div
+        className="container-pad"
         style={{
           borderTop: '1px solid rgba(245,239,230,0.06)',
-          padding: '18px 48px',
+          padding: '18px clamp(20px, 5vw, 48px)',
           textAlign: 'center',
         }}
       >

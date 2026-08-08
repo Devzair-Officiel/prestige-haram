@@ -63,7 +63,7 @@ function Hero() {
     <section
       style={{
         position: 'relative',
-        minHeight: 680,
+        minHeight: 'clamp(560px, 90vh, 720px)',
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
@@ -95,12 +95,12 @@ function Hero() {
         }}
       />
       <div
+        className="hero-pad"
         style={{
           position: 'relative',
           width: '100%',
           maxWidth: 1240,
           margin: '0 auto',
-          padding: '72px 48px',
         }}
       >
         <div
@@ -122,11 +122,11 @@ function Hero() {
             CONCIERGERIE DE SÉJOUR · MAKKAH &amp; MADINAH
           </span>
           <h1
+            className="hero-title"
             style={{
               margin: 0,
               fontFamily: "'Cormorant Garamond',serif",
               fontWeight: 600,
-              fontSize: 68,
               lineHeight: 1.02,
               color: '#F8F2E8',
               textWrap: 'pretty',
@@ -210,6 +210,7 @@ function Hero() {
             </a>
           </div>
           <div
+            className="hero-trust"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -232,6 +233,7 @@ function Hero() {
                 </span>
                 {index < trustItems.length - 1 && (
                   <span
+                    className="hero-trust-sep"
                     style={{
                       width: 4,
                       height: 4,

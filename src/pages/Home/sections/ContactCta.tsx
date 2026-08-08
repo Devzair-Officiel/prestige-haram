@@ -1,43 +1,45 @@
-import ImagePlaceholder from '../../../components/ui/ImagePlaceholder';
 import { useReveal } from '../../../hooks/useReveal';
+import nabawiImage from '../../../assets/masjid_nabawi.webp';
 
 function ContactCta() {
   const revealRef = useReveal<HTMLDivElement>();
 
   return (
-    <section
-      id="contact"
-      style={{
-        marginTop: 130,
-        padding: '0 48px',
-      }}
-    >
+    <section id="contact" className="container-pad section-pad-y">
       <div
         ref={revealRef}
-        className="reveal"
+        className="reveal contact-pad"
         style={{
           position: 'relative',
           maxWidth: 1240,
           margin: '0 auto',
           borderRadius: 24,
           overflow: 'hidden',
-          minHeight: 340,
+          minHeight: 300,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           textAlign: 'center',
-          padding: '80px 40px',
         }}
       >
-        <div style={{ position: 'absolute', inset: 0 }}>
-          <ImagePlaceholder label="Photo — Masjid an-Nabawi au coucher du soleil" />
-        </div>
+        <img
+          src={nabawiImage}
+          alt="Masjid an-Nabawi à Madinah"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center 40%',
+          }}
+        />
         <div
           style={{
             position: 'absolute',
             inset: 0,
             background:
-              'linear-gradient(180deg,rgba(20,17,14,0.5) 0%,rgba(20,17,14,0.82) 100%)',
+              'linear-gradient(180deg,rgba(20,17,14,0.55) 0%,rgba(20,17,14,0.78) 60%,rgba(20,17,14,0.9) 100%)',
           }}
         />
         <div
@@ -61,11 +63,11 @@ function ContactCta() {
             PRÊT À PARTIR ?
           </span>
           <h2
+            className="section-title"
             style={{
               margin: 0,
               fontFamily: "'Cormorant Garamond',serif",
               fontWeight: 600,
-              fontSize: 44,
               lineHeight: 1.1,
               color: '#F8F2E8',
             }}

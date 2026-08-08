@@ -40,20 +40,21 @@ function Testimonials() {
   return (
     <section
       id="temoignages"
+      className="container-pad section-pad-y"
       style={{
         maxWidth: 1240,
-        margin: '110px auto 0',
-        padding: '0 48px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
       }}
     >
       <div
         ref={revealRef}
-        className="reveal"
+        className="reveal testi-header"
         style={{
           display: 'flex',
           alignItems: 'flex-end',
           justifyContent: 'space-between',
-          gap: 40,
+          gap: 24,
           marginBottom: 36,
           flexWrap: 'wrap',
         }}
@@ -70,11 +71,11 @@ function Testimonials() {
             ILS NOUS FONT CONFIANCE
           </span>
           <h2
+            className="section-title"
             style={{
               margin: '12px 0 0',
               fontFamily: "'Cormorant Garamond',serif",
               fontWeight: 600,
-              fontSize: 44,
               lineHeight: 1.1,
               color: '#F5EFE6',
             }}
@@ -82,7 +83,7 @@ function Testimonials() {
             Ce que disent nos voyageurs
           </h2>
         </div>
-        <div style={{ textAlign: 'right' }}>
+        <div className="testi-rating" style={{ textAlign: 'right' }}>
           <div
             style={{
               display: 'flex',
@@ -128,13 +129,7 @@ function Testimonials() {
         </div>
       </div>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3,1fr)',
-          gap: 20,
-        }}
-      >
+      <div className="grid-3">
         {testimonials.map((testimonial) => (
           <figure
             key={testimonial.name}

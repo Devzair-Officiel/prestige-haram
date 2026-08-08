@@ -74,10 +74,11 @@ function Services() {
   return (
     <section
       id="services"
+      className="container-pad section-pad-y"
       style={{
         maxWidth: 1240,
-        margin: '110px auto 0',
-        padding: '0 48px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
       }}
     >
       <div
@@ -96,11 +97,11 @@ function Services() {
           CE QUE NOUS FAISONS
         </span>
         <h2
+          className="section-title"
           style={{
             margin: '12px 0 0',
             fontFamily: "'Cormorant Garamond',serif",
             fontWeight: 600,
-            fontSize: 44,
             lineHeight: 1.1,
             color: '#F5EFE6',
           }}
@@ -121,9 +122,8 @@ function Services() {
       </div>
 
       <div
+        className="grid-4"
         style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4,1fr)',
           gap: 1,
           background: 'rgba(245,239,230,0.08)',
           border: '1px solid rgba(245,239,230,0.08)',

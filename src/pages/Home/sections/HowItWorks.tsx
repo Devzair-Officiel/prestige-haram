@@ -27,10 +27,11 @@ function HowItWorks() {
   return (
     <section
       id="fonctionnement"
+      className="container-pad section-pad-y"
       style={{
         maxWidth: 1240,
-        margin: '110px auto 0',
-        padding: '0 48px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
       }}
     >
       <div
@@ -49,11 +50,11 @@ function HowItWorks() {
           COMMENT ÇA MARCHE
         </span>
         <h2
+          className="section-title"
           style={{
             margin: '12px 0 0',
             fontFamily: "'Cormorant Garamond',serif",
             fontWeight: 600,
-            fontSize: 44,
             lineHeight: 1.1,
             color: '#F5EFE6',
           }}
@@ -62,13 +63,7 @@ function HowItWorks() {
         </h2>
       </div>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3,1fr)',
-          gap: 24,
-        }}
-      >
+      <div className="grid-3" style={{ gap: 24 }}>
         {steps.map((step) => (
           <div
             key={step.number}

@@ -270,21 +270,20 @@ function QuoteForm() {
   return (
     <section
       id="devis"
+      className="container-pad"
       style={{
         maxWidth: 1240,
         margin: '-48px auto 0',
-        padding: '0 48px',
         position: 'relative',
         zIndex: 10,
       }}
     >
       <div
         ref={revealRef}
-        className="reveal"
+        className="reveal form-card-pad"
         style={{
           borderRadius: 20,
-          padding: '38px 42px',
-          background: 'rgba(20,17,14,0.52)',
+          background: 'rgba(20,17,14,0.72)',
           backdropFilter: 'blur(18px) saturate(140%)',
           WebkitBackdropFilter: 'blur(18px) saturate(140%)',
           border: '1px solid rgba(201,162,75,0.22)',
@@ -307,7 +306,7 @@ function QuoteForm() {
               margin: '9px 0 6px',
               fontFamily: "'Cormorant Garamond',serif",
               fontWeight: 600,
-              fontSize: 34,
+              fontSize: 'clamp(24px, 3.6vw, 34px)',
               color: '#F5EFE6',
             }}
           >
@@ -338,13 +337,7 @@ function QuoteForm() {
           >
             DE QUELS SERVICES AVEZ-VOUS BESOIN ?
           </legend>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4,1fr)',
-              gap: 12,
-            }}
-          >
+          <div className="svc-grid">
             {services.map((service) => (
               <button
                 key={service.key}
@@ -401,13 +394,7 @@ function QuoteForm() {
           </div>
         </fieldset>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
-            gap: 38,
-          }}
-        >
+        <div className="form-steps">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <span style={stepBadgeStyle}>1</span>

@@ -9,6 +9,8 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100%;
+  overflow-x: hidden;
+  max-width: 100vw;
   background: #14110e;
   color: #f5efe6;
   font-family:
@@ -29,6 +31,11 @@ body {
   min-height: 100vh;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 a {
   color: #e6c878;
   text-decoration: none;
@@ -40,6 +47,13 @@ a:hover {
 
 button {
   cursor: pointer;
+  font-family: inherit;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 input::placeholder,
@@ -63,6 +77,7 @@ textarea::placeholder {
   border-radius: 8px;
 }
 
+/* ---------- Animations ---------- */
 .reveal {
   opacity: 0;
   transform: translateY(18px);
@@ -100,6 +115,7 @@ textarea::placeholder {
   animation: lineflow 6s linear infinite;
 }
 
+/* ---------- Service toggles ---------- */
 .svc-card {
   transition:
     background 0.22s ease,
@@ -134,6 +150,212 @@ textarea::placeholder {
 
 .svccard.hover-lift:hover {
   background: #1e1a14;
+}
+
+/* ---------- Responsive layout utilities ---------- */
+.container-pad {
+  padding-left: clamp(20px, 5vw, 48px);
+  padding-right: clamp(20px, 5vw, 48px);
+}
+
+.section-pad-y {
+  margin-top: clamp(70px, 10vw, 110px);
+}
+
+.hero-pad {
+  padding: clamp(56px, 8vw, 72px) clamp(20px, 5vw, 48px);
+}
+
+.form-card-pad {
+  padding: clamp(22px, 4vw, 42px);
+}
+
+.footer-pad {
+  padding: clamp(40px, 6vw, 52px) clamp(20px, 5vw, 48px);
+}
+
+.about-pad {
+  padding: clamp(56px, 8vw, 90px) clamp(20px, 5vw, 48px);
+}
+
+.contact-pad {
+  padding: clamp(60px, 8vw, 80px) clamp(24px, 5vw, 40px);
+}
+
+.header-pad {
+  padding: 14px clamp(20px, 4vw, 48px);
+}
+
+/* Fluid typography */
+.hero-title {
+  font-size: clamp(38px, 6.5vw, 68px) !important;
+}
+
+.section-title {
+  font-size: clamp(30px, 4.4vw, 44px) !important;
+}
+
+.about-title {
+  font-size: clamp(32px, 4.8vw, 46px) !important;
+}
+
+/* Responsive grids */
+.grid-2,
+.grid-3,
+.grid-4 {
+  display: grid;
+  gap: 20px;
+}
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Form specific */
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+@media (max-width: 900px) {
+  .svc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .svc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 38px;
+}
+@media (max-width: 960px) {
+  .form-steps {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+/* About 2-col */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+/* Footer 4-col */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+}
+@media (max-width: 520px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Header — mobile menu */
+.nav-desktop {
+  display: flex;
+}
+.nav-toggle {
+  display: none;
+}
+.header-cta {
+  display: flex;
+}
+@media (max-width: 960px) {
+  .nav-desktop {
+    display: none !important;
+  }
+  .nav-toggle {
+    display: inline-flex !important;
+  }
+  .header-cta.hide-mobile {
+    display: none !important;
+  }
+}
+
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(20, 17, 14, 0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(245, 239, 230, 0.08);
+  padding: 12px clamp(20px, 5vw, 48px) 24px;
+  flex-direction: column;
+  gap: 4px;
+}
+.mobile-menu.open {
+  display: flex;
+}
+
+/* Responsive tweaks that touch inline-styled sections */
+@media (max-width: 720px) {
+  .hero-trust {
+    gap: 14px !important;
+    font-size: 12.5px !important;
+  }
+  .hero-trust .hero-trust-sep {
+    display: none !important;
+  }
+  .testi-header {
+    flex-direction: column;
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+  .testi-rating {
+    text-align: left !important;
+  }
+  .testi-rating > div {
+    justify-content: flex-start !important;
+  }
+  .hotels-header {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -118,10 +118,11 @@ function Faq() {
   return (
     <section
       id="faq"
+      className="container-pad section-pad-y"
       style={{
         maxWidth: 960,
-        margin: '110px auto 0',
-        padding: '0 48px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
       }}
     >
       <div
@@ -140,11 +141,11 @@ function Faq() {
           QUESTIONS FRÉQUENTES
         </span>
         <h2
+          className="section-title"
           style={{
             margin: '12px 0 0',
             fontFamily: "'Cormorant Garamond',serif",
             fontWeight: 600,
-            fontSize: 44,
             lineHeight: 1.1,
             color: '#F5EFE6',
           }}
