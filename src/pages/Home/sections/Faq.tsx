@@ -10,12 +10,18 @@ const faqItems: FaqItem[] = [
   {
     question: 'Êtes-vous une agence de voyage ?',
     answer:
-      'Non, nous sommes une conciergerie de séjour. Nous ne vendons pas de packs tout inclus : nous vous aidons à réserver hôtels, transferts et déplacements sur mesure, et nous vous accompagnons sur place à Makkah & Madinah.',
+      "Haramain Prestige est une conciergerie de séjour spécialisée à Makkah et Madinah. Nous organisons vos réservations d'hôtels, transferts et déplacements selon vos besoins, avec un accompagnement et un interlocuteur disponible sur place.",
   },
   {
     question: "Puis-je réserver seulement l'hôtel ?",
     answer:
-      "Oui, vous pouvez ne réserver qu'un ou plusieurs services. Beaucoup de voyageurs nous demandent uniquement l'hôtel, ou uniquement le transfert aéroport. Vous choisissez ce dont vous avez besoin.",
+      'Oui. Vous pouvez réserver uniquement votre hébergement, sans transfert ni autre service.',
+  },
+  {
+    question:
+      'Vos tarifs sont-ils moins chers que les plateformes de réservation ?',
+    answer:
+      "Nos partenariats avec les hôtels nous permettent d'accéder à des tarifs négociés et à des conditions privilégiées. Nous recherchons pour chaque séjour la meilleure offre disponible, selon vos dates et vos besoins.",
   },
   {
     question: 'Comment obtenir un devis ?',

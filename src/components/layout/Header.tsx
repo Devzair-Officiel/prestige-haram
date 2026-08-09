@@ -45,18 +45,12 @@ const dropdownItemStyle: React.CSSProperties = {
   fontSize: 13,
 };
 
-function menuStyle(open: boolean): React.CSSProperties {
+function menuWrapperStyle(open: boolean): React.CSSProperties {
   return {
     position: 'absolute',
     top: '100%',
     left: 0,
-    marginTop: 6,
-    minWidth: 210,
-    padding: 8,
-    borderRadius: 12,
-    background: '#1E1A14',
-    border: '1px solid rgba(245,239,230,0.1)',
-    boxShadow: '0 16px 40px rgba(0,0,0,0.5)',
+    paddingTop: 6,
     transition: 'opacity .2s ease, transform .2s ease',
     opacity: open ? 1 : 0,
     transform: open ? 'translateY(0)' : 'translateY(6px)',
@@ -64,6 +58,15 @@ function menuStyle(open: boolean): React.CSSProperties {
     visibility: open ? 'visible' : 'hidden',
   };
 }
+
+const menuInnerStyle: React.CSSProperties = {
+  minWidth: 210,
+  padding: 8,
+  borderRadius: 12,
+  background: '#1E1A14',
+  border: '1px solid rgba(245,239,230,0.1)',
+  boxShadow: '0 16px 40px rgba(0,0,0,0.5)',
+};
 
 function Header() {
   const [menu, setMenu] = useState<MenuKey>(null);
@@ -98,6 +101,9 @@ function Header() {
         <img
           src={logoHaramain}
           alt="Haramain Prestige"
+          width={44}
+          height={44}
+          decoding="async"
           style={{
             width: 44,
             height: 44,
@@ -142,7 +148,7 @@ function Header() {
           fontWeight: 600,
         }}
       >
-        <a href="#" style={{ ...linkBase, color: '#F5EFE6' }}>
+        <a href="#" className="nav-link" style={{ ...linkBase, color: '#F5EFE6' }}>
           Accueil
         </a>
 
@@ -153,6 +159,7 @@ function Header() {
         >
           <a
             href="#hotels"
+            className="nav-link"
             style={{
               ...linkBase,
               display: 'flex',
@@ -172,12 +179,19 @@ function Header() {
               />
             </svg>
           </a>
-          <div style={menuStyle(menu === 'hotels')}>
-            {hotelsMenu.map((item) => (
-              <a key={item.label} href={item.href} style={dropdownItemStyle}>
-                {item.label}
-              </a>
-            ))}
+          <div style={menuWrapperStyle(menu === 'hotels')}>
+            <div style={menuInnerStyle}>
+              {hotelsMenu.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="nav-dropdown-item"
+                  style={dropdownItemStyle}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -188,6 +202,7 @@ function Header() {
         >
           <a
             href="#services"
+            className="nav-link"
             style={{
               ...linkBase,
               display: 'flex',
@@ -207,17 +222,29 @@ function Header() {
               />
             </svg>
           </a>
-          <div style={menuStyle(menu === 'services')}>
-            {servicesMenu.map((item) => (
-              <a key={item.label} href={item.href} style={dropdownItemStyle}>
-                {item.label}
-              </a>
-            ))}
+          <div style={menuWrapperStyle(menu === 'services')}>
+            <div style={menuInnerStyle}>
+              {servicesMenu.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="nav-dropdown-item"
+                  style={dropdownItemStyle}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
         {simpleLinks.map((link) => (
-          <a key={link.label} href={link.href} style={linkBase}>
+          <a
+            key={link.label}
+            href={link.href}
+            className="nav-link"
+            style={linkBase}
+          >
             {link.label}
           </a>
         ))}
@@ -226,7 +253,7 @@ function Header() {
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <a
           href="#devis"
-          className="header-cta hide-mobile"
+          className="header-cta hide-mobile btn-primary"
           style={{
             alignItems: 'center',
             gap: 8,
@@ -240,16 +267,18 @@ function Header() {
           }}
         >
           Obtenir un devis
-          <svg width="14" height="14" viewBox="0 0 16 16">
-            <path
-              d="M3 8h9M9 4l4 4-4 4"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <span className="btn-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16">
+              <path
+                d="M3 8h9M9 4l4 4-4 4"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
         </a>
 
         <button
@@ -296,6 +325,7 @@ function Header() {
           <a
             key={item.label}
             href={item.href}
+            className="mobile-nav-link"
             onClick={() => setMobileOpen(false)}
             style={{
               padding: '13px 6px',
@@ -311,6 +341,7 @@ function Header() {
         <a
           href="#devis"
           onClick={() => setMobileOpen(false)}
+          className="btn-primary"
           style={{
             marginTop: 14,
             display: 'flex',
@@ -326,16 +357,18 @@ function Header() {
           }}
         >
           Obtenir un devis
-          <svg width="14" height="14" viewBox="0 0 16 16">
-            <path
-              d="M3 8h9M9 4l4 4-4 4"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <span className="btn-arrow">
+            <svg width="14" height="14" viewBox="0 0 16 16">
+              <path
+                d="M3 8h9M9 4l4 4-4 4"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
         </a>
       </div>
     </header>

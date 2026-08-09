@@ -6,6 +6,7 @@ import QuoteForm from './sections/QuoteForm';
 import Services from './sections/Services';
 import HowItWorks from './sections/HowItWorks';
 import Hotels from './sections/Hotels';
+import About from './sections/About';
 import Testimonials from './sections/Testimonials';
 import Faq from './sections/Faq';
 import ContactCta from './sections/ContactCta';
@@ -20,6 +21,7 @@ function HomePage() {
         <Services />
         <HowItWorks />
         <Hotels />
+        <About />
         <Testimonials />
         <Faq />
         <ContactCta />

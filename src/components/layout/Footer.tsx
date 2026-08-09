@@ -50,7 +50,12 @@ function LinkColumn({ title, links }: LinkColumnProps) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <div style={columnTitle}>{title}</div>
       {links.map((link) => (
-        <a key={link.label} href={link.href} style={columnLink}>
+        <a
+          key={link.label}
+          href={link.href}
+          className="nav-link"
+          style={columnLink}
+        >
           {link.label}
         </a>
       ))}
@@ -79,6 +84,10 @@ function Footer() {
             <img
               src={logoHaramain}
               alt="Haramain Prestige"
+              width={42}
+              height={42}
+              loading="lazy"
+              decoding="async"
               style={{
                 width: 42,
                 height: 42,
@@ -120,11 +129,16 @@ function Footer() {
               maxWidth: 300,
             }}
           >
-            Conciergerie de séjour à Makkah &amp; Madinah : hôtels, transferts,
-            déplacements et accompagnement local.
+            Votre conciergerie à Makkah &amp; Madinah, à vos côtés avant et
+            pendant votre séjour.
           </p>
           <div style={{ display: 'flex', gap: 10 }}>
-            <a href="#" aria-label="Instagram" style={socialIconStyle}>
+            <a
+              href="#"
+              aria-label="Instagram"
+              className="social-icon"
+              style={socialIconStyle}
+            >
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
                 <rect
                   x="3"
@@ -145,7 +159,12 @@ function Footer() {
                 <circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" />
               </svg>
             </a>
-            <a href="#" aria-label="WhatsApp" style={socialIconStyle}>
+            <a
+              href="#"
+              aria-label="WhatsApp"
+              className="social-icon"
+              style={socialIconStyle}
+            >
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
                 <path
                   d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"

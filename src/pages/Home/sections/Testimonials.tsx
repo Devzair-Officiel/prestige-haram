@@ -68,7 +68,7 @@ function Testimonials() {
               color: '#E6C878',
             }}
           >
-            ILS NOUS FONT CONFIANCE
+            ILS NOUS ONT FAIT CONFIANCE
           </span>
           <h2
             className="section-title"

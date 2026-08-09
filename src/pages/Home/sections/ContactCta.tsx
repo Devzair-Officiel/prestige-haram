@@ -25,6 +25,10 @@ function ContactCta() {
         <img
           src={nabawiImage}
           alt="Masjid an-Nabawi à Madinah"
+          width={1500}
+          height={1125}
+          loading="lazy"
+          decoding="async"
           style={{
             position: 'absolute',
             inset: 0,
@@ -49,7 +53,7 @@ function ContactCta() {
             flexDirection: 'column',
             alignItems: 'center',
             gap: 20,
-            maxWidth: 620,
+            maxWidth: 820,
           }}
         >
           <span
@@ -63,7 +67,7 @@ function ContactCta() {
             PRÊT À PARTIR ?
           </span>
           <h2
-            className="section-title"
+            className="section-title cta-title-nowrap"
             style={{
               margin: 0,
               fontFamily: "'Cormorant Garamond',serif",
@@ -99,6 +103,7 @@ function ContactCta() {
           >
             <a
               href="#devis"
+              className="btn-primary"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -112,19 +117,22 @@ function ContactCta() {
               }}
             >
               Demander un devis
-              <svg width="15" height="15" viewBox="0 0 16 16">
-                <path
-                  d="M3 8h9M9 4l4 4-4 4"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <span className="btn-arrow">
+                <svg width="15" height="15" viewBox="0 0 16 16">
+                  <path
+                    d="M3 8h9M9 4l4 4-4 4"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
             </a>
             <a
               href="#"
+              className="btn-secondary"
               style={{
                 display: 'flex',
                 alignItems: 'center',

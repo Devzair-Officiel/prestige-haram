@@ -77,6 +77,10 @@ function Hero() {
         <img
           src={heroImage}
           alt="Vue depuis un hôtel de Makkah sur le Masjid al-Haram"
+          width={1600}
+          height={901}
+          fetchPriority="high"
+          decoding="async"
           style={{
             width: '100%',
             height: '100%',
@@ -105,7 +109,7 @@ function Hero() {
       >
         <div
           style={{
-            maxWidth: 620,
+            maxWidth: 720,
             display: 'flex',
             flexDirection: 'column',
             gap: 22,
@@ -132,11 +136,14 @@ function Hero() {
               textWrap: 'pretty',
             }}
           >
-            Votre séjour à{' '}
-            <span style={{ fontStyle: 'italic', color: '#E6C878' }}>
-              Makkah &amp; Madinah
-            </span>{' '}
-            commence ici
+            <span style={{ whiteSpace: 'nowrap' }}>Votre séjour à Makkah</span>
+            <br />
+            <span style={{ whiteSpace: 'nowrap' }}>
+              <span style={{ fontStyle: 'italic', color: '#E6C878' }}>
+                &amp; Madinah
+              </span>{' '}
+              commence ici
+            </span>
           </h1>
           <div
             className="goldline"
@@ -165,6 +172,7 @@ function Hero() {
           >
             <a
               href="#devis"
+              className="btn-primary"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -179,19 +187,22 @@ function Hero() {
               }}
             >
               Recevoir ma proposition personnalisée
-              <svg width="16" height="16" viewBox="0 0 16 16">
-                <path
-                  d="M3 8h9M9 4l4 4-4 4"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <span className="btn-arrow">
+                <svg width="16" height="16" viewBox="0 0 16 16">
+                  <path
+                    d="M3 8h9M9 4l4 4-4 4"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
             </a>
             <a
               href="#hotels"
+              className="btn-secondary"
               style={{
                 display: 'flex',
                 alignItems: 'center',

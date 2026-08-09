@@ -328,15 +328,47 @@ function QuoteForm() {
           <legend
             style={{
               padding: 0,
-              margin: '0 0 14px',
-              fontSize: 11,
-              letterSpacing: '1.4px',
+              margin: '0 0 6px',
+              fontSize: 15,
               fontWeight: 700,
-              color: 'rgba(245,239,230,0.5)',
+              color: '#F5EFE6',
             }}
           >
-            DE QUELS SERVICES AVEZ-VOUS BESOIN ?
+            De quels services avez-vous besoin&nbsp;?
           </legend>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 10,
+              flexWrap: 'wrap',
+              margin: '0 0 14px',
+              fontSize: 13,
+              color: 'rgba(245,239,230,0.6)',
+            }}
+          >
+            <span>Cliquez pour sélectionner — plusieurs choix possibles.</span>
+            {(() => {
+              const count = Object.values(svc).filter(Boolean).length;
+              return count > 0 ? (
+                <span
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    padding: '3px 10px',
+                    borderRadius: 999,
+                    background: 'rgba(201,162,75,0.15)',
+                    color: '#E6C878',
+                    fontSize: 12,
+                    fontWeight: 700,
+                    letterSpacing: '0.3px',
+                  }}
+                >
+                  {count} sélectionné{count > 1 ? 's' : ''}
+                </span>
+              ) : null;
+            })()}
+          </div>
           <div className="svc-grid">
             {services.map((service) => (
               <button
@@ -350,7 +382,7 @@ function QuoteForm() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 11,
+                  gap: 12,
                   padding: '15px 16px',
                   borderRadius: 12,
                   border: '1px solid rgba(245,239,230,0.12)',
@@ -362,24 +394,8 @@ function QuoteForm() {
                   textAlign: 'left',
                 }}
               >
-                <span style={{ color: '#E6C878', flex: 'none' }}>
-                  {service.icon}
-                </span>
-                <span style={{ flex: 1 }}>{service.label}</span>
-                <span
-                  className="svc-dot"
-                  style={{
-                    width: 16,
-                    height: 16,
-                    borderRadius: '50%',
-                    background: '#E6C878',
-                    color: '#14110E',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+                <span className="svc-check" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
                     <path
                       d="M20 6L9 17l-5-5"
                       stroke="currentColor"
@@ -389,6 +405,10 @@ function QuoteForm() {
                     />
                   </svg>
                 </span>
+                <span style={{ color: '#E6C878', flex: 'none', display: 'flex' }}>
+                  {service.icon}
+                </span>
+                <span style={{ flex: 1 }}>{service.label}</span>
               </button>
             ))}
           </div>
@@ -595,6 +615,7 @@ function QuoteForm() {
         >
           <button
             type="submit"
+            className="btn-primary"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -610,7 +631,7 @@ function QuoteForm() {
               fontSize: 15,
             }}
           >
-            Recevoir ma proposition gratuitement
+            <span>Recevoir ma proposition gratuitement</span>
           </button>
           <span style={{ fontSize: 12, color: 'rgba(245,239,230,0.5)' }}>
             Vos informations sont utilisées uniquement pour traiter votre
