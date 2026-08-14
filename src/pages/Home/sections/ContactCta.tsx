@@ -131,7 +131,10 @@ function ContactCta() {
               </span>
             </a>
             <a
-              href="#"
+              href="https://wa.me/33773157902"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Écrire à Haramain Prestige sur WhatsApp au +33 7 73 15 79 02"
               className="btn-secondary"
               style={{
                 display: 'flex',

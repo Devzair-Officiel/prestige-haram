@@ -155,11 +155,11 @@ function Hero() {
               fontSize: 17,
               lineHeight: 1.65,
               color: 'rgba(248,242,232,0.78)',
-              maxWidth: 500,
+              maxWidth: 560,
             }}
           >
-            Hôtels à tarifs négociés, transferts, chauffeurs et accompagnement
-            local. Un interlocuteur sur place pour organiser votre séjour à
+            Des hôtels soigneusement sélectionnés à tarifs négociés, associés à
+            un accompagnement local et personnalisé, pour vivre votre séjour à
             Makkah &amp; Madinah en toute sérénité.
           </p>
           <div

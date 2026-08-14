@@ -62,22 +62,69 @@ function About() {
               color: '#F8F2E8',
             }}
           >
-            Une équipe sur place, à votre écoute
+            Haramain Prestige, né d'un constat
           </h2>
-          <p
+          <div
             style={{
-              margin: 0,
-              fontSize: 16,
-              lineHeight: 1.7,
-              color: 'rgba(245,239,230,0.72)',
-              maxWidth: 500,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 14,
+              maxWidth: 520,
             }}
           >
-            Haramain Prestige est né du besoin d'un accompagnement humain et
-            fiable à Makkah &amp; Madinah. Nous vivons sur place, nous
-            connaissons les hôtels, les quartiers et les usages — et nous
-            construisons chaque séjour avec la même attention.
-          </p>
+            <p
+              style={{
+                margin: 0,
+                fontSize: 16,
+                lineHeight: 1.7,
+                color: 'rgba(245,239,230,0.72)',
+              }}
+            >
+              Au fil du temps, nous avons constaté que de nombreux pèlerins
+              rencontraient les mêmes difficultés : choisir le bon hôtel parmi
+              des centaines d'offres, comprendre les réelles distances du Haram
+              et faire face à des tarifs souvent très élevés.
+            </p>
+            <p
+              style={{
+                margin: 0,
+                fontSize: 16,
+                lineHeight: 1.7,
+                color: '#F5EFE6',
+                fontStyle: 'italic',
+              }}
+            >
+              C'est de ce constat qu'est né Haramain Prestige.
+            </p>
+            <p
+              style={{
+                margin: 0,
+                fontSize: 16,
+                lineHeight: 1.7,
+                color: 'rgba(245,239,230,0.72)',
+              }}
+            >
+              Grâce à notre présence à Makkah &amp; Madinah et à notre
+              connaissance du terrain, nous avons développé un réseau de
+              partenaires afin de proposer des hôtels soigneusement
+              sélectionnés, des tarifs négociés et un véritable accompagnement
+              sur place.
+            </p>
+            <p
+              style={{
+                margin: 0,
+                fontSize: 16,
+                lineHeight: 1.7,
+                color: 'rgba(245,239,230,0.82)',
+              }}
+            >
+              <span style={{ color: '#E6C878', fontWeight: 600 }}>
+                Notre ambition :
+              </span>{' '}
+              rendre votre séjour plus simple, plus serein et au prix le plus
+              juste.
+            </p>
+          </div>
           <ul
             style={{
               listStyle: 'none',

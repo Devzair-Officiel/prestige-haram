@@ -12,5 +12,12 @@ export default defineConfig({
       usePolling: true,
       interval: 100,
     },
+    proxy: {
+      '/api': {
+        target: 'http://php:80',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
   },
 });

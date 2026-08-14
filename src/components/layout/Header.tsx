@@ -4,32 +4,32 @@ import logoHaramain from '../../assets/logo_haramain.png';
 type MenuKey = 'hotels' | 'services' | null;
 
 const hotelsMenu = [
-  { label: 'Hôtels à Makkah', href: '#hotels' },
-  { label: 'Hôtels à Madinah', href: '#hotels' },
-  { label: 'Chambres avec vue Kaaba', href: '#hotels' },
+  { label: 'Hôtels à Makkah', href: '/#hotels' },
+  { label: 'Hôtels à Madinah', href: '/#hotels' },
+  { label: 'Chambres avec vue Kaaba', href: '/#hotels' },
 ];
 
 const servicesMenu = [
-  { label: 'Transferts aéroport', href: '#services' },
-  { label: 'Chauffeurs & déplacements', href: '#services' },
-  { label: 'Visites & accompagnement', href: '#services' },
+  { label: 'Transferts aéroport', href: '/#services' },
+  { label: 'Chauffeurs & déplacements', href: '/#services' },
+  { label: 'Visites & accompagnement', href: '/#services' },
 ];
 
 const simpleLinks = [
-  { label: 'À propos', href: '#apropos' },
-  { label: 'Témoignages', href: '#temoignages' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'À propos', href: '/#apropos' },
+  { label: 'Témoignages', href: '/#temoignages' },
+  { label: 'FAQ', href: '/#faq' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 const mobileNav = [
-  { label: 'Accueil', href: '#' },
-  { label: 'Hôtels', href: '#hotels' },
-  { label: 'Services', href: '#services' },
-  { label: 'À propos', href: '#apropos' },
-  { label: 'Témoignages', href: '#temoignages' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Accueil', href: '/' },
+  { label: 'Hôtels', href: '/#hotels' },
+  { label: 'Services', href: '/#services' },
+  { label: 'À propos', href: '/#apropos' },
+  { label: 'Témoignages', href: '/#temoignages' },
+  { label: 'FAQ', href: '/#faq' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 const linkBase: React.CSSProperties = {
@@ -90,7 +90,7 @@ function Header() {
       }}
     >
       <a
-        href="#"
+        href="/"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -148,7 +148,7 @@ function Header() {
           fontWeight: 600,
         }}
       >
-        <a href="#" className="nav-link" style={{ ...linkBase, color: '#F5EFE6' }}>
+        <a href="/" className="nav-link" style={{ ...linkBase, color: '#F5EFE6' }}>
           Accueil
         </a>
 
@@ -158,7 +158,7 @@ function Header() {
           onMouseLeave={() => setMenu(null)}
         >
           <a
-            href="#hotels"
+            href="/#hotels"
             className="nav-link"
             style={{
               ...linkBase,
@@ -201,7 +201,7 @@ function Header() {
           onMouseLeave={() => setMenu(null)}
         >
           <a
-            href="#services"
+            href="/#services"
             className="nav-link"
             style={{
               ...linkBase,
@@ -252,7 +252,7 @@ function Header() {
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <a
-          href="#devis"
+          href="/#devis"
           className="header-cta hide-mobile btn-primary"
           style={{
             alignItems: 'center',
@@ -339,7 +339,7 @@ function Header() {
           </a>
         ))}
         <a
-          href="#devis"
+          href="/#devis"
           onClick={() => setMobileOpen(false)}
           className="btn-primary"
           style={{

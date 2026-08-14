@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useReveal } from '../../../hooks/useReveal';
+
+type Toast = { type: 'success' | 'error'; message: string } | null;
 
 type ServiceKey = 'hotel' | 'transfer' | 'driver' | 'visit';
 
@@ -149,16 +151,25 @@ function Select({
   value,
   ariaLabel,
   compact,
+  name,
+  required,
+  defaultValue,
 }: {
   children: React.ReactNode;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   value?: string;
   ariaLabel?: string;
   compact?: boolean;
+  name?: string;
+  required?: boolean;
+  defaultValue?: string;
 }) {
   return (
     <div style={{ position: 'relative' }}>
       <select
+        name={name}
+        required={required}
+        defaultValue={defaultValue}
         aria-label={ariaLabel}
         value={value}
         onChange={onChange}
@@ -201,6 +212,44 @@ function Select({
         />
       </svg>
     </div>
+  );
+}
+
+function Label({
+  children,
+  required,
+  optional,
+}: {
+  children: React.ReactNode;
+  required?: boolean;
+  optional?: boolean;
+}) {
+  return (
+    <span style={labelStyle}>
+      {children}
+      {required && (
+        <span
+          aria-hidden="true"
+          style={{ color: '#E6C878', marginLeft: 4, fontWeight: 700 }}
+        >
+          *
+        </span>
+      )}
+      {optional && (
+        <span
+          style={{
+            marginLeft: 6,
+            fontSize: 9.5,
+            letterSpacing: '0.6px',
+            fontWeight: 500,
+            color: 'rgba(245,239,230,0.32)',
+            textTransform: 'none',
+          }}
+        >
+          (optionnel)
+        </span>
+      )}
+    </span>
   );
 }
 
@@ -261,11 +310,21 @@ function QuoteForm() {
     driver: false,
     visit: false,
   });
+  const [submitting, setSubmitting] = useState(false);
+  const [toast, setToast] = useState<Toast>(null);
+
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(null), 6000);
+    return () => clearTimeout(t);
+  }, [toast]);
 
   const clamp = (v: number, lo: number, hi: number) =>
     Math.max(lo, Math.min(hi, v));
 
   const showKaaba = (city === 'makkah' || city === 'both') && svc.hotel;
+
+  const hasService = Object.values(svc).some(Boolean);
 
   return (
     <section
@@ -322,7 +381,133 @@ function QuoteForm() {
             Décrivez votre projet — nous revenons vers vous avec une proposition
             adaptée à vos dates, votre budget et vos besoins.
           </p>
+          <p
+            style={{
+              margin: '10px 0 0',
+              fontSize: 12,
+              color: 'rgba(245,239,230,0.45)',
+            }}
+          >
+            <span
+              aria-hidden="true"
+              style={{ color: '#E6C878', fontWeight: 700, marginRight: 4 }}
+            >
+              *
+            </span>
+            Champs obligatoires
+          </p>
         </div>
+
+        <form
+          noValidate={!hasService}
+          onSubmit={async (e) => {
+            e.preventDefault();
+            if (!hasService) {
+              const el = document.getElementById('svc-empty-hint');
+              el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              return;
+            }
+            const form = e.currentTarget;
+            if (!form.checkValidity()) {
+              form.reportValidity();
+              return;
+            }
+            const raw = new FormData(form);
+            if ((raw.get('website') as string)?.trim()) {
+              return;
+            }
+            const get = (k: string) =>
+              ((raw.get(k) as string) || '').trim();
+
+            const selectedKeys = (
+              Object.entries(svc) as [ServiceKey, boolean][]
+            )
+              .filter(([, v]) => v)
+              .map(([k]) => k);
+
+            const payload = {
+              name: get('Nom'),
+              email: get('Email'),
+              countryCode: get('Indicatif')
+                .replace(/^[^\d+]+/, '')
+                .trim(),
+              phone: get('Téléphone WhatsApp'),
+              city,
+              arrival: get("Date d'arrivée"),
+              departure: get('Date de départ'),
+              adults,
+              children,
+              services: selectedKeys,
+              rooms: get('Nombre de chambres'),
+              category: get("Catégorie d'hôtel"),
+              kaabaView: get('Vue Kaaba'),
+              budget: get('Budget'),
+              message: get('Message'),
+            };
+
+            setSubmitting(true);
+            try {
+              const res = await fetch('/api/send-quote.php', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Accept: 'application/json',
+                },
+                body: JSON.stringify(payload),
+              });
+              const data = (await res.json().catch(() => ({}))) as {
+                success?: boolean;
+                error?: string;
+              };
+              if (res.ok && data.success) {
+                setToast({
+                  type: 'success',
+                  message:
+                    'Votre demande a bien été envoyée. Nous revenons vers vous rapidement.',
+                });
+                form.reset();
+                setCity('');
+                setAdults(2);
+                setChildren(0);
+                setSvc({
+                  hotel: true,
+                  transfer: false,
+                  driver: false,
+                  visit: false,
+                });
+              } else {
+                setToast({
+                  type: 'error',
+                  message:
+                    data.error ||
+                    "L'envoi a échoué. Réessayez ou contactez-nous sur WhatsApp.",
+                });
+              }
+            } catch {
+              setToast({
+                type: 'error',
+                message:
+                  'Erreur réseau. Vérifiez votre connexion et réessayez.',
+              });
+            } finally {
+              setSubmitting(false);
+            }
+          }}
+        >
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            style={{
+              position: 'absolute',
+              left: '-9999px',
+              width: 1,
+              height: 1,
+              opacity: 0,
+            }}
+            aria-hidden="true"
+          />
 
         <fieldset style={{ border: 'none', margin: '0 0 28px', padding: 0 }}>
           <legend
@@ -369,6 +554,44 @@ function QuoteForm() {
               ) : null;
             })()}
           </div>
+          {Object.values(svc).every((v) => !v) && (
+            <div
+              id="svc-empty-hint"
+              role="status"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+                margin: '0 0 12px',
+                padding: '10px 14px',
+                borderRadius: 10,
+                border: '1px solid rgba(201,162,75,0.28)',
+                background: 'rgba(201,162,75,0.06)',
+                color: '#E6C878',
+                fontSize: 12.5,
+                fontWeight: 600,
+                letterSpacing: '0.2px',
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                />
+                <path
+                  d="M12 8v5"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+                <circle cx="12" cy="16.2" r="1" fill="currentColor" />
+              </svg>
+              Sélectionnez au moins un service pour continuer.
+            </div>
+          )}
           <div className="svc-grid">
             {services.map((service) => (
               <button
@@ -421,8 +644,13 @@ function QuoteForm() {
               <span style={stepTitleStyle}>Votre séjour</span>
             </div>
             <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <span style={labelStyle}>VILLE</span>
-              <Select value={city} onChange={(e) => setCity(e.target.value)}>
+              <Label required>VILLE</Label>
+              <Select
+                name="Ville"
+                required
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              >
                 <option value="">Choisir une ville</option>
                 <option value="makkah">Makkah</option>
                 <option value="madinah">Madinah</option>
@@ -438,8 +666,13 @@ function QuoteForm() {
                   gap: 6,
                 }}
               >
-                <span style={labelStyle}>DATE D'ARRIVÉE</span>
-                <input type="date" style={dateStyle} />
+                <Label required>DATE D'ARRIVÉE</Label>
+                <input
+                  type="date"
+                  name="Date d'arrivée"
+                  required
+                  style={dateStyle}
+                />
               </label>
               <label
                 style={{
@@ -449,8 +682,13 @@ function QuoteForm() {
                   gap: 6,
                 }}
               >
-                <span style={labelStyle}>DATE DE DÉPART</span>
-                <input type="date" style={dateStyle} />
+                <Label required>DATE DE DÉPART</Label>
+                <input
+                  type="date"
+                  name="Date de départ"
+                  required
+                  style={dateStyle}
+                />
               </label>
             </div>
             <div style={{ display: 'flex', gap: 12 }}>
@@ -462,7 +700,7 @@ function QuoteForm() {
                   gap: 6,
                 }}
               >
-                <span style={labelStyle}>ADULTES</span>
+                <Label required>ADULTES</Label>
                 <Counter
                   value={adults}
                   onDec={() => setAdults((v) => clamp(v - 1, 1, 12))}
@@ -481,7 +719,7 @@ function QuoteForm() {
                   gap: 6,
                 }}
               >
-                <span style={labelStyle}>ENFANTS</span>
+                <Label optional>ENFANTS</Label>
                 <Counter
                   value={children}
                   onDec={() => setChildren((v) => clamp(v - 1, 0, 10))}
@@ -495,52 +733,93 @@ function QuoteForm() {
             </div>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={stepBadgeStyle}>2</span>
-              <span style={stepTitleStyle}>Vos préférences</span>
+          {svc.hotel ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span style={stepBadgeStyle}>2</span>
+                <span style={stepTitleStyle}>Vos préférences hôtel</span>
+              </div>
+              <label
+                style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
+              >
+                <Label required>NOMBRE DE CHAMBRES</Label>
+                <Select name="Nombre de chambres" required defaultValue="">
+                  <option value="" disabled>
+                    Choisir…
+                  </option>
+                  <option>1 chambre</option>
+                  <option>2 chambres</option>
+                  <option>3 chambres et +</option>
+                </Select>
+              </label>
+              <label
+                style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
+              >
+                <Label optional>CATÉGORIE D'HÔTEL</Label>
+                <Select name="Catégorie d'hôtel" defaultValue="Indifférent">
+                  <option>Indifférent</option>
+                  <option>3 étoiles</option>
+                  <option>4 étoiles</option>
+                  <option>5 étoiles</option>
+                </Select>
+              </label>
+              <label
+                style={{
+                  display: showKaaba ? 'flex' : 'none',
+                  flexDirection: 'column',
+                  gap: 6,
+                }}
+              >
+                <Label optional>CHAMBRE AVEC VUE KAABA</Label>
+                <Select name="Vue Kaaba" defaultValue="Indifférent">
+                  <option>Indifférent</option>
+                  <option>Oui, si possible</option>
+                  <option>Indispensable</option>
+                </Select>
+              </label>
+              <label
+                style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
+              >
+                <Label optional>BUDGET PAR CHAMBRE / NUIT</Label>
+                <Select name="Budget" defaultValue="Indifférent">
+                  <option>Indifférent</option>
+                  <option>Économique</option>
+                  <option>Confort</option>
+                  <option>Premium</option>
+                </Select>
+              </label>
             </div>
-            <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <span style={labelStyle}>NOMBRE DE CHAMBRES</span>
-              <Select>
-                <option>1 chambre</option>
-                <option>2 chambres</option>
-                <option>3 chambres et +</option>
-              </Select>
-            </label>
-            <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <span style={labelStyle}>CATÉGORIE D'HÔTEL</span>
-              <Select>
-                <option>Indifférent</option>
-                <option>3 étoiles</option>
-                <option>4 étoiles</option>
-                <option>5 étoiles</option>
-              </Select>
-            </label>
-            <label
+          ) : (
+            <div
               style={{
-                display: showKaaba ? 'flex' : 'none',
+                display: 'flex',
                 flexDirection: 'column',
-                gap: 6,
+                gap: 12,
+                padding: '18px 18px',
+                borderRadius: 12,
+                border: '1px dashed rgba(201,162,75,0.25)',
+                background: 'rgba(201,162,75,0.04)',
+                alignSelf: 'flex-start',
               }}
             >
-              <span style={labelStyle}>CHAMBRE AVEC VUE KAABA</span>
-              <Select>
-                <option>Indifférent</option>
-                <option>Oui, si possible</option>
-                <option>Indispensable</option>
-              </Select>
-            </label>
-            <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <span style={labelStyle}>BUDGET PAR CHAMBRE / NUIT</span>
-              <Select>
-                <option>Indifférent</option>
-                <option>Économique</option>
-                <option>Confort</option>
-                <option>Premium</option>
-              </Select>
-            </label>
-          </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span style={stepBadgeStyle}>2</span>
+                <span style={stepTitleStyle}>Vos préférences hôtel</span>
+              </div>
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: 13,
+                  lineHeight: 1.55,
+                  color: 'rgba(245,239,230,0.55)',
+                }}
+              >
+                Cette étape n'est demandée que si vous ajoutez «&nbsp;Hôtel&nbsp;»
+                à votre demande. Vous pouvez la laisser de côté et passer aux
+                coordonnées.
+              </p>
+            </div>
+          )}
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -548,16 +827,18 @@ function QuoteForm() {
               <span style={stepTitleStyle}>Vos coordonnées</span>
             </div>
             <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <span style={labelStyle}>NOM</span>
+              <Label required>NOM</Label>
               <input
                 type="text"
+                name="Nom"
+                required
                 autoComplete="name"
                 placeholder="Votre nom complet"
                 style={inputStyle}
               />
             </label>
             <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <span style={labelStyle}>WHATSAPP</span>
+              <Label required>WHATSAPP</Label>
               <div
                 style={{
                   display: 'flex',
@@ -566,7 +847,12 @@ function QuoteForm() {
                 }}
               >
                 <div style={{ flex: 'none' }}>
-                  <Select ariaLabel="Indicatif pays" compact>
+                  <Select
+                    name="Indicatif"
+                    defaultValue="🇫🇷 +33"
+                    ariaLabel="Indicatif pays"
+                    compact
+                  >
                     {countryCodes.map((code) => (
                       <option key={code}>{code}</option>
                     ))}
@@ -574,6 +860,8 @@ function QuoteForm() {
                 </div>
                 <input
                   type="tel"
+                  name="Téléphone WhatsApp"
+                  required
                   autoComplete="tel"
                   placeholder="6 12 34 56 78"
                   style={{ ...inputStyle, flex: 1, minWidth: 0 }}
@@ -581,17 +869,19 @@ function QuoteForm() {
               </div>
             </label>
             <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <span style={labelStyle}>EMAIL</span>
+              <Label optional>EMAIL</Label>
               <input
                 type="email"
+                name="Email"
                 autoComplete="email"
                 placeholder="exemple@email.com"
                 style={inputStyle}
               />
             </label>
             <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <span style={labelStyle}>DEMANDE PARTICULIÈRE (OPTIONNEL)</span>
+              <Label optional>DEMANDE PARTICULIÈRE</Label>
               <textarea
+                name="Message"
                 placeholder="Précisez votre demande..."
                 style={{
                   ...inputStyle,
@@ -616,6 +906,8 @@ function QuoteForm() {
           <button
             type="submit"
             className="btn-primary"
+            disabled={!hasService || submitting}
+            aria-disabled={!hasService || submitting}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -624,21 +916,172 @@ function QuoteForm() {
               padding: '16px 40px',
               borderRadius: 12,
               border: 'none',
-              background: 'linear-gradient(135deg,#EBCE82,#C09A44)',
-              color: '#14110E',
+              background:
+                hasService && !submitting
+                  ? 'linear-gradient(135deg,#EBCE82,#C09A44)'
+                  : 'rgba(245,239,230,0.08)',
+              color:
+                hasService && !submitting ? '#14110E' : 'rgba(245,239,230,0.35)',
               fontFamily: 'inherit',
               fontWeight: 700,
               fontSize: 15,
+              cursor:
+                !hasService || submitting ? 'not-allowed' : 'pointer',
+              transition: 'background 0.2s ease, color 0.2s ease',
             }}
           >
-            <span>Recevoir ma proposition gratuitement</span>
+            {submitting ? (
+              <>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  style={{ animation: 'spin 0.9s linear infinite' }}
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="9"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    fill="none"
+                    strokeDasharray="42"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <span>Envoi en cours…</span>
+              </>
+            ) : (
+              <span>Recevoir ma proposition gratuitement</span>
+            )}
           </button>
           <span style={{ fontSize: 12, color: 'rgba(245,239,230,0.5)' }}>
             Vos informations sont utilisées uniquement pour traiter votre
             demande.
           </span>
         </div>
+        </form>
       </div>
+      {toast && (
+        <div
+          className="toast"
+          role="status"
+          aria-live="polite"
+          style={{
+            position: 'fixed',
+            top: 24,
+            right: 24,
+            zIndex: 200,
+            display: 'flex',
+            alignItems: 'flex-start',
+            gap: 12,
+            maxWidth: 360,
+            padding: '14px 16px 14px 14px',
+            borderRadius: 14,
+            background: 'rgba(20,17,14,0.92)',
+            backdropFilter: 'blur(14px) saturate(140%)',
+            WebkitBackdropFilter: 'blur(14px) saturate(140%)',
+            border: `1px solid ${
+              toast.type === 'success'
+                ? 'rgba(201,162,75,0.4)'
+                : 'rgba(220,90,70,0.45)'
+            }`,
+            boxShadow: '0 18px 40px rgba(0,0,0,0.45)',
+            color: '#F5EFE6',
+          }}
+        >
+          <span
+            aria-hidden="true"
+            style={{
+              flex: 'none',
+              width: 30,
+              height: 30,
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background:
+                toast.type === 'success'
+                  ? 'rgba(201,162,75,0.18)'
+                  : 'rgba(220,90,70,0.18)',
+              color: toast.type === 'success' ? '#E6C878' : '#FF8878',
+            }}
+          >
+            {toast.type === 'success' ? (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M20 6L9 17l-5-5"
+                  stroke="currentColor"
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+                <path
+                  d="M12 8v5"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+                <circle cx="12" cy="16.2" r="1.1" fill="currentColor" />
+              </svg>
+            )}
+          </span>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div
+              style={{
+                fontSize: 13,
+                fontWeight: 700,
+                marginBottom: 3,
+                color: toast.type === 'success' ? '#E6C878' : '#FF8878',
+                letterSpacing: '0.2px',
+              }}
+            >
+              {toast.type === 'success' ? 'Demande envoyée' : 'Envoi impossible'}
+            </div>
+            <p
+              style={{
+                margin: 0,
+                fontSize: 13,
+                lineHeight: 1.5,
+                color: 'rgba(245,239,230,0.78)',
+              }}
+            >
+              {toast.message}
+            </p>
+          </div>
+          <button
+            type="button"
+            aria-label="Fermer la notification"
+            onClick={() => setToast(null)}
+            style={{
+              flex: 'none',
+              width: 26,
+              height: 26,
+              borderRadius: 8,
+              border: 'none',
+              background: 'transparent',
+              color: 'rgba(245,239,230,0.5)',
+              fontSize: 18,
+              lineHeight: 1,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            ×
+          </button>
+        </div>
+      )}
     </section>
   );
 }

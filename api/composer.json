@@ -1,0 +1,20 @@
+{
+  "name": "haramain-prestige/api",
+  "description": "Backend PHP pour le formulaire de devis Haramain Prestige.",
+  "type": "project",
+  "license": "proprietary",
+  "require": {
+    "php": ">=8.2",
+    "phpmailer/phpmailer": "^6.9",
+    "vlucas/phpdotenv": "^5.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "HaramainPrestige\\": "src/"
+    }
+  },
+  "config": {
+    "sort-packages": true,
+    "optimize-autoloader": true
+  }
+}

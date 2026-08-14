@@ -209,6 +209,7 @@ function HotelCard({ hotel }: { hotel: Hotel }) {
             height={600}
             loading="lazy"
             decoding="async"
+            draggable={false}
             style={{
               position: 'absolute',
               inset: 0,
@@ -299,6 +300,7 @@ function HotelScroller({
   showAll: boolean;
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const scrollByRef = useRef<(delta: number) => void>(() => {});
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
   const [hasOverflow, setHasOverflow] = useState(false);
@@ -318,15 +320,42 @@ function HotelScroller({
 
     updateState();
 
-    const onWheel = (e: WheelEvent) => {
-      if (!isDesktop()) return;
-      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
-      const { scrollLeft, scrollWidth, clientWidth } = el;
-      const startBound = scrollLeft <= 0;
-      const endBound = scrollLeft + clientWidth >= scrollWidth - 1;
-      if ((e.deltaY < 0 && startBound) || (e.deltaY > 0 && endBound)) return;
-      e.preventDefault();
-      el.scrollLeft += e.deltaY;
+    let targetScroll = el.scrollLeft;
+    let rafId = 0;
+    let lastTime = 0;
+    const EASE = 0.14;
+
+    const animate = (now: number) => {
+      const dt = lastTime ? (now - lastTime) / 16.6667 : 1;
+      lastTime = now;
+      const diff = targetScroll - el.scrollLeft;
+      if (Math.abs(diff) < 0.4) {
+        el.scrollLeft = targetScroll;
+        rafId = 0;
+        lastTime = 0;
+        return;
+      }
+      const step = 1 - Math.pow(1 - EASE, dt);
+      el.scrollLeft += diff * step;
+      rafId = requestAnimationFrame(animate);
+    };
+
+    const scheduleAnimate = () => {
+      if (!rafId) {
+        lastTime = 0;
+        rafId = requestAnimationFrame(animate);
+      }
+    };
+
+    const clampTarget = () => {
+      const max = el.scrollWidth - el.clientWidth;
+      targetScroll = Math.max(0, Math.min(max, targetScroll));
+    };
+
+    scrollByRef.current = (delta: number) => {
+      targetScroll += delta;
+      clampTarget();
+      scheduleAnimate();
     };
 
     let isDown = false;
@@ -341,6 +370,11 @@ function HotelScroller({
       dragged = false;
       startX = e.clientX;
       scrollStart = el.scrollLeft;
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = 0;
+      }
+      targetScroll = el.scrollLeft;
     };
 
     const onPointerMove = (e: PointerEvent) => {
@@ -352,6 +386,7 @@ function HotelScroller({
           el.classList.add('is-dragging');
         }
         el.scrollLeft = scrollStart - walk;
+        targetScroll = el.scrollLeft;
       }
     };
 
@@ -373,23 +408,26 @@ function HotelScroller({
       }
     };
 
+    const onDragStart = (e: DragEvent) => e.preventDefault();
+
     el.addEventListener('scroll', updateState, { passive: true });
-    el.addEventListener('wheel', onWheel, { passive: false });
     el.addEventListener('pointerdown', onPointerDown);
     window.addEventListener('pointermove', onPointerMove);
     window.addEventListener('pointerup', stopDrag);
     window.addEventListener('pointercancel', stopDrag);
     el.addEventListener('click', onClickCapture, true);
+    el.addEventListener('dragstart', onDragStart);
     window.addEventListener('resize', updateState);
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
       el.removeEventListener('scroll', updateState);
-      el.removeEventListener('wheel', onWheel);
       el.removeEventListener('pointerdown', onPointerDown);
       window.removeEventListener('pointermove', onPointerMove);
       window.removeEventListener('pointerup', stopDrag);
       window.removeEventListener('pointercancel', stopDrag);
       el.removeEventListener('click', onClickCapture, true);
+      el.removeEventListener('dragstart', onDragStart);
       window.removeEventListener('resize', updateState);
     };
   }, [hotels.length, showAll]);
@@ -397,7 +435,7 @@ function HotelScroller({
   const scrollByAmount = (dir: 1 | -1) => {
     const el = scrollerRef.current;
     if (!el) return;
-    el.scrollBy({ left: dir * (340 * 2), behavior: 'smooth' });
+    scrollByRef.current(dir * Math.min(el.clientWidth * 0.85, 680));
   };
 
   const wrapClass = [
@@ -475,36 +513,66 @@ function CategoryBlock({ category }: { category: Category }) {
   return (
     <div ref={revealRef} className="reveal" style={{ marginTop: 56 }}>
       <div
+        className="hotel-category-head"
         style={{
           display: 'flex',
           alignItems: 'baseline',
+          justifyContent: 'space-between',
           gap: 14,
           marginBottom: 22,
           flexWrap: 'wrap',
         }}
       >
-        <span
+        <div
           style={{
-            fontSize: 11.5,
-            letterSpacing: '3.6px',
-            fontWeight: 700,
-            color: '#E6C878',
+            display: 'flex',
+            alignItems: 'baseline',
+            gap: 14,
+            flexWrap: 'wrap',
           }}
         >
-          {category.eyebrow}
-        </span>
-        <h3
+          <span
+            style={{
+              fontSize: 11.5,
+              letterSpacing: '3.6px',
+              fontWeight: 700,
+              color: '#E6C878',
+            }}
+          >
+            {category.eyebrow}
+          </span>
+          <h3
+            style={{
+              margin: 0,
+              fontFamily: "'Cormorant Garamond',serif",
+              fontSize: 26,
+              fontWeight: 600,
+              lineHeight: 1.15,
+              color: '#F5EFE6',
+            }}
+          >
+            {category.title}
+          </h3>
+        </div>
+        <a
+          href="/#devis"
+          className="link-arrow"
+          aria-label={`Demander un devis pour un séjour — ${category.title}`}
           style={{
-            margin: 0,
-            fontFamily: "'Cormorant Garamond',serif",
-            fontSize: 26,
+            fontSize: 13,
             fontWeight: 600,
-            lineHeight: 1.15,
-            color: '#F5EFE6',
+            color: '#E6C878',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 7,
+            whiteSpace: 'nowrap',
           }}
         >
-          {category.title}
-        </h3>
+          Demander un devis
+          <span className="btn-arrow">
+            <ArrowIcon />
+          </span>
+        </a>
       </div>
       <HotelScroller hotels={category.hotels} showAll={showAll} />
       {showMoreButton && (
@@ -546,56 +614,30 @@ function Hotels() {
       <div
         ref={revealRef}
         className="reveal hotels-header"
-        style={{
-          display: 'flex',
-          alignItems: 'flex-end',
-          justifyContent: 'space-between',
-          gap: 24,
-          marginBottom: 18,
-          flexWrap: 'wrap',
-        }}
+        style={{ marginBottom: 18 }}
       >
-        <div>
-          <span
-            style={{
-              fontSize: 12,
-              letterSpacing: '3.6px',
-              fontWeight: 700,
-              color: '#E6C878',
-            }}
-          >
-            NOS ADRESSES SÉLECTIONNÉES
-          </span>
-          <h2
-            className="section-title"
-            style={{
-              margin: '12px 0 0',
-              fontFamily: "'Cormorant Garamond',serif",
-              fontWeight: 600,
-              lineHeight: 1.1,
-              color: '#F5EFE6',
-            }}
-          >
-            Hôtels à Makkah &amp; Madinah
-          </h2>
-        </div>
-        <a
-          href="#devis"
-          className="link-arrow"
+        <span
           style={{
-            fontSize: 13.5,
-            fontWeight: 600,
+            fontSize: 12,
+            letterSpacing: '3.6px',
+            fontWeight: 700,
             color: '#E6C878',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 8,
           }}
         >
-          Demander un devis
-          <span className="btn-arrow">
-            <ArrowIcon />
-          </span>
-        </a>
+          NOS ADRESSES SÉLECTIONNÉES
+        </span>
+        <h2
+          className="section-title"
+          style={{
+            margin: '12px 0 0',
+            fontFamily: "'Cormorant Garamond',serif",
+            fontWeight: 600,
+            lineHeight: 1.1,
+            color: '#F5EFE6',
+          }}
+        >
+          Hôtels à Makkah &amp; Madinah
+        </h2>
       </div>
 
       <p

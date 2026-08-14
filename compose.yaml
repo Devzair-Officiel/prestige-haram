@@ -13,3 +13,19 @@ services:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
     command: npm run dev
+    depends_on:
+      - php
+
+  php:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: prestige-haram-php
+    ports:
+      - '8081:80'
+    volumes:
+      - ./api/public:/var/www/html/public
+      - ./api/src:/var/www/html/src
+    env_file:
+      - ./api/.env
+    restart: unless-stopped
