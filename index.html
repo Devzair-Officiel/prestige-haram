@@ -53,11 +53,18 @@
       content="https://haramainprestige.com/favicon-256.png"
     />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Polices auto-hébergées (@fontsource) importées via src/main.tsx :
+         @font-face embarqué dans notre bundle CSS, woff2 servis depuis
+         notre origine, plus de chaîne critique fonts.googleapis.com /
+         fonts.gstatic.com. -->
+
+    <!-- Preload de l'image LCP (hero) : Vite réécrit le href vers l'asset
+         hashé de dist/ pendant le build. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600;1,700&family=Manrope:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="image"
+      href="/src/assets/header-hotel-mekkah.webp"
+      fetchpriority="high"
     />
   </head>
   <body>
