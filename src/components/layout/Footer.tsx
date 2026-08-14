@@ -1,4 +1,4 @@
-import logoHaramain from '../../assets/logo_haramain.png';
+import logoHaramain from '../../assets/logo_haramain.webp';
 
 const navigationLinks = [
   { label: 'À propos', href: '/#apropos' },

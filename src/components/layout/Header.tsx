@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import logoHaramain from '../../assets/logo_haramain.png';
+import logoHaramain from '../../assets/logo_haramain.webp';
 
 type MenuKey = 'hotels' | 'services' | null;
 

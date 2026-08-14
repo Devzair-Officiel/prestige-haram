@@ -108,7 +108,7 @@ const labelStyle: React.CSSProperties = {
   fontSize: 10,
   letterSpacing: '1.2px',
   fontWeight: 700,
-  color: 'rgba(245,239,230,0.45)',
+  color: 'rgba(245,239,230,0.62)',
 };
 
 const stepBadgeStyle: React.CSSProperties = {
@@ -242,7 +242,7 @@ function Label({
             fontSize: 9.5,
             letterSpacing: '0.6px',
             fontWeight: 500,
-            color: 'rgba(245,239,230,0.32)',
+            color: 'rgba(245,239,230,0.55)',
             textTransform: 'none',
           }}
         >
@@ -385,7 +385,7 @@ function QuoteForm() {
             style={{
               margin: '10px 0 0',
               fontSize: 12,
-              color: 'rgba(245,239,230,0.45)',
+              color: 'rgba(245,239,230,0.62)',
             }}
           >
             <span
@@ -818,7 +818,7 @@ function QuoteForm() {
                     margin: 0,
                     fontSize: 13,
                     lineHeight: 1.55,
-                    color: 'rgba(245,239,230,0.55)',
+                    color: 'rgba(245,239,230,0.7)',
                   }}
                 >
                   Cette étape n'est demandée que si vous ajoutez
@@ -971,7 +971,7 @@ function QuoteForm() {
                 <span>Recevoir ma proposition gratuitement</span>
               )}
             </button>
-            <span style={{ fontSize: 12, color: 'rgba(245,239,230,0.5)' }}>
+            <span style={{ fontSize: 12, color: 'rgba(245,239,230,0.62)' }}>
               Vos informations sont utilisées uniquement pour traiter votre
               demande.
             </span>
