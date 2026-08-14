@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import logoHaramain from '../../assets/logo_haramain.png';
 
 type MenuKey = 'hotels' | 'services' | null;
@@ -71,6 +71,24 @@ const menuInnerStyle: React.CSSProperties = {
 function Header() {
   const [menu, setMenu] = useState<MenuKey>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    if (menu === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenu(null);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [menu]);
+
+  const handleGroupBlur = (
+    e: React.FocusEvent<HTMLDivElement>,
+    key: MenuKey,
+  ) => {
+    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+      setMenu((current) => (current === key ? null : current));
+    }
+  };
 
   return (
     <header
@@ -148,7 +166,11 @@ function Header() {
           fontWeight: 600,
         }}
       >
-        <a href="/" className="nav-link" style={{ ...linkBase, color: '#F5EFE6' }}>
+        <a
+          href="/"
+          className="nav-link"
+          style={{ ...linkBase, color: '#F5EFE6' }}
+        >
           Accueil
         </a>
 
@@ -156,10 +178,14 @@ function Header() {
           style={{ position: 'relative' }}
           onMouseEnter={() => setMenu('hotels')}
           onMouseLeave={() => setMenu(null)}
+          onFocus={() => setMenu('hotels')}
+          onBlur={(e) => handleGroupBlur(e, 'hotels')}
         >
           <a
             href="/#hotels"
             className="nav-link"
+            aria-haspopup="menu"
+            aria-expanded={menu === 'hotels'}
             style={{
               ...linkBase,
               display: 'flex',
@@ -168,7 +194,7 @@ function Header() {
             }}
           >
             Hôtels
-            <svg width="11" height="11" viewBox="0 0 16 16">
+            <svg width="11" height="11" viewBox="0 0 16 16" aria-hidden="true">
               <path
                 d="M4 6l4 4 4-4"
                 stroke="currentColor"
@@ -180,11 +206,12 @@ function Header() {
             </svg>
           </a>
           <div style={menuWrapperStyle(menu === 'hotels')}>
-            <div style={menuInnerStyle}>
+            <div style={menuInnerStyle} role="menu" aria-label="Hôtels">
               {hotelsMenu.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
+                  role="menuitem"
                   className="nav-dropdown-item"
                   style={dropdownItemStyle}
                 >
@@ -199,10 +226,14 @@ function Header() {
           style={{ position: 'relative' }}
           onMouseEnter={() => setMenu('services')}
           onMouseLeave={() => setMenu(null)}
+          onFocus={() => setMenu('services')}
+          onBlur={(e) => handleGroupBlur(e, 'services')}
         >
           <a
             href="/#services"
             className="nav-link"
+            aria-haspopup="menu"
+            aria-expanded={menu === 'services'}
             style={{
               ...linkBase,
               display: 'flex',
@@ -211,7 +242,7 @@ function Header() {
             }}
           >
             Services
-            <svg width="11" height="11" viewBox="0 0 16 16">
+            <svg width="11" height="11" viewBox="0 0 16 16" aria-hidden="true">
               <path
                 d="M4 6l4 4 4-4"
                 stroke="currentColor"
@@ -223,11 +254,12 @@ function Header() {
             </svg>
           </a>
           <div style={menuWrapperStyle(menu === 'services')}>
-            <div style={menuInnerStyle}>
+            <div style={menuInnerStyle} role="menu" aria-label="Services">
               {servicesMenu.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
+                  role="menuitem"
                   className="nav-dropdown-item"
                   style={dropdownItemStyle}
                 >

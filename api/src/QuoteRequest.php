@@ -187,6 +187,13 @@ final class QuoteRequest
         if ($d === false) {
             return null;
         }
+        $errors = \DateTimeImmutable::getLastErrors();
+        if (is_array($errors) && (($errors['warning_count'] ?? 0) > 0 || ($errors['error_count'] ?? 0) > 0)) {
+            return null;
+        }
+        if ($d->format('Y-m-d') !== $raw) {
+            return null;
+        }
         return $d;
     }
 }

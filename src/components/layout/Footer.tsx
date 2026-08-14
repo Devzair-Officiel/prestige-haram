@@ -217,8 +217,8 @@ function Footer() {
             style={{ color: '#E6C878', textDecoration: 'none' }}
           >
             Devzair
-          </a>
-          {' '}— Tous droits réservés.
+          </a>{' '}
+          — Tous droits réservés.
         </span>
       </div>
     </footer>

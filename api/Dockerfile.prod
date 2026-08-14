@@ -1,0 +1,56 @@
+# syntax=docker/dockerfile:1.7
+# Image PHP durcie pour la production.
+# Différences vs api/Dockerfile (utilisé pour le dev) :
+#   - conf.d/php-production.ini appliqué (display_errors=Off, log_errors=On, expose_php=Off)
+#   - PHP en mode production explicite
+#   - Aucun bind mount attendu (le code est copié dans l'image)
+
+FROM php:8.3-apache-bookworm
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libzip-dev unzip \
+    && docker-php-ext-install zip opcache \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN a2enmod rewrite headers
+
+# Configuration PHP durcie
+COPY docker/php-production.ini /usr/local/etc/php/conf.d/zz-production.ini
+
+# Apache : document root sur public/
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
+        /etc/apache2/sites-available/000-default.conf \
+        /etc/apache2/apache2.conf \
+        /etc/apache2/conf-available/*.conf
+
+# Masque la signature Apache.
+# Nommé "zz-security-hardening" pour être chargé APRÈS le
+# /etc/apache2/conf-enabled/security.conf fourni par Debian (qui définit
+# ServerTokens OS + ServerSignature On) : l'ordre alphabétique des
+# conf-enabled/*.conf fait que ce fichier est appliqué en dernier et
+# écrase les valeurs par défaut.
+RUN { \
+      echo 'ServerTokens Prod'; \
+      echo 'ServerSignature Off'; \
+      echo 'TraceEnable Off'; \
+    } > /etc/apache2/conf-available/zz-security-hardening.conf \
+    && a2enconf zz-security-hardening
+
+WORKDIR /var/www/html
+
+# Deps figées par composer.lock (reproductible)
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --no-scripts --prefer-dist --optimize-autoloader --no-interaction
+
+# Sources applicatives
+COPY public/ ./public/
+COPY src/ ./src/
+
+RUN chown -R www-data:www-data /var/www/html \
+    && find /var/www/html -type d -exec chmod 755 {} \; \
+    && find /var/www/html -type f -exec chmod 644 {} \;
+
+EXPOSE 80

@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: development
     container_name: prestige-haram-frontend
     ports:
       - '5173:5173'
@@ -26,6 +27,7 @@ services:
     volumes:
       - ./api/public:/var/www/html/public
       - ./api/src:/var/www/html/src
+      - ./api/tests:/var/www/html/tests
     env_file:
       - ./api/.env
     restart: unless-stopped

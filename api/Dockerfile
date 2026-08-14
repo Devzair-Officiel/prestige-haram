@@ -17,8 +17,8 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
 
 WORKDIR /var/www/html
 
-COPY composer.json ./
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --no-scripts --prefer-dist --optimize-autoloader --no-interaction
 
 COPY public/ ./public/
 COPY src/ ./src/

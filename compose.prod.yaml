@@ -1,0 +1,50 @@
+# Configuration Docker Compose production.
+# Utilisation :
+#   docker compose -f compose.prod.yaml build
+#   docker compose -f compose.prod.yaml up -d
+#
+# Ce fichier :
+#   - build le frontend statique (dist/) servi par nginx
+#   - build l'image PHP durcie (php-production.ini)
+#   - N'expose PAS de bind mounts (code figé dans les images)
+#   - N'expose PAS de ports directement à Internet ; le reverse proxy hôte
+#     (Traefik, nginx, Cloudflare Tunnel, OVH LB…) doit se brancher sur
+#     les ports internes 80 des services frontend et php.
+#
+# HTTPS, HSTS et certificats sont gérés par ce reverse proxy hôte,
+# pas dans ce compose.
+
+services:
+  frontend:
+    image: haramain-frontend-prod:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: haramain-frontend
+    restart: unless-stopped
+    ports:
+      # Écoute uniquement sur localhost du serveur ; le reverse proxy
+      # hôte pointe dessus. À adapter (retirer ou changer) selon le
+      # setup (Traefik réseau interne, socket, etc.).
+      - '127.0.0.1:8080:80'
+    depends_on:
+      - php
+
+  php:
+    image: haramain-php-prod:latest
+    build:
+      context: ./api
+      dockerfile: Dockerfile.prod
+    container_name: haramain-php
+    restart: unless-stopped
+    ports:
+      - '127.0.0.1:8081:80'
+    env_file:
+      - ./api/.env
+    # Persistance du rate limiter (survit aux redémarrages du conteneur)
+    volumes:
+      - haramain-rl:/tmp/haramain_rl
+
+volumes:
+  haramain-rl:

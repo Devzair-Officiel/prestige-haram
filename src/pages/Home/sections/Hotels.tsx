@@ -91,8 +91,7 @@ const categories: Category[] = [
       },
       {
         name: 'Zamzam Pullman Madinah',
-        description:
-          'Élégance et sérénité à quelques pas de Masjid an-Nabawi.',
+        description: 'Élégance et sérénité à quelques pas de Masjid an-Nabawi.',
         image: zamzamMadinahImage,
       },
       {

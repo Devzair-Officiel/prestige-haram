@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use HaramainPrestige\ClientIp;
 use HaramainPrestige\EmailTemplate;
 use HaramainPrestige\Mailer;
 use HaramainPrestige\QuoteRequest;
@@ -34,6 +35,13 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     respond(405, ['error' => 'Method not allowed.']);
 }
 
+// Content-Type doit être application/json (avec ou sans charset).
+$contentType = (string) ($_SERVER['CONTENT_TYPE'] ?? $_SERVER['HTTP_CONTENT_TYPE'] ?? '');
+$mime = trim(strtolower(explode(';', $contentType, 2)[0] ?? ''));
+if ($mime !== 'application/json') {
+    respond(415, ['error' => 'Content-Type must be application/json.']);
+}
+
 $raw = file_get_contents('php://input') ?: '';
 if (strlen($raw) > 20_000) {
     respond(413, ['error' => 'Payload too large.']);
@@ -48,8 +56,7 @@ if (!empty($data['website'])) {
     respond(200, ['success' => true]);
 }
 
-$ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? 'unknown';
-$ip = trim(explode(',', $ip)[0]);
+$ip = ClientIp::resolve($_SERVER, $env['TRUSTED_PROXIES'] ?? '');
 $limiter = new RateLimiter(
     maxHits: (int) ($env['RATE_LIMIT_MAX'] ?? 5),
     windowSec: (int) ($env['RATE_LIMIT_WINDOW'] ?? 600),
@@ -98,7 +105,8 @@ function loadEnv(string $path): array
     $out = [];
     foreach (['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS', 'SMTP_FROM', 'SMTP_FROM_NAME',
               'MAIL_TO', 'MAIL_TO_NAME', 'ALLOWED_ORIGINS', 'RATE_LIMIT_MAX',
-              'RATE_LIMIT_WINDOW', 'WHATSAPP_FALLBACK', 'SMTP_DEBUG'] as $k) {
+              'RATE_LIMIT_WINDOW', 'WHATSAPP_FALLBACK', 'SMTP_DEBUG',
+              'TRUSTED_PROXIES'] as $k) {
         $v = getenv($k);
         if ($v !== false && $v !== '') {
             $out[$k] = $v;

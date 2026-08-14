@@ -416,8 +416,7 @@ function QuoteForm() {
             if ((raw.get('website') as string)?.trim()) {
               return;
             }
-            const get = (k: string) =>
-              ((raw.get(k) as string) || '').trim();
+            const get = (k: string) => ((raw.get(k) as string) || '').trim();
 
             const selectedKeys = (
               Object.entries(svc) as [ServiceKey, boolean][]
@@ -509,457 +508,474 @@ function QuoteForm() {
             aria-hidden="true"
           />
 
-        <fieldset style={{ border: 'none', margin: '0 0 28px', padding: 0 }}>
-          <legend
-            style={{
-              padding: 0,
-              margin: '0 0 6px',
-              fontSize: 15,
-              fontWeight: 700,
-              color: '#F5EFE6',
-            }}
-          >
-            De quels services avez-vous besoin&nbsp;?
-          </legend>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 10,
-              flexWrap: 'wrap',
-              margin: '0 0 14px',
-              fontSize: 13,
-              color: 'rgba(245,239,230,0.6)',
-            }}
-          >
-            <span>Cliquez pour sélectionner — plusieurs choix possibles.</span>
-            {(() => {
-              const count = Object.values(svc).filter(Boolean).length;
-              return count > 0 ? (
-                <span
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    padding: '3px 10px',
-                    borderRadius: 999,
-                    background: 'rgba(201,162,75,0.15)',
-                    color: '#E6C878',
-                    fontSize: 12,
-                    fontWeight: 700,
-                    letterSpacing: '0.3px',
-                  }}
-                >
-                  {count} sélectionné{count > 1 ? 's' : ''}
-                </span>
-              ) : null;
-            })()}
-          </div>
-          {Object.values(svc).every((v) => !v) && (
+          <fieldset style={{ border: 'none', margin: '0 0 28px', padding: 0 }}>
+            <legend
+              style={{
+                padding: 0,
+                margin: '0 0 6px',
+                fontSize: 15,
+                fontWeight: 700,
+                color: '#F5EFE6',
+              }}
+            >
+              De quels services avez-vous besoin&nbsp;?
+            </legend>
             <div
-              id="svc-empty-hint"
-              role="status"
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: 10,
-                margin: '0 0 12px',
-                padding: '10px 14px',
-                borderRadius: 10,
-                border: '1px solid rgba(201,162,75,0.28)',
-                background: 'rgba(201,162,75,0.06)',
-                color: '#E6C878',
-                fontSize: 12.5,
-                fontWeight: 600,
-                letterSpacing: '0.2px',
+                flexWrap: 'wrap',
+                margin: '0 0 14px',
+                fontSize: 13,
+                color: 'rgba(245,239,230,0.6)',
               }}
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="9"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                />
-                <path
-                  d="M12 8v5"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                />
-                <circle cx="12" cy="16.2" r="1" fill="currentColor" />
-              </svg>
-              Sélectionnez au moins un service pour continuer.
+              <span>
+                Cliquez pour sélectionner — plusieurs choix possibles.
+              </span>
+              {(() => {
+                const count = Object.values(svc).filter(Boolean).length;
+                return count > 0 ? (
+                  <span
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      padding: '3px 10px',
+                      borderRadius: 999,
+                      background: 'rgba(201,162,75,0.15)',
+                      color: '#E6C878',
+                      fontSize: 12,
+                      fontWeight: 700,
+                      letterSpacing: '0.3px',
+                    }}
+                  >
+                    {count} sélectionné{count > 1 ? 's' : ''}
+                  </span>
+                ) : null;
+              })()}
             </div>
-          )}
-          <div className="svc-grid">
-            {services.map((service) => (
-              <button
-                key={service.key}
-                type="button"
-                className="svc-card"
-                aria-pressed={svc[service.key]}
-                onClick={() =>
-                  setSvc((s) => ({ ...s, [service.key]: !s[service.key] }))
-                }
+            {Object.values(svc).every((v) => !v) && (
+              <div
+                id="svc-empty-hint"
+                role="status"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 12,
-                  padding: '15px 16px',
-                  borderRadius: 12,
-                  border: '1px solid rgba(245,239,230,0.12)',
-                  background: '#14110E',
-                  color: 'rgba(245,239,230,0.8)',
-                  fontFamily: 'inherit',
-                  fontSize: 14,
+                  gap: 10,
+                  margin: '0 0 12px',
+                  padding: '10px 14px',
+                  borderRadius: 10,
+                  border: '1px solid rgba(201,162,75,0.28)',
+                  background: 'rgba(201,162,75,0.06)',
+                  color: '#E6C878',
+                  fontSize: 12.5,
                   fontWeight: 600,
-                  textAlign: 'left',
+                  letterSpacing: '0.2px',
                 }}
               >
-                <span className="svc-check" aria-hidden="true">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M20 6L9 17l-5-5"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-                <span style={{ color: '#E6C878', flex: 'none', display: 'flex' }}>
-                  {service.icon}
-                </span>
-                <span style={{ flex: 1 }}>{service.label}</span>
-              </button>
-            ))}
-          </div>
-        </fieldset>
-
-        <div className="form-steps">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={stepBadgeStyle}>1</span>
-              <span style={stepTitleStyle}>Votre séjour</span>
-            </div>
-            <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <Label required>VILLE</Label>
-              <Select
-                name="Ville"
-                required
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-              >
-                <option value="">Choisir une ville</option>
-                <option value="makkah">Makkah</option>
-                <option value="madinah">Madinah</option>
-                <option value="both">Makkah &amp; Madinah</option>
-              </Select>
-            </label>
-            <div style={{ display: 'flex', gap: 12 }}>
-              <label
-                style={{
-                  flex: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 6,
-                }}
-              >
-                <Label required>DATE D'ARRIVÉE</Label>
-                <input
-                  type="date"
-                  name="Date d'arrivée"
-                  required
-                  style={dateStyle}
-                />
-              </label>
-              <label
-                style={{
-                  flex: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 6,
-                }}
-              >
-                <Label required>DATE DE DÉPART</Label>
-                <input
-                  type="date"
-                  name="Date de départ"
-                  required
-                  style={dateStyle}
-                />
-              </label>
-            </div>
-            <div style={{ display: 'flex', gap: 12 }}>
-              <div
-                style={{
-                  flex: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 6,
-                }}
-              >
-                <Label required>ADULTES</Label>
-                <Counter
-                  value={adults}
-                  onDec={() => setAdults((v) => clamp(v - 1, 1, 12))}
-                  onInc={() => setAdults((v) => clamp(v + 1, 1, 12))}
-                  labels={{
-                    dec: 'Retirer un adulte',
-                    inc: 'Ajouter un adulte',
-                  }}
-                />
-              </div>
-              <div
-                style={{
-                  flex: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 6,
-                }}
-              >
-                <Label optional>ENFANTS</Label>
-                <Counter
-                  value={children}
-                  onDec={() => setChildren((v) => clamp(v - 1, 0, 10))}
-                  onInc={() => setChildren((v) => clamp(v + 1, 0, 10))}
-                  labels={{
-                    dec: 'Retirer un enfant',
-                    inc: 'Ajouter un enfant',
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-
-          {svc.hotel ? (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <span style={stepBadgeStyle}>2</span>
-                <span style={stepTitleStyle}>Vos préférences hôtel</span>
-              </div>
-              <label
-                style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
-              >
-                <Label required>NOMBRE DE CHAMBRES</Label>
-                <Select name="Nombre de chambres" required defaultValue="">
-                  <option value="" disabled>
-                    Choisir…
-                  </option>
-                  <option>1 chambre</option>
-                  <option>2 chambres</option>
-                  <option>3 chambres et +</option>
-                </Select>
-              </label>
-              <label
-                style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
-              >
-                <Label optional>CATÉGORIE D'HÔTEL</Label>
-                <Select name="Catégorie d'hôtel" defaultValue="Indifférent">
-                  <option>Indifférent</option>
-                  <option>3 étoiles</option>
-                  <option>4 étoiles</option>
-                  <option>5 étoiles</option>
-                </Select>
-              </label>
-              <label
-                style={{
-                  display: showKaaba ? 'flex' : 'none',
-                  flexDirection: 'column',
-                  gap: 6,
-                }}
-              >
-                <Label optional>CHAMBRE AVEC VUE KAABA</Label>
-                <Select name="Vue Kaaba" defaultValue="Indifférent">
-                  <option>Indifférent</option>
-                  <option>Oui, si possible</option>
-                  <option>Indispensable</option>
-                </Select>
-              </label>
-              <label
-                style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
-              >
-                <Label optional>BUDGET PAR CHAMBRE / NUIT</Label>
-                <Select name="Budget" defaultValue="Indifférent">
-                  <option>Indifférent</option>
-                  <option>Économique</option>
-                  <option>Confort</option>
-                  <option>Premium</option>
-                </Select>
-              </label>
-            </div>
-          ) : (
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 12,
-                padding: '18px 18px',
-                borderRadius: 12,
-                border: '1px dashed rgba(201,162,75,0.25)',
-                background: 'rgba(201,162,75,0.04)',
-                alignSelf: 'flex-start',
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <span style={stepBadgeStyle}>2</span>
-                <span style={stepTitleStyle}>Vos préférences hôtel</span>
-              </div>
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: 13,
-                  lineHeight: 1.55,
-                  color: 'rgba(245,239,230,0.55)',
-                }}
-              >
-                Cette étape n'est demandée que si vous ajoutez «&nbsp;Hôtel&nbsp;»
-                à votre demande. Vous pouvez la laisser de côté et passer aux
-                coordonnées.
-              </p>
-            </div>
-          )}
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={stepBadgeStyle}>3</span>
-              <span style={stepTitleStyle}>Vos coordonnées</span>
-            </div>
-            <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <Label required>NOM</Label>
-              <input
-                type="text"
-                name="Nom"
-                required
-                autoComplete="name"
-                placeholder="Votre nom complet"
-                style={inputStyle}
-              />
-            </label>
-            <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <Label required>WHATSAPP</Label>
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'stretch',
-                  gap: 8,
-                }}
-              >
-                <div style={{ flex: 'none' }}>
-                  <Select
-                    name="Indicatif"
-                    defaultValue="🇫🇷 +33"
-                    ariaLabel="Indicatif pays"
-                    compact
-                  >
-                    {countryCodes.map((code) => (
-                      <option key={code}>{code}</option>
-                    ))}
-                  </Select>
-                </div>
-                <input
-                  type="tel"
-                  name="Téléphone WhatsApp"
-                  required
-                  autoComplete="tel"
-                  placeholder="6 12 34 56 78"
-                  style={{ ...inputStyle, flex: 1, minWidth: 0 }}
-                />
-              </div>
-            </label>
-            <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <Label optional>EMAIL</Label>
-              <input
-                type="email"
-                name="Email"
-                autoComplete="email"
-                placeholder="exemple@email.com"
-                style={inputStyle}
-              />
-            </label>
-            <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <Label optional>DEMANDE PARTICULIÈRE</Label>
-              <textarea
-                name="Message"
-                placeholder="Précisez votre demande..."
-                style={{
-                  ...inputStyle,
-                  minHeight: 52,
-                  resize: 'none',
-                  padding: '12px 14px',
-                }}
-              />
-            </label>
-          </div>
-        </div>
-
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: 12,
-            marginTop: 30,
-          }}
-        >
-          <button
-            type="submit"
-            className="btn-primary"
-            disabled={!hasService || submitting}
-            aria-disabled={!hasService || submitting}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 9,
-              padding: '16px 40px',
-              borderRadius: 12,
-              border: 'none',
-              background:
-                hasService && !submitting
-                  ? 'linear-gradient(135deg,#EBCE82,#C09A44)'
-                  : 'rgba(245,239,230,0.08)',
-              color:
-                hasService && !submitting ? '#14110E' : 'rgba(245,239,230,0.35)',
-              fontFamily: 'inherit',
-              fontWeight: 700,
-              fontSize: 15,
-              cursor:
-                !hasService || submitting ? 'not-allowed' : 'pointer',
-              transition: 'background 0.2s ease, color 0.2s ease',
-            }}
-          >
-            {submitting ? (
-              <>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  style={{ animation: 'spin 0.9s linear infinite' }}
-                >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                   <circle
                     cx="12"
                     cy="12"
                     r="9"
                     stroke="currentColor"
-                    strokeWidth="2.5"
-                    fill="none"
-                    strokeDasharray="42"
+                    strokeWidth="1.6"
+                  />
+                  <path
+                    d="M12 8v5"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
                     strokeLinecap="round"
                   />
+                  <circle cx="12" cy="16.2" r="1" fill="currentColor" />
                 </svg>
-                <span>Envoi en cours…</span>
-              </>
-            ) : (
-              <span>Recevoir ma proposition gratuitement</span>
+                Sélectionnez au moins un service pour continuer.
+              </div>
             )}
-          </button>
-          <span style={{ fontSize: 12, color: 'rgba(245,239,230,0.5)' }}>
-            Vos informations sont utilisées uniquement pour traiter votre
-            demande.
-          </span>
-        </div>
+            <div className="svc-grid">
+              {services.map((service) => (
+                <button
+                  key={service.key}
+                  type="button"
+                  className="svc-card"
+                  aria-pressed={svc[service.key]}
+                  onClick={() =>
+                    setSvc((s) => ({ ...s, [service.key]: !s[service.key] }))
+                  }
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 12,
+                    padding: '15px 16px',
+                    borderRadius: 12,
+                    border: '1px solid rgba(245,239,230,0.12)',
+                    background: '#14110E',
+                    color: 'rgba(245,239,230,0.8)',
+                    fontFamily: 'inherit',
+                    fontSize: 14,
+                    fontWeight: 600,
+                    textAlign: 'left',
+                  }}
+                >
+                  <span className="svc-check" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M20 6L9 17l-5-5"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  <span
+                    style={{ color: '#E6C878', flex: 'none', display: 'flex' }}
+                  >
+                    {service.icon}
+                  </span>
+                  <span style={{ flex: 1 }}>{service.label}</span>
+                </button>
+              ))}
+            </div>
+          </fieldset>
+
+          <div className="form-steps">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span style={stepBadgeStyle}>1</span>
+                <span style={stepTitleStyle}>Votre séjour</span>
+              </div>
+              <label
+                style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
+              >
+                <Label required>VILLE</Label>
+                <Select
+                  name="Ville"
+                  required
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                >
+                  <option value="">Choisir une ville</option>
+                  <option value="makkah">Makkah</option>
+                  <option value="madinah">Madinah</option>
+                  <option value="both">Makkah &amp; Madinah</option>
+                </Select>
+              </label>
+              <div style={{ display: 'flex', gap: 12 }}>
+                <label
+                  style={{
+                    flex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 6,
+                  }}
+                >
+                  <Label required>DATE D'ARRIVÉE</Label>
+                  <input
+                    type="date"
+                    name="Date d'arrivée"
+                    required
+                    style={dateStyle}
+                  />
+                </label>
+                <label
+                  style={{
+                    flex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 6,
+                  }}
+                >
+                  <Label required>DATE DE DÉPART</Label>
+                  <input
+                    type="date"
+                    name="Date de départ"
+                    required
+                    style={dateStyle}
+                  />
+                </label>
+              </div>
+              <div style={{ display: 'flex', gap: 12 }}>
+                <div
+                  style={{
+                    flex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 6,
+                  }}
+                >
+                  <Label required>ADULTES</Label>
+                  <Counter
+                    value={adults}
+                    onDec={() => setAdults((v) => clamp(v - 1, 1, 12))}
+                    onInc={() => setAdults((v) => clamp(v + 1, 1, 12))}
+                    labels={{
+                      dec: 'Retirer un adulte',
+                      inc: 'Ajouter un adulte',
+                    }}
+                  />
+                </div>
+                <div
+                  style={{
+                    flex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 6,
+                  }}
+                >
+                  <Label optional>ENFANTS</Label>
+                  <Counter
+                    value={children}
+                    onDec={() => setChildren((v) => clamp(v - 1, 0, 10))}
+                    onInc={() => setChildren((v) => clamp(v + 1, 0, 10))}
+                    labels={{
+                      dec: 'Retirer un enfant',
+                      inc: 'Ajouter un enfant',
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {svc.hotel ? (
+              <div
+                style={{ display: 'flex', flexDirection: 'column', gap: 16 }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span style={stepBadgeStyle}>2</span>
+                  <span style={stepTitleStyle}>Vos préférences hôtel</span>
+                </div>
+                <label
+                  style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
+                >
+                  <Label required>NOMBRE DE CHAMBRES</Label>
+                  <Select name="Nombre de chambres" required defaultValue="">
+                    <option value="" disabled>
+                      Choisir…
+                    </option>
+                    <option>1 chambre</option>
+                    <option>2 chambres</option>
+                    <option>3 chambres et +</option>
+                  </Select>
+                </label>
+                <label
+                  style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
+                >
+                  <Label optional>CATÉGORIE D'HÔTEL</Label>
+                  <Select name="Catégorie d'hôtel" defaultValue="Indifférent">
+                    <option>Indifférent</option>
+                    <option>3 étoiles</option>
+                    <option>4 étoiles</option>
+                    <option>5 étoiles</option>
+                  </Select>
+                </label>
+                <label
+                  style={{
+                    display: showKaaba ? 'flex' : 'none',
+                    flexDirection: 'column',
+                    gap: 6,
+                  }}
+                >
+                  <Label optional>CHAMBRE AVEC VUE KAABA</Label>
+                  <Select name="Vue Kaaba" defaultValue="Indifférent">
+                    <option>Indifférent</option>
+                    <option>Oui, si possible</option>
+                    <option>Indispensable</option>
+                  </Select>
+                </label>
+                <label
+                  style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
+                >
+                  <Label optional>BUDGET PAR CHAMBRE / NUIT</Label>
+                  <Select name="Budget" defaultValue="Indifférent">
+                    <option>Indifférent</option>
+                    <option>Économique</option>
+                    <option>Confort</option>
+                    <option>Premium</option>
+                  </Select>
+                </label>
+              </div>
+            ) : (
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 12,
+                  padding: '18px 18px',
+                  borderRadius: 12,
+                  border: '1px dashed rgba(201,162,75,0.25)',
+                  background: 'rgba(201,162,75,0.04)',
+                  alignSelf: 'flex-start',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span style={stepBadgeStyle}>2</span>
+                  <span style={stepTitleStyle}>Vos préférences hôtel</span>
+                </div>
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: 13,
+                    lineHeight: 1.55,
+                    color: 'rgba(245,239,230,0.55)',
+                  }}
+                >
+                  Cette étape n'est demandée que si vous ajoutez
+                  «&nbsp;Hôtel&nbsp;» à votre demande. Vous pouvez la laisser de
+                  côté et passer aux coordonnées.
+                </p>
+              </div>
+            )}
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span style={stepBadgeStyle}>3</span>
+                <span style={stepTitleStyle}>Vos coordonnées</span>
+              </div>
+              <label
+                style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
+              >
+                <Label required>NOM</Label>
+                <input
+                  type="text"
+                  name="Nom"
+                  required
+                  autoComplete="name"
+                  placeholder="Votre nom complet"
+                  style={inputStyle}
+                />
+              </label>
+              <label
+                style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
+              >
+                <Label required>WHATSAPP</Label>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'stretch',
+                    gap: 8,
+                  }}
+                >
+                  <div style={{ flex: 'none' }}>
+                    <Select
+                      name="Indicatif"
+                      defaultValue="🇫🇷 +33"
+                      ariaLabel="Indicatif pays"
+                      compact
+                    >
+                      {countryCodes.map((code) => (
+                        <option key={code}>{code}</option>
+                      ))}
+                    </Select>
+                  </div>
+                  <input
+                    type="tel"
+                    name="Téléphone WhatsApp"
+                    required
+                    autoComplete="tel"
+                    placeholder="6 12 34 56 78"
+                    style={{ ...inputStyle, flex: 1, minWidth: 0 }}
+                  />
+                </div>
+              </label>
+              <label
+                style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
+              >
+                <Label optional>EMAIL</Label>
+                <input
+                  type="email"
+                  name="Email"
+                  autoComplete="email"
+                  placeholder="exemple@email.com"
+                  style={inputStyle}
+                />
+              </label>
+              <label
+                style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
+              >
+                <Label optional>DEMANDE PARTICULIÈRE</Label>
+                <textarea
+                  name="Message"
+                  placeholder="Précisez votre demande..."
+                  style={{
+                    ...inputStyle,
+                    minHeight: 52,
+                    resize: 'none',
+                    padding: '12px 14px',
+                  }}
+                />
+              </label>
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 12,
+              marginTop: 30,
+            }}
+          >
+            <button
+              type="submit"
+              className="btn-primary"
+              disabled={!hasService || submitting}
+              aria-disabled={!hasService || submitting}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 9,
+                padding: '16px 40px',
+                borderRadius: 12,
+                border: 'none',
+                background:
+                  hasService && !submitting
+                    ? 'linear-gradient(135deg,#EBCE82,#C09A44)'
+                    : 'rgba(245,239,230,0.08)',
+                color:
+                  hasService && !submitting
+                    ? '#14110E'
+                    : 'rgba(245,239,230,0.35)',
+                fontFamily: 'inherit',
+                fontWeight: 700,
+                fontSize: 15,
+                cursor: !hasService || submitting ? 'not-allowed' : 'pointer',
+                transition: 'background 0.2s ease, color 0.2s ease',
+              }}
+            >
+              {submitting ? (
+                <>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    style={{ animation: 'spin 0.9s linear infinite' }}
+                  >
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="9"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      fill="none"
+                      strokeDasharray="42"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <span>Envoi en cours…</span>
+                </>
+              ) : (
+                <span>Recevoir ma proposition gratuitement</span>
+              )}
+            </button>
+            <span style={{ fontSize: 12, color: 'rgba(245,239,230,0.5)' }}>
+              Vos informations sont utilisées uniquement pour traiter votre
+              demande.
+            </span>
+          </div>
         </form>
       </div>
       {toast && (
@@ -1046,7 +1062,9 @@ function QuoteForm() {
                 letterSpacing: '0.2px',
               }}
             >
-              {toast.type === 'success' ? 'Demande envoyée' : 'Envoi impossible'}
+              {toast.type === 'success'
+                ? 'Demande envoyée'
+                : 'Envoi impossible'}
             </div>
             <p
               style={{

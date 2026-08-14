@@ -1,6 +1,7 @@
 import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 import WhatsAppFloat from '../../components/ui/WhatsAppFloat';
+import { usePageMetadata } from '../../hooks/usePageMetadata';
 import Hero from './sections/Hero';
 import QuoteForm from './sections/QuoteForm';
 import Services from './sections/Services';
@@ -12,6 +13,13 @@ import Faq from './sections/Faq';
 import ContactCta from './sections/ContactCta';
 
 function HomePage() {
+  usePageMetadata({
+    title: "Haramain Prestige – Réservation d'hôtels à Makkah & Madinah",
+    description:
+      "Haramain Prestige — réservation d'hôtels et accompagnement à Makkah & Madinah.",
+    path: '/',
+  });
+
   return (
     <>
       <Header />

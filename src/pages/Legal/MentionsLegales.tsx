@@ -2,6 +2,7 @@ import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 import WhatsAppFloat from '../../components/ui/WhatsAppFloat';
 import { useReveal } from '../../hooks/useReveal';
+import { usePageMetadata } from '../../hooks/usePageMetadata';
 
 type Block = {
   eyebrow: string;
@@ -31,7 +32,7 @@ const blocks: Block[] = [
     paragraphs: [
       "L'ensemble des éléments présents sur ce site (textes, photographies, logos, illustrations, éléments graphiques, mise en page) est la propriété exclusive de Haramain Prestige ou de ses partenaires, et est protégé par les lois françaises et internationales relatives à la propriété intellectuelle.",
       "Toute reproduction, représentation, modification, publication ou adaptation, totale ou partielle, de l'un quelconque de ces éléments, quel que soit le moyen ou le procédé utilisé, est interdite sans autorisation écrite préalable.",
-      "Les photographies des hôtels partenaires sont utilisées à titre illustratif et restent la propriété de leurs ayants droit respectifs.",
+      'Les photographies des hôtels partenaires sont utilisées à titre illustratif et restent la propriété de leurs ayants droit respectifs.',
     ],
   },
   {
@@ -40,15 +41,16 @@ const blocks: Block[] = [
     paragraphs: [
       "Les informations que vous communiquez via nos formulaires (nom, prénom, e-mail, téléphone, dates de séjour) sont utilisées uniquement pour traiter votre demande de devis et vous accompagner dans l'organisation de votre séjour à Makkah & Madinah.",
       "Aucune donnée n'est revendue ni transmise à des tiers à des fins commerciales. Vos informations sont conservées le temps nécessaire au traitement de votre demande, puis pendant la durée légale requise.",
-      "Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition et de portabilité de vos données. Pour exercer ces droits, écrivez-nous à contact@haramain-prestige.com.",
+      "Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition et de portabilité de vos données. Pour exercer ces droits, écrivez-nous à contact@haramainprestige.com.",
     ],
   },
   {
     eyebrow: 'COOKIES',
     title: 'Utilisation des cookies',
     paragraphs: [
-      "Ce site utilise uniquement des cookies techniques nécessaires à son bon fonctionnement. Aucun cookie publicitaire ou de suivi tiers n'est déposé sans votre consentement.",
-      "Vous pouvez à tout moment configurer votre navigateur pour bloquer ou supprimer les cookies déjà installés.",
+      "Ce site ne dépose aucun cookie de sa propre initiative. Aucun cookie publicitaire, de mesure d'audience ou de suivi tiers n'est utilisé.",
+      "Les polices d'écriture sont chargées depuis Google Fonts (fonts.googleapis.com et fonts.gstatic.com), ce qui entraîne la transmission de votre adresse IP et de votre User-Agent aux serveurs de Google (Alphabet Inc., États-Unis). Aucun cookie n'est déposé par ces requêtes.",
+      'Vous pouvez à tout moment configurer votre navigateur pour bloquer ou supprimer les cookies déjà installés.',
     ],
   },
   {
@@ -63,7 +65,7 @@ const blocks: Block[] = [
     eyebrow: 'DROIT APPLICABLE',
     title: 'Litiges',
     paragraphs: [
-      "Les présentes mentions légales sont régies par le droit français. En cas de litige, et à défaut de résolution amiable, les tribunaux français seront seuls compétents.",
+      'Les présentes mentions légales sont régies par le droit français. En cas de litige, et à défaut de résolution amiable, les tribunaux français seront seuls compétents.',
     ],
   },
 ];
@@ -158,6 +160,13 @@ function BlockSection({ block }: { block: Block }) {
 
 function MentionsLegales() {
   const heroRef = useReveal<HTMLDivElement>();
+
+  usePageMetadata({
+    title: 'Mentions légales — Haramain Prestige',
+    description:
+      'Mentions légales du site Haramain Prestige : éditeur, hébergeur, propriété intellectuelle et contact.',
+    path: '/mentions-legales',
+  });
 
   return (
     <>

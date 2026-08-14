@@ -570,6 +570,54 @@ textarea::placeholder {
   padding: clamp(40px, 6vw, 52px) clamp(20px, 5vw, 48px);
 }
 
+/* ---------- 404 ---------- */
+.notfound {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(60px, 10vw, 120px) clamp(20px, 5vw, 48px);
+}
+.notfound__inner {
+  max-width: 640px;
+  text-align: center;
+}
+.notfound__eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  color: #c9a24b;
+  margin: 0 0 12px;
+}
+.notfound__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 0 0 18px;
+  color: #f5efe6;
+}
+.notfound__text {
+  color: rgba(245, 239, 230, 0.75);
+  margin: 0 0 28px;
+}
+.notfound__cta {
+  display: inline-block;
+  padding: 14px 28px;
+  background: linear-gradient(180deg, #d9b866 0%, #b8892f 100%);
+  color: #14110e;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 6px 16px rgba(201, 162, 75, 0.2);
+}
+.notfound__cta:hover {
+  transform: translateY(-2px);
+  color: #14110e;
+  box-shadow: 0 12px 24px rgba(201, 162, 75, 0.34);
+}
+
 .about-pad {
   padding: clamp(56px, 8vw, 90px) clamp(20px, 5vw, 48px);
 }
