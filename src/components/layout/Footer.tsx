@@ -148,6 +148,54 @@ function Footer() {
             Votre conciergerie à Makkah &amp; Madinah, à vos côtés avant et
             pendant votre séjour.
           </p>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 8,
+              fontSize: 13,
+              color: 'rgba(245,239,230,0.55)',
+            }}
+          >
+            <a
+              href="mailto:contact@haramainprestige.com"
+              className="nav-link"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                color: 'inherit',
+              }}
+              aria-label="Nous écrire à contact@haramainprestige.com"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+                style={{ color: '#E6C878', flexShrink: 0 }}
+              >
+                <rect
+                  x="3"
+                  y="5"
+                  width="18"
+                  height="14"
+                  rx="2"
+                  stroke="currentColor"
+                  strokeWidth="1.7"
+                />
+                <path
+                  d="M3.5 6.5 12 13l8.5-6.5"
+                  stroke="currentColor"
+                  strokeWidth="1.7"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              contact@haramainprestige.com
+            </a>
+          </div>
           <div style={{ display: 'flex', gap: 10 }}>
             <a
               href="https://www.instagram.com/haramainprestige?igsh=MTBzYmt5MTZjeHVxZQ%3D%3D"
