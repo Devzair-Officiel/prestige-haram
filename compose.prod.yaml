@@ -30,6 +30,9 @@ services:
       - '127.0.0.1:8080:80'
     depends_on:
       - php
+    networks:
+      - default
+      - web
 
   php:
     image: haramain-php-prod:latest
@@ -45,6 +48,17 @@ services:
     # Persistance du rate limiter (survit aux redémarrages du conteneur)
     volumes:
       - haramain-rl:/tmp/haramain_rl
+    networks:
+      - default
+      - web
 
 volumes:
   haramain-rl:
+
+networks:
+  # Réseau partagé avec le reverse proxy Caddy (container `caddy` attaché
+  # à `web`). Permet à Caddy de résoudre `haramain-frontend:80` et
+  # `haramain-php:80` par nom DNS Docker. Créé hors de ce compose :
+  #   docker network create web   (si absent)
+  web:
+    external: true
