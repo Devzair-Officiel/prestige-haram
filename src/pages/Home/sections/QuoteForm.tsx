@@ -662,13 +662,14 @@ function QuoteForm() {
                   <option value="both">Makkah &amp; Madinah</option>
                 </Select>
               </label>
-              <div style={{ display: 'flex', gap: 12 }}>
+              <div className="form-row-2">
                 <label
                   style={{
                     flex: 1,
                     display: 'flex',
                     flexDirection: 'column',
                     gap: 6,
+                    minWidth: 0,
                   }}
                 >
                   <Label required>DATE D'ARRIVÉE</Label>
@@ -685,6 +686,7 @@ function QuoteForm() {
                     display: 'flex',
                     flexDirection: 'column',
                     gap: 6,
+                    minWidth: 0,
                   }}
                 >
                   <Label required>DATE DE DÉPART</Label>
@@ -696,13 +698,14 @@ function QuoteForm() {
                   />
                 </label>
               </div>
-              <div style={{ display: 'flex', gap: 12 }}>
+              <div className="form-row-2">
                 <div
                   style={{
                     flex: 1,
                     display: 'flex',
                     flexDirection: 'column',
                     gap: 6,
+                    minWidth: 0,
                   }}
                 >
                   <Label required>ADULTES</Label>
@@ -722,6 +725,7 @@ function QuoteForm() {
                     display: 'flex',
                     flexDirection: 'column',
                     gap: 6,
+                    minWidth: 0,
                   }}
                 >
                   <Label optional>ENFANTS</Label>

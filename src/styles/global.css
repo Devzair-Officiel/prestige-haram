@@ -632,7 +632,10 @@ textarea::placeholder {
 
 /* Fluid typography */
 .hero-title {
-  font-size: clamp(38px, 6.5vw, 68px) !important;
+  /* Reste très gros sur mobile (min 34px) : c'est un h1 hero, il doit
+     avoir de la présence. La structure mobile/desktop du h1 gère elle-même
+     les retours à la ligne pour éviter le débordement. */
+  font-size: clamp(42px, 6.5vw, 68px) !important;
 }
 
 .section-title {
@@ -700,6 +703,18 @@ textarea::placeholder {
   .form-steps {
     grid-template-columns: 1fr;
     gap: 28px;
+  }
+}
+
+/* Deux champs sur une même ligne (dates, compteurs adultes/enfants).
+   Restent côte à côte jusqu'à 385px, puis empilés en dessous. */
+.form-row-2 {
+  display: flex;
+  gap: 12px;
+}
+@media (max-width: 384px) {
+  .form-row-2 {
+    flex-direction: column;
   }
 }
 
@@ -793,6 +808,90 @@ textarea::placeholder {
   }
   .header-cta.hide-mobile {
     display: none !important;
+  }
+}
+
+/* Petits mobiles : réduit la respiration typographique du logo header
+   pour éviter que "HARAMAIN" / "PRESTIGE" ne débordent (letter-spacing
+   3px et 5px prenaient trop de place sous ~405px de largeur). */
+@media (max-width: 480px) {
+  .header-brand-name {
+    font-size: 18px !important;
+    letter-spacing: 2px !important;
+  }
+  .header-brand-tagline {
+    letter-spacing: 3px !important;
+  }
+}
+
+/* Overlay du hero — sur desktop, dégradé horizontal (côté gauche
+   sombre car contenu à gauche, côté droit ouvert sur l'image).
+   Sur mobile, le contenu prend toute la largeur donc on assombrit
+   uniformément pour garantir la lisibilité du texte. */
+@media (max-width: 720px) {
+  .hero-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(20, 17, 14, 0.88) 0%,
+      rgba(20, 17, 14, 0.78) 50%,
+      rgba(20, 17, 14, 0.85) 100%
+    ) !important;
+  }
+}
+
+/* Titre du hero — deux versions dans le markup, une pour desktop
+   (layout typographique original en 2 lignes forcées) et une pour
+   mobile ("Makkah & Madinah" groupés en insécable pour tenir sous
+   360px sans casser l'association visuelle des deux villes). */
+.hero-title-desktop {
+  display: inline;
+}
+.hero-title-mobile {
+  display: none;
+}
+@media (max-width: 520px) {
+  .hero-title-desktop {
+    display: none;
+  }
+  .hero-title-mobile {
+    display: inline;
+  }
+}
+.hero-title-line {
+  white-space: nowrap;
+}
+.hero-title-couple {
+  white-space: nowrap;
+}
+
+/* CTA principal du hero — reste sur une seule ligne, on rétrécit la
+   police et le padding pour tenir dans les écrans étroits (360px). */
+/* Sous 640px, les 2 CTA du hero passent en pleine largeur
+   (empilement vertical, largeur identique). À partir de 640px ils
+   restent côte à côte, chacun à sa taille naturelle. */
+@media (max-width: 639px) {
+  .hero-cta-primary,
+  .hero-cta-secondary {
+    width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .hero-cta-primary {
+    font-size: 15px !important;
+    padding: 13px 18px !important;
+    gap: 6px !important;
+  }
+  .hero-cta-secondary {
+    padding: 13px 18px !important;
+  }
+}
+@media (max-width: 380px) {
+  .hero-cta-primary {
+    font-size: 14px !important;
+    padding: 12px 16px !important;
+  }
+  .hero-cta-secondary {
+    padding: 12px 16px !important;
   }
 }
 

@@ -90,6 +90,7 @@ function Hero() {
         />
       </div>
       <div
+        className="hero-overlay"
         style={{
           position: 'absolute',
           inset: 0,
@@ -136,11 +137,28 @@ function Hero() {
               textWrap: 'pretty',
             }}
           >
-            <span style={{ whiteSpace: 'nowrap' }}>Votre séjour à Makkah</span>
-            <br />
-            <span style={{ whiteSpace: 'nowrap' }}>
-              <span style={{ fontStyle: 'italic', color: '#E6C878' }}>
-                &amp; Madinah
+            {/* Version desktop : layout typographique original en 2 lignes
+                ("Votre séjour à Makkah" / "& Madinah commence ici"). */}
+            <span className="hero-title-desktop">
+              <span className="hero-title-line">Votre séjour à Makkah</span>
+              <br />
+              <span className="hero-title-line">
+                <span style={{ fontStyle: 'italic', color: '#E6C878' }}>
+                  &amp; Madinah
+                </span>{' '}
+                commence ici
+              </span>
+            </span>
+            {/* Version mobile : "Makkah & Madinah" reste insécable pour
+                garder l'association visuelle des deux villes, le reste
+                se coupe naturellement. */}
+            <span className="hero-title-mobile">
+              Votre séjour à{' '}
+              <span className="hero-title-couple">
+                Makkah{' '}
+                <span style={{ fontStyle: 'italic', color: '#E6C878' }}>
+                  &amp; Madinah
+                </span>
               </span>{' '}
               commence ici
             </span>
@@ -172,18 +190,19 @@ function Hero() {
           >
             <a
               href="#devis"
-              className="btn-primary"
+              className="btn-primary hero-cta-primary"
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: 9,
-                padding: '16px 26px',
+                padding: '15px 26px',
                 borderRadius: 12,
                 background: 'linear-gradient(135deg,#EBCE82,#C09A44)',
                 color: '#14110E',
                 fontWeight: 700,
                 fontSize: 15,
+                whiteSpace: 'nowrap',
               }}
             >
               Recevoir ma proposition personnalisée
@@ -202,11 +221,12 @@ function Hero() {
             </a>
             <a
               href="#hotels"
-              className="btn-secondary"
+              className="btn-secondary hero-cta-secondary"
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                padding: '16px 26px',
+                justifyContent: 'center',
+                padding: '15px 26px',
                 borderRadius: 12,
                 border: '1px solid rgba(245,239,230,0.28)',
                 background: 'rgba(20,17,14,0.35)',

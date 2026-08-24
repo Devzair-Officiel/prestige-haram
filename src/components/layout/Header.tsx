@@ -133,6 +133,7 @@ function Header() {
           style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}
         >
           <span
+            className="header-brand-name"
             style={{
               fontFamily: "'Cormorant Garamond',serif",
               fontSize: 18,
@@ -144,6 +145,7 @@ function Header() {
             HARAMAIN
           </span>
           <span
+            className="header-brand-tagline"
             style={{
               fontSize: 8,
               letterSpacing: 5,
