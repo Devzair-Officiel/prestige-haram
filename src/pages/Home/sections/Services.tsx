@@ -1,75 +1,58 @@
 import { useReveal } from '../../../hooks/useReveal';
+import { useI18n } from '../../../i18n';
 
-const services = [
-  {
-    icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M3 8v10M3 13h18v5M21 13v-2a3 3 0 0 0-3-3h-6v5"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-    title: 'Hôtels',
-    description:
-      'Établissements sélectionnés à proximité des lieux saints, à tarifs négociés.',
-  },
-  {
-    icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M10.5 4a1.5 1.5 0 0 1 3 0v5.2l7 4.1v2.1l-7-2.2v3.8l2.2 1.6v1.6L12 24l-3.7-1.2v-1.6L10.5 20v-3.8l-7 2.2v-2.1l7-4.1V4z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-    title: 'Transferts aéroport',
-    description:
-      "De Jeddah ou Madinah jusqu'à votre hôtel, sans attente ni imprévu.",
-  },
-  {
-    icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M5 11l1.4-4.2A2 2 0 0 1 8.3 5.4h7.4a2 2 0 0 1 1.9 1.4L19 11m-14 0h14m-14 0v6h2m12-6v6h-2m-8 0h8"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <circle cx="7.5" cy="14" r="1" fill="currentColor" />
-        <circle cx="16.5" cy="14" r="1" fill="currentColor" />
-      </svg>
-    ),
-    title: 'Chauffeurs & VTC',
-    description:
-      'Des déplacements confortables, avec chauffeur disponible 7j/7 sur place.',
-  },
-  {
-    icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
-        <path
-          d="M15.5 8.5l-2.2 5.2-5.2 2.2 2.2-5.2 5.2-2.2z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-    title: 'Visites & accompagnement',
-    description:
-      'Un accompagnement bienveillant pour vos visites à Makkah & Madinah.',
-  },
+// Les icônes sont figées côté vue : les libellés/descriptions viennent
+// des traductions et sont zippés dans l'ordre attendu (hôtels, transferts,
+// chauffeurs, visites).
+const icons = [
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+    <path
+      d="M3 8v10M3 13h18v5M21 13v-2a3 3 0 0 0-3-3h-6v5"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>,
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+    <path
+      d="M10.5 4a1.5 1.5 0 0 1 3 0v5.2l7 4.1v2.1l-7-2.2v3.8l2.2 1.6v1.6L12 24l-3.7-1.2v-1.6L10.5 20v-3.8l-7 2.2v-2.1l7-4.1V4z"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+    />
+  </svg>,
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+    <path
+      d="M5 11l1.4-4.2A2 2 0 0 1 8.3 5.4h7.4a2 2 0 0 1 1.9 1.4L19 11m-14 0h14m-14 0v6h2m12-6v6h-2m-8 0h8"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <circle cx="7.5" cy="14" r="1" fill="currentColor" />
+    <circle cx="16.5" cy="14" r="1" fill="currentColor" />
+  </svg>,
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
+    <path
+      d="M15.5 8.5l-2.2 5.2-5.2 2.2 2.2-5.2 5.2-2.2z"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+    />
+  </svg>,
 ];
 
 function Services() {
   const revealRef = useReveal<HTMLDivElement>();
+  const { t } = useI18n();
+
+  const services = t.services.cards.map((card, index) => ({
+    icon: icons[index],
+    title: card.title,
+    description: card.description,
+  }));
 
   return (
     <section
@@ -94,7 +77,7 @@ function Services() {
             color: '#E6C878',
           }}
         >
-          CE QUE NOUS FAISONS
+          {t.services.eyebrow}
         </span>
         <h2
           className="section-title"
@@ -106,7 +89,7 @@ function Services() {
             color: '#F5EFE6',
           }}
         >
-          Nos services
+          {t.services.title}
         </h2>
         <p
           style={{
@@ -116,8 +99,7 @@ function Services() {
             color: 'rgba(245,239,230,0.62)',
           }}
         >
-          Une prise en charge complète, sur place, pour un séjour serein à
-          Makkah &amp; Madinah.
+          {t.services.subtitle}
         </p>
       </div>
 

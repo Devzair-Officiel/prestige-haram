@@ -1,63 +1,44 @@
 import { useReveal } from '../../../hooks/useReveal';
+import { useI18n } from '../../../i18n';
 import heroImage from '../../../assets/header-hotel-mekkah.webp';
 
-const trustItems = [
-  {
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        />
-        <circle
-          cx="12"
-          cy="11"
-          r="2.3"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        />
-      </svg>
-    ),
-    label: 'Présence locale sur place',
-  },
-  {
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <circle
-          cx="12"
-          cy="8"
-          r="3.3"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        />
-        <path
-          d="M5 20c0-3.5 3.1-6 7-6s7 2.5 7 6"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-    label: 'Interlocuteur dédié',
-  },
-  {
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M12 3l2.3 4.7 5.2.8-3.7 3.6.9 5.1L12 15l-4.6 2.4.9-5.1L4.5 8.5l5.2-.8L12 3z"
-          stroke="currentColor"
-          strokeWidth="1.4"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-    label: 'Tarifs négociés',
-  },
+const trustIcons = [
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <path
+      d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"
+      stroke="currentColor"
+      strokeWidth="1.5"
+    />
+    <circle cx="12" cy="11" r="2.3" stroke="currentColor" strokeWidth="1.5" />
+  </svg>,
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <circle cx="12" cy="8" r="3.3" stroke="currentColor" strokeWidth="1.5" />
+    <path
+      d="M5 20c0-3.5 3.1-6 7-6s7 2.5 7 6"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+  </svg>,
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <path
+      d="M12 3l2.3 4.7 5.2.8-3.7 3.6.9 5.1L12 15l-4.6 2.4.9-5.1L4.5 8.5l5.2-.8L12 3z"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinejoin="round"
+    />
+  </svg>,
 ];
 
 function Hero() {
   const zoomRef = useReveal<HTMLDivElement>();
+  const { t, pathFor } = useI18n();
+  const homeHref = pathFor('home');
+
+  const trustItems = t.hero.trust.map((entry, index) => ({
+    icon: trustIcons[index],
+    label: entry.label,
+  }));
 
   return (
     <section
@@ -76,7 +57,7 @@ function Hero() {
       >
         <img
           src={heroImage}
-          alt="Vue depuis un hôtel de Makkah sur le Masjid al-Haram"
+          alt={t.hero.imageAlt}
           width={1600}
           height={901}
           fetchPriority="high"
@@ -124,7 +105,7 @@ function Hero() {
               color: '#E6C878',
             }}
           >
-            CONCIERGERIE DE SÉJOUR · MAKKAH &amp; MADINAH
+            {t.hero.eyebrow}
           </span>
           <h1
             className="hero-title"
@@ -137,31 +118,19 @@ function Hero() {
               textWrap: 'pretty',
             }}
           >
-            {/* Version desktop : layout typographique original en 2 lignes
-                ("Votre séjour à Makkah" / "& Madinah commence ici"). */}
-            <span className="hero-title-desktop">
-              <span className="hero-title-line">Votre séjour à Makkah</span>
-              <br />
-              <span className="hero-title-line">
-                <span style={{ fontStyle: 'italic', color: '#E6C878' }}>
-                  &amp; Madinah
-                </span>{' '}
-                commence ici
+            {/* Nom de marque en surtitre du H1 : renforce l'association
+                Haramain Prestige ↔ Makkah/Madinah sans casser le layout
+                typographique existant. Non traduit (identité de marque). */}
+            <span className="hero-title-brand">Haramain Prestige</span>
+            {t.hero.titleLead}{' '}
+            <span className="hero-title-couple">
+              {t.hero.titleCityMakkah}
+              <br className="hero-title-br" />{' '}
+              <span style={{ fontStyle: 'italic', color: '#E6C878' }}>
+                {t.hero.titleCityMadinah}
               </span>
-            </span>
-            {/* Version mobile : "Makkah & Madinah" reste insécable pour
-                garder l'association visuelle des deux villes, le reste
-                se coupe naturellement. */}
-            <span className="hero-title-mobile">
-              Votre séjour à{' '}
-              <span className="hero-title-couple">
-                Makkah{' '}
-                <span style={{ fontStyle: 'italic', color: '#E6C878' }}>
-                  &amp; Madinah
-                </span>
-              </span>{' '}
-              commence ici
-            </span>
+            </span>{' '}
+            {t.hero.titleTrailing}
           </h1>
           <div
             className="goldline"
@@ -176,9 +145,7 @@ function Hero() {
               maxWidth: 560,
             }}
           >
-            Des hôtels soigneusement sélectionnés à tarifs négociés, associés à
-            un accompagnement local et personnalisé, pour vivre votre séjour à
-            Makkah &amp; Madinah en toute sérénité.
+            {t.hero.paragraph}
           </p>
           <div
             style={{
@@ -189,7 +156,7 @@ function Hero() {
             }}
           >
             <a
-              href="#devis"
+              href={`${homeHref}#devis`}
               className="btn-primary hero-cta-primary"
               style={{
                 display: 'flex',
@@ -205,7 +172,7 @@ function Hero() {
                 whiteSpace: 'nowrap',
               }}
             >
-              Recevoir ma proposition personnalisée
+              {t.hero.ctaPrimary}
               <span className="btn-arrow">
                 <svg width="16" height="16" viewBox="0 0 16 16">
                   <path
@@ -220,7 +187,7 @@ function Hero() {
               </span>
             </a>
             <a
-              href="#hotels"
+              href={`${homeHref}#hotels`}
               className="btn-secondary hero-cta-secondary"
               style={{
                 display: 'flex',
@@ -237,7 +204,7 @@ function Hero() {
                 fontSize: 15,
               }}
             >
-              Découvrir nos hôtels
+              {t.hero.ctaSecondary}
             </a>
           </div>
           <div

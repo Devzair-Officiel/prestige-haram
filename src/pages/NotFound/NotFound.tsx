@@ -2,12 +2,16 @@ import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 import WhatsAppFloat from '../../components/ui/WhatsAppFloat';
 import { usePageMetadata } from '../../hooks/usePageMetadata';
+import { useI18n } from '../../i18n';
 
 function NotFound() {
+  const { t, locale, pathFor } = useI18n();
+
   usePageMetadata({
-    title: 'Page introuvable — Haramain Prestige',
-    description: "La page que vous cherchez n'existe pas ou a été déplacée.",
-    path: '/404',
+    title: t.meta.notFound.title,
+    description: t.meta.notFound.description,
+    page: null,
+    locale,
     noindex: true,
   });
 
@@ -16,13 +20,11 @@ function NotFound() {
       <Header />
       <main className="notfound">
         <div className="notfound__inner">
-          <p className="notfound__eyebrow">ERREUR 404</p>
-          <h1 className="notfound__title">Page introuvable</h1>
-          <p className="notfound__text">
-            La page que vous cherchez n'existe pas ou a été déplacée.
-          </p>
-          <a href="/" className="notfound__cta">
-            Retour à l'accueil
+          <p className="notfound__eyebrow">{t.notFound.eyebrow}</p>
+          <h1 className="notfound__title">{t.notFound.title}</h1>
+          <p className="notfound__text">{t.notFound.text}</p>
+          <a href={pathFor('home')} className="notfound__cta">
+            {t.notFound.cta}
           </a>
         </div>
       </main>

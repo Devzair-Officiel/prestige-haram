@@ -1,12 +1,6 @@
 import { useReveal } from '../../../hooks/useReveal';
+import { useI18n } from '../../../i18n';
 import aboutImage from '../../../assets/about_prestige.webp';
-
-const bullets = [
-  'Équipe francophone présente à Makkah &amp; Madinah, joignable 7j/7.',
-  'Accords directs avec les hôtels et prestataires locaux, sans intermédiaire.',
-  'Un seul interlocuteur de la première question au retour de séjour.',
-  'Suivi personnalisé, adapté aux familles, aux couples et aux voyageurs seuls.',
-];
 
 function CheckIcon() {
   return (
@@ -24,6 +18,13 @@ function CheckIcon() {
 
 function About() {
   const revealRef = useReveal<HTMLDivElement>();
+  const { t } = useI18n();
+
+  // On isole le paragraphe accentué (italique) parmi les paragraphs :
+  // les traductions garantissent qu'`accent` correspond exactement à
+  // l'un des paragraphes fournis, ce qui laisse la mise en forme
+  // (italique + non-italique) locale-agnostique.
+  const paragraphs = t.about.paragraphs;
 
   return (
     <section
@@ -50,7 +51,7 @@ function About() {
               color: '#E6C878',
             }}
           >
-            PRÉSENCE LOCALE
+            {t.about.eyebrow}
           </span>
           <h2
             className="about-title"
@@ -62,7 +63,7 @@ function About() {
               color: '#F8F2E8',
             }}
           >
-            Haramain Prestige, né d'un constat
+            {t.about.title}
           </h2>
           <div
             style={{
@@ -72,44 +73,23 @@ function About() {
               maxWidth: 520,
             }}
           >
-            <p
-              style={{
-                margin: 0,
-                fontSize: 16,
-                lineHeight: 1.7,
-                color: 'rgba(245,239,230,0.72)',
-              }}
-            >
-              Au fil du temps, nous avons constaté que de nombreux pèlerins
-              rencontraient les mêmes difficultés : choisir le bon hôtel parmi
-              des centaines d'offres, comprendre les réelles distances du Haram
-              et faire face à des tarifs souvent très élevés.
-            </p>
-            <p
-              style={{
-                margin: 0,
-                fontSize: 16,
-                lineHeight: 1.7,
-                color: '#F5EFE6',
-                fontStyle: 'italic',
-              }}
-            >
-              C'est de ce constat qu'est né Haramain Prestige.
-            </p>
-            <p
-              style={{
-                margin: 0,
-                fontSize: 16,
-                lineHeight: 1.7,
-                color: 'rgba(245,239,230,0.72)',
-              }}
-            >
-              Grâce à notre présence à Makkah &amp; Madinah et à notre
-              connaissance du terrain, nous avons développé un réseau de
-              partenaires afin de proposer des hôtels soigneusement
-              sélectionnés, des tarifs négociés et un véritable accompagnement
-              sur place.
-            </p>
+            {paragraphs.map((paragraph) => {
+              const isAccent = paragraph === t.about.accent;
+              return (
+                <p
+                  key={paragraph}
+                  style={{
+                    margin: 0,
+                    fontSize: 16,
+                    lineHeight: 1.7,
+                    color: isAccent ? '#F5EFE6' : 'rgba(245,239,230,0.72)',
+                    fontStyle: isAccent ? 'italic' : 'normal',
+                  }}
+                >
+                  {paragraph}
+                </p>
+              );
+            })}
             <p
               style={{
                 margin: 0,
@@ -119,10 +99,9 @@ function About() {
               }}
             >
               <span style={{ color: '#E6C878', fontWeight: 600 }}>
-                Notre ambition :
-              </span>{' '}
-              rendre votre séjour plus simple, plus serein et au prix le plus
-              juste.
+                {t.about.ambitionLead}
+              </span>
+              {t.about.ambitionTail}
             </p>
           </div>
           <ul
@@ -135,7 +114,7 @@ function About() {
               gap: 14,
             }}
           >
-            {bullets.map((bullet) => (
+            {t.about.bullets.map((bullet) => (
               <li
                 key={bullet}
                 style={{
@@ -181,7 +160,7 @@ function About() {
         >
           <img
             src={aboutImage}
-            alt="Équipe Haramain Prestige à Makkah"
+            alt={t.about.imageAlt}
             width={1000}
             height={750}
             loading="lazy"

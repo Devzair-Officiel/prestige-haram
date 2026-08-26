@@ -11,9 +11,9 @@ Google évalue chaque site web sur quatre critères, notés de 0 à 100.
 En dessous de 50 c'est rouge, entre 50 et 89 c'est orange, au-dessus de 90
 c'est vert. Voici ce que Google a mesuré sur haramainprestige.com :
 
-| Performance | Accessibilité | Bonnes pratiques | SEO |
-|:-:|:-:|:-:|:-:|
-| **97** | **96** | **100** | **100** |
+| Performance | Accessibilité | Bonnes pratiques |   SEO   |
+| :---------: | :-----------: | :--------------: | :-----: |
+|   **97**    |    **96**     |     **100**      | **100** |
 
 Ces scores sont **tous dans le vert**, avec deux 100/100 parfaits.
 
@@ -177,7 +177,6 @@ accessible**. Les notes Google le prouvent :
 - **100/100** en bonnes pratiques (perfection)
 - **100/100** en SEO (perfection)
 
-
 ---
 
-*Rapport établi par Devzair · [devzair.fr](https://devzair.fr)*
+_Rapport établi par Devzair · [devzair.fr](https://devzair.fr)_

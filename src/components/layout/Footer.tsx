@@ -1,24 +1,5 @@
 import logoHaramain from '../../assets/logo_haramain.webp';
-
-const navigationLinks = [
-  { label: 'À propos', href: '/#apropos' },
-  { label: 'Hôtels', href: '/#hotels' },
-  { label: 'Services', href: '/#services' },
-];
-
-const moreLinks = [
-  { label: 'Témoignages', href: '/#temoignages' },
-  { label: 'FAQ', href: '/#faq' },
-  { label: 'Contact', href: '/#contact' },
-];
-
-const legalLinks = [
-  { label: 'Mentions légales', href: '/mentions-legales' },
-  {
-    label: 'Politique de confidentialité',
-    href: '/politique-de-confidentialite',
-  },
-];
+import { useI18n } from '../../i18n';
 
 const socialBase: React.CSSProperties = {
   width: 38,
@@ -80,6 +61,30 @@ function LinkColumn({ title, links }: LinkColumnProps) {
 }
 
 function Footer() {
+  const { t, pathFor } = useI18n();
+  const homeHref = pathFor('home');
+
+  // On construit les liens ici (label localisé × href stable) : la
+  // structure des colonnes ne change pas d'une locale à l'autre,
+  // seuls les libellés diffèrent.
+  const navigationLinks = [
+    { label: t.footer.columns.navigation.items[0], href: pathFor('about') },
+    { label: t.footer.columns.navigation.items[1], href: `${homeHref}#hotels` },
+    {
+      label: t.footer.columns.navigation.items[2],
+      href: `${homeHref}#services`,
+    },
+  ];
+  const moreLinks = [
+    { label: t.footer.columns.more.items[0], href: `${homeHref}#temoignages` },
+    { label: t.footer.columns.more.items[1], href: `${homeHref}#faq` },
+    { label: t.footer.columns.more.items[2], href: `${homeHref}#contact` },
+  ];
+  const legalLinks = [
+    { label: t.footer.columns.legal.items[0], href: pathFor('legal') },
+    { label: t.footer.columns.legal.items[1], href: pathFor('privacy') },
+  ];
+
   return (
     <footer
       style={{
@@ -99,7 +104,7 @@ function Footer() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <img
               src={logoHaramain}
-              alt="Haramain Prestige"
+              alt={t.footer.logoAlt}
               width={42}
               height={42}
               loading="lazy"
@@ -145,8 +150,7 @@ function Footer() {
               maxWidth: 300,
             }}
           >
-            Votre conciergerie à Makkah &amp; Madinah, à vos côtés avant et
-            pendant votre séjour.
+            {t.footer.tagline}
           </p>
           <div
             style={{
@@ -166,7 +170,7 @@ function Footer() {
                 gap: 8,
                 color: 'inherit',
               }}
-              aria-label="Nous écrire à contact@haramainprestige.com"
+              aria-label={t.footer.emailAria}
             >
               <svg
                 width="14"
@@ -201,7 +205,7 @@ function Footer() {
               href="https://www.instagram.com/haramainprestige?igsh=MTBzYmt5MTZjeHVxZQ%3D%3D"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Instagram Haramain Prestige"
+              aria-label={t.footer.instagramAria}
               className="social-icon"
               style={instagramStyle}
             >
@@ -229,7 +233,7 @@ function Footer() {
               href="https://wa.me/33773157902"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="WhatsApp Haramain Prestige : +33 7 73 15 79 02"
+              aria-label={t.footer.whatsappAria}
               className="social-icon"
               style={whatsappStyle}
             >
@@ -243,9 +247,12 @@ function Footer() {
           </div>
         </div>
 
-        <LinkColumn title="Navigation" links={navigationLinks} />
-        <LinkColumn title="En savoir plus" links={moreLinks} />
-        <LinkColumn title="Légal" links={legalLinks} />
+        <LinkColumn
+          title={t.footer.columns.navigation.title}
+          links={navigationLinks}
+        />
+        <LinkColumn title={t.footer.columns.more.title} links={moreLinks} />
+        <LinkColumn title={t.footer.columns.legal.title} links={legalLinks} />
       </div>
 
       <div
@@ -257,7 +264,7 @@ function Footer() {
         }}
       >
         <span style={{ fontSize: 12, color: 'rgba(245,239,230,0.38)' }}>
-          © 2026{' '}
+          {t.footer.copyright}{' '}
           <a
             href="https://devzair.fr"
             target="_blank"
@@ -266,7 +273,7 @@ function Footer() {
           >
             Devzair
           </a>{' '}
-          — Tous droits réservés.
+          {t.footer.author}
         </span>
       </div>
     </footer>

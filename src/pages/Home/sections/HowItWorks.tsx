@@ -1,28 +1,9 @@
 import { useReveal } from '../../../hooks/useReveal';
-
-const steps = [
-  {
-    number: '01',
-    title: 'Vous nous parlez de votre séjour',
-    description:
-      'Dates, nombre de voyageurs, préférences, budget — un formulaire rapide ou un message WhatsApp suffit.',
-  },
-  {
-    number: '02',
-    title: 'Nous préparons une proposition sur mesure',
-    description:
-      'Hôtels sélectionnés, transferts, chauffeurs et accompagnement local pensés autour de vos besoins.',
-  },
-  {
-    number: '03',
-    title: 'Vous voyagez sereinement',
-    description:
-      'Un interlocuteur dédié sur place, disponible tout au long du séjour pour vous accompagner.',
-  },
-];
+import { useI18n } from '../../../i18n';
 
 function HowItWorks() {
   const revealRef = useReveal<HTMLDivElement>();
+  const { t } = useI18n();
 
   return (
     <section
@@ -47,7 +28,7 @@ function HowItWorks() {
             color: '#E6C878',
           }}
         >
-          COMMENT ÇA MARCHE
+          {t.howItWorks.eyebrow}
         </span>
         <h2
           className="section-title"
@@ -59,12 +40,12 @@ function HowItWorks() {
             color: '#F5EFE6',
           }}
         >
-          Un séjour organisé en 3 étapes
+          {t.howItWorks.title}
         </h2>
       </div>
 
       <div className="grid-3" style={{ gap: 24 }}>
-        {steps.map((step) => (
+        {t.howItWorks.steps.map((step) => (
           <div
             key={step.number}
             style={{

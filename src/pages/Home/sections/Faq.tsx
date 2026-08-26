@@ -1,47 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useReveal } from '../../../hooks/useReveal';
+import { useI18n } from '../../../i18n';
+import type { FaqItem } from '../../../i18n/types';
 
-type FaqItem = {
-  question: string;
-  answer: string;
-};
-
-const faqItems: FaqItem[] = [
-  {
-    question: 'Êtes-vous une agence de voyage ?',
-    answer:
-      "Haramain Prestige est une conciergerie de séjour spécialisée à Makkah et Madinah. Nous organisons vos réservations d'hôtels, transferts et déplacements selon vos besoins, avec un accompagnement et un interlocuteur disponible sur place.",
-  },
-  {
-    question: "Puis-je réserver seulement l'hôtel ?",
-    answer:
-      'Oui. Vous pouvez réserver uniquement votre hébergement, sans transfert ni autre service.',
-  },
-  {
-    question:
-      'Vos tarifs sont-ils moins chers que les plateformes de réservation ?',
-    answer:
-      "Nos partenariats avec les hôtels nous permettent d'accéder à des tarifs négociés et à des conditions privilégiées. Nous recherchons pour chaque séjour la meilleure offre disponible, selon vos dates et vos besoins.",
-  },
-  {
-    question: 'Comment obtenir un devis ?',
-    answer:
-      'Remplissez le formulaire en haut de page ou contactez-nous directement sur WhatsApp. Nous revenons vers vous dans la journée avec une proposition personnalisée et sans engagement.',
-  },
-  {
-    question: 'Êtes-vous joignables une fois sur place ?',
-    answer:
-      "Oui, un interlocuteur dédié reste joignable pendant tout votre séjour, 7j/7. En cas d'imprévu (retard, changement de vol, besoin d'un transfert de dernière minute), nous sommes là.",
-  },
-];
-
-type FaqItemProps = {
+type FaqRowProps = {
   item: FaqItem;
   isOpen: boolean;
   onToggle: () => void;
 };
 
-function FaqRow({ item, isOpen, onToggle }: FaqItemProps) {
+function FaqRow({ item, isOpen, onToggle }: FaqRowProps) {
   return (
     <div
       style={{
@@ -117,9 +85,45 @@ function FaqRow({ item, isOpen, onToggle }: FaqItemProps) {
   );
 }
 
+const FAQ_SCHEMA_ID = 'faq-jsonld';
+
 function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const revealRef = useReveal<HTMLDivElement>();
+  const { t } = useI18n();
+  const faqItems = t.faq.items;
+
+  // Injecte le FAQPage JSON-LD à partir de la même source que le rendu :
+  // le contenu balisé suit la locale active — Google reçoit les Q/R
+  // dans la même langue que la page.
+  useEffect(() => {
+    const payload = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    };
+    let script = document.getElementById(
+      FAQ_SCHEMA_ID,
+    ) as HTMLScriptElement | null;
+    if (!script) {
+      script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.id = FAQ_SCHEMA_ID;
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(payload);
+    return () => {
+      const existing = document.getElementById(FAQ_SCHEMA_ID);
+      if (existing) existing.remove();
+    };
+  }, [faqItems]);
 
   return (
     <section
@@ -144,7 +148,7 @@ function Faq() {
             color: '#E6C878',
           }}
         >
-          QUESTIONS FRÉQUENTES
+          {t.faq.eyebrow}
         </span>
         <h2
           className="section-title"
@@ -156,7 +160,7 @@ function Faq() {
             color: '#F5EFE6',
           }}
         >
-          Vos questions, nos réponses
+          {t.faq.title}
         </h2>
       </div>
 

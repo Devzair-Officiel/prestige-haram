@@ -1,36 +1,8 @@
 import { useEffect, useState } from 'react';
 import logoHaramain from '../../assets/logo_haramain.webp';
+import { useI18n, navigateTo } from '../../i18n';
 
 type MenuKey = 'hotels' | 'services' | null;
-
-const hotelsMenu = [
-  { label: 'Hôtels à Makkah', href: '/#hotels' },
-  { label: 'Hôtels à Madinah', href: '/#hotels' },
-  { label: 'Chambres avec vue Kaaba', href: '/#hotels' },
-];
-
-const servicesMenu = [
-  { label: 'Transferts aéroport', href: '/#services' },
-  { label: 'Chauffeurs & déplacements', href: '/#services' },
-  { label: 'Visites & accompagnement', href: '/#services' },
-];
-
-const simpleLinks = [
-  { label: 'À propos', href: '/#apropos' },
-  { label: 'Témoignages', href: '/#temoignages' },
-  { label: 'FAQ', href: '/#faq' },
-  { label: 'Contact', href: '/#contact' },
-];
-
-const mobileNav = [
-  { label: 'Accueil', href: '/' },
-  { label: 'Hôtels', href: '/#hotels' },
-  { label: 'Services', href: '/#services' },
-  { label: 'À propos', href: '/#apropos' },
-  { label: 'Témoignages', href: '/#temoignages' },
-  { label: 'FAQ', href: '/#faq' },
-  { label: 'Contact', href: '/#contact' },
-];
 
 const linkBase: React.CSSProperties = {
   padding: '9px 12px',
@@ -49,7 +21,7 @@ function menuWrapperStyle(open: boolean): React.CSSProperties {
   return {
     position: 'absolute',
     top: '100%',
-    left: 0,
+    insetInlineStart: 0,
     paddingTop: 6,
     transition: 'opacity .2s ease, transform .2s ease',
     opacity: open ? 1 : 0,
@@ -69,8 +41,36 @@ const menuInnerStyle: React.CSSProperties = {
 };
 
 function Header() {
+  const { t, locale, otherLocale, pathFor, altPathFor } = useI18n();
   const [menu, setMenu] = useState<MenuKey>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const homeHref = pathFor('home');
+  const aboutHref = pathFor('about');
+
+  const hotelsMenu = t.header.hotelsMenu.map((label) => ({
+    label,
+    href: `${homeHref}#hotels`,
+  }));
+  const servicesMenu = t.header.servicesMenu.map((label) => ({
+    label,
+    href: `${homeHref}#services`,
+  }));
+  const simpleLinks = [
+    { label: t.header.navAbout, href: aboutHref },
+    { label: t.header.navTestimonials, href: `${homeHref}#temoignages` },
+    { label: t.header.navFaq, href: `${homeHref}#faq` },
+    { label: t.header.navContact, href: `${homeHref}#contact` },
+  ];
+  const mobileNav = [
+    { label: t.header.navHome, href: homeHref },
+    { label: t.header.navHotels, href: `${homeHref}#hotels` },
+    { label: t.header.navServices, href: `${homeHref}#services` },
+    { label: t.header.navAbout, href: aboutHref },
+    { label: t.header.navTestimonials, href: `${homeHref}#temoignages` },
+    { label: t.header.navFaq, href: `${homeHref}#faq` },
+    { label: t.header.navContact, href: `${homeHref}#contact` },
+  ];
 
   useEffect(() => {
     if (menu === null) return;
@@ -88,6 +88,53 @@ function Header() {
     if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
       setMenu((current) => (current === key ? null : current));
     }
+  };
+
+  // Le sélecteur de langue conserve la page courante mais bascule le
+  // préfixe /ar-sa/. On récupère la page courante via detectRoute, mais
+  // pour rester léger on utilise directement la version « home »
+  // par défaut : les usePageMetadata de chaque page définissent ensuite
+  // la bonne canonique. On préserve toutefois la page réelle pour le
+  // cas courant (about/legal/privacy).
+  const languageSwitchHref = (() => {
+    // On lit le pathname courant et on remappe vers la locale opposée
+    // en gardant la même page — cela évite de forcer un retour à
+    // l'accueil quand on est sur /a-propos ou /mentions-legales.
+    if (typeof window === 'undefined') return altPathFor('home');
+    // Recompose à partir des routes connues : si la page courante n'est
+    // pas mappée (404), on retombe sur l'accueil de l'autre locale.
+    return altPathFor(guessPageFromPath(window.location.pathname));
+  })();
+
+  const otherLabel =
+    otherLocale === 'fr' ? t.common.languageFr : t.common.languageAr;
+  const currentLabel =
+    locale === 'fr' ? t.common.languageFr : t.common.languageAr;
+
+  const handleLanguageSwitch = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigateTo(languageSwitchHref);
+  };
+
+  const handleInternalNav = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    // Interception seulement pour les liens internes (pas hash-only ni
+    // externe) afin de garder la navigation SPA + notifier le provider
+    // i18n via navigateTo.
+    if (href.startsWith('http')) return;
+    if (href.startsWith('mailto:')) return;
+    if (href.startsWith('#')) return;
+    // Si la cible est la page courante avec juste un hash, laisser le
+    // navigateur gérer l'ancre.
+    if (typeof window !== 'undefined') {
+      const [path, hash] = href.split('#');
+      if (path === window.location.pathname && hash) return;
+    }
+    e.preventDefault();
+    navigateTo(href);
+    setMobileOpen(false);
   };
 
   return (
@@ -108,7 +155,8 @@ function Header() {
       }}
     >
       <a
-        href="/"
+        href={homeHref}
+        onClick={(e) => handleInternalNav(e, homeHref)}
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -118,7 +166,7 @@ function Header() {
       >
         <img
           src={logoHaramain}
-          alt="Haramain Prestige"
+          alt={t.header.logoAlt}
           width={44}
           height={44}
           decoding="async"
@@ -142,7 +190,7 @@ function Header() {
               color: '#F5EFE6',
             }}
           >
-            HARAMAIN
+            {t.header.brandLine1}
           </span>
           <span
             className="header-brand-tagline"
@@ -154,7 +202,7 @@ function Header() {
               fontWeight: 700,
             }}
           >
-            PRESTIGE
+            {t.header.brandLine2}
           </span>
         </div>
       </a>
@@ -169,11 +217,12 @@ function Header() {
         }}
       >
         <a
-          href="/"
+          href={homeHref}
+          onClick={(e) => handleInternalNav(e, homeHref)}
           className="nav-link"
           style={{ ...linkBase, color: '#F5EFE6' }}
         >
-          Accueil
+          {t.header.navHome}
         </a>
 
         <div
@@ -184,7 +233,7 @@ function Header() {
           onBlur={(e) => handleGroupBlur(e, 'hotels')}
         >
           <a
-            href="/#hotels"
+            href={`${homeHref}#hotels`}
             className="nav-link"
             aria-haspopup="menu"
             aria-expanded={menu === 'hotels'}
@@ -195,7 +244,7 @@ function Header() {
               gap: 5,
             }}
           >
-            Hôtels
+            {t.header.navHotels}
             <svg width="11" height="11" viewBox="0 0 16 16" aria-hidden="true">
               <path
                 d="M4 6l4 4 4-4"
@@ -208,7 +257,11 @@ function Header() {
             </svg>
           </a>
           <div style={menuWrapperStyle(menu === 'hotels')}>
-            <div style={menuInnerStyle} role="menu" aria-label="Hôtels">
+            <div
+              style={menuInnerStyle}
+              role="menu"
+              aria-label={t.header.hotelsMenuAria}
+            >
               {hotelsMenu.map((item) => (
                 <a
                   key={item.label}
@@ -232,7 +285,7 @@ function Header() {
           onBlur={(e) => handleGroupBlur(e, 'services')}
         >
           <a
-            href="/#services"
+            href={`${homeHref}#services`}
             className="nav-link"
             aria-haspopup="menu"
             aria-expanded={menu === 'services'}
@@ -243,7 +296,7 @@ function Header() {
               gap: 5,
             }}
           >
-            Services
+            {t.header.navServices}
             <svg width="11" height="11" viewBox="0 0 16 16" aria-hidden="true">
               <path
                 d="M4 6l4 4 4-4"
@@ -256,7 +309,11 @@ function Header() {
             </svg>
           </a>
           <div style={menuWrapperStyle(menu === 'services')}>
-            <div style={menuInnerStyle} role="menu" aria-label="Services">
+            <div
+              style={menuInnerStyle}
+              role="menu"
+              aria-label={t.header.servicesMenuAria}
+            >
               {servicesMenu.map((item) => (
                 <a
                   key={item.label}
@@ -276,6 +333,7 @@ function Header() {
           <a
             key={link.label}
             href={link.href}
+            onClick={(e) => handleInternalNav(e, link.href)}
             className="nav-link"
             style={linkBase}
           >
@@ -286,7 +344,37 @@ function Header() {
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <a
-          href="/#devis"
+          href={languageSwitchHref}
+          onClick={handleLanguageSwitch}
+          className="lang-switch"
+          aria-label={t.common.languageSwitchAria}
+          lang={otherLocale}
+          title={otherLabel}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+            padding: '8px 12px',
+            borderRadius: 999,
+            border: '1px solid rgba(245,239,230,0.16)',
+            color: '#F5EFE6',
+            fontSize: 12.5,
+            fontWeight: 700,
+            letterSpacing: '0.3px',
+            background: 'rgba(20,17,14,0.6)',
+          }}
+        >
+          <span aria-hidden="true" style={{ opacity: 0.5 }}>
+            {currentLabel}
+          </span>
+          <span aria-hidden="true" style={{ opacity: 0.35 }}>
+            ·
+          </span>
+          <span>{otherLabel}</span>
+        </a>
+
+        <a
+          href={`${homeHref}#devis`}
           className="header-cta hide-mobile btn-primary"
           style={{
             alignItems: 'center',
@@ -300,7 +388,7 @@ function Header() {
             whiteSpace: 'nowrap',
           }}
         >
-          Obtenir un devis
+          {t.header.ctaQuote}
           <span className="btn-arrow">
             <svg width="14" height="14" viewBox="0 0 16 16">
               <path
@@ -317,7 +405,7 @@ function Header() {
 
         <button
           type="button"
-          aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+          aria-label={mobileOpen ? t.header.closeMenu : t.header.openMenu}
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((v) => !v)}
           className="nav-toggle"
@@ -360,7 +448,7 @@ function Header() {
             key={item.label}
             href={item.href}
             className="mobile-nav-link"
-            onClick={() => setMobileOpen(false)}
+            onClick={(e) => handleInternalNav(e, item.href)}
             style={{
               padding: '13px 6px',
               fontSize: 15,
@@ -373,7 +461,7 @@ function Header() {
           </a>
         ))}
         <a
-          href="/#devis"
+          href={`${homeHref}#devis`}
           onClick={() => setMobileOpen(false)}
           className="btn-primary"
           style={{
@@ -390,7 +478,7 @@ function Header() {
             fontSize: 14,
           }}
         >
-          Obtenir un devis
+          {t.header.ctaQuote}
           <span className="btn-arrow">
             <svg width="14" height="14" viewBox="0 0 16 16">
               <path
@@ -407,6 +495,20 @@ function Header() {
       </div>
     </header>
   );
+}
+
+// Helper local : mappe un pathname vers la clé de page correspondante,
+// pour que le sélecteur de langue préserve la page courante. Doublon
+// discret de `detectRoute` (importé par ailleurs par App/provider) —
+// gardé local ici pour ne pas coupler le Header aux slugs FR.
+function guessPageFromPath(
+  pathname: string,
+): 'home' | 'about' | 'legal' | 'privacy' {
+  const stripped = pathname.replace(/^\/ar-sa/, '').replace(/\/+$/, '') || '/';
+  if (stripped === '/a-propos') return 'about';
+  if (stripped === '/mentions-legales') return 'legal';
+  if (stripped === '/politique-de-confidentialite') return 'privacy';
+  return 'home';
 }
 
 export default Header;

@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useReveal } from '../../../hooks/useReveal';
+import { useI18n } from '../../../i18n';
+import type { HotelItem } from '../../../i18n/types';
 import sheratonImage from '../../../assets/sheraton_jabal_al_kaaba.webp';
 import tilalImage from '../../../assets/tilal_jabal_al_kaaba.webp';
 import marriottImage from '../../../assets/marriott_jabal_omar.webp';
@@ -15,125 +17,33 @@ import fairmontImage from '../../../assets/fairmont_clock_royal.webp';
 import swissotelImage from '../../../assets/swissotel_makkah.webp';
 import zamzamMakkahImage from '../../../assets/zamzam_pullman_makkah.webp';
 
-type Hotel = {
-  name: string;
-  description: string;
-  image?: string;
+// Les images sont locales au composant (assets, non traduisibles). L'ordre
+// dans chaque tableau doit correspondre exactement à l'ordre des hôtels
+// dans les traductions (fr.ts / ar-SA.ts) pour la catégorie associée.
+type CategoryKey = 'makkah' | 'madinah' | 'kaaba';
+
+const CATEGORY_IMAGES: Record<CategoryKey, string[]> = {
+  makkah: [
+    sheratonImage,
+    tilalImage,
+    marriottImage,
+    hiltonImage,
+    vocoImage,
+    kiswahImage,
+  ],
+  madinah: [
+    asSaafaImage,
+    crowneImage,
+    zamzamMadinahImage,
+    myskImage,
+    valyImage,
+  ],
+  kaaba: [fairmontImage, swissotelImage, zamzamMakkahImage],
 };
 
-type Category = {
-  key: string;
-  eyebrow: string;
-  title: string;
-  hotels: Hotel[];
-};
+const CATEGORY_ORDER: CategoryKey[] = ['makkah', 'madinah', 'kaaba'];
 
-const categories: Category[] = [
-  {
-    key: 'makkah',
-    eyebrow: 'MAKKAH',
-    title: 'Hôtels à Makkah',
-    hotels: [
-      {
-        name: 'Sheraton Jabal Al Kaaba',
-        description:
-          'Confort élégant à Jabal Al Kaaba, avec un accès pratique au Masjid Al-Haram.',
-        image: sheratonImage,
-      },
-      {
-        name: 'Tilal Jabal Al Kaaba',
-        description:
-          'Élégance, sérénité et vue sur le Haram au cœur de Makkah.',
-        image: tilalImage,
-      },
-      {
-        name: 'Marriott Jabal Omar',
-        description:
-          'Confort 5 étoiles à quelques minutes du Haram, avec des vues privilégiées sur la Mosquée sacrée.',
-        image: marriottImage,
-      },
-      {
-        name: 'Hilton Suites Jabal Omar',
-        description:
-          'À deux pas du Haram, confort premium et vues privilégiées au cœur de Makkah.',
-        image: hiltonImage,
-      },
-      {
-        name: 'Voco',
-        description:
-          'Confort moderne et navette pratique vers le Masjid Al-Haram.',
-        image: vocoImage,
-      },
-      {
-        name: 'Kiswah Towers',
-        description:
-          'Confort familial à proximité du Haram, avec navette gratuite 24h/24.',
-        image: kiswahImage,
-      },
-    ],
-  },
-  {
-    key: 'madinah',
-    eyebrow: 'MADINAH',
-    title: 'Hôtels à Madinah',
-    hotels: [
-      {
-        name: 'As Saafa Hôtel',
-        description:
-          'Confort et hospitalité à seulement 500 m de Masjid an-Nabawi.',
-        image: asSaafaImage,
-      },
-      {
-        name: 'Crowne Plaza',
-        description:
-          'Confort 5 étoiles à quelques pas de Masjid an-Nabawi et Bab Al Salam.',
-        image: crowneImage,
-      },
-      {
-        name: 'Zamzam Pullman Madinah',
-        description: 'Élégance et sérénité à quelques pas de Masjid an-Nabawi.',
-        image: zamzamMadinahImage,
-      },
-      {
-        name: 'Mysk Al Balad',
-        description:
-          'Confort contemporain et accès privilégié à Masjid an-Nabawi.',
-        image: myskImage,
-      },
-      {
-        name: 'Valy Hôtel',
-        description:
-          'Confort moderne et emplacement privilégié à moins d’1 km de Masjid an-Nabawi.',
-        image: valyImage,
-      },
-    ],
-  },
-  {
-    key: 'kaaba',
-    eyebrow: 'VUE KAABA',
-    title: 'Chambres avec vue sur la Kaaba',
-    hotels: [
-      {
-        name: 'Fairmont Clock Royal',
-        description:
-          'Luxe emblématique et vues exceptionnelles sur la Kaaba, au cœur de Makkah.',
-        image: fairmontImage,
-      },
-      {
-        name: 'Swissôtel Makkah',
-        description:
-          'Confort 5 étoiles et vues privilégiées sur la Kaaba, au cœur des Clock Towers.',
-        image: swissotelImage,
-      },
-      {
-        name: 'Zamzam Pullman Makkah',
-        description:
-          'Confort haut de gamme et vues privilégiées sur la Kaaba, à quelques pas du Haram.',
-        image: zamzamMakkahImage,
-      },
-    ],
-  },
-];
+type HotelWithImage = HotelItem & { image?: string };
 
 function ArrowIcon() {
   return (
@@ -181,10 +91,18 @@ function HotelPlaceholder() {
   );
 }
 
-function HotelCard({ hotel }: { hotel: Hotel }) {
+function HotelCard({
+  hotel,
+  quoteHref,
+  viewRatesLabel,
+}: {
+  hotel: HotelWithImage;
+  quoteHref: string;
+  viewRatesLabel: string;
+}) {
   return (
     <a
-      href="#devis"
+      href={quoteHref}
       className="hotel-card"
       style={{
         display: 'flex',
@@ -281,7 +199,7 @@ function HotelCard({ hotel }: { hotel: Hotel }) {
             letterSpacing: '0.4px',
           }}
         >
-          Voir les tarifs
+          {viewRatesLabel}
           <ArrowIcon />
         </span>
       </div>
@@ -294,9 +212,17 @@ const MOBILE_INITIAL_COUNT = 3;
 function HotelScroller({
   hotels,
   showAll,
+  quoteHref,
+  viewRatesLabel,
+  prevAria,
+  nextAria,
 }: {
-  hotels: Hotel[];
+  hotels: HotelWithImage[];
   showAll: boolean;
+  quoteHref: string;
+  viewRatesLabel: string;
+  prevAria: string;
+  nextAria: string;
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const scrollByRef = useRef<(delta: number) => void>(() => {});
@@ -452,7 +378,7 @@ function HotelScroller({
         className="hotel-nav hotel-nav-prev"
         onClick={() => scrollByAmount(-1)}
         disabled={atStart || !hasOverflow}
-        aria-label="Voir les hôtels précédents"
+        aria-label={prevAria}
       >
         <svg width="18" height="18" viewBox="0 0 16 16">
           <path
@@ -473,7 +399,11 @@ function HotelScroller({
               : '';
           return (
             <div key={hotel.name} className={`hotel-slide${hiddenClass}`}>
-              <HotelCard hotel={hotel} />
+              <HotelCard
+                hotel={hotel}
+                quoteHref={quoteHref}
+                viewRatesLabel={viewRatesLabel}
+              />
             </div>
           );
         })}
@@ -483,7 +413,7 @@ function HotelScroller({
         className="hotel-nav hotel-nav-next"
         onClick={() => scrollByAmount(1)}
         disabled={atEnd || !hasOverflow}
-        aria-label="Voir les hôtels suivants"
+        aria-label={nextAria}
       >
         <svg width="18" height="18" viewBox="0 0 16 16">
           <path
@@ -500,13 +430,32 @@ function HotelScroller({
   );
 }
 
-function CategoryBlock({ category }: { category: Category }) {
+function CategoryBlock({
+  eyebrow,
+  title,
+  hotels,
+  quoteHref,
+  ctaLabel,
+  ctaAria,
+  viewRatesLabel,
+  prevAria,
+  nextAria,
+  showMoreLabel,
+}: {
+  eyebrow: string;
+  title: string;
+  hotels: HotelWithImage[];
+  quoteHref: string;
+  ctaLabel: string;
+  ctaAria: (title: string) => string;
+  viewRatesLabel: string;
+  prevAria: string;
+  nextAria: string;
+  showMoreLabel: (n: number) => string;
+}) {
   const revealRef = useReveal<HTMLDivElement>();
   const [showAll, setShowAll] = useState(false);
-  const hiddenOnMobile = Math.max(
-    0,
-    category.hotels.length - MOBILE_INITIAL_COUNT,
-  );
+  const hiddenOnMobile = Math.max(0, hotels.length - MOBILE_INITIAL_COUNT);
   const showMoreButton = hiddenOnMobile > 0 && !showAll;
 
   return (
@@ -538,7 +487,7 @@ function CategoryBlock({ category }: { category: Category }) {
               color: '#E6C878',
             }}
           >
-            {category.eyebrow}
+            {eyebrow}
           </span>
           <h3
             style={{
@@ -550,13 +499,13 @@ function CategoryBlock({ category }: { category: Category }) {
               color: '#F5EFE6',
             }}
           >
-            {category.title}
+            {title}
           </h3>
         </div>
         <a
-          href="/#devis"
+          href={quoteHref}
           className="link-arrow"
-          aria-label={`Demander un devis pour un séjour — ${category.title}`}
+          aria-label={ctaAria(title)}
           style={{
             fontSize: 13,
             fontWeight: 600,
@@ -567,20 +516,27 @@ function CategoryBlock({ category }: { category: Category }) {
             whiteSpace: 'nowrap',
           }}
         >
-          Demander un devis
+          {ctaLabel}
           <span className="btn-arrow">
             <ArrowIcon />
           </span>
         </a>
       </div>
-      <HotelScroller hotels={category.hotels} showAll={showAll} />
+      <HotelScroller
+        hotels={hotels}
+        showAll={showAll}
+        quoteHref={quoteHref}
+        viewRatesLabel={viewRatesLabel}
+        prevAria={prevAria}
+        nextAria={nextAria}
+      />
       {showMoreButton && (
         <button
           type="button"
           className="hotel-show-more"
           onClick={() => setShowAll(true)}
         >
-          Voir {hiddenOnMobile} hôtel{hiddenOnMobile > 1 ? 's' : ''} de plus
+          {showMoreLabel(hiddenOnMobile)}
           <svg width="12" height="12" viewBox="0 0 16 16">
             <path
               d="M4 6l4 4 4-4"
@@ -599,6 +555,8 @@ function CategoryBlock({ category }: { category: Category }) {
 
 function Hotels() {
   const revealRef = useReveal<HTMLDivElement>();
+  const { t, pathFor } = useI18n();
+  const quoteHref = `${pathFor('home')}#devis`;
 
   return (
     <section
@@ -623,7 +581,7 @@ function Hotels() {
             color: '#E6C878',
           }}
         >
-          NOS ADRESSES SÉLECTIONNÉES
+          {t.hotels.eyebrow}
         </span>
         <h2
           className="section-title"
@@ -635,7 +593,7 @@ function Hotels() {
             color: '#F5EFE6',
           }}
         >
-          Hôtels à Makkah &amp; Madinah
+          {t.hotels.title}
         </h2>
       </div>
 
@@ -648,17 +606,36 @@ function Hotels() {
           maxWidth: 720,
         }}
       >
-        Un aperçu de nos adresses partenaires.{' '}
+        {t.hotels.intro}
         <span style={{ color: '#E6C878', fontWeight: 600 }}>
-          Plus de 100 hôtels
-        </span>{' '}
-        disponibles à Makkah &amp; Madinah, à tous les budgets et à toutes les
-        distances du Haram — demandez la liste complète.
+          {t.hotels.introHighlight}
+        </span>
+        {t.hotels.introTail}
       </p>
 
-      {categories.map((category) => (
-        <CategoryBlock key={category.key} category={category} />
-      ))}
+      {CATEGORY_ORDER.map((key) => {
+        const category = t.hotels.categories[key];
+        const images = CATEGORY_IMAGES[key];
+        const hotels: HotelWithImage[] = category.hotels.map((hotel, i) => ({
+          ...hotel,
+          image: images[i],
+        }));
+        return (
+          <CategoryBlock
+            key={key}
+            eyebrow={category.eyebrow}
+            title={category.title}
+            hotels={hotels}
+            quoteHref={quoteHref}
+            ctaLabel={t.hotels.ctaLabel}
+            ctaAria={t.hotels.ctaAria}
+            viewRatesLabel={t.hotels.viewRates}
+            prevAria={t.hotels.prevAria}
+            nextAria={t.hotels.nextAria}
+            showMoreLabel={t.hotels.showMore}
+          />
+        );
+      })}
     </section>
   );
 }

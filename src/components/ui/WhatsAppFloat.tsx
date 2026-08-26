@@ -1,14 +1,21 @@
+import { useI18n } from '../../i18n';
+
 function WhatsAppFloat() {
+  const { t, dir } = useI18n();
+  // Le bouton reste en bas-droit en LTR ; en RTL on le bascule en bas-gauche
+  // pour respecter la convention arabe (élément flottant côté « fin » de
+  // lecture, ici la gauche).
+  const isRtl = dir === 'rtl';
   return (
     <a
       href="https://wa.me/33773157902"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Contacter Haramain Prestige sur WhatsApp au +33 7 73 15 79 02"
+      aria-label={t.whatsappFloat.ariaLabel}
       className="wa-float"
       style={{
         position: 'fixed',
-        right: 24,
+        [isRtl ? 'left' : 'right']: 24,
         bottom: 24,
         zIndex: 80,
         display: 'flex',
@@ -43,7 +50,9 @@ function WhatsAppFloat() {
           />
         </svg>
       </span>
-      <span style={{ fontSize: 13.5, fontWeight: 600 }}>WhatsApp</span>
+      <span style={{ fontSize: 13.5, fontWeight: 600 }}>
+        {t.whatsappFloat.text}
+      </span>
     </a>
   );
 }

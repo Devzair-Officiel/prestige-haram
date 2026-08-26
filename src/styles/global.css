@@ -839,29 +839,37 @@ textarea::placeholder {
   }
 }
 
-/* Titre du hero — deux versions dans le markup, une pour desktop
-   (layout typographique original en 2 lignes forcées) et une pour
-   mobile ("Makkah & Madinah" groupés en insécable pour tenir sous
-   360px sans casser l'association visuelle des deux villes). */
-.hero-title-desktop {
-  display: inline;
-}
-.hero-title-mobile {
-  display: none;
+/* Titre du hero — un seul contenu textuel dans le DOM. Le layout
+   responsive est piloté par CSS :
+   - Desktop (> 520px) : le <br className="hero-title-br"> est visible
+     et découpe le H1 en 2 lignes ("Votre séjour à Makkah" / "& Madinah
+     commence ici"). La couple "Makkah & Madinah" est en flow naturel.
+   - Mobile (<= 520px) : le <br> est masqué et la couple passe en
+     insécable pour garder les deux villes visuellement liées, le
+     reste du H1 wrap naturellement. */
+.hero-title-couple {
+  white-space: normal;
 }
 @media (max-width: 520px) {
-  .hero-title-desktop {
+  .hero-title-br {
     display: none;
   }
-  .hero-title-mobile {
-    display: inline;
+  .hero-title-couple {
+    white-space: nowrap;
   }
 }
-.hero-title-line {
-  white-space: nowrap;
-}
-.hero-title-couple {
-  white-space: nowrap;
+/* Nom de marque intégré au H1 : ligne dédiée au-dessus de la baseline
+   du titre, plus petite, italique, dorée — reste dans le H1 pour le SEO
+   de marque sans dominer visuellement l'accroche. */
+.hero-title-brand {
+  display: block;
+  font-size: clamp(18px, 2vw, 24px);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #e6c878;
+  margin-bottom: 10px;
+  line-height: 1;
 }
 
 /* CTA principal du hero — reste sur une seule ligne, on rétrécit la
@@ -996,5 +1004,77 @@ textarea::placeholder {
   }
   * {
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- RTL support (ar-SA) ---------- */
+[dir='rtl'] {
+  font-family:
+    'Noto Naskh Arabic',
+    'Manrope',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+}
+
+/* Preserve Latin/decorative fonts for brand-marked elements */
+[dir='rtl'] .hero-title-brand,
+[dir='rtl'] .header-brand-name,
+[dir='rtl'] .header-brand-tagline {
+  font-family: 'Cormorant Garamond', 'Manrope', serif;
+}
+
+/* Mirror hotel scroller navigation arrows */
+[dir='rtl'] .hotel-nav-prev {
+  left: auto;
+  right: -14px;
+}
+[dir='rtl'] .hotel-nav-next {
+  right: auto;
+  left: -14px;
+}
+[dir='rtl'] .hotel-nav-prev svg,
+[dir='rtl'] .hotel-nav-next svg {
+  transform: scaleX(-1);
+}
+
+/* Mirror button arrows so they always point in the reading direction */
+[dir='rtl'] .btn-arrow svg {
+  transform: scaleX(-1);
+}
+[dir='rtl'] .btn-primary:hover .btn-arrow,
+[dir='rtl'] .btn-secondary:hover .btn-arrow,
+[dir='rtl'] .link-arrow:hover .btn-arrow {
+  transform: translateX(-4px);
+}
+
+/* Mirror hotel scroller mask edges so the fade lines up with scroll extremes */
+[dir='rtl'] .hotel-scroll-wrap.at-start .hotel-scroller {
+  --mask-left: transparent;
+  --mask-right: #000;
+}
+[dir='rtl'] .hotel-scroll-wrap.at-end .hotel-scroller {
+  --mask-left: #000;
+  --mask-right: transparent;
+}
+
+/* Testimonials / hotels headers: keep alignment consistent with reading dir */
+@media (max-width: 720px) {
+  [dir='rtl'] .testi-header {
+    align-items: flex-end !important;
+    text-align: right !important;
+  }
+  [dir='rtl'] .testi-rating {
+    text-align: right !important;
+  }
+  [dir='rtl'] .testi-rating > div {
+    justify-content: flex-end !important;
+  }
+  [dir='rtl'] .hotels-header {
+    align-items: flex-end !important;
   }
 }

@@ -1,41 +1,9 @@
 import { useReveal } from '../../../hooks/useReveal';
-
-type Testimonial = {
-  initial: string;
-  name: string;
-  location: string;
-  quote: string;
-};
-
-const testimonials: Testimonial[] = [
-  {
-    initial: 'Y',
-    name: 'Yassin M.',
-    location: 'Paris',
-    quote:
-      'Service au top. Hôtels magnifiques, très bien situés. Je recommande Haramain Prestige les yeux fermés.',
-  },
-  {
-    initial: 'A',
-    name: 'Amina K.',
-    location: 'Lyon',
-    quote:
-      "Nous avons eu une chambre avec vue sur la Kaaba, c'était incroyable. Merci pour tout, du début à la fin.",
-  },
-  {
-    initial: 'S',
-    name: 'Sofiane B.',
-    location: 'Bruxelles',
-    quote:
-      "Réponse rapide, prix imbattables et équipe très professionnelle. Qu'Allah vous préserve.",
-  },
-];
-
-const rating = '4,9';
-const reviewCount = 500;
+import { useI18n } from '../../../i18n';
 
 function Testimonials() {
   const revealRef = useReveal<HTMLDivElement>();
+  const { t } = useI18n();
 
   return (
     <section
@@ -68,7 +36,7 @@ function Testimonials() {
               color: '#E6C878',
             }}
           >
-            ILS NOUS ONT FAIT CONFIANCE
+            {t.testimonials.eyebrow}
           </span>
           <h2
             className="section-title"
@@ -80,7 +48,7 @@ function Testimonials() {
               color: '#F5EFE6',
             }}
           >
-            Ce que disent nos voyageurs
+            {t.testimonials.title}
           </h2>
         </div>
         <div className="testi-rating" style={{ textAlign: 'right' }}>
@@ -101,7 +69,7 @@ function Testimonials() {
                 lineHeight: 1,
               }}
             >
-              {rating}
+              {t.testimonials.rating}
             </span>
             <span style={{ fontSize: 15, color: 'rgba(245,239,230,0.55)' }}>
               /5
@@ -124,13 +92,13 @@ function Testimonials() {
               marginTop: 4,
             }}
           >
-            {reviewCount}+ avis vérifiés
+            {t.testimonials.reviewsCount}
           </div>
         </div>
       </div>
 
       <div className="grid-3">
-        {testimonials.map((testimonial) => (
+        {t.testimonials.items.map((testimonial) => (
           <figure
             key={testimonial.name}
             style={{
@@ -174,7 +142,7 @@ function Testimonials() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                VÉRIFIÉ
+                {t.testimonials.verifiedBadge}
               </div>
             </div>
             <blockquote

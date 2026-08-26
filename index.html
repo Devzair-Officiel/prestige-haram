@@ -66,6 +66,46 @@
       href="/src/assets/header-hotel-mekkah.webp"
       fetchpriority="high"
     />
+
+    <!-- Données structurées de marque (WebSite + Organization).
+         Servies dans le HTML initial pour être exploitables par les
+         crawlers sans exécution JS. Ne dépend pas d'une interaction
+         utilisateur. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Haramain Prestige",
+        "url": "https://haramainprestige.com/",
+        "inLanguage": ["fr-FR", "ar-SA"]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Haramain Prestige",
+        "url": "https://haramainprestige.com/",
+        "logo": "https://haramainprestige.com/favicon-256.png",
+        "description": "Haramain Prestige — conciergerie de séjour à Makkah et Madinah : réservation d'hôtels à tarifs négociés et accompagnement local personnalisé.",
+        "email": "contact@haramainprestige.com",
+        "areaServed": [
+          { "@type": "City", "name": "Makkah" },
+          { "@type": "City", "name": "Madinah" },
+          { "@type": "Country", "name": "Arabie saoudite" }
+        ],
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "email": "contact@haramainprestige.com",
+            "telephone": "+33-7-73-15-79-02",
+            "availableLanguage": ["French", "Arabic"]
+          }
+        ],
+        "sameAs": ["https://www.instagram.com/haramainprestige"]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

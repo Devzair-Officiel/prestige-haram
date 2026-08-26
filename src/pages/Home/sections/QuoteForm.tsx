@@ -1,80 +1,70 @@
 import { useEffect, useState } from 'react';
 import { useReveal } from '../../../hooks/useReveal';
+import { useI18n } from '../../../i18n';
 
 type Toast = { type: 'success' | 'error'; message: string } | null;
 
 type ServiceKey = 'hotel' | 'transfer' | 'driver' | 'visit';
 
-type ServiceOption = {
-  key: ServiceKey;
-  label: string;
-  icon: React.ReactNode;
+// Contrat API : les noms de champs FormData (« Nom », « Ville »,
+// « Date d'arrivée », etc.), les clés JSON (name, email, city…) et les
+// tokens d'énumération (`hotel`/`transfer`/`driver`/`visit`,
+// `makkah`/`madinah`/`both`) sont figés — ils voyagent vers
+// `/api/send-quote.php` et le back n'est pas locale-aware. Seuls les
+// libellés visibles sont traduits.
+
+// Les icônes sont locales au composant (décoratives, non traduisibles).
+// L'ordre du tableau doit correspondre à l'ordre de `t.quoteForm.services`
+// (hotel, transfer, driver, visit).
+const SERVICE_ICONS: Record<ServiceKey, React.ReactNode> = {
+  hotel: (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M3 8v10M3 13h18v5M21 13v-2a3 3 0 0 0-3-3h-6v5"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  transfer: (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M10.5 4a1.5 1.5 0 0 1 3 0v5.2l7 4.1v2.1l-7-2.2v3.8l2.2 1.6v1.6L12 24l-3.7-1.2v-1.6L10.5 20v-3.8l-7 2.2v-2.1l7-4.1V4z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+  driver: (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M5 11l1.4-4.2A2 2 0 0 1 8.3 5.4h7.4a2 2 0 0 1 1.9 1.4L19 11m-14 0h14m-14 0v6h2m12-6v6h-2m-8 0h8"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="7.5" cy="14" r="1" fill="currentColor" />
+      <circle cx="16.5" cy="14" r="1" fill="currentColor" />
+    </svg>
+  ),
+  visit: (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
+      <path
+        d="M15.5 8.5l-2.2 5.2-5.2 2.2 2.2-5.2 5.2-2.2z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
 };
 
-const services: ServiceOption[] = [
-  {
-    key: 'hotel',
-    label: 'Hôtel',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M3 8v10M3 13h18v5M21 13v-2a3 3 0 0 0-3-3h-6v5"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    key: 'transfer',
-    label: 'Transfert aéroport',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M10.5 4a1.5 1.5 0 0 1 3 0v5.2l7 4.1v2.1l-7-2.2v3.8l2.2 1.6v1.6L12 24l-3.7-1.2v-1.6L10.5 20v-3.8l-7 2.2v-2.1l7-4.1V4z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    key: 'driver',
-    label: 'Chauffeur / déplacements',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M5 11l1.4-4.2A2 2 0 0 1 8.3 5.4h7.4a2 2 0 0 1 1.9 1.4L19 11m-14 0h14m-14 0v6h2m12-6v6h-2m-8 0h8"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <circle cx="7.5" cy="14" r="1" fill="currentColor" />
-        <circle cx="16.5" cy="14" r="1" fill="currentColor" />
-      </svg>
-    ),
-  },
-  {
-    key: 'visit',
-    label: 'Visites & accompagnement',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
-        <path
-          d="M15.5 8.5l-2.2 5.2-5.2 2.2 2.2-5.2 5.2-2.2z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-];
-
+// Indicatifs pays : drapeaux + préfixes internationaux (locale-agnostiques).
 const countryCodes = [
   '🇫🇷 +33',
   '🇧🇪 +32',
@@ -85,6 +75,14 @@ const countryCodes = [
   '🇬🇧 +44',
   '🇸🇦 +966',
 ];
+
+// Tokens `value=""` figés (français) pour les selects dont la valeur
+// est envoyée au back. Cela garantit que le backend reçoit toujours la
+// même chaîne, quelle que soit la locale UI de l'utilisateur.
+const ROOM_VALUES = ['1 chambre', '2 chambres', '3 chambres et +'];
+const CATEGORY_VALUES = ['Indifférent', '3 étoiles', '4 étoiles', '5 étoiles'];
+const KAABA_VALUES = ['Indifférent', 'Oui, si possible', 'Indispensable'];
+const BUDGET_VALUES = ['Indifférent', 'Économique', 'Confort', 'Premium'];
 
 const inputStyle: React.CSSProperties = {
   width: '100%',
@@ -219,10 +217,12 @@ function Label({
   children,
   required,
   optional,
+  optionalLabel,
 }: {
   children: React.ReactNode;
   required?: boolean;
   optional?: boolean;
+  optionalLabel?: string;
 }) {
   return (
     <span style={labelStyle}>
@@ -246,7 +246,7 @@ function Label({
             textTransform: 'none',
           }}
         >
-          (optionnel)
+          {optionalLabel}
         </span>
       )}
     </span>
@@ -301,6 +301,10 @@ function Counter({
 
 function QuoteForm() {
   const revealRef = useReveal<HTMLDivElement>();
+  const { t } = useI18n();
+  const q = t.quoteForm;
+  const optionalLabel = t.common.optional;
+
   const [adults, setAdults] = useState(2);
   const [children, setChildren] = useState(0);
   const [city, setCity] = useState('');
@@ -315,8 +319,8 @@ function QuoteForm() {
 
   useEffect(() => {
     if (!toast) return;
-    const t = setTimeout(() => setToast(null), 6000);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => setToast(null), 6000);
+    return () => clearTimeout(timer);
   }, [toast]);
 
   const clamp = (v: number, lo: number, hi: number) =>
@@ -358,7 +362,7 @@ function QuoteForm() {
               color: '#E6C878',
             }}
           >
-            DEVIS PERSONNALISÉ
+            {q.eyebrow}
           </span>
           <h2
             style={{
@@ -369,7 +373,7 @@ function QuoteForm() {
               color: '#F5EFE6',
             }}
           >
-            Recevez votre proposition personnalisée
+            {q.title}
           </h2>
           <p
             style={{
@@ -378,8 +382,7 @@ function QuoteForm() {
               color: 'rgba(245,239,230,0.6)',
             }}
           >
-            Décrivez votre projet — nous revenons vers vous avec une proposition
-            adaptée à vos dates, votre budget et vos besoins.
+            {q.intro}
           </p>
           <p
             style={{
@@ -394,7 +397,7 @@ function QuoteForm() {
             >
               *
             </span>
-            Champs obligatoires
+            {q.requiredHint}
           </p>
         </div>
 
@@ -461,8 +464,7 @@ function QuoteForm() {
               if (res.ok && data.success) {
                 setToast({
                   type: 'success',
-                  message:
-                    'Votre demande a bien été envoyée. Nous revenons vers vous rapidement.',
+                  message: q.toastSuccessMsg,
                 });
                 form.reset();
                 setCity('');
@@ -477,16 +479,13 @@ function QuoteForm() {
               } else {
                 setToast({
                   type: 'error',
-                  message:
-                    data.error ||
-                    "L'envoi a échoué. Réessayez ou contactez-nous sur WhatsApp.",
+                  message: data.error || q.toastErrorGeneric,
                 });
               }
             } catch {
               setToast({
                 type: 'error',
-                message:
-                  'Erreur réseau. Vérifiez votre connexion et réessayez.',
+                message: q.toastErrorNetwork,
               });
             } finally {
               setSubmitting(false);
@@ -518,7 +517,7 @@ function QuoteForm() {
                 color: '#F5EFE6',
               }}
             >
-              De quels services avez-vous besoin&nbsp;?
+              {q.servicesLegend}
             </legend>
             <div
               style={{
@@ -531,12 +530,15 @@ function QuoteForm() {
                 color: 'rgba(245,239,230,0.6)',
               }}
             >
-              <span>
-                Cliquez pour sélectionner — plusieurs choix possibles.
-              </span>
+              <span>{q.servicesHint}</span>
               {(() => {
                 const count = Object.values(svc).filter(Boolean).length;
-                return count > 0 ? (
+                if (count === 0) return null;
+                const suffix =
+                  count > 1
+                    ? q.servicesSelectedPlural
+                    : q.servicesSelectedSingular;
+                return (
                   <span
                     style={{
                       display: 'inline-flex',
@@ -550,9 +552,9 @@ function QuoteForm() {
                       letterSpacing: '0.3px',
                     }}
                   >
-                    {count} sélectionné{count > 1 ? 's' : ''}
+                    {count} {suffix}
                   </span>
-                ) : null;
+                );
               })()}
             </div>
             {Object.values(svc).every((v) => !v) && (
@@ -590,11 +592,11 @@ function QuoteForm() {
                   />
                   <circle cx="12" cy="16.2" r="1" fill="currentColor" />
                 </svg>
-                Sélectionnez au moins un service pour continuer.
+                {q.servicesEmptyWarn}
               </div>
             )}
             <div className="svc-grid">
-              {services.map((service) => (
+              {q.services.map((service) => (
                 <button
                   key={service.key}
                   type="button"
@@ -632,7 +634,7 @@ function QuoteForm() {
                   <span
                     style={{ color: '#E6C878', flex: 'none', display: 'flex' }}
                   >
-                    {service.icon}
+                    {SERVICE_ICONS[service.key]}
                   </span>
                   <span style={{ flex: 1 }}>{service.label}</span>
                 </button>
@@ -644,22 +646,22 @@ function QuoteForm() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <span style={stepBadgeStyle}>1</span>
-                <span style={stepTitleStyle}>Votre séjour</span>
+                <span style={stepTitleStyle}>{q.step1Title}</span>
               </div>
               <label
                 style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
               >
-                <Label required>VILLE</Label>
+                <Label required>{q.cityLabel}</Label>
                 <Select
                   name="Ville"
                   required
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                 >
-                  <option value="">Choisir une ville</option>
-                  <option value="makkah">Makkah</option>
-                  <option value="madinah">Madinah</option>
-                  <option value="both">Makkah &amp; Madinah</option>
+                  <option value="">{q.cityPlaceholder}</option>
+                  <option value="makkah">{q.cityMakkah}</option>
+                  <option value="madinah">{q.cityMadinah}</option>
+                  <option value="both">{q.cityBoth}</option>
                 </Select>
               </label>
               <div className="form-row-2">
@@ -672,7 +674,7 @@ function QuoteForm() {
                     minWidth: 0,
                   }}
                 >
-                  <Label required>DATE D'ARRIVÉE</Label>
+                  <Label required>{q.arrivalLabel}</Label>
                   <input
                     type="date"
                     name="Date d'arrivée"
@@ -689,7 +691,7 @@ function QuoteForm() {
                     minWidth: 0,
                   }}
                 >
-                  <Label required>DATE DE DÉPART</Label>
+                  <Label required>{q.departureLabel}</Label>
                   <input
                     type="date"
                     name="Date de départ"
@@ -708,14 +710,14 @@ function QuoteForm() {
                     minWidth: 0,
                   }}
                 >
-                  <Label required>ADULTES</Label>
+                  <Label required>{q.adultsLabel}</Label>
                   <Counter
                     value={adults}
                     onDec={() => setAdults((v) => clamp(v - 1, 1, 12))}
                     onInc={() => setAdults((v) => clamp(v + 1, 1, 12))}
                     labels={{
-                      dec: 'Retirer un adulte',
-                      inc: 'Ajouter un adulte',
+                      dec: q.decrementAdult,
+                      inc: q.incrementAdult,
                     }}
                   />
                 </div>
@@ -728,14 +730,16 @@ function QuoteForm() {
                     minWidth: 0,
                   }}
                 >
-                  <Label optional>ENFANTS</Label>
+                  <Label optional optionalLabel={optionalLabel}>
+                    {q.childrenLabel}
+                  </Label>
                   <Counter
                     value={children}
                     onDec={() => setChildren((v) => clamp(v - 1, 0, 10))}
                     onInc={() => setChildren((v) => clamp(v + 1, 0, 10))}
                     labels={{
-                      dec: 'Retirer un enfant',
-                      inc: 'Ajouter un enfant',
+                      dec: q.decrementChild,
+                      inc: q.incrementChild,
                     }}
                   />
                 </div>
@@ -748,30 +752,38 @@ function QuoteForm() {
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                   <span style={stepBadgeStyle}>2</span>
-                  <span style={stepTitleStyle}>Vos préférences hôtel</span>
+                  <span style={stepTitleStyle}>{q.step2Title}</span>
                 </div>
                 <label
                   style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
                 >
-                  <Label required>NOMBRE DE CHAMBRES</Label>
+                  <Label required>{q.roomsLabel}</Label>
                   <Select name="Nombre de chambres" required defaultValue="">
                     <option value="" disabled>
-                      Choisir…
+                      {q.roomsPlaceholder}
                     </option>
-                    <option>1 chambre</option>
-                    <option>2 chambres</option>
-                    <option>3 chambres et +</option>
+                    {q.roomsOptions.map((label, i) => (
+                      <option key={ROOM_VALUES[i]} value={ROOM_VALUES[i]}>
+                        {label}
+                      </option>
+                    ))}
                   </Select>
                 </label>
                 <label
                   style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
                 >
-                  <Label optional>CATÉGORIE D'HÔTEL</Label>
+                  <Label optional optionalLabel={optionalLabel}>
+                    {q.categoryLabel}
+                  </Label>
                   <Select name="Catégorie d'hôtel" defaultValue="Indifférent">
-                    <option>Indifférent</option>
-                    <option>3 étoiles</option>
-                    <option>4 étoiles</option>
-                    <option>5 étoiles</option>
+                    {q.categoryOptions.map((label, i) => (
+                      <option
+                        key={CATEGORY_VALUES[i]}
+                        value={CATEGORY_VALUES[i]}
+                      >
+                        {label}
+                      </option>
+                    ))}
                   </Select>
                 </label>
                 <label
@@ -781,22 +793,29 @@ function QuoteForm() {
                     gap: 6,
                   }}
                 >
-                  <Label optional>CHAMBRE AVEC VUE KAABA</Label>
+                  <Label optional optionalLabel={optionalLabel}>
+                    {q.kaabaLabel}
+                  </Label>
                   <Select name="Vue Kaaba" defaultValue="Indifférent">
-                    <option>Indifférent</option>
-                    <option>Oui, si possible</option>
-                    <option>Indispensable</option>
+                    {q.kaabaOptions.map((label, i) => (
+                      <option key={KAABA_VALUES[i]} value={KAABA_VALUES[i]}>
+                        {label}
+                      </option>
+                    ))}
                   </Select>
                 </label>
                 <label
                   style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
                 >
-                  <Label optional>BUDGET PAR CHAMBRE / NUIT</Label>
+                  <Label optional optionalLabel={optionalLabel}>
+                    {q.budgetLabel}
+                  </Label>
                   <Select name="Budget" defaultValue="Indifférent">
-                    <option>Indifférent</option>
-                    <option>Économique</option>
-                    <option>Confort</option>
-                    <option>Premium</option>
+                    {q.budgetOptions.map((label, i) => (
+                      <option key={BUDGET_VALUES[i]} value={BUDGET_VALUES[i]}>
+                        {label}
+                      </option>
+                    ))}
                   </Select>
                 </label>
               </div>
@@ -815,7 +834,7 @@ function QuoteForm() {
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                   <span style={stepBadgeStyle}>2</span>
-                  <span style={stepTitleStyle}>Vos préférences hôtel</span>
+                  <span style={stepTitleStyle}>{q.step2Title}</span>
                 </div>
                 <p
                   style={{
@@ -825,9 +844,7 @@ function QuoteForm() {
                     color: 'rgba(245,239,230,0.7)',
                   }}
                 >
-                  Cette étape n'est demandée que si vous ajoutez
-                  «&nbsp;Hôtel&nbsp;» à votre demande. Vous pouvez la laisser de
-                  côté et passer aux coordonnées.
+                  {q.step2InactiveNote}
                 </p>
               </div>
             )}
@@ -835,25 +852,25 @@ function QuoteForm() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <span style={stepBadgeStyle}>3</span>
-                <span style={stepTitleStyle}>Vos coordonnées</span>
+                <span style={stepTitleStyle}>{q.step3Title}</span>
               </div>
               <label
                 style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
               >
-                <Label required>NOM</Label>
+                <Label required>{q.nameLabel}</Label>
                 <input
                   type="text"
                   name="Nom"
                   required
                   autoComplete="name"
-                  placeholder="Votre nom complet"
+                  placeholder={q.namePlaceholder}
                   style={inputStyle}
                 />
               </label>
               <label
                 style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
               >
-                <Label required>WHATSAPP</Label>
+                <Label required>{q.whatsappLabel}</Label>
                 <div
                   style={{
                     display: 'flex',
@@ -865,7 +882,7 @@ function QuoteForm() {
                     <Select
                       name="Indicatif"
                       defaultValue="🇫🇷 +33"
-                      ariaLabel="Indicatif pays"
+                      ariaLabel={q.indicatifAria}
                       compact
                     >
                       {countryCodes.map((code) => (
@@ -878,7 +895,7 @@ function QuoteForm() {
                     name="Téléphone WhatsApp"
                     required
                     autoComplete="tel"
-                    placeholder="6 12 34 56 78"
+                    placeholder={q.phonePlaceholder}
                     style={{ ...inputStyle, flex: 1, minWidth: 0 }}
                   />
                 </div>
@@ -886,22 +903,26 @@ function QuoteForm() {
               <label
                 style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
               >
-                <Label optional>EMAIL</Label>
+                <Label optional optionalLabel={optionalLabel}>
+                  {q.emailLabel}
+                </Label>
                 <input
                   type="email"
                   name="Email"
                   autoComplete="email"
-                  placeholder="exemple@email.com"
+                  placeholder={q.emailPlaceholder}
                   style={inputStyle}
                 />
               </label>
               <label
                 style={{ display: 'flex', flexDirection: 'column', gap: 6 }}
               >
-                <Label optional>DEMANDE PARTICULIÈRE</Label>
+                <Label optional optionalLabel={optionalLabel}>
+                  {q.messageLabel}
+                </Label>
                 <textarea
                   name="Message"
-                  placeholder="Précisez votre demande..."
+                  placeholder={q.messagePlaceholder}
                   style={{
                     ...inputStyle,
                     minHeight: 52,
@@ -969,15 +990,14 @@ function QuoteForm() {
                       strokeLinecap="round"
                     />
                   </svg>
-                  <span>Envoi en cours…</span>
+                  <span>{q.submitting}</span>
                 </>
               ) : (
-                <span>Recevoir ma proposition gratuitement</span>
+                <span>{q.submit}</span>
               )}
             </button>
             <span style={{ fontSize: 12, color: 'rgba(245,239,230,0.62)' }}>
-              Vos informations sont utilisées uniquement pour traiter votre
-              demande.
+              {q.privacyNote}
             </span>
           </div>
         </form>
@@ -1067,8 +1087,8 @@ function QuoteForm() {
               }}
             >
               {toast.type === 'success'
-                ? 'Demande envoyée'
-                : 'Envoi impossible'}
+                ? q.toastSuccessTitle
+                : q.toastErrorTitle}
             </div>
             <p
               style={{
@@ -1083,7 +1103,7 @@ function QuoteForm() {
           </div>
           <button
             type="button"
-            aria-label="Fermer la notification"
+            aria-label={q.toastCloseAria}
             onClick={() => setToast(null)}
             style={{
               flex: 'none',

@@ -1,8 +1,11 @@
 import { useReveal } from '../../../hooks/useReveal';
+import { useI18n } from '../../../i18n';
 import nabawiImage from '../../../assets/masjid_nabawi.webp';
 
 function ContactCta() {
   const revealRef = useReveal<HTMLDivElement>();
+  const { t, pathFor } = useI18n();
+  const homeHref = pathFor('home');
 
   return (
     <section id="contact" className="container-pad section-pad-y">
@@ -24,7 +27,7 @@ function ContactCta() {
       >
         <img
           src={nabawiImage}
-          alt="Masjid an-Nabawi à Madinah"
+          alt={t.contactCta.imageAlt}
           width={1500}
           height={1125}
           loading="lazy"
@@ -64,7 +67,7 @@ function ContactCta() {
               color: '#E6C878',
             }}
           >
-            PRÊT À PARTIR ?
+            {t.contactCta.eyebrow}
           </span>
           <h2
             className="section-title cta-title-nowrap"
@@ -76,9 +79,9 @@ function ContactCta() {
               color: '#F8F2E8',
             }}
           >
-            Discutons de votre séjour à{' '}
+            {t.contactCta.titleLead}{' '}
             <span style={{ fontStyle: 'italic', color: '#E6C878' }}>
-              Makkah &amp; Madinah
+              {t.contactCta.titleCouple}
             </span>
           </h2>
           <p
@@ -90,7 +93,7 @@ function ContactCta() {
               maxWidth: 520,
             }}
           >
-            Recevez une proposition personnalisée sous 24h, sans engagement.
+            {t.contactCta.paragraph}
           </p>
           <div
             style={{
@@ -102,7 +105,7 @@ function ContactCta() {
             }}
           >
             <a
-              href="#devis"
+              href={`${homeHref}#devis`}
               className="btn-primary"
               style={{
                 display: 'flex',
@@ -116,7 +119,7 @@ function ContactCta() {
                 fontSize: 14.5,
               }}
             >
-              Demander un devis
+              {t.contactCta.ctaPrimary}
               <span className="btn-arrow">
                 <svg width="15" height="15" viewBox="0 0 16 16">
                   <path
@@ -134,7 +137,7 @@ function ContactCta() {
               href="https://wa.me/33773157902"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Écrire à Haramain Prestige sur WhatsApp au +33 7 73 15 79 02"
+              aria-label={t.contactCta.ctaSecondaryAria}
               className="btn-secondary"
               style={{
                 display: 'flex',
@@ -161,7 +164,7 @@ function ContactCta() {
                   />
                 </svg>
               </span>
-              Écrire sur WhatsApp
+              {t.contactCta.ctaSecondary}
             </a>
           </div>
         </div>
