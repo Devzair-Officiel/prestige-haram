@@ -51,7 +51,7 @@ function Testimonials() {
             {t.testimonials.title}
           </h2>
         </div>
-        <div className="testi-rating" style={{ textAlign: 'right' }}>
+        <div className="testi-rating" style={{ textAlign: 'end' }}>
           <div
             style={{
               display: 'flex',

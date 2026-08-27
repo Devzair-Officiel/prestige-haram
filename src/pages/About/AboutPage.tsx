@@ -98,7 +98,13 @@ function AboutPage() {
                 marginBottom: 26,
               }}
             >
-              <svg width="14" height="14" viewBox="0 0 16 16">
+              <svg
+                className="dir-arrow"
+                width="14"
+                height="14"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+              >
                 <path
                   d="M10 3L5 8l5 5"
                   stroke="currentColor"

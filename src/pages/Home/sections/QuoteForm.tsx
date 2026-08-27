@@ -617,7 +617,7 @@ function QuoteForm() {
                     fontFamily: 'inherit',
                     fontSize: 14,
                     fontWeight: 600,
-                    textAlign: 'left',
+                    textAlign: 'start',
                   }}
                 >
                   <span className="svc-check" aria-hidden="true">

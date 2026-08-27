@@ -22,7 +22,13 @@ export default tseslint.config(
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': [
         'warn',
-        { allowConstantExport: true },
+        {
+          allowConstantExport: true,
+          // Hooks cohabitant avec un composant dans le même fichier
+          // (ex. `useI18n` à côté de `I18nProvider`) : Fast Refresh
+          // fonctionne, la règle est trop stricte par défaut.
+          allowExportNames: ['useI18n'],
+        },
       ],
     },
   },

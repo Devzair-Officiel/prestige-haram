@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import logoHaramain from '../../assets/logo_haramain.webp';
-import { useI18n, navigateTo } from '../../i18n';
+import { useI18n } from '../../i18n';
+import { navigateTo } from '../../i18n/utils';
 
 type MenuKey = 'hotels' | 'services' | null;
 

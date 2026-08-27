@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import type { Locale, PageKey } from '../i18n/types';
-import { htmlLangOf, ogLocaleOf } from '../i18n';
+import { htmlLangOf, ogLocaleOf } from '../i18n/utils';
 import { localizedPath } from '../i18n/routes';
 
 const SITE_ORIGIN = 'https://haramainprestige.com';

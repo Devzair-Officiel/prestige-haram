@@ -21,26 +21,12 @@ import {
   localizedPath,
   otherLocale as getOtherLocale,
 } from './routes';
+import { directionOf, htmlLangOf } from './utils';
 
 const DICTIONARIES: Record<Locale, Translations> = {
   fr,
   'ar-SA': ar,
 };
-
-/** Direction textuelle induite par la locale. */
-export function directionOf(locale: Locale): Direction {
-  return locale === 'ar-SA' ? 'rtl' : 'ltr';
-}
-
-/** Balise `lang` HTML pour la locale (attendue par les moteurs et Google). */
-export function htmlLangOf(locale: Locale): string {
-  return locale === 'ar-SA' ? 'ar-SA' : 'fr-FR';
-}
-
-/** Valeur `og:locale` par locale (format Facebook Open Graph). */
-export function ogLocaleOf(locale: Locale): string {
-  return locale === 'ar-SA' ? 'ar_SA' : 'fr_FR';
-}
 
 type I18nContextValue = {
   locale: Locale;
@@ -130,18 +116,4 @@ export function useI18n(): I18nContextValue {
     throw new Error('useI18n must be used within <I18nProvider>');
   }
   return ctx;
-}
-
-/**
- * Navigation SPA locale-aware. Émet un événement synthétique pour que
- * le Provider et le router puissent recalculer la locale et la page
- * courante sans dépendre de popstate (qui ne se déclenche pas sur
- * pushState).
- */
-export function navigateTo(href: string): void {
-  if (typeof window === 'undefined') return;
-  window.history.pushState({}, '', href);
-  window.dispatchEvent(new Event('haramain:navigate'));
-  // Remonte en haut par cohérence avec la navigation par ancre native.
-  window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
 }

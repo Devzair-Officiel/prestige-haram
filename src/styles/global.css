@@ -933,10 +933,10 @@ textarea::placeholder {
   .testi-header {
     flex-direction: column;
     align-items: flex-start !important;
-    text-align: left !important;
+    text-align: start !important;
   }
   .testi-rating {
-    text-align: left !important;
+    text-align: start !important;
   }
   .testi-rating > div {
     justify-content: flex-start !important;
@@ -1028,6 +1028,35 @@ textarea::placeholder {
   font-family: 'Cormorant Garamond', 'Manrope', serif;
 }
 
+/* Titres en RTL : de nombreux composants imposent Cormorant Garamond en
+   style inline (identité graphique FR). En arabe, Cormorant ne dispose
+   pas des glyphes arabes → fallback système peu lisible. On force donc
+   Noto Naskh Arabic sur tous les titres, sauf ceux marqués `.brand-latin`
+   (nom de marque, mots latins à préserver). `!important` est nécessaire
+   pour battre les inline styles React. */
+[dir='rtl'] h1,
+[dir='rtl'] h2,
+[dir='rtl'] h3,
+[dir='rtl'] h4 {
+  font-family:
+    'Noto Naskh Arabic',
+    'Manrope',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif !important;
+}
+
+/* Classe utilitaire : à poser sur toute icône ou SVG directionnel (ex.
+   flèche « retour ») pour miroir automatique en RTL. Ne mirroir pas
+   les icônes non directionnelles (chevrons verticaux, croix, etc.). */
+[dir='rtl'] .dir-arrow {
+  transform: scaleX(-1);
+}
+
 /* Mirror hotel scroller navigation arrows */
 [dir='rtl'] .hotel-nav-prev {
   left: auto;
@@ -1062,14 +1091,14 @@ textarea::placeholder {
   --mask-right: transparent;
 }
 
-/* Testimonials / hotels headers: keep alignment consistent with reading dir */
+/* Testimonials / hotels headers en RTL <720px : les règles LTR utilisent
+   `text-align: start` et `align-items: flex-start`, donc l'alignement se
+   fait naturellement en fin de ligne côté RTL. On garde uniquement la
+   symétrie sur les containers flex où align-items reste logiquement
+   inversé. */
 @media (max-width: 720px) {
   [dir='rtl'] .testi-header {
     align-items: flex-end !important;
-    text-align: right !important;
-  }
-  [dir='rtl'] .testi-rating {
-    text-align: right !important;
   }
   [dir='rtl'] .testi-rating > div {
     justify-content: flex-end !important;

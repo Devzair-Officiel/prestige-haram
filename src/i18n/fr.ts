@@ -552,7 +552,7 @@ const fr: Translations = {
         title: 'Utilisation des cookies',
         paragraphs: [
           "Ce site ne dépose aucun cookie de sa propre initiative. Aucun cookie publicitaire, de mesure d'audience ou de suivi tiers n'est utilisé.",
-          "Les polices d'écriture sont chargées depuis Google Fonts (fonts.googleapis.com et fonts.gstatic.com), ce qui entraîne la transmission de votre adresse IP et de votre User-Agent aux serveurs de Google (Alphabet Inc., États-Unis). Aucun cookie n'est déposé par ces requêtes.",
+          "Les polices d'écriture sont auto-hébergées : les fichiers de fonte (Cormorant Garamond, Manrope, Noto Naskh Arabic) sont servis depuis notre propre domaine, sans requête vers Google Fonts ni transfert d'adresse IP à un tiers.",
           'Vous pouvez à tout moment configurer votre navigateur pour bloquer ou supprimer les cookies déjà installés.',
         ],
       },
@@ -648,7 +648,7 @@ const fr: Translations = {
         title: 'Cookies & traceurs',
         paragraphs: [
           "Le site ne dépose aucun cookie de sa propre initiative. Aucun cookie publicitaire, de mesure d'audience tierce ou de traçage n'est utilisé.",
-          "Les polices d'écriture sont chargées depuis Google Fonts (fonts.googleapis.com et fonts.gstatic.com). Ce chargement transmet votre adresse IP et votre User-Agent aux serveurs de Google (Alphabet Inc., États-Unis) ; aucun cookie n'est déposé par ces requêtes.",
+          "Les polices d'écriture (Cormorant Garamond, Manrope, Noto Naskh Arabic) sont auto-hébergées : les fichiers de fonte sont servis depuis notre propre domaine. Aucune requête n'est effectuée vers Google Fonts et aucune adresse IP n'est transmise à un tiers de ce fait.",
           'Vous pouvez à tout moment configurer votre navigateur pour bloquer ou supprimer les cookies déjà installés.',
         ],
       },

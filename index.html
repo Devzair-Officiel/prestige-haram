@@ -9,7 +9,11 @@
     <meta name="theme-color" content="#0b1e3a" />
 
     <!-- Métadonnées par défaut (homepage). Les autres pages surchargent
-         title/description/canonical dynamiquement via usePageMetadata. -->
+         title/description/canonical dynamiquement via usePageMetadata.
+         Pas de canonical statique ici : usePageMetadata injecte la
+         canonique locale-aware (fr / ar-SA) au montage, ce qui évite
+         que Google mémorise https://haramainprestige.com/ comme
+         canonique de /ar-sa/ avant l'hydratation. -->
     <title>
       Haramain Prestige – Réservation d'hôtels à Makkah &amp; Madinah
     </title>
@@ -17,7 +21,6 @@
       name="description"
       content="Haramain Prestige — réservation d'hôtels et accompagnement à Makkah &amp; Madinah."
     />
-    <link rel="canonical" href="https://haramainprestige.com/" />
     <meta name="robots" content="index, follow" />
 
     <!-- Open Graph -->
@@ -100,7 +103,7 @@
             "contactType": "customer service",
             "email": "contact@haramainprestige.com",
             "telephone": "+33-7-73-15-79-02",
-            "availableLanguage": ["French", "Arabic"]
+            "availableLanguage": ["fr"]
           }
         ],
         "sameAs": ["https://www.instagram.com/haramainprestige"]

@@ -1,0 +1,113 @@
+// Tests légers du contrat i18n : les URLs canoniques et la détection
+// de locale sont critiques pour l'indexation Google (hreflang) et le
+// switcher de langue. Un renommage silencieux d'un slug casserait les
+// permaliens ; ces tests jouent le rôle de garde-fou.
+
+import { describe, expect, it } from 'vitest';
+import { detectRoute, localizedPath, otherLocale } from './routes';
+import type { PageKey } from './types';
+
+describe('localizedPath', () => {
+  it('renvoie / pour la home FR', () => {
+    expect(localizedPath('home', 'fr')).toBe('/');
+  });
+
+  it('renvoie /ar-sa/ pour la home AR (trailing slash canonique)', () => {
+    expect(localizedPath('home', 'ar-SA')).toBe('/ar-sa/');
+  });
+
+  it('préserve les slugs FR sur les autres pages en FR', () => {
+    expect(localizedPath('about', 'fr')).toBe('/a-propos');
+    expect(localizedPath('legal', 'fr')).toBe('/mentions-legales');
+    expect(localizedPath('privacy', 'fr')).toBe(
+      '/politique-de-confidentialite',
+    );
+  });
+
+  it('préfixe /ar-sa sur les autres pages en AR sans dupliquer les slashes', () => {
+    expect(localizedPath('about', 'ar-SA')).toBe('/ar-sa/a-propos');
+    expect(localizedPath('legal', 'ar-SA')).toBe('/ar-sa/mentions-legales');
+    expect(localizedPath('privacy', 'ar-SA')).toBe(
+      '/ar-sa/politique-de-confidentialite',
+    );
+  });
+});
+
+describe('detectRoute', () => {
+  it('renvoie FR + home pour /', () => {
+    expect(detectRoute('/')).toEqual({ locale: 'fr', page: 'home' });
+  });
+
+  it('renvoie AR + home pour /ar-sa et /ar-sa/', () => {
+    expect(detectRoute('/ar-sa')).toEqual({ locale: 'ar-SA', page: 'home' });
+    expect(detectRoute('/ar-sa/')).toEqual({ locale: 'ar-SA', page: 'home' });
+  });
+
+  it('mappe les slugs sur leur PageKey en FR', () => {
+    expect(detectRoute('/a-propos')).toEqual({ locale: 'fr', page: 'about' });
+    expect(detectRoute('/mentions-legales')).toEqual({
+      locale: 'fr',
+      page: 'legal',
+    });
+    expect(detectRoute('/politique-de-confidentialite')).toEqual({
+      locale: 'fr',
+      page: 'privacy',
+    });
+  });
+
+  it('mappe les slugs sur leur PageKey en AR (préfixe /ar-sa)', () => {
+    expect(detectRoute('/ar-sa/a-propos')).toEqual({
+      locale: 'ar-SA',
+      page: 'about',
+    });
+    expect(detectRoute('/ar-sa/mentions-legales')).toEqual({
+      locale: 'ar-SA',
+      page: 'legal',
+    });
+    expect(detectRoute('/ar-sa/politique-de-confidentialite')).toEqual({
+      locale: 'ar-SA',
+      page: 'privacy',
+    });
+  });
+
+  it('tolère un trailing slash quelconque', () => {
+    expect(detectRoute('/a-propos/')).toEqual({ locale: 'fr', page: 'about' });
+    expect(detectRoute('/ar-sa/a-propos/')).toEqual({
+      locale: 'ar-SA',
+      page: 'about',
+    });
+  });
+
+  it('retourne page=null pour un slug inconnu (déclencheur 404)', () => {
+    expect(detectRoute('/inexistant')).toEqual({ locale: 'fr', page: null });
+    expect(detectRoute('/ar-sa/inconnu')).toEqual({
+      locale: 'ar-SA',
+      page: null,
+    });
+  });
+});
+
+describe('otherLocale', () => {
+  it('renvoie la locale opposée', () => {
+    expect(otherLocale('fr')).toBe('ar-SA');
+    expect(otherLocale('ar-SA')).toBe('fr');
+  });
+});
+
+describe('équivalence localizedPath ↔ detectRoute', () => {
+  const pages: PageKey[] = ['home', 'about', 'legal', 'privacy'];
+
+  it('round-trip FR : detectRoute(localizedPath(p, "fr")) → { fr, p }', () => {
+    for (const page of pages) {
+      const path = localizedPath(page, 'fr');
+      expect(detectRoute(path)).toEqual({ locale: 'fr', page });
+    }
+  });
+
+  it('round-trip AR : detectRoute(localizedPath(p, "ar-SA")) → { ar-SA, p }', () => {
+    for (const page of pages) {
+      const path = localizedPath(page, 'ar-SA');
+      expect(detectRoute(path)).toEqual({ locale: 'ar-SA', page });
+    }
+  });
+});

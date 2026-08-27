@@ -29,7 +29,7 @@ function FaqRow({ item, isOpen, onToggle }: FaqRowProps) {
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: 24,
-          textAlign: 'left',
+          textAlign: 'start',
           color: '#F5EFE6',
           fontSize: 16,
           fontWeight: 600,
