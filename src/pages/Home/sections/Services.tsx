@@ -70,6 +70,7 @@ function Services() {
         style={{ textAlign: 'center', marginBottom: 40 }}
       >
         <span
+          className="section-eyebrow"
           style={{
             fontSize: 12,
             letterSpacing: '3.6px',

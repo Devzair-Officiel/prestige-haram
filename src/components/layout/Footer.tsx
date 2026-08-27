@@ -197,7 +197,7 @@ function Footer() {
                   strokeLinejoin="round"
                 />
               </svg>
-              contact@haramainprestige.com
+              <span dir="ltr">contact@haramainprestige.com</span>
             </a>
           </div>
           <div style={{ display: 'flex', gap: 10 }}>

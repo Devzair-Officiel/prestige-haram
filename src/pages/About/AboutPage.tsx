@@ -20,6 +20,7 @@ function SectionBlock({ section }: { section: EditorialBlock }) {
       }}
     >
       <span
+        className="section-eyebrow"
         style={{
           fontSize: 11.5,
           letterSpacing: '3.6px',
@@ -117,6 +118,7 @@ function AboutPage() {
               {page.backHome}
             </a>
             <span
+              className="section-eyebrow"
               style={{
                 display: 'block',
                 fontSize: 12,
@@ -205,6 +207,7 @@ function AboutPage() {
             }}
           >
             <span
+              className="section-eyebrow"
               style={{
                 display: 'block',
                 fontSize: 12,

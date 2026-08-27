@@ -878,7 +878,7 @@ function QuoteForm() {
                     gap: 8,
                   }}
                 >
-                  <div style={{ flex: 'none' }}>
+                  <div style={{ flex: 'none' }} dir="ltr">
                     <Select
                       name="Indicatif"
                       defaultValue="🇫🇷 +33"
@@ -896,6 +896,7 @@ function QuoteForm() {
                     required
                     autoComplete="tel"
                     placeholder={q.phonePlaceholder}
+                    dir="ltr"
                     style={{ ...inputStyle, flex: 1, minWidth: 0 }}
                   />
                 </div>
@@ -911,6 +912,7 @@ function QuoteForm() {
                   name="Email"
                   autoComplete="email"
                   placeholder={q.emailPlaceholder}
+                  dir="ltr"
                   style={inputStyle}
                 />
               </label>

@@ -29,6 +29,7 @@ function Testimonials() {
       >
         <div>
           <span
+            className="section-eyebrow"
             style={{
               fontSize: 12,
               letterSpacing: '3.6px',

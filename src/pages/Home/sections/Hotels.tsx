@@ -480,6 +480,7 @@ function CategoryBlock({
           }}
         >
           <span
+            className="section-eyebrow"
             style={{
               fontSize: 11.5,
               letterSpacing: '3.6px',
@@ -574,6 +575,7 @@ function Hotels() {
         style={{ marginBottom: 18 }}
       >
         <span
+          className="section-eyebrow"
           style={{
             fontSize: 12,
             letterSpacing: '3.6px',

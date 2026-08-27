@@ -44,6 +44,7 @@ function About() {
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
           <span
+            className="section-eyebrow"
             style={{
               fontSize: 12,
               letterSpacing: '3.6px',

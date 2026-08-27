@@ -19,6 +19,7 @@ function BlockSection({ block }: { block: EditorialBlock }) {
       }}
     >
       <span
+        className="section-eyebrow"
         style={{
           fontSize: 11.5,
           letterSpacing: '3.6px',
@@ -184,6 +185,7 @@ function PolitiqueConfidentialite() {
               {page.backHome}
             </a>
             <span
+              className="section-eyebrow"
               style={{
                 display: 'block',
                 fontSize: 12,

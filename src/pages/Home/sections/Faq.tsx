@@ -141,6 +141,7 @@ function Faq() {
         style={{ textAlign: 'center', marginBottom: 34 }}
       >
         <span
+          className="section-eyebrow"
           style={{
             fontSize: 12,
             letterSpacing: '3.6px',

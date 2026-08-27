@@ -930,20 +930,24 @@ textarea::placeholder {
   .hero-trust .hero-trust-sep {
     display: none !important;
   }
+  /* En Flexbox, `align-items: start` et `justify-content: start` suivent
+     `direction`. En LTR le début est à gauche, en RTL il est à droite —
+     un seul jeu de règles couvre les deux locales, plus besoin
+     d'override `[dir='rtl']`. */
   .testi-header {
     flex-direction: column;
-    align-items: flex-start !important;
+    align-items: start !important;
     text-align: start !important;
   }
   .testi-rating {
     text-align: start !important;
   }
   .testi-rating > div {
-    justify-content: flex-start !important;
+    justify-content: start !important;
   }
   .hotels-header {
     flex-direction: column;
-    align-items: flex-start !important;
+    align-items: start !important;
   }
 }
 
@@ -1057,6 +1061,34 @@ textarea::placeholder {
   transform: scaleX(-1);
 }
 
+/* Hero : le H1 FR utilise line-height 1.02 (typographie Cormorant très
+   dense). Pour Noto Naskh Arabic les glyphes empilent des diacritiques
+   au-dessus/en-dessous → un line-height 1.02 provoque du chevauchement.
+   On desserre l'interligne en arabe seulement. */
+[dir='rtl'] .hero-title {
+  line-height: 1.3 !important;
+}
+
+/* Sur mobile <=520px, `.hero-title-couple` passe en `white-space: nowrap`
+   pour garder « Makkah & Madinah » sur une seule ligne. En arabe la
+   couple équivalente « مكة المكرمة والمدينة المنورة » est bien plus
+   longue et provoquerait un overflow horizontal → on autorise le wrap. */
+[dir='rtl'] .hero-title-couple {
+  white-space: normal !important;
+}
+
+/* Surtitres (« eyebrow ») : les composants FR utilisent letter-spacing
+   3.6px pour espacer les capitales latines. Sur des lettres arabes
+   liées (script cursif), cet espacement casse les ligatures → texte
+   illisible. La classe `.section-eyebrow` est posée sur tous les
+   surtitres textuels (Hero, About, Services, HowItWorks, Hotels,
+   Testimonials, Faq, ContactCta, pages About + Légales). Le branding
+   latin (`.hero-title-brand`, `.header-brand-name`) n'a pas cette
+   classe et conserve son letter-spacing. */
+[dir='rtl'] .section-eyebrow {
+  letter-spacing: normal !important;
+}
+
 /* Mirror hotel scroller navigation arrows */
 [dir='rtl'] .hotel-nav-prev {
   left: auto;
@@ -1091,19 +1123,7 @@ textarea::placeholder {
   --mask-right: transparent;
 }
 
-/* Testimonials / hotels headers en RTL <720px : les règles LTR utilisent
-   `text-align: start` et `align-items: flex-start`, donc l'alignement se
-   fait naturellement en fin de ligne côté RTL. On garde uniquement la
-   symétrie sur les containers flex où align-items reste logiquement
-   inversé. */
-@media (max-width: 720px) {
-  [dir='rtl'] .testi-header {
-    align-items: flex-end !important;
-  }
-  [dir='rtl'] .testi-rating > div {
-    justify-content: flex-end !important;
-  }
-  [dir='rtl'] .hotels-header {
-    align-items: flex-end !important;
-  }
-}
+/* Les règles LTR <720px utilisent `align-items: start` et
+   `justify-content: start`, valeurs logiques qui suivent `direction`.
+   Aucun override RTL n'est nécessaire — en arabe l'alignement se fait
+   automatiquement au début du flux (visuellement à droite). */

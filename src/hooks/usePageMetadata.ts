@@ -64,6 +64,13 @@ function setMetaProperty(property: string, content: string): void {
   );
 }
 
+/** Retire une balise <meta property> si elle existe. Utile pour purger
+ *  `og:locale:alternate` quand on entre sur une page noindex/404 après
+ *  avoir été sur une page indexable dans la même session SPA. */
+function removeMetaProperty(property: string): void {
+  document.head.querySelector(`meta[property="${property}"]`)?.remove();
+}
+
 function setCanonical(href: string | null): void {
   const existing = document.head.querySelector<HTMLLinkElement>(
     'link[rel="canonical"]',
@@ -144,6 +151,11 @@ export function usePageMetadata({
         'og:locale:alternate',
         locale === 'fr' ? 'ar_SA' : 'fr_FR',
       );
+    } else {
+      // Page noindex (ex. 404) : purge l'`og:locale:alternate` qui
+      // aurait pu être posé lors d'une navigation SPA précédente vers
+      // une page indexable — sinon le head reste incohérent.
+      removeMetaProperty('og:locale:alternate');
     }
 
     // Applique la balise lang sur <html>. Le Provider le fait déjà au

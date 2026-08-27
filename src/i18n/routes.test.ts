@@ -71,6 +71,10 @@ describe('detectRoute', () => {
   });
 
   it('tolère un trailing slash quelconque', () => {
+    // Note : côté client, detectRoute('/a-propos/') est accepté pour
+    // rester tolérant si un utilisateur tape l'URL manuellement. En
+    // production Nginx canonicalise cette URL vers /a-propos (301)
+    // avant même que le SPA soit chargé — cf. docker/nginx.conf.
     expect(detectRoute('/a-propos/')).toEqual({ locale: 'fr', page: 'about' });
     expect(detectRoute('/ar-sa/a-propos/')).toEqual({
       locale: 'ar-SA',
