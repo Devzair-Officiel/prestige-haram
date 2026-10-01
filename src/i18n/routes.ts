@@ -19,6 +19,7 @@ const PATHS: Record<PageKey, string> = {
   hotelsMakkah: '/hotels-makkah',
   hotelsMadinah: '/hotels-madinah',
   chambreVueKaaba: '/chambre-vue-kaaba',
+  transfertJeddahMakkah: '/transfert-aeroport-jeddah-makkah',
 };
 
 /** URL canonique locale-scoped. `home` en FR = "/", en AR = "/ar-sa/". */
@@ -56,6 +57,7 @@ function matchPage(path: string): PageKey | null {
   if (path === '/hotels-makkah') return 'hotelsMakkah';
   if (path === '/hotels-madinah') return 'hotelsMadinah';
   if (path === '/chambre-vue-kaaba') return 'chambreVueKaaba';
+  if (path === '/transfert-aeroport-jeddah-makkah') return 'transfertJeddahMakkah';
   return null;
 }
 

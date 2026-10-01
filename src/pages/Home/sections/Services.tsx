@@ -1,5 +1,6 @@
 import { useReveal } from '../../../hooks/useReveal';
 import { useI18n } from '../../../i18n';
+import { handleSpaNav } from '../../../i18n/utils';
 
 // Les icônes sont figées côté vue : les libellés/descriptions viennent
 // des traductions et sont zippés dans l'ordre attendu (hôtels, transferts,
@@ -46,12 +47,21 @@ const icons = [
 
 function Services() {
   const revealRef = useReveal<HTMLDivElement>();
-  const { t } = useI18n();
+  const { t, pathFor } = useI18n();
+
+  const CARD_HREFS = [
+    '',
+    pathFor('transfertJeddahMakkah'),
+    '',
+    '',
+  ];
 
   const services = t.services.cards.map((card, index) => ({
     icon: icons[index],
     title: card.title,
     description: card.description,
+    discoverHref: CARD_HREFS[index],
+    discoverLabel: t.services.cardLinks[index],
   }));
 
   return (
@@ -159,6 +169,34 @@ function Services() {
             >
               {service.description}
             </div>
+            {service.discoverHref && service.discoverLabel && (
+              <a
+                href={service.discoverHref}
+                onClick={(e) => handleSpaNav(e, service.discoverHref)}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  marginTop: 4,
+                  fontSize: 12.5,
+                  fontWeight: 600,
+                  color: '#E6C878',
+                  textDecoration: 'none',
+                }}
+              >
+                {service.discoverLabel}
+                <svg width="11" height="11" viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    d="M3 8h9M9 4l4 4-4 4"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
+            )}
           </div>
         ))}
       </div>

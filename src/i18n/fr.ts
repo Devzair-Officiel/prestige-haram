@@ -164,6 +164,12 @@ const fr: Translations = {
           'Un accompagnement bienveillant pour vos visites à Makkah & Madinah.',
       },
     ],
+    cardLinks: [
+      '',
+      'Découvrir le transfert Jeddah \u2013 Makkah',
+      '',
+      '',
+    ],
   },
 
   howItWorks: {
@@ -1026,6 +1032,130 @@ const fr: Translations = {
     },
   },
 
+  transfertJeddahMakkahPage: {
+    backHome: "Retour à l'accueil",
+    hero: {
+      eyebrow: 'TRANSFERT A\u00c9ROPORT \u00b7 JEDDAH \u2192 MAKKAH',
+      title: 'Transfert a\u00e9roport Jeddah \u2013 Makkah\u00a0: organisez votre trajet vers La Mecque',
+      intro:
+        "Haramain Prestige vous accompagne pour organiser votre transfert entre l'a\u00e9roport de Jeddah et Makkah (La Mecque). Transmettez-nous vos informations de voyage, le nombre de passagers et vos besoins afin que nous puissions vous proposer une solution adapt\u00e9e.",
+      ctaPrimary: 'Demander mon transfert',
+      ctaSecondary: 'Comment \u00e7a fonctionne\u00a0?',
+      imageAlt: "Transfert entre l'a\u00e9roport de Jeddah et Makkah",
+    },
+    trajetSection: {
+      eyebrow: 'DE JEDDAH \u00c0 MAKKAH',
+      title: "Un transfert organis\u00e9 depuis l'a\u00e9roport de Jeddah vers Makkah",
+      paragraphs: [
+        "Apr\u00e8s votre arriv\u00e9e \u00e0 Jeddah, rejoindre votre h\u00e9bergement \u00e0 Makkah n\u00e9cessite d\u2019anticiper votre transport. Haramain Prestige peut organiser votre transfert selon les informations transmises dans votre demande.",
+        'Pour pr\u00e9parer la prestation, nous avons notamment besoin de conna\u00eetre votre date d\u2019arriv\u00e9e, les informations utiles li\u00e9es \u00e0 votre vol, le nombre de voyageurs et votre destination \u00e0 Makkah.',
+      ],
+    },
+    criteresSection: {
+      eyebrow: 'VOTRE DEMANDE',
+      title: 'Quelles informations transmettre pour votre transfert\u00a0?',
+      paragraphs: [
+        'Plus votre demande est pr\u00e9cise, plus nous pouvons rechercher une solution correspondant \u00e0 votre trajet.',
+      ],
+      criteriaLabel: 'INFORMATIONS UTILES',
+      criteria: [
+        'Date du transfert',
+        'Heure ou informations du vol',
+        'A\u00e9roport ou terminal si n\u00e9cessaire',
+        'Nombre de voyageurs',
+        'Destination \u00e0 Makkah',
+        'Besoins particuliers \u00e0 pr\u00e9ciser dans la demande',
+      ],
+    },
+    arriveeSection: {
+      eyebrow: 'ARRIV\u00c9E EN ARABIE SAOUDITE',
+      title: "Pr\u00e9parer votre arriv\u00e9e \u00e0 l'a\u00e9roport de Jeddah",
+      paragraphs: [
+        "Pour limiter les impr\u00e9vus \u00e0 votre arriv\u00e9e, il est pr\u00e9f\u00e9rable d\u2019organiser votre transfert avant votre voyage. Les informations de vol permettent notamment d\u2019identifier le trajet concern\u00e9 et de pr\u00e9parer la prestation demand\u00e9e.",
+        "Si vos horaires ou vos informations de voyage changent, transmettez-nous les nouvelles donn\u00e9es afin que votre demande puisse \u00eatre r\u00e9\u00e9valu\u00e9e si n\u00e9cessaire.",
+      ],
+    },
+    retourSection: {
+      eyebrow: 'MAKKAH \u2192 JEDDAH',
+      title: "Transfert de Makkah vers l'a\u00e9roport de Jeddah",
+      paragraphs: [
+        "Le service peut \u00e9galement concerner votre trajet retour depuis Makkah vers l'a\u00e9roport de Jeddah. Indiquez votre horaire de vol et votre lieu de d\u00e9part afin que le transfert puisse \u00eatre organis\u00e9 en tenant compte de votre programme.",
+        "Il est conseill\u00e9 de pr\u00e9voir une marge adapt\u00e9e avant le d\u00e9part de votre vol. L\u2019heure de prise en charge doit \u00eatre d\u00e9termin\u00e9e selon votre situation, votre vol et les conditions du trajet.",
+      ],
+    },
+    reservationSection: {
+      eyebrow: 'SERVICE PERSONNALIS\u00c9',
+      title: 'Pourquoi r\u00e9server votre transfert \u00e0 l\u2019avance\u00a0?',
+      paragraphs: [
+        "R\u00e9server votre transport avant votre arriv\u00e9e permet de pr\u00e9parer votre trajet dans le cadre global de votre s\u00e9jour et d\u2019\u00e9viter de devoir rechercher une solution une fois sur place.",
+        "Haramain Prestige centralise votre demande et peut int\u00e9grer le transfert aux autres prestations de votre s\u00e9jour, notamment votre h\u00e9bergement \u00e0 Makkah lorsque vous nous confiez \u00e9galement cette r\u00e9servation.",
+      ],
+    },
+    makkahSection: {
+      eyebrow: 'VOTRE S\u00c9JOUR \u00c0 MAKKAH',
+      title: 'Compl\u00e9tez votre transfert avec votre h\u00f4tel \u00e0 Makkah',
+      paragraphs: [
+        "Vous pouvez demander uniquement votre transfert ou nous confier \u00e9galement la recherche de votre h\u00e9bergement \u00e0 Makkah. Haramain Prestige peut ainsi prendre en compte les diff\u00e9rentes \u00e9tapes de votre s\u00e9jour dans une m\u00eame demande.",
+      ],
+      makkahLinkLabel: "D\u00e9couvrir nos h\u00f4tels \u00e0 Makkah",
+    },
+    fonctionnementSection: {
+      eyebrow: 'COMMENT \u00c7A MARCHE\u00a0?',
+      title: 'Comment r\u00e9server votre transfert Jeddah \u2013 Makkah\u00a0?',
+      paragraphs: [
+        "Transmettez-nous les informations essentielles concernant votre trajet. Nous v\u00e9rifions ensuite les possibilit\u00e9s correspondant \u00e0 votre demande avant de vous transmettre une proposition.",
+      ],
+      steps: [
+        'Vous nous transmettez vos informations de voyage',
+        'Nous v\u00e9rifions la solution correspondant \u00e0 votre trajet',
+        'Vous recevez une proposition avant de confirmer votre transfert',
+      ],
+    },
+    faq: {
+      title: 'FAQ \u2014 Transfert a\u00e9roport Jeddah \u2013 Makkah',
+      items: [
+        {
+          question: "Peut-on r\u00e9server un transfert de l'a\u00e9roport de Jeddah vers Makkah\u00a0?",
+          answer:
+            "Oui. Haramain Prestige peut organiser votre transfert depuis l\u2019a\u00e9roport de Jeddah vers votre destination \u00e0 Makkah selon les informations et disponibilit\u00e9s correspondant \u00e0 votre demande.",
+        },
+        {
+          question: "Peut-on r\u00e9server le trajet Makkah vers l'a\u00e9roport de Jeddah\u00a0?",
+          answer:
+            "Oui. Vous pouvez \u00e9galement demander un transfert depuis Makkah vers l\u2019a\u00e9roport de Jeddah pour votre vol retour.",
+        },
+        {
+          question: 'Quelles informations faut-il transmettre pour r\u00e9server\u00a0?',
+          answer:
+            "Indiquez notamment votre date de transfert, les informations utiles de votre vol, le nombre de voyageurs et votre lieu de prise en charge ou de destination.",
+        },
+        {
+          question: 'Peut-on r\u00e9server un transfert pour une famille ou un groupe\u00a0?',
+          answer:
+            "Oui. Pr\u00e9cisez le nombre de voyageurs dans votre demande afin qu\u2019une solution adapt\u00e9e puisse \u00eatre recherch\u00e9e selon les disponibilit\u00e9s.",
+        },
+        {
+          question: "Puis-je r\u00e9server mon h\u00f4tel \u00e0 Makkah en m\u00eame temps que mon transfert\u00a0?",
+          answer:
+            "Oui. Vous pouvez demander votre transfert seul ou compl\u00e9ter votre demande avec une r\u00e9servation d\u2019h\u00f4tel \u00e0 Makkah et les autres services propos\u00e9s par Haramain Prestige.",
+        },
+        {
+          question: 'Comment obtenir le tarif d\u2019un transfert Jeddah \u2013 Makkah\u00a0?',
+          answer:
+            "Transmettez les informations de votre trajet dans votre demande. Haramain Prestige vous communiquera une proposition correspondant \u00e0 votre besoin et aux options disponibles.",
+        },
+      ],
+    },
+    ctaBlock: {
+      eyebrow: 'VOTRE TRANSFERT',
+      title: 'Organisez votre transfert entre Jeddah et Makkah',
+      paragraph:
+        "Indiquez-nous votre date, vos informations de voyage et le nombre de passagers afin de recevoir une proposition adapt\u00e9e \u00e0 votre trajet.",
+      ctaPrimary: 'Demander mon transfert',
+      ctaSecondary: '\u00c9crire sur WhatsApp',
+    },
+  },
+
   meta: {
     home: {
       title: "Haramain Prestige – Réservation d'hôtels à Makkah & Madinah",
@@ -1065,6 +1195,11 @@ const fr: Translations = {
       title: 'Chambre avec vue sur la Kaaba à Makkah | Haramain Prestige',
       description:
         'Recherchez une chambre ou suite avec vue sur la Kaaba à Makkah. Haramain Prestige vérifie les catégories disponibles selon vos dates et vos critères.',
+    },
+    transfertJeddahMakkah: {
+      title: 'Transfert aéroport Jeddah \u2013 Makkah | Haramain Prestige',
+      description:
+        "Organisez votre transfert entre l'aéroport de Jeddah et Makkah avec Haramain Prestige. Indiquez vos horaires et le nombre de voyageurs pour recevoir une proposition personnalisée.",
     },
   },
 };

@@ -149,18 +149,20 @@ export function SeoSectionCriteria({
 }
 
 export function SeoSectionSteps({
+  id,
   eyebrow,
   title,
   paragraphs,
   steps,
 }: {
+  id?: string;
   eyebrow?: string;
   title: string;
   paragraphs: string[];
   steps: string[];
 }) {
   return (
-    <SeoSection>
+    <SeoSection id={id}>
       {eyebrow && <SectionEyebrow text={eyebrow} />}
       <SectionH2>{title}</SectionH2>
       {paragraphs.map((p, i) => (

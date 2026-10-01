@@ -224,8 +224,55 @@ describe('detectRoute — chambreVueKaaba', () => {
   });
 });
 
+describe('localizedPath — transfertJeddahMakkah', () => {
+  it('renvoie /transfert-aeroport-jeddah-makkah en FR', () => {
+    expect(localizedPath('transfertJeddahMakkah', 'fr')).toBe(
+      '/transfert-aeroport-jeddah-makkah',
+    );
+  });
+
+  it('renvoie /ar-sa/transfert-aeroport-jeddah-makkah en AR', () => {
+    expect(localizedPath('transfertJeddahMakkah', 'ar-SA')).toBe(
+      '/ar-sa/transfert-aeroport-jeddah-makkah',
+    );
+  });
+});
+
+describe('detectRoute — transfertJeddahMakkah', () => {
+  it('détecte FR + transfertJeddahMakkah', () => {
+    expect(detectRoute('/transfert-aeroport-jeddah-makkah')).toEqual({
+      locale: 'fr',
+      page: 'transfertJeddahMakkah',
+    });
+  });
+
+  it('détecte AR + transfertJeddahMakkah', () => {
+    expect(detectRoute('/ar-sa/transfert-aeroport-jeddah-makkah')).toEqual({
+      locale: 'ar-SA',
+      page: 'transfertJeddahMakkah',
+    });
+  });
+
+  it('tolère le trailing slash FR', () => {
+    expect(detectRoute('/transfert-aeroport-jeddah-makkah/')).toEqual({
+      locale: 'fr',
+      page: 'transfertJeddahMakkah',
+    });
+  });
+
+  it('tolère le trailing slash AR', () => {
+    expect(detectRoute('/ar-sa/transfert-aeroport-jeddah-makkah/')).toEqual({
+      locale: 'ar-SA',
+      page: 'transfertJeddahMakkah',
+    });
+  });
+});
+
 describe('équivalence localizedPath ↔ detectRoute', () => {
-  const pages: PageKey[] = ['home', 'about', 'legal', 'privacy', 'hotelsMakkah', 'hotelsMadinah', 'chambreVueKaaba'];
+  const pages: PageKey[] = [
+    'home', 'about', 'legal', 'privacy',
+    'hotelsMakkah', 'hotelsMadinah', 'chambreVueKaaba', 'transfertJeddahMakkah',
+  ];
 
   it('round-trip FR : detectRoute(localizedPath(p, "fr")) → { fr, p }', () => {
     for (const page of pages) {
