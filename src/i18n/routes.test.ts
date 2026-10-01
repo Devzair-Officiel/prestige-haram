@@ -268,10 +268,55 @@ describe('detectRoute — transfertJeddahMakkah', () => {
   });
 });
 
+describe('localizedPath — transfertAeroportMadinah', () => {
+  it('renvoie /transfert-aeroport-madinah en FR', () => {
+    expect(localizedPath('transfertAeroportMadinah', 'fr')).toBe(
+      '/transfert-aeroport-madinah',
+    );
+  });
+
+  it('renvoie /ar-sa/transfert-aeroport-madinah en AR', () => {
+    expect(localizedPath('transfertAeroportMadinah', 'ar-SA')).toBe(
+      '/ar-sa/transfert-aeroport-madinah',
+    );
+  });
+});
+
+describe('detectRoute — transfertAeroportMadinah', () => {
+  it('détecte FR + transfertAeroportMadinah', () => {
+    expect(detectRoute('/transfert-aeroport-madinah')).toEqual({
+      locale: 'fr',
+      page: 'transfertAeroportMadinah',
+    });
+  });
+
+  it('détecte AR + transfertAeroportMadinah', () => {
+    expect(detectRoute('/ar-sa/transfert-aeroport-madinah')).toEqual({
+      locale: 'ar-SA',
+      page: 'transfertAeroportMadinah',
+    });
+  });
+
+  it('tolère le trailing slash FR', () => {
+    expect(detectRoute('/transfert-aeroport-madinah/')).toEqual({
+      locale: 'fr',
+      page: 'transfertAeroportMadinah',
+    });
+  });
+
+  it('tolère le trailing slash AR', () => {
+    expect(detectRoute('/ar-sa/transfert-aeroport-madinah/')).toEqual({
+      locale: 'ar-SA',
+      page: 'transfertAeroportMadinah',
+    });
+  });
+});
+
 describe('équivalence localizedPath ↔ detectRoute', () => {
   const pages: PageKey[] = [
     'home', 'about', 'legal', 'privacy',
-    'hotelsMakkah', 'hotelsMadinah', 'chambreVueKaaba', 'transfertJeddahMakkah',
+    'hotelsMakkah', 'hotelsMadinah', 'chambreVueKaaba',
+    'transfertJeddahMakkah', 'transfertAeroportMadinah',
   ];
 
   it('round-trip FR : detectRoute(localizedPath(p, "fr")) → { fr, p }', () => {

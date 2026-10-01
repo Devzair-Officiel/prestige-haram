@@ -165,10 +165,13 @@ const fr: Translations = {
       },
     ],
     cardLinks: [
-      '',
-      'Découvrir le transfert Jeddah \u2013 Makkah',
-      '',
-      '',
+      [],
+      [
+        'Découvrir le transfert Jeddah \u2013 Makkah',
+        'Découvrir le transfert à Madinah',
+      ],
+      [],
+      [],
     ],
   },
 
@@ -973,6 +976,7 @@ const fr: Translations = {
         'De nombreux voyageurs choisissent d\'associer à leur Omra un séjour à Madinah avant ou après leur passage à Makkah. La durée du séjour à Madinah varie selon les voyageurs\u00a0: certains restent quelques jours, d\'autres davantage.',
         'Haramain Prestige organise les deux étapes de votre séjour. Nous pouvons proposer un hôtel à Makkah et un hôtel à Madinah dans la même demande, ainsi que les transferts entre les deux villes si vous en avez besoin.',
       ],
+      transfertDiscoverLabel: 'Organiser votre transfert depuis l\u2019a\u00e9roport de Madinah',
     },
     bookingSection: {
       eyebrow: 'RÉSERVATION',
@@ -1156,6 +1160,131 @@ const fr: Translations = {
     },
   },
 
+  transfertAeroportMadinahPage: {
+    backHome: "Retour à l'accueil",
+    hero: {
+      eyebrow: 'TRANSFERT A\u00c9ROPORT \u00b7 MADINAH',
+      title: 'Transfert a\u00e9roport Madinah\u00a0: rejoignez votre h\u00f4tel \u00e0 M\u00e9dine sereinement',
+      intro:
+        "Haramain Prestige vous accompagne pour organiser votre transfert entre l'a\u00e9roport de Madinah et votre h\u00e9bergement \u00e0 M\u00e9dine. Transmettez-nous vos informations de voyage, le nombre de passagers et votre destination afin que nous puissions rechercher une solution adapt\u00e9e.",
+      ctaPrimary: 'Demander mon transfert',
+      ctaSecondary: 'Comment \u00e7a fonctionne\u00a0?',
+      imageAlt: 'Vue du Masjid an-Nabawi \u00e0 Madinah',
+    },
+    trajetSection: {
+      eyebrow: "DE L'A\u00c9ROPORT \u00c0 VOTRE H\u00d4TEL",
+      title: "Organiser votre transfert depuis l'a\u00e9roport de Madinah",
+      paragraphs: [
+        "Apr\u00e8s votre arriv\u00e9e \u00e0 l'a\u00e9roport de Madinah, votre transfert vers votre h\u00f4tel peut \u00eatre pr\u00e9par\u00e9 \u00e0 l'avance selon les informations transmises dans votre demande.",
+        "Indiquez notamment votre date d'arriv\u00e9e, les informations utiles li\u00e9es \u00e0 votre vol, le nombre de voyageurs et votre destination \u00e0 M\u00e9dine afin que Haramain Prestige puisse rechercher une solution adapt\u00e9e.",
+      ],
+    },
+    criteresSection: {
+      eyebrow: 'VOTRE DEMANDE',
+      title: 'Quelles informations transmettre pour votre transfert \u00e0 Madinah\u00a0?',
+      paragraphs: [
+        'Plus votre demande est pr\u00e9cise, plus nous pouvons rechercher une solution correspondant \u00e0 votre trajet.',
+      ],
+      criteriaLabel: 'INFORMATIONS UTILES',
+      criteria: [
+        'Date du transfert',
+        'Heure ou informations du vol',
+        'Nombre de voyageurs',
+        'H\u00f4tel ou adresse de destination',
+        'Besoins particuliers \u00e0 pr\u00e9ciser',
+        'Informations compl\u00e9mentaires utiles au trajet',
+      ],
+    },
+    aeroportSection: {
+      eyebrow: 'A\u00c9ROPORT DE MADINAH',
+      title: 'Votre arriv\u00e9e \u00e0 l\u2019a\u00e9roport Prince Mohammad Bin Abdulaziz',
+      paragraphs: [
+        "L'a\u00e9roport Prince Mohammad Bin Abdulaziz dessert Madinah et accueille de nombreux voyageurs se rendant dans la ville. Pr\u00e9parer votre transfert avant votre arriv\u00e9e permet d\u2019int\u00e9grer ce trajet \u00e0 l\u2019organisation g\u00e9n\u00e9rale de votre s\u00e9jour.",
+        "Si vos horaires ou vos informations de voyage changent, transmettez-nous les nouvelles donn\u00e9es afin que votre demande puisse \u00eatre adapt\u00e9e si n\u00e9cessaire.",
+      ],
+    },
+    retourSection: {
+      eyebrow: 'H\u00d4TEL \u2192 A\u00c9ROPORT',
+      title: "Transfert de votre h\u00f4tel \u00e0 Madinah vers l'a\u00e9roport",
+      paragraphs: [
+        "Le service peut \u00e9galement concerner votre trajet retour depuis votre h\u00f4tel \u00e0 Madinah vers l'a\u00e9roport. Indiquez votre horaire de vol et votre lieu de d\u00e9part afin que la prestation puisse \u00eatre organis\u00e9e selon votre programme.",
+        "L\u2019heure de prise en charge doit \u00eatre d\u00e9finie en fonction de votre vol, de votre lieu de d\u00e9part et des conditions du trajet.",
+      ],
+    },
+    nabawiSection: {
+      eyebrow: 'VOTRE S\u00c9JOUR \u00c0 MADINAH',
+      title: 'Rejoindre votre h\u00f4tel pr\u00e8s du Masjid an-Nabawi',
+      paragraphs: [
+        'De nombreux voyageurs choisissent un h\u00f4tel situ\u00e9 \u00e0 proximit\u00e9 du Masjid an-Nabawi. Lors de votre demande de transfert, indiquez simplement votre h\u00f4tel ou votre destination exacte afin que le trajet corresponde \u00e0 votre h\u00e9bergement.',
+        'Vous pouvez \u00e9galement confier \u00e0 Haramain Prestige la recherche de votre h\u00f4tel \u00e0 Madinah dans la m\u00eame demande.',
+      ],
+      madinahLinkLabel: 'D\u00e9couvrir nos h\u00f4tels \u00e0 Madinah',
+    },
+    reservationSection: {
+      eyebrow: 'SERVICE PERSONNALIS\u00c9',
+      title: 'Pourquoi organiser votre transfert avant votre arriv\u00e9e\u00a0?',
+      paragraphs: [
+        "Pr\u00e9parer votre transfert \u00e0 l\u2019avance permet d\u2019int\u00e9grer votre arriv\u00e9e \u00e0 Madinah dans l\u2019organisation g\u00e9n\u00e9rale de votre s\u00e9jour et d\u2019\u00e9viter de rechercher une solution au dernier moment.",
+        "Haramain Prestige peut centraliser votre demande de transfert avec les autres prestations de votre s\u00e9jour lorsque vous nous confiez \u00e9galement votre h\u00e9bergement ou d\u2019autres d\u00e9placements.",
+      ],
+    },
+    fonctionnementSection: {
+      eyebrow: 'COMMENT \u00c7A MARCHE\u00a0?',
+      title: "Comment r\u00e9server votre transfert depuis l'a\u00e9roport de Madinah\u00a0?",
+      paragraphs: [
+        "Transmettez-nous les informations essentielles concernant votre arriv\u00e9e ou votre d\u00e9part. Nous v\u00e9rifions ensuite les possibilit\u00e9s correspondant \u00e0 votre demande avant de vous transmettre une proposition.",
+      ],
+      steps: [
+        'Vous nous transmettez vos informations de voyage',
+        'Nous v\u00e9rifions la solution correspondant \u00e0 votre trajet',
+        'Vous recevez une proposition avant de confirmer votre transfert',
+      ],
+    },
+    faq: {
+      title: 'FAQ \u2014 Transfert a\u00e9roport Madinah',
+      items: [
+        {
+          question: "Peut-on r\u00e9server un transfert depuis l'a\u00e9roport de Madinah\u00a0?",
+          answer:
+            "Oui. Haramain Prestige peut organiser votre transfert depuis l\u2019a\u00e9roport de Madinah vers votre h\u00f4tel ou votre destination dans la ville selon les informations et disponibilit\u00e9s correspondant \u00e0 votre demande.",
+        },
+        {
+          question: 'Peut-on r\u00e9server le transfert retour vers l\u2019a\u00e9roport\u00a0?',
+          answer:
+            "Oui. Vous pouvez \u00e9galement demander un transfert depuis votre h\u00f4tel \u00e0 Madinah vers l\u2019a\u00e9roport pour votre d\u00e9part.",
+        },
+        {
+          question: 'Quelles informations faut-il transmettre\u00a0?',
+          answer:
+            "Indiquez notamment votre date de transfert, les informations utiles li\u00e9es \u00e0 votre vol, le nombre de voyageurs et votre h\u00f4tel ou adresse de destination.",
+        },
+        {
+          question: 'Peut-on r\u00e9server un transfert pour une famille ou un groupe\u00a0?',
+          answer:
+            "Oui. Pr\u00e9cisez le nombre de voyageurs dans votre demande afin qu\u2019une solution adapt\u00e9e puisse \u00eatre recherch\u00e9e selon les disponibilit\u00e9s.",
+        },
+        {
+          question: 'Puis-je r\u00e9server mon h\u00f4tel \u00e0 Madinah en m\u00eame temps\u00a0?',
+          answer:
+            "Oui. Vous pouvez demander uniquement votre transfert ou compl\u00e9ter votre demande avec une r\u00e9servation d\u2019h\u00f4tel \u00e0 Madinah et les autres services propos\u00e9s par Haramain Prestige.",
+        },
+        {
+          question: 'Comment obtenir le tarif du transfert\u00a0?',
+          answer:
+            "Transmettez les informations de votre trajet dans votre demande. Haramain Prestige vous communiquera une proposition correspondant \u00e0 votre besoin et aux options disponibles.",
+        },
+      ],
+    },
+    ctaBlock: {
+      eyebrow: 'VOTRE ARRIV\u00c9E \u00c0 MADINAH',
+      title: "Organisez votre transfert depuis l'a\u00e9roport de Madinah",
+      paragraph:
+        "Indiquez-nous votre date, vos informations de voyage, votre destination et le nombre de passagers afin de recevoir une proposition adapt\u00e9e.",
+      ctaPrimary: 'Demander mon transfert',
+      ctaSecondary: '\u00c9crire sur WhatsApp',
+    },
+  },
+
   meta: {
     home: {
       title: "Haramain Prestige – Réservation d'hôtels à Makkah & Madinah",
@@ -1200,6 +1329,11 @@ const fr: Translations = {
       title: 'Transfert aéroport Jeddah \u2013 Makkah | Haramain Prestige',
       description:
         "Organisez votre transfert entre l'aéroport de Jeddah et Makkah avec Haramain Prestige. Indiquez vos horaires et le nombre de voyageurs pour recevoir une proposition personnalisée.",
+    },
+    transfertAeroportMadinah: {
+      title: 'Transfert a\u00e9roport Madinah \u2013 h\u00f4tel | Haramain Prestige',
+      description:
+        "Organisez votre transfert entre l'a\u00e9roport de Madinah et votre h\u00f4tel \u00e0 M\u00e9dine avec Haramain Prestige. Indiquez vos horaires et le nombre de voyageurs pour recevoir une proposition personnalis\u00e9e.",
     },
   },
 };

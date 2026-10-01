@@ -7,7 +7,7 @@ export type Locale = 'fr' | 'ar-SA';
 /** Direction textuelle induite par la locale. */
 export type Direction = 'ltr' | 'rtl';
 
-export type PageKey = 'home' | 'about' | 'legal' | 'privacy' | 'notFound' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah';
+export type PageKey = 'home' | 'about' | 'legal' | 'privacy' | 'notFound' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah';
 
 /** Une entrée FAQ, utilisée pour le rendu ET le JSON-LD FAQPage. */
 export type FaqItem = {
@@ -170,8 +170,8 @@ export interface Translations {
     title: string;
     subtitle: string;
     cards: { title: string; description: string }[];
-    /** Un libellé par carte (ordre = cards). Chaîne vide = pas de lien. */
-    cardLinks: string[];
+    /** Libellés de liens par carte (ordre = cards). Tableau vide = pas de lien. */
+    cardLinks: string[][];
   };
 
   howItWorks: {
@@ -447,6 +447,7 @@ export interface Translations {
       eyebrow: string;
       title: string;
       paragraphs: string[];
+      transfertDiscoverLabel: string;
     };
     bookingSection: {
       eyebrow: string;
@@ -509,6 +510,68 @@ export interface Translations {
       title: string;
       paragraphs: string[];
       makkahLinkLabel: string;
+    };
+    fonctionnementSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      steps: string[];
+    };
+    faq: {
+      title: string;
+      items: FaqItem[];
+    };
+    ctaBlock: {
+      eyebrow: string;
+      title: string;
+      paragraph: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+    };
+  };
+
+  transfertAeroportMadinahPage: {
+    backHome: string;
+    hero: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+      imageAlt: string;
+    };
+    trajetSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    criteresSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      criteriaLabel: string;
+      criteria: string[];
+    };
+    aeroportSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    retourSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    nabawiSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      madinahLinkLabel: string;
+    };
+    reservationSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
     };
     fonctionnementSection: {
       eyebrow: string;

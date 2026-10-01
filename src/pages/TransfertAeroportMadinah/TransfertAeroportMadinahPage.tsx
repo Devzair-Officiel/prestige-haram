@@ -5,25 +5,25 @@ import {
   SeoSectionCriteria,
   SeoSectionSteps,
 } from '../../components/seo/sections';
-import heroImage from '../../assets/header-transfert-jeddah-makkah.webp';
+import heroImage from '../../assets/header-hotel-madinah.webp';
 
 const SITE_ORIGIN = 'https://haramainprestige.com';
 
-function TransfertJeddahMakkahPage() {
+function TransfertAeroportMadinahPage() {
   const { t, locale, pathFor } = useI18n();
-  const page = t.transfertJeddahMakkahPage;
+  const page = t.transfertAeroportMadinahPage;
   const homeHref = pathFor('home');
-  const transfertHref = pathFor('transfertJeddahMakkah');
-  const hotelsMakkahHref = pathFor('hotelsMakkah');
+  const transfertHref = pathFor('transfertAeroportMadinah');
+  const hotelsMadinahHref = pathFor('hotelsMadinah');
   const quoteHref = `${homeHref}#devis`;
 
   return (
     <SeoLandingPage
-      page="transfertJeddahMakkah"
-      metaTitle={t.meta.transfertJeddahMakkah.title}
-      metaDescription={t.meta.transfertJeddahMakkah.description}
+      page="transfertAeroportMadinah"
+      metaTitle={t.meta.transfertAeroportMadinah.title}
+      metaDescription={t.meta.transfertAeroportMadinah.description}
       breadcrumbLabel={
-        locale === 'fr' ? 'Transfert Jeddah \u2013 Makkah' : 'التوصيل جدة \u2013 مكة'
+        locale === 'fr' ? 'Transfert aéroport Madinah' : 'التوصيل من مطار المدينة المنورة'
       }
       hero={{
         backHomeLabel: page.backHome,
@@ -34,7 +34,7 @@ function TransfertJeddahMakkahPage() {
         ctaPrimary: { label: page.hero.ctaPrimary, href: quoteHref },
         ctaSecondary: {
           label: page.hero.ctaSecondary,
-          href: '#fonctionnement-transfert',
+          href: '#fonctionnement-transfert-madinah',
         },
         image: { src: heroImage, alt: page.hero.imageAlt },
       }}
@@ -57,8 +57,8 @@ function TransfertJeddahMakkahPage() {
         {
           name:
             locale === 'fr'
-              ? 'Transfert Jeddah \u2013 Makkah'
-              : 'التوصيل جدة \u2013 مكة',
+              ? 'Transfert aéroport Madinah'
+              : 'التوصيل من مطار المدينة المنورة',
           url: SITE_ORIGIN + transfertHref,
         },
       ]}
@@ -76,9 +76,9 @@ function TransfertJeddahMakkahPage() {
         criteria={page.criteresSection.criteria}
       />
       <SeoSectionText
-        eyebrow={page.arriveeSection.eyebrow}
-        title={page.arriveeSection.title}
-        paragraphs={page.arriveeSection.paragraphs}
+        eyebrow={page.aeroportSection.eyebrow}
+        title={page.aeroportSection.title}
+        paragraphs={page.aeroportSection.paragraphs}
       />
       <SeoSectionText
         eyebrow={page.retourSection.eyebrow}
@@ -86,21 +86,21 @@ function TransfertJeddahMakkahPage() {
         paragraphs={page.retourSection.paragraphs}
       />
       <SeoSectionText
+        eyebrow={page.nabawiSection.eyebrow}
+        title={page.nabawiSection.title}
+        paragraphs={page.nabawiSection.paragraphs}
+        discoverLink={{
+          label: page.nabawiSection.madinahLinkLabel,
+          href: hotelsMadinahHref,
+        }}
+      />
+      <SeoSectionText
         eyebrow={page.reservationSection.eyebrow}
         title={page.reservationSection.title}
         paragraphs={page.reservationSection.paragraphs}
       />
-      <SeoSectionText
-        eyebrow={page.makkahSection.eyebrow}
-        title={page.makkahSection.title}
-        paragraphs={page.makkahSection.paragraphs}
-        discoverLink={{
-          label: page.makkahSection.makkahLinkLabel,
-          href: hotelsMakkahHref,
-        }}
-      />
       <SeoSectionSteps
-        id="fonctionnement-transfert"
+        id="fonctionnement-transfert-madinah"
         eyebrow={page.fonctionnementSection.eyebrow}
         title={page.fonctionnementSection.title}
         paragraphs={page.fonctionnementSection.paragraphs}
@@ -110,4 +110,4 @@ function TransfertJeddahMakkahPage() {
   );
 }
 
-export default TransfertJeddahMakkahPage;
+export default TransfertAeroportMadinahPage;

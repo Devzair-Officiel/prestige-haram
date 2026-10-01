@@ -513,7 +513,7 @@ function Header() {
 // gardé local ici pour ne pas coupler le Header aux slugs FR.
 function guessPageFromPath(
   pathname: string,
-): 'home' | 'about' | 'legal' | 'privacy' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' {
+): 'home' | 'about' | 'legal' | 'privacy' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' {
   const stripped = pathname.replace(/^\/ar-sa/, '').replace(/\/+$/, '') || '/';
   if (stripped === '/a-propos') return 'about';
   if (stripped === '/mentions-legales') return 'legal';
@@ -522,6 +522,7 @@ function guessPageFromPath(
   if (stripped === '/hotels-madinah') return 'hotelsMadinah';
   if (stripped === '/chambre-vue-kaaba') return 'chambreVueKaaba';
   if (stripped === '/transfert-aeroport-jeddah-makkah') return 'transfertJeddahMakkah';
+  if (stripped === '/transfert-aeroport-madinah') return 'transfertAeroportMadinah';
   return 'home';
 }
 

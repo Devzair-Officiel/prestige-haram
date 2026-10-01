@@ -49,19 +49,20 @@ function Services() {
   const revealRef = useReveal<HTMLDivElement>();
   const { t, pathFor } = useI18n();
 
-  const CARD_HREFS = [
-    '',
-    pathFor('transfertJeddahMakkah'),
-    '',
-    '',
+  const CARD_HREFS: string[][] = [
+    [],
+    [pathFor('transfertJeddahMakkah'), pathFor('transfertAeroportMadinah')],
+    [],
+    [],
   ];
 
   const services = t.services.cards.map((card, index) => ({
     icon: icons[index],
     title: card.title,
     description: card.description,
-    discoverHref: CARD_HREFS[index],
-    discoverLabel: t.services.cardLinks[index],
+    links: (t.services.cardLinks[index] as string[])
+      .map((label, li) => ({ label, href: CARD_HREFS[index][li] ?? '' }))
+      .filter(({ label, href }) => label && href),
   }));
 
   return (
@@ -169,10 +170,11 @@ function Services() {
             >
               {service.description}
             </div>
-            {service.discoverHref && service.discoverLabel && (
+            {service.links.map(({ label, href }) => (
               <a
-                href={service.discoverHref}
-                onClick={(e) => handleSpaNav(e, service.discoverHref)}
+                key={href}
+                href={href}
+                onClick={(e) => handleSpaNav(e, href)}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -184,7 +186,7 @@ function Services() {
                   textDecoration: 'none',
                 }}
               >
-                {service.discoverLabel}
+                {label}
                 <svg width="11" height="11" viewBox="0 0 16 16" aria-hidden="true">
                   <path
                     d="M3 8h9M9 4l4 4-4 4"
@@ -196,7 +198,7 @@ function Services() {
                   />
                 </svg>
               </a>
-            )}
+            ))}
           </div>
         ))}
       </div>

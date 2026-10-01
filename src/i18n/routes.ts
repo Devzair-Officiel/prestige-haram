@@ -20,6 +20,7 @@ const PATHS: Record<PageKey, string> = {
   hotelsMadinah: '/hotels-madinah',
   chambreVueKaaba: '/chambre-vue-kaaba',
   transfertJeddahMakkah: '/transfert-aeroport-jeddah-makkah',
+  transfertAeroportMadinah: '/transfert-aeroport-madinah',
 };
 
 /** URL canonique locale-scoped. `home` en FR = "/", en AR = "/ar-sa/". */
@@ -58,6 +59,7 @@ function matchPage(path: string): PageKey | null {
   if (path === '/hotels-madinah') return 'hotelsMadinah';
   if (path === '/chambre-vue-kaaba') return 'chambreVueKaaba';
   if (path === '/transfert-aeroport-jeddah-makkah') return 'transfertJeddahMakkah';
+  if (path === '/transfert-aeroport-madinah') return 'transfertAeroportMadinah';
   return null;
 }
 
