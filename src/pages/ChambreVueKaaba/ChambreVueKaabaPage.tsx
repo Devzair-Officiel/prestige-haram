@@ -6,23 +6,16 @@ import {
   SeoSectionText,
   SeoSectionSteps,
 } from '../../components/seo/sections';
-import heroImage from '../../assets/fairmont_clock_royal.webp';
-import sheratonImage from '../../assets/sheraton_jabal_al_kaaba.webp';
-import tilalImage from '../../assets/tilal_jabal_al_kaaba.webp';
-import marriottImage from '../../assets/marriott_jabal_omar.webp';
-import hiltonImage from '../../assets/hilton_suites_jabal_omar.webp';
-import vocoImage from '../../assets/voco.webp';
-import kiswahImage from '../../assets/kiswah_towers.webp';
+import fairmontImage from '../../assets/fairmont_clock_royal.webp';
+import swissotelImage from '../../assets/swissotel_makkah.webp';
+import zamzamMakkahImage from '../../assets/zamzam_pullman_makkah.webp';
 
 const SITE_ORIGIN = 'https://haramainprestige.com';
 
 const KAABA_IMAGES = [
-  sheratonImage,
-  tilalImage,
-  marriottImage,
-  hiltonImage,
-  vocoImage,
-  kiswahImage,
+  fairmontImage,
+  swissotelImage,
+  zamzamMakkahImage,
 ];
 
 function ChambreVueKaabaPage() {
@@ -54,7 +47,7 @@ function ChambreVueKaabaPage() {
         intro: page.hero.intro,
         ctaPrimary: { label: page.hero.ctaPrimary, href: quoteHref },
         ctaSecondary: { label: page.hero.ctaSecondary, href: '#hotels-liste' },
-        image: { src: heroImage, alt: page.hero.imageAlt },
+        image: { src: fairmontImage, alt: page.hero.imageAlt },
       }}
       faq={{ title: page.faq.title, items: page.faq.items }}
       finalCta={{

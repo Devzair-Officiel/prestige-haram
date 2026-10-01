@@ -839,10 +839,10 @@ const fr: Translations = {
     },
     priceSection: {
       eyebrow: 'TARIFS',
-      title: 'Pourquoi une chambre avec vue sur la Kaaba coûte-t-elle plus cher\u00a0?',
+      title: 'Pourquoi le tarif d\'une chambre avec vue sur la Kaaba peut-il varier\u00a0?',
       paragraphs: [
-        'Les catégories proposant une vue sur la Kaaba ou le Masjid al-Haram sont souvent distinctes des chambres standards. Leur tarif dépend notamment de l\'établissement, de la catégorie exacte, de la période du séjour et de la demande.',
-        'Les prix peuvent donc varier fortement selon vos dates. Haramain Prestige vérifie les options disponibles au moment de votre demande afin de vous proposer une solution adaptée à votre budget.',
+        'Le tarif d\'une catégorie avec vue sur la Kaaba ou le Masjid al-Haram dépend notamment de l\'établissement, de la catégorie exacte, de la période du séjour et de la demande.',
+        'Les prix peuvent donc varier selon vos dates. Haramain Prestige vérifie les options disponibles au moment de votre demande afin de vous proposer une solution adaptée à votre budget.',
       ],
     },
     choiceSection: {
