@@ -7,7 +7,7 @@ export type Locale = 'fr' | 'ar-SA';
 /** Direction textuelle induite par la locale. */
 export type Direction = 'ltr' | 'rtl';
 
-export type PageKey = 'home' | 'about' | 'legal' | 'privacy' | 'notFound' | 'hotelsMakkah' | 'hotelsMadinah';
+export type PageKey = 'home' | 'about' | 'legal' | 'privacy' | 'notFound' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba';
 
 /** Une entrée FAQ, utilisée pour le rendu ET le JSON-LD FAQPage. */
 export type FaqItem = {
@@ -194,6 +194,8 @@ export interface Translations {
     discoverMakkah: string;
     /** Lien de maillage interne vers la landing page Hôtels Madinah. */
     discoverMadinah: string;
+    /** Lien de maillage interne vers la landing page Chambre vue Kaaba. */
+    discoverKaaba: string;
     categories: {
       makkah: { eyebrow: string; title: string; hotels: HotelItem[] };
       madinah: { eyebrow: string; title: string; hotels: HotelItem[] };
@@ -330,6 +332,64 @@ export interface Translations {
       eyebrow: string;
       title: string;
       paragraphs: string[];
+      discoverLabel: string;
+    };
+    bookingSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      steps: string[];
+    };
+    faq: {
+      title: string;
+      items: FaqItem[];
+    };
+    ctaBlock: {
+      eyebrow: string;
+      title: string;
+      paragraph: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+    };
+  };
+
+  chambreVueKaabaPage: {
+    backHome: string;
+    hero: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+      imageAlt: string;
+    };
+    hotelsSection: {
+      title: string;
+      intro: string;
+      ctaLabel: string;
+    };
+    categorySection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      criteriaLabel: string;
+      criteria: string[];
+    };
+    viewDiffSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    priceSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    choiceSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      makkahLinkLabel: string;
     };
     bookingSection: {
       eyebrow: string;

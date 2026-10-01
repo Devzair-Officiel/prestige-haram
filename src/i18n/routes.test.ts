@@ -182,8 +182,50 @@ describe('detectRoute — hotelsMadinah', () => {
   });
 });
 
+describe('localizedPath — chambreVueKaaba', () => {
+  it('renvoie /chambre-vue-kaaba en FR', () => {
+    expect(localizedPath('chambreVueKaaba', 'fr')).toBe('/chambre-vue-kaaba');
+  });
+
+  it('renvoie /ar-sa/chambre-vue-kaaba en AR', () => {
+    expect(localizedPath('chambreVueKaaba', 'ar-SA')).toBe(
+      '/ar-sa/chambre-vue-kaaba',
+    );
+  });
+});
+
+describe('detectRoute — chambreVueKaaba', () => {
+  it('détecte FR + chambreVueKaaba pour /chambre-vue-kaaba', () => {
+    expect(detectRoute('/chambre-vue-kaaba')).toEqual({
+      locale: 'fr',
+      page: 'chambreVueKaaba',
+    });
+  });
+
+  it('détecte AR + chambreVueKaaba pour /ar-sa/chambre-vue-kaaba', () => {
+    expect(detectRoute('/ar-sa/chambre-vue-kaaba')).toEqual({
+      locale: 'ar-SA',
+      page: 'chambreVueKaaba',
+    });
+  });
+
+  it('tolère le trailing slash sur /chambre-vue-kaaba/', () => {
+    expect(detectRoute('/chambre-vue-kaaba/')).toEqual({
+      locale: 'fr',
+      page: 'chambreVueKaaba',
+    });
+  });
+
+  it('tolère le trailing slash sur /ar-sa/chambre-vue-kaaba/', () => {
+    expect(detectRoute('/ar-sa/chambre-vue-kaaba/')).toEqual({
+      locale: 'ar-SA',
+      page: 'chambreVueKaaba',
+    });
+  });
+});
+
 describe('équivalence localizedPath ↔ detectRoute', () => {
-  const pages: PageKey[] = ['home', 'about', 'legal', 'privacy', 'hotelsMakkah', 'hotelsMadinah'];
+  const pages: PageKey[] = ['home', 'about', 'legal', 'privacy', 'hotelsMakkah', 'hotelsMadinah', 'chambreVueKaaba'];
 
   it('round-trip FR : detectRoute(localizedPath(p, "fr")) → { fr, p }', () => {
     for (const page of pages) {

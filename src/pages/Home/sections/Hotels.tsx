@@ -664,11 +664,13 @@ function Hotels() {
             showMoreLabel={t.hotels.showMore}
             discoveryHref={
               key === 'makkah' ? hotelsMakkahHref :
-              key === 'madinah' ? pathFor('hotelsMadinah') : undefined
+              key === 'madinah' ? pathFor('hotelsMadinah') :
+              key === 'kaaba' ? pathFor('chambreVueKaaba') : undefined
             }
             discoveryLabel={
               key === 'makkah' ? t.hotels.discoverMakkah :
-              key === 'madinah' ? t.hotels.discoverMadinah : undefined
+              key === 'madinah' ? t.hotels.discoverMadinah :
+              key === 'kaaba' ? t.hotels.discoverKaaba : undefined
             }
           />
         );

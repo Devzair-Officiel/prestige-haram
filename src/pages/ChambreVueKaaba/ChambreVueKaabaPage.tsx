@@ -6,7 +6,7 @@ import {
   SeoSectionText,
   SeoSectionSteps,
 } from '../../components/seo/sections';
-import heroImage from '../../assets/header-hotel-mekkah.webp';
+import heroImage from '../../assets/fairmont_clock_royal.webp';
 import sheratonImage from '../../assets/sheraton_jabal_al_kaaba.webp';
 import tilalImage from '../../assets/tilal_jabal_al_kaaba.webp';
 import marriottImage from '../../assets/marriott_jabal_omar.webp';
@@ -16,7 +16,7 @@ import kiswahImage from '../../assets/kiswah_towers.webp';
 
 const SITE_ORIGIN = 'https://haramainprestige.com';
 
-const MAKKAH_IMAGES = [
+const KAABA_IMAGES = [
   sheratonImage,
   tilalImage,
   marriottImage,
@@ -25,24 +25,27 @@ const MAKKAH_IMAGES = [
   kiswahImage,
 ];
 
-function HotelsMakkahPage() {
+function ChambreVueKaabaPage() {
   const { t, locale, pathFor } = useI18n();
-  const page = t.hotelsMakkahPage;
+  const page = t.chambreVueKaabaPage;
   const homeHref = pathFor('home');
+  const chambreVueKaabaHref = pathFor('chambreVueKaaba');
   const hotelsMakkahHref = pathFor('hotelsMakkah');
   const quoteHref = `${homeHref}#devis`;
 
-  const makkahHotels = t.hotels.categories.makkah.hotels.map((h, i) => ({
+  const kaabaHotels = t.hotels.categories.kaaba.hotels.map((h, i) => ({
     ...h,
-    image: MAKKAH_IMAGES[i],
+    image: KAABA_IMAGES[i],
   }));
 
   return (
     <SeoLandingPage
-      page="hotelsMakkah"
-      metaTitle={t.meta.hotelsMakkah.title}
-      metaDescription={t.meta.hotelsMakkah.description}
-      breadcrumbLabel={locale === 'fr' ? 'Hôtels à Makkah' : 'فنادق مكة المكرمة'}
+      page="chambreVueKaaba"
+      metaTitle={t.meta.chambreVueKaaba.title}
+      metaDescription={t.meta.chambreVueKaaba.description}
+      breadcrumbLabel={
+        locale === 'fr' ? 'Chambre vue Kaaba' : 'غرفة بإطلالة على الكعبة'
+      }
       hero={{
         backHomeLabel: page.backHome,
         backHomeHref: homeHref,
@@ -70,39 +73,42 @@ function HotelsMakkahPage() {
           url: SITE_ORIGIN + homeHref,
         },
         {
-          name: locale === 'fr' ? 'Hôtels à Makkah' : 'فنادق مكة المكرمة',
-          url: SITE_ORIGIN + hotelsMakkahHref,
+          name: locale === 'fr' ? 'Chambre vue Kaaba' : 'غرفة بإطلالة على الكعبة',
+          url: SITE_ORIGIN + chambreVueKaabaHref,
         },
       ]}
     >
       <SeoSectionHotels
         title={page.hotelsSection.title}
         intro={page.hotelsSection.intro}
-        hotels={makkahHotels}
+        hotels={kaabaHotels}
         ctaLabel={page.hotelsSection.ctaLabel}
         quoteHref={quoteHref}
       />
       <SeoSectionCriteria
-        eyebrow={page.haramSection.eyebrow}
-        title={page.haramSection.title}
-        paragraphs={page.haramSection.paragraphs}
-        criteriaLabel={
-          locale === 'fr' ? 'NOS CRITÈRES DE SÉLECTION' : 'معايير الاختيار'
-        }
-        criteria={page.haramSection.criteria}
+        eyebrow={page.categorySection.eyebrow}
+        title={page.categorySection.title}
+        paragraphs={page.categorySection.paragraphs}
+        criteriaLabel={page.categorySection.criteriaLabel}
+        criteria={page.categorySection.criteria}
+      />
+      <SeoSectionText
+        eyebrow={page.viewDiffSection.eyebrow}
+        title={page.viewDiffSection.title}
+        paragraphs={page.viewDiffSection.paragraphs}
+      />
+      <SeoSectionText
+        eyebrow={page.priceSection.eyebrow}
+        title={page.priceSection.title}
+        paragraphs={page.priceSection.paragraphs}
       />
       <SeoSectionText
         eyebrow={page.choiceSection.eyebrow}
         title={page.choiceSection.title}
         paragraphs={page.choiceSection.paragraphs}
-      />
-      <SeoSectionText
-        eyebrow={page.kaabaSection.eyebrow}
-        title={page.kaabaSection.title}
-        paragraphs={page.kaabaSection.paragraphs}
         discoverLink={{
-          label: page.kaabaSection.discoverLabel,
-          href: pathFor('chambreVueKaaba'),
+          label: page.choiceSection.makkahLinkLabel,
+          href: hotelsMakkahHref,
         }}
       />
       <SeoSectionSteps
@@ -115,4 +121,4 @@ function HotelsMakkahPage() {
   );
 }
 
-export default HotelsMakkahPage;
+export default ChambreVueKaabaPage;

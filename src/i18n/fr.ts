@@ -202,6 +202,7 @@ const fr: Translations = {
     viewRates: 'Voir les tarifs',
     discoverMakkah: 'Découvrir tous les hôtels à Makkah',
     discoverMadinah: 'Découvrir tous les hôtels à Madinah',
+    discoverKaaba: 'Découvrir les chambres avec vue Kaaba',
     ctaAria: (categoryTitle: string) =>
       `Demander un devis pour un séjour — ${categoryTitle}`,
     prevAria: 'Voir les hôtels précédents',
@@ -734,6 +735,7 @@ const fr: Translations = {
         'Certaines catégories de chambres et suites offrent une vue sur la Kaaba ou sur le Masjid al-Haram. Cette caractéristique dépend de l\'établissement, de la catégorie exacte de chambre et des disponibilités au moment de la réservation.',
         'Si la vue Kaaba est importante pour votre séjour, indiquez-le dès votre demande de devis. Nous pourrons rechercher les options disponibles correspondant à ce critère et vous préciser la catégorie proposée avant confirmation.',
       ],
+      discoverLabel: 'Découvrir les chambres avec vue sur la Kaaba',
     },
     bookingSection: {
       eyebrow: 'RÉSERVATION',
@@ -789,6 +791,123 @@ const fr: Translations = {
       paragraph:
         'Indiquez-nous vos dates, votre budget et la proximité souhaitée avec le Haram. Nous vous répondons avec une proposition personnalisée selon les disponibilités.',
       ctaPrimary: 'Demander mon devis hôtel',
+      ctaSecondary: 'Écrire sur WhatsApp',
+    },
+  },
+
+  chambreVueKaabaPage: {
+    backHome: "Retour à l'accueil",
+    hero: {
+      eyebrow: 'CHAMBRES & SUITES · VUE KAABA',
+      title: 'Chambre avec vue sur la Kaaba à Makkah : trouvez la catégorie adaptée',
+      intro:
+        'Certaines chambres et suites à Makkah offrent une vue sur la Kaaba ou sur le Masjid al-Haram. Haramain Prestige vous accompagne pour identifier les établissements et les catégories de chambres correspondant à votre demande, selon vos dates, votre budget et les disponibilités.',
+      ctaPrimary: 'Rechercher une chambre vue Kaaba',
+      ctaSecondary: 'Voir les hôtels sélectionnés',
+      imageAlt: 'Abraj Al-Bait et Masjid al-Haram à Makkah',
+    },
+    hotelsSection: {
+      title: 'Quelques hôtels proposant des catégories avec vue sur la Kaaba',
+      intro:
+        'Certains établissements de Makkah proposent des catégories de chambres ou de suites avec vue sur la Kaaba ou le Masjid al-Haram. La vue dépend toujours de la catégorie réservée et des disponibilités au moment de votre séjour.',
+      ctaLabel: 'Vérifier les chambres disponibles',
+    },
+    categorySection: {
+      eyebrow: 'CATÉGORIE DE CHAMBRE',
+      title: 'Que signifie réellement "chambre avec vue sur la Kaaba"\u00a0?',
+      paragraphs: [
+        'Dans un même hôtel, plusieurs catégories de chambres peuvent être proposées avec des orientations différentes. Une chambre standard, une chambre avec vue sur le Haram et une chambre avec vue sur la Kaaba ne correspondent pas nécessairement au même produit ni au même tarif.',
+        'La mention exacte de la catégorie est donc essentielle. Haramain Prestige vérifie la catégorie proposée afin que vous sachiez précisément quel type de vue est associé à votre réservation avant confirmation.',
+      ],
+      criteriaLabel: 'POINTS À VÉRIFIER',
+      criteria: [
+        'Catégorie exacte de chambre ou suite',
+        'Type de vue indiqué par l\'établissement',
+        'Dates du séjour',
+        'Nombre de voyageurs',
+        'Budget',
+        'Disponibilité au moment de la réservation',
+      ],
+    },
+    viewDiffSection: {
+      eyebrow: 'KAABA · HARAM · VILLE',
+      title: 'Vue Kaaba, vue Haram ou vue ville\u00a0: quelle différence\u00a0?',
+      paragraphs: [
+        'Les établissements de Makkah peuvent proposer plusieurs types de vues. Une "vue Kaaba" désigne une catégorie depuis laquelle la Kaaba est visible selon les caractéristiques annoncées par l\'établissement. Une "vue Haram" peut offrir une vue sur le Masjid al-Haram sans garantir une vue directe sur la Kaaba.',
+        'Il est donc important de ne pas se baser uniquement sur le nom de l\'hôtel. La catégorie précise de la chambre doit être vérifiée avant la réservation.',
+      ],
+    },
+    priceSection: {
+      eyebrow: 'TARIFS',
+      title: 'Pourquoi une chambre avec vue sur la Kaaba coûte-t-elle plus cher\u00a0?',
+      paragraphs: [
+        'Les catégories proposant une vue sur la Kaaba ou le Masjid al-Haram sont souvent distinctes des chambres standards. Leur tarif dépend notamment de l\'établissement, de la catégorie exacte, de la période du séjour et de la demande.',
+        'Les prix peuvent donc varier fortement selon vos dates. Haramain Prestige vérifie les options disponibles au moment de votre demande afin de vous proposer une solution adaptée à votre budget.',
+      ],
+    },
+    choiceSection: {
+      eyebrow: 'SELON VOTRE SÉJOUR',
+      title: 'Comment choisir votre chambre avec vue sur la Kaaba\u00a0?',
+      paragraphs: [
+        'Le choix dépend de vos priorités. Certains voyageurs recherchent avant tout une vue particulière, tandis que d\'autres privilégient la proximité avec le Haram, la superficie de la chambre, le niveau de confort ou le budget.',
+        'Indiquez-nous vos critères dès votre demande afin que nous puissions rechercher les catégories correspondant réellement à vos attentes plutôt que de vous proposer uniquement un nom d\'hôtel.',
+      ],
+      makkahLinkLabel: 'Découvrir notre sélection d\'hôtels à Makkah',
+    },
+    bookingSection: {
+      eyebrow: 'RÉSERVATION',
+      title: 'Comment réserver une chambre avec vue sur la Kaaba avec Haramain Prestige\u00a0?',
+      paragraphs: [
+        'Indiquez vos dates, le nombre de voyageurs, votre budget et précisez que vous recherchez une chambre ou une suite avec vue sur la Kaaba.',
+        'Nous vérifions ensuite les établissements et les catégories disponibles avant de vous transmettre une proposition. La catégorie exacte de chambre doit être confirmée avant la réservation.',
+      ],
+      steps: [
+        'Vous nous transmettez vos dates et vos critères',
+        'Nous recherchons les catégories avec vue correspondant à votre demande',
+        'Vous recevez une proposition précisant la catégorie disponible avant de confirmer',
+      ],
+    },
+    faq: {
+      title: 'FAQ — Chambre avec vue sur la Kaaba à Makkah',
+      items: [
+        {
+          question: 'Tous les hôtels proches du Haram proposent-ils des chambres avec vue sur la Kaaba\u00a0?',
+          answer:
+            'Non. La proximité avec le Masjid al-Haram ne signifie pas automatiquement qu\'une chambre offre une vue sur la Kaaba. Cela dépend de l\'établissement, de son emplacement et surtout de la catégorie exacte de chambre.',
+        },
+        {
+          question: 'Toutes les chambres d\'un hôtel vue Kaaba ont-elles la même vue\u00a0?',
+          answer:
+            'Non. Un même établissement peut proposer plusieurs catégories de chambres avec des orientations différentes. Il est donc important de vérifier la catégorie précise avant de réserver.',
+        },
+        {
+          question: 'Quelle est la différence entre une vue Kaaba et une vue Haram\u00a0?',
+          answer:
+            'Une catégorie annoncée avec vue Kaaba indique une vue sur la Kaaba selon les caractéristiques définies par l\'établissement. Une vue Haram peut concerner le Masjid al-Haram sans nécessairement offrir une vue directe sur la Kaaba.',
+        },
+        {
+          question: 'Peut-on réserver une suite avec vue sur la Kaaba\u00a0?',
+          answer:
+            'Certains établissements peuvent proposer des suites dans des catégories avec vue sur la Kaaba ou le Masjid al-Haram. Les disponibilités et catégories doivent être vérifiées pour vos dates.',
+        },
+        {
+          question: 'Le prix d\'une chambre vue Kaaba est-il fixe\u00a0?',
+          answer:
+            'Non. Les tarifs varient selon l\'établissement, la catégorie de chambre, les dates du séjour et la disponibilité.',
+        },
+        {
+          question: 'Comment demander une chambre avec vue sur la Kaaba\u00a0?',
+          answer:
+            'Précisez ce critère dans votre demande de devis avec vos dates, le nombre de voyageurs et votre budget. Haramain Prestige vérifie ensuite les catégories disponibles correspondant à votre demande.',
+        },
+      ],
+    },
+    ctaBlock: {
+      eyebrow: 'VOTRE CHAMBRE À MAKKAH',
+      title: 'Recevez une proposition pour une chambre avec vue sur la Kaaba',
+      paragraph:
+        'Indiquez-nous vos dates, votre budget et le type de vue recherché. Nous vérifions les catégories disponibles avant de vous transmettre une proposition personnalisée.',
+      ctaPrimary: 'Demander les disponibilités',
       ctaSecondary: 'Écrire sur WhatsApp',
     },
   },
@@ -941,6 +1060,11 @@ const fr: Translations = {
       title: 'Hôtels à Madinah près du Masjid an-Nabawi | Haramain Prestige',
       description:
         'Trouvez votre hôtel à Madinah avec Haramain Prestige\u00a0: établissements sélectionnés près du Masjid an-Nabawi, tarifs négociés et accompagnement personnalisé.',
+    },
+    chambreVueKaaba: {
+      title: 'Chambre avec vue sur la Kaaba à Makkah | Haramain Prestige',
+      description:
+        'Recherchez une chambre ou suite avec vue sur la Kaaba à Makkah. Haramain Prestige vérifie les catégories disponibles selon vos dates et vos critères.',
     },
   },
 };

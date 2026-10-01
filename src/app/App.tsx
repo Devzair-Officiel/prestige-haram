@@ -3,6 +3,7 @@ import HomePage from '../pages/Home/HomePage';
 import AboutPage from '../pages/About/AboutPage';
 import HotelsMakkahPage from '../pages/HotelsMakkah/HotelsMakkahPage';
 import HotelsMadinahPage from '../pages/HotelsMadinah/HotelsMadinahPage';
+import ChambreVueKaabaPage from '../pages/ChambreVueKaaba/ChambreVueKaabaPage';
 import MentionsLegales from '../pages/Legal/MentionsLegales';
 import PolitiqueConfidentialite from '../pages/Legal/PolitiqueConfidentialite';
 import NotFound from '../pages/NotFound/NotFound';
@@ -35,6 +36,7 @@ function App() {
   if (page === 'about') return <AboutPage />;
   if (page === 'hotelsMakkah') return <HotelsMakkahPage />;
   if (page === 'hotelsMadinah') return <HotelsMadinahPage />;
+  if (page === 'chambreVueKaaba') return <ChambreVueKaabaPage />;
   if (page === 'legal') return <MentionsLegales />;
   if (page === 'privacy') return <PolitiqueConfidentialite />;
   return <NotFound />;

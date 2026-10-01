@@ -1,17 +1,20 @@
 import { SeoSection } from './SeoSection';
 import { SectionEyebrow, SectionH2, BodyParagraph } from './primitives';
 import { HotelGridCard } from './HotelGridCard';
+import { handleSpaNav } from '../../i18n/utils';
 
 export function SeoSectionText({
   id,
   eyebrow,
   title,
   paragraphs,
+  discoverLink,
 }: {
   id?: string;
   eyebrow?: string;
   title: string;
   paragraphs: string[];
+  discoverLink?: { label: string; href: string };
 }) {
   return (
     <SeoSection id={id}>
@@ -20,6 +23,34 @@ export function SeoSectionText({
       {paragraphs.map((p, i) => (
         <BodyParagraph key={i}>{p}</BodyParagraph>
       ))}
+      {discoverLink && (
+        <a
+          href={discoverLink.href}
+          onClick={(e) => handleSpaNav(e, discoverLink.href)}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 7,
+            fontSize: 13.5,
+            fontWeight: 600,
+            color: '#E6C878',
+            marginTop: 8,
+            textDecoration: 'none',
+          }}
+        >
+          {discoverLink.label}
+          <svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true">
+            <path
+              d="M3 8h9M9 4l4 4-4 4"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </a>
+      )}
     </SeoSection>
   );
 }
