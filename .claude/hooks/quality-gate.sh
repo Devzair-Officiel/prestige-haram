@@ -7,8 +7,8 @@ if echo "$input" | grep -Eq '"stop_hook_active"[[:space:]]*:[[:space:]]*true'; t
 cd "$CLAUDE_PROJECT_DIR" || exit 0
 
 # Skip if no relevant source files have changed
-if git diff --quiet HEAD -- src/ public/ package.json tsconfig*.json vite.config.* \
-   && [ -z "$(git ls-files --others --exclude-standard -- src/ public/)" ]; then
+if git diff --quiet HEAD -- src/ public/ docker/ package.json tsconfig*.json vite.config.* \
+   && [ -z "$(git ls-files --others --exclude-standard -- src/ public/ docker/)" ]; then
   exit 0
 fi
 

@@ -201,6 +201,7 @@ const fr: Translations = {
     ctaLabel: 'Demander un devis',
     viewRates: 'Voir les tarifs',
     discoverMakkah: 'Découvrir tous les hôtels à Makkah',
+    discoverMadinah: 'Découvrir tous les hôtels à Madinah',
     ctaAria: (categoryTitle: string) =>
       `Demander un devis pour un séjour — ${categoryTitle}`,
     prevAria: 'Voir les hôtels précédents',
@@ -792,6 +793,120 @@ const fr: Translations = {
     },
   },
 
+  hotelsMadinahPage: {
+    backHome: "Retour à l'accueil",
+    hero: {
+      eyebrow: 'HÔTELS À MADINAH · MÉDINE',
+      title: 'Hôtels à Madinah : trouvez l\'hébergement idéal près du Masjid an-Nabawi',
+      intro:
+        'Haramain Prestige vous accompagne dans la recherche et la réservation de votre hôtel à Madinah (Médine). Nous sélectionnons des établissements selon votre budget, la proximité souhaitée avec le Masjid an-Nabawi, le niveau de confort et les besoins de votre séjour.',
+      ctaPrimary: 'Recevoir une proposition personnalisée',
+      ctaSecondary: 'Voir les hôtels sélectionnés',
+      imageAlt: 'Vue sur le Masjid an-Nabawi depuis un hôtel à Madinah',
+    },
+    hotelsSection: {
+      title: 'Quelques hôtels à Madinah',
+      intro:
+        'Voici une sélection d\'établissements déjà proposés par Haramain Prestige à Madinah. Les disponibilités, catégories de chambres et tarifs varient selon vos dates\u00a0: nous vérifions chaque demande avant de vous transmettre une proposition.',
+      ctaLabel: 'Demander les disponibilités',
+    },
+    nabawiSection: {
+      eyebrow: 'PROXIMITÉ DU MASJID AN-NABAWI',
+      title: 'Choisir un hôtel proche du Masjid an-Nabawi',
+      paragraphs: [
+        'La distance jusqu\'au Masjid an-Nabawi est souvent le premier critère de choix à Madinah. Mais une distance seule ne suffit pas toujours\u00a0: l\'accès réel, le quartier, la présence d\'une navette gratuite et la porte de la Mosquée du Prophète que vous utilisez peuvent influencer vos déplacements quotidiens.',
+        'Haramain Prestige étudie votre demande selon vos priorités et vous oriente vers des hôtels cohérents avec votre séjour, en tenant compte de votre budget et du niveau de confort souhaité.',
+      ],
+      criteria: [
+        'Proximité souhaitée avec le Masjid an-Nabawi',
+        'Budget par chambre et par nuit',
+        'Catégorie d\'hôtel et niveau de confort',
+        'Voyage en couple, famille ou groupe',
+        'Présence d\'une navette gratuite vers la Mosquée',
+      ],
+    },
+    choiceSection: {
+      eyebrow: 'SELON VOTRE SÉJOUR',
+      title: 'Quel hôtel choisir à Madinah\u00a0?',
+      paragraphs: [
+        'Les besoins varient selon le type de séjour. Une famille avec enfants privilégiera souvent un accès simple et des espaces adaptés, tandis qu\'un voyageur seul ou un couple cherchera peut-être à maîtriser son budget tout en restant proche du Masjid an-Nabawi.',
+        'Notre rôle est de comparer les options disponibles à vos dates et de vous présenter une sélection adaptée à vos critères, avec un interlocuteur unique pour votre demande.',
+      ],
+    },
+    nabawiImportanceSection: {
+      eyebrow: 'MADINAH AL-MUNAWWARAH',
+      title: 'Pourquoi la proximité du Masjid an-Nabawi compte',
+      paragraphs: [
+        'Madinah accueille le Masjid an-Nabawi, la Mosquée du Prophète Muhammad ﷺ. Pour de nombreux pèlerins, pouvoir se rendre facilement à la Mosquée plusieurs fois par jour — pour les prières obligatoires ou les prières surérogatoires — est un élément essentiel du séjour.',
+        'Un hôtel bien situé permet d\'organiser ses journées sereinement, sans dépendre d\'un transport à chaque déplacement. À l\'inverse, un établissement éloigné peut engendrer des frais supplémentaires ou une fatigue accrue. Haramain Prestige tient compte de cet équilibre dans chaque proposition.',
+      ],
+    },
+    omraSection: {
+      eyebrow: 'OMRA ET SÉJOUR À MADINAH',
+      title: 'Séjour à Madinah dans le cadre de votre Omra',
+      paragraphs: [
+        'La Omra inclut généralement un séjour à Makkah et un passage à Madinah pour visiter le Masjid an-Nabawi et ses environs. La durée du séjour à Madinah varie selon les voyageurs\u00a0: certains restent quelques jours, d\'autres davantage.',
+        'Haramain Prestige organise les deux étapes de votre séjour. Nous pouvons proposer un hôtel à Makkah et un hôtel à Madinah dans la même demande, ainsi que les transferts entre les deux villes saintes si vous en avez besoin.',
+      ],
+    },
+    bookingSection: {
+      eyebrow: 'RÉSERVATION',
+      title: 'Comment réserver votre hôtel à Madinah avec Haramain Prestige\u00a0?',
+      paragraphs: [
+        'Vous nous indiquez vos dates, le nombre de voyageurs, le nombre de chambres, votre budget et vos préférences. Nous recherchons ensuite les options correspondant à votre demande auprès de notre réseau de partenaires à Madinah.',
+        'Vous recevez une proposition personnalisée. Vous pouvez réserver uniquement l\'hôtel ou compléter votre séjour avec les autres services disponibles, notamment les transferts depuis l\'aéroport de Madinah et les déplacements entre Makkah et Madinah.',
+      ],
+      steps: [
+        'Vous nous transmettez vos dates et vos critères pour Madinah',
+        'Nous vérifions les options et disponibilités correspondant à votre demande',
+        'Vous recevez une proposition personnalisée avant de confirmer',
+      ],
+    },
+    faq: {
+      title: 'FAQ — Réserver un hôtel à Madinah',
+      items: [
+        {
+          question: 'Proposez-vous des hôtels proches du Masjid an-Nabawi à Madinah\u00a0?',
+          answer:
+            'Oui. Haramain Prestige sélectionne des hôtels à Madinah selon la proximité souhaitée avec le Masjid an-Nabawi. La proposition dépend de vos dates, de votre budget et des disponibilités.',
+        },
+        {
+          question: 'Puis-je réserver uniquement l\'hôtel à Madinah sans autre service\u00a0?',
+          answer:
+            'Oui. Vous pouvez demander uniquement votre hébergement à Madinah. Les transferts, chauffeurs et autres services restent facultatifs et peuvent être ajoutés selon vos besoins.',
+        },
+        {
+          question: 'Organisez-vous le séjour complet Makkah + Madinah\u00a0?',
+          answer:
+            'Oui. Haramain Prestige peut organiser les deux étapes de votre séjour en même temps\u00a0: hôtel à Makkah, hôtel à Madinah et transferts entre les deux villes. Vous pouvez indiquer les deux villes dans votre demande de devis.',
+        },
+        {
+          question: 'Puis-je demander un hôtel 3, 4 ou 5 étoiles à Madinah\u00a0?',
+          answer:
+            'Oui. Vous pouvez préciser la catégorie souhaitée dans votre demande. Nous recherchons ensuite les établissements disponibles correspondant à vos critères.',
+        },
+        {
+          question: 'Comment se passe le transfert depuis l\'aéroport de Madinah\u00a0?',
+          answer:
+            'Nous organisons les transferts depuis l\'aéroport Prince Mohammad Bin Abdulaziz de Madinah vers votre hôtel. Ce service peut être ajouté à votre demande de devis.',
+        },
+        {
+          question: 'Comment obtenir un devis pour un hôtel à Madinah\u00a0?',
+          answer:
+            'Remplissez le formulaire de demande avec vos dates, le nombre de voyageurs, votre budget et vos préférences. Haramain Prestige revient ensuite vers vous avec une proposition adaptée aux options disponibles à Madinah.',
+        },
+      ],
+    },
+    ctaBlock: {
+      eyebrow: 'VOTRE SÉJOUR À MADINAH',
+      title: 'Recevez une sélection d\'hôtels à Madinah adaptée à vos critères',
+      paragraph:
+        'Indiquez-nous vos dates, votre budget et la proximité souhaitée avec le Masjid an-Nabawi. Nous vous répondons avec une proposition personnalisée selon les disponibilités.',
+      ctaPrimary: 'Demander mon devis hôtel',
+      ctaSecondary: 'Écrire sur WhatsApp',
+    },
+  },
+
   meta: {
     home: {
       title: "Haramain Prestige – Réservation d'hôtels à Makkah & Madinah",
@@ -821,6 +936,11 @@ const fr: Translations = {
       title: 'Hôtels à Makkah près du Haram | Haramain Prestige',
       description:
         'Trouvez votre hôtel à Makkah avec Haramain Prestige\u00a0: établissements sélectionnés près du Masjid al-Haram, tarifs négociés et accompagnement personnalisé.',
+    },
+    hotelsMadinah: {
+      title: 'Hôtels à Madinah près du Masjid an-Nabawi | Haramain Prestige',
+      description:
+        'Trouvez votre hôtel à Madinah avec Haramain Prestige\u00a0: établissements sélectionnés près du Masjid an-Nabawi, tarifs négociés et accompagnement personnalisé.',
     },
   },
 };

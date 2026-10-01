@@ -140,8 +140,50 @@ describe('detectRoute — hotelsMakkah', () => {
   });
 });
 
+describe('localizedPath — hotelsMadinah', () => {
+  it('renvoie /hotels-madinah en FR', () => {
+    expect(localizedPath('hotelsMadinah', 'fr')).toBe('/hotels-madinah');
+  });
+
+  it('renvoie /ar-sa/hotels-madinah en AR', () => {
+    expect(localizedPath('hotelsMadinah', 'ar-SA')).toBe(
+      '/ar-sa/hotels-madinah',
+    );
+  });
+});
+
+describe('detectRoute — hotelsMadinah', () => {
+  it('détecte FR + hotelsMadinah pour /hotels-madinah', () => {
+    expect(detectRoute('/hotels-madinah')).toEqual({
+      locale: 'fr',
+      page: 'hotelsMadinah',
+    });
+  });
+
+  it('détecte AR + hotelsMadinah pour /ar-sa/hotels-madinah', () => {
+    expect(detectRoute('/ar-sa/hotels-madinah')).toEqual({
+      locale: 'ar-SA',
+      page: 'hotelsMadinah',
+    });
+  });
+
+  it('tolère le trailing slash sur /hotels-madinah/', () => {
+    expect(detectRoute('/hotels-madinah/')).toEqual({
+      locale: 'fr',
+      page: 'hotelsMadinah',
+    });
+  });
+
+  it('tolère le trailing slash sur /ar-sa/hotels-madinah/', () => {
+    expect(detectRoute('/ar-sa/hotels-madinah/')).toEqual({
+      locale: 'ar-SA',
+      page: 'hotelsMadinah',
+    });
+  });
+});
+
 describe('équivalence localizedPath ↔ detectRoute', () => {
-  const pages: PageKey[] = ['home', 'about', 'legal', 'privacy', 'hotelsMakkah'];
+  const pages: PageKey[] = ['home', 'about', 'legal', 'privacy', 'hotelsMakkah', 'hotelsMadinah'];
 
   it('round-trip FR : detectRoute(localizedPath(p, "fr")) → { fr, p }', () => {
     for (const page of pages) {

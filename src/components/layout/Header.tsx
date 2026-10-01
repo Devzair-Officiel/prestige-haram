@@ -50,10 +50,13 @@ function Header() {
   const aboutHref = pathFor('about');
 
   const hotelsMakkahHref = pathFor('hotelsMakkah');
+  const hotelsMadinahHref = pathFor('hotelsMadinah');
   const hotelsMenu = t.header.hotelsMenu.map((label, index) => ({
     label,
-    // Premier item → landing page Hôtels Makkah ; les autres restent sur #hotels
-    href: index === 0 ? hotelsMakkahHref : `${homeHref}#hotels`,
+    href:
+      index === 0 ? hotelsMakkahHref :
+      index === 1 ? hotelsMadinahHref :
+      `${homeHref}#hotels`,
   }));
   const servicesMenu = t.header.servicesMenu.map((label) => ({
     label,
@@ -507,12 +510,13 @@ function Header() {
 // gardé local ici pour ne pas coupler le Header aux slugs FR.
 function guessPageFromPath(
   pathname: string,
-): 'home' | 'about' | 'legal' | 'privacy' | 'hotelsMakkah' {
+): 'home' | 'about' | 'legal' | 'privacy' | 'hotelsMakkah' | 'hotelsMadinah' {
   const stripped = pathname.replace(/^\/ar-sa/, '').replace(/\/+$/, '') || '/';
   if (stripped === '/a-propos') return 'about';
   if (stripped === '/mentions-legales') return 'legal';
   if (stripped === '/politique-de-confidentialite') return 'privacy';
   if (stripped === '/hotels-makkah') return 'hotelsMakkah';
+  if (stripped === '/hotels-madinah') return 'hotelsMadinah';
   return 'home';
 }
 

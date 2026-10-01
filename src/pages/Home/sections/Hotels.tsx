@@ -662,8 +662,14 @@ function Hotels() {
             prevAria={t.hotels.prevAria}
             nextAria={t.hotels.nextAria}
             showMoreLabel={t.hotels.showMore}
-            discoveryHref={key === 'makkah' ? hotelsMakkahHref : undefined}
-            discoveryLabel={key === 'makkah' ? t.hotels.discoverMakkah : undefined}
+            discoveryHref={
+              key === 'makkah' ? hotelsMakkahHref :
+              key === 'madinah' ? pathFor('hotelsMadinah') : undefined
+            }
+            discoveryLabel={
+              key === 'makkah' ? t.hotels.discoverMakkah :
+              key === 'madinah' ? t.hotels.discoverMadinah : undefined
+            }
           />
         );
       })}
