@@ -1,20 +1,18 @@
 #!/usr/bin/env bash
 input=$(cat)
 
+# Prevent re-entry when a stop hook is already active
 if echo "$input" | grep -Eq '"stop_hook_active"[[:space:]]*:[[:space:]]*true'; then exit 0; fi
 
 cd "$CLAUDE_PROJECT_DIR" || exit 0
 
-if git diff --quiet HEAD -- apps/web && [ -z "$(git ls-files --others --exclude-standard apps/web)" ]; then
+# Skip if no relevant source files have changed
+if git diff --quiet HEAD -- src/ public/ package.json tsconfig*.json vite.config.* \
+   && [ -z "$(git ls-files --others --exclude-standard -- src/ public/)" ]; then
   exit 0
 fi
 
-# Si le conteneur ne tourne pas, on ne bloque pas dessus
-docker compose ps --status running --services 2>/dev/null | grep -q '^web$' || exit 0
-
-out=$( { docker compose exec -T web npm run lint \
-      && docker compose exec -T web npm run typecheck \
-      && docker compose exec -T web npm run test; } 2>&1 ) || {
+out=$( { npm run lint && npm run test && npm run build; } 2>&1 ) || {
   echo "Contrôles qualité en échec. Corrige avant de conclure :" >&2
   echo "$out" | tail -40 >&2
   exit 2

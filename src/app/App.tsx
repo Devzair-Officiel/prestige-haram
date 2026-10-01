@@ -6,6 +6,7 @@ import MentionsLegales from '../pages/Legal/MentionsLegales';
 import PolitiqueConfidentialite from '../pages/Legal/PolitiqueConfidentialite';
 import NotFound from '../pages/NotFound/NotFound';
 import { detectRoute } from '../i18n/routes';
+import { scrollToHash } from '../i18n/utils';
 
 function App() {
   const [pathname, setPathname] = useState(window.location.pathname);
@@ -13,13 +14,19 @@ function App() {
   useEffect(() => {
     const sync = () => setPathname(window.location.pathname);
     window.addEventListener('popstate', sync);
-    // Événement émis par navigateTo() du provider i18n après pushState.
     window.addEventListener('haramain:navigate', sync);
     return () => {
       window.removeEventListener('popstate', sync);
       window.removeEventListener('haramain:navigate', sync);
     };
   }, []);
+
+  // After each navigation (pathname change), scroll to hash element or top.
+  // requestAnimationFrame ensures the new page has rendered before scrolling.
+  useEffect(() => {
+    const frame = requestAnimationFrame(scrollToHash);
+    return () => cancelAnimationFrame(frame);
+  }, [pathname]);
 
   const { page } = detectRoute(pathname);
 
