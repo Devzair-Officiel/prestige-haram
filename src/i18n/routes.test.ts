@@ -98,8 +98,50 @@ describe('otherLocale', () => {
   });
 });
 
+describe('localizedPath — hotelsMakkah', () => {
+  it('renvoie /hotels-makkah en FR', () => {
+    expect(localizedPath('hotelsMakkah', 'fr')).toBe('/hotels-makkah');
+  });
+
+  it('renvoie /ar-sa/hotels-makkah en AR', () => {
+    expect(localizedPath('hotelsMakkah', 'ar-SA')).toBe(
+      '/ar-sa/hotels-makkah',
+    );
+  });
+});
+
+describe('detectRoute — hotelsMakkah', () => {
+  it('détecte FR + hotelsMakkah pour /hotels-makkah', () => {
+    expect(detectRoute('/hotels-makkah')).toEqual({
+      locale: 'fr',
+      page: 'hotelsMakkah',
+    });
+  });
+
+  it('détecte AR + hotelsMakkah pour /ar-sa/hotels-makkah', () => {
+    expect(detectRoute('/ar-sa/hotels-makkah')).toEqual({
+      locale: 'ar-SA',
+      page: 'hotelsMakkah',
+    });
+  });
+
+  it('tolère le trailing slash sur /hotels-makkah/', () => {
+    expect(detectRoute('/hotels-makkah/')).toEqual({
+      locale: 'fr',
+      page: 'hotelsMakkah',
+    });
+  });
+
+  it('tolère le trailing slash sur /ar-sa/hotels-makkah/', () => {
+    expect(detectRoute('/ar-sa/hotels-makkah/')).toEqual({
+      locale: 'ar-SA',
+      page: 'hotelsMakkah',
+    });
+  });
+});
+
 describe('équivalence localizedPath ↔ detectRoute', () => {
-  const pages: PageKey[] = ['home', 'about', 'legal', 'privacy'];
+  const pages: PageKey[] = ['home', 'about', 'legal', 'privacy', 'hotelsMakkah'];
 
   it('round-trip FR : detectRoute(localizedPath(p, "fr")) → { fr, p }', () => {
     for (const page of pages) {

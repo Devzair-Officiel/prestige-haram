@@ -7,7 +7,7 @@ export type Locale = 'fr' | 'ar-SA';
 /** Direction textuelle induite par la locale. */
 export type Direction = 'ltr' | 'rtl';
 
-export type PageKey = 'home' | 'about' | 'legal' | 'privacy' | 'notFound';
+export type PageKey = 'home' | 'about' | 'legal' | 'privacy' | 'notFound' | 'hotelsMakkah';
 
 /** Une entrée FAQ, utilisée pour le rendu ET le JSON-LD FAQPage. */
 export type FaqItem = {
@@ -190,6 +190,8 @@ export interface Translations {
     prevAria: string;
     nextAria: string;
     showMore: (n: number) => string;
+    /** Lien de maillage interne vers la landing page Hôtels Makkah. */
+    discoverMakkah: string;
     categories: {
       makkah: { eyebrow: string; title: string; hotels: HotelItem[] };
       madinah: { eyebrow: string; title: string; hotels: HotelItem[] };
@@ -294,6 +296,56 @@ export interface Translations {
     title: string;
     intro: string;
     blocks: EditorialBlock[];
+  };
+
+  hotelsMakkahPage: {
+    backHome: string;
+    hero: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+      imageAlt: string;
+    };
+    hotelsSection: {
+      title: string;
+      intro: string;
+      ctaLabel: string;
+    };
+    haramSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      criteria: string[];
+    };
+    choiceSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    kaabaSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    bookingSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      steps: string[];
+    };
+    faq: {
+      title: string;
+      items: FaqItem[];
+    };
+    ctaBlock: {
+      eyebrow: string;
+      title: string;
+      paragraph: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+    };
   };
 
   meta: Record<PageKey, PageMeta>;

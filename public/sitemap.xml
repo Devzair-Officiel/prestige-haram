@@ -67,4 +67,20 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://haramainprestige.com/hotels-makkah</loc>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://haramainprestige.com/hotels-makkah" />
+    <xhtml:link rel="alternate" hreflang="ar-SA" href="https://haramainprestige.com/ar-sa/hotels-makkah" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://haramainprestige.com/hotels-makkah" />
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://haramainprestige.com/ar-sa/hotels-makkah</loc>
+    <xhtml:link rel="alternate" hreflang="fr-FR" href="https://haramainprestige.com/hotels-makkah" />
+    <xhtml:link rel="alternate" hreflang="ar-SA" href="https://haramainprestige.com/ar-sa/hotels-makkah" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://haramainprestige.com/hotels-makkah" />
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>

@@ -441,6 +441,8 @@ function CategoryBlock({
   prevAria,
   nextAria,
   showMoreLabel,
+  discoveryHref,
+  discoveryLabel,
 }: {
   eyebrow: string;
   title: string;
@@ -452,6 +454,8 @@ function CategoryBlock({
   prevAria: string;
   nextAria: string;
   showMoreLabel: (n: number) => string;
+  discoveryHref?: string;
+  discoveryLabel?: string;
 }) {
   const revealRef = useReveal<HTMLDivElement>();
   const [showAll, setShowAll] = useState(false);
@@ -503,25 +507,47 @@ function CategoryBlock({
             {title}
           </h3>
         </div>
-        <a
-          href={quoteHref}
-          className="link-arrow"
-          aria-label={ctaAria(title)}
-          style={{
-            fontSize: 13,
-            fontWeight: 600,
-            color: '#E6C878',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 7,
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {ctaLabel}
-          <span className="btn-arrow">
-            <ArrowIcon />
-          </span>
-        </a>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+          {discoveryHref && discoveryLabel && (
+            <a
+              href={discoveryHref}
+              className="link-arrow"
+              style={{
+                fontSize: 12.5,
+                fontWeight: 600,
+                color: 'rgba(230,200,120,0.75)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {discoveryLabel}
+              <span className="btn-arrow">
+                <ArrowIcon />
+              </span>
+            </a>
+          )}
+          <a
+            href={quoteHref}
+            className="link-arrow"
+            aria-label={ctaAria(title)}
+            style={{
+              fontSize: 13,
+              fontWeight: 600,
+              color: '#E6C878',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 7,
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {ctaLabel}
+            <span className="btn-arrow">
+              <ArrowIcon />
+            </span>
+          </a>
+        </div>
       </div>
       <HotelScroller
         hotels={hotels}
@@ -558,6 +584,7 @@ function Hotels() {
   const revealRef = useReveal<HTMLDivElement>();
   const { t, pathFor } = useI18n();
   const quoteHref = `${pathFor('home')}#devis`;
+  const hotelsMakkahHref = pathFor('hotelsMakkah');
 
   return (
     <section
@@ -635,6 +662,8 @@ function Hotels() {
             prevAria={t.hotels.prevAria}
             nextAria={t.hotels.nextAria}
             showMoreLabel={t.hotels.showMore}
+            discoveryHref={key === 'makkah' ? hotelsMakkahHref : undefined}
+            discoveryLabel={key === 'makkah' ? t.hotels.discoverMakkah : undefined}
           />
         );
       })}

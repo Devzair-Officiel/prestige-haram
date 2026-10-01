@@ -16,6 +16,7 @@ const PATHS: Record<PageKey, string> = {
   legal: '/mentions-legales',
   privacy: '/politique-de-confidentialite',
   notFound: '/404',
+  hotelsMakkah: '/hotels-makkah',
 };
 
 /** URL canonique locale-scoped. `home` en FR = "/", en AR = "/ar-sa/". */
@@ -50,6 +51,7 @@ function matchPage(path: string): PageKey | null {
   if (path === '/a-propos') return 'about';
   if (path === '/mentions-legales') return 'legal';
   if (path === '/politique-de-confidentialite') return 'privacy';
+  if (path === '/hotels-makkah') return 'hotelsMakkah';
   return null;
 }
 

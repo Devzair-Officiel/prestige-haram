@@ -200,6 +200,7 @@ const fr: Translations = {
       ' disponibles à Makkah & Madinah, à tous les budgets et à toutes les distances du Haram — demandez la liste complète.',
     ctaLabel: 'Demander un devis',
     viewRates: 'Voir les tarifs',
+    discoverMakkah: 'Découvrir tous les hôtels à Makkah',
     ctaAria: (categoryTitle: string) =>
       `Demander un devis pour un séjour — ${categoryTitle}`,
     prevAria: 'Voir les hôtels précédents',
@@ -685,6 +686,112 @@ const fr: Translations = {
     ],
   },
 
+  hotelsMakkahPage: {
+    backHome: "Retour à l'accueil",
+    hero: {
+      eyebrow: 'HÔTELS À MAKKAH · LA MECQUE',
+      title: 'Hôtels à Makkah : trouvez l\'hébergement adapté à votre séjour',
+      intro:
+        'Haramain Prestige vous accompagne dans la recherche et la réservation de votre hôtel à Makkah (La Mecque). Nous sélectionnons des établissements selon votre budget, la proximité souhaitée avec le Masjid al-Haram, le niveau de confort et les besoins de votre séjour.',
+      ctaPrimary: 'Recevoir une proposition personnalisée',
+      ctaSecondary: 'Voir les hôtels sélectionnés',
+      imageAlt: 'Vue sur le Masjid al-Haram depuis un hôtel à Makkah',
+    },
+    hotelsSection: {
+      title: 'Quelques hôtels à Makkah',
+      intro:
+        'Voici une sélection d\'établissements déjà proposés par Haramain Prestige. Les disponibilités, catégories de chambres et tarifs varient selon vos dates\u00a0: nous vérifions chaque demande avant de vous transmettre une proposition.',
+      ctaLabel: 'Demander les disponibilités',
+    },
+    haramSection: {
+      eyebrow: 'PROXIMITÉ DU HARAM',
+      title: 'Choisir un hôtel proche du Masjid al-Haram',
+      paragraphs: [
+        'Pour un séjour à Makkah, la distance jusqu\'au Masjid al-Haram est souvent l\'un des premiers critères de choix. Mais une distance seule ne suffit pas toujours\u00a0: l\'accès réel, le quartier, le dénivelé, la présence d\'une navette et l\'entrée du Haram que vous utilisez peuvent également avoir un impact sur vos déplacements.',
+        'Haramain Prestige étudie votre demande en fonction de vos priorités afin de vous orienter vers des hôtels cohérents avec votre séjour, plutôt que de vous proposer une liste générique d\'établissements.',
+      ],
+      criteria: [
+        'Proximité souhaitée avec le Masjid al-Haram',
+        'Budget par chambre et par nuit',
+        'Catégorie d\'hôtel et niveau de confort',
+        'Voyage en couple, famille ou groupe',
+        'Besoin éventuel d\'une chambre avec vue sur la Kaaba',
+      ],
+    },
+    choiceSection: {
+      eyebrow: 'SELON VOTRE SÉJOUR',
+      title: 'Quel hôtel choisir à Makkah\u00a0?',
+      paragraphs: [
+        'Il n\'existe pas un hôtel idéal pour tous les voyageurs. Une famille peut privilégier l\'espace, l\'accès et la simplicité des déplacements, tandis qu\'un couple peut rechercher un établissement premium ou une vue particulière. D\'autres voyageurs souhaitent surtout maîtriser leur budget tout en restant dans une zone pratique.',
+        'Notre rôle est de comparer les options disponibles à vos dates et de vous présenter une sélection adaptée à vos critères, avec un interlocuteur unique pour votre demande.',
+      ],
+    },
+    kaabaSection: {
+      eyebrow: 'VUE KAABA',
+      title: 'Hôtel à Makkah avec vue sur la Kaaba',
+      paragraphs: [
+        'Certaines catégories de chambres et suites offrent une vue sur la Kaaba ou sur le Masjid al-Haram. Cette caractéristique dépend de l\'établissement, de la catégorie exacte de chambre et des disponibilités au moment de la réservation.',
+        'Si la vue Kaaba est importante pour votre séjour, indiquez-le dès votre demande de devis. Nous pourrons rechercher les options disponibles correspondant à ce critère et vous préciser la catégorie proposée avant confirmation.',
+      ],
+    },
+    bookingSection: {
+      eyebrow: 'RÉSERVATION',
+      title: 'Comment réserver votre hôtel à Makkah avec Haramain Prestige\u00a0?',
+      paragraphs: [
+        'Vous nous indiquez vos dates, le nombre de voyageurs, le nombre de chambres, votre budget et vos préférences. Nous recherchons ensuite les options correspondant à votre demande auprès de notre réseau de partenaires.',
+        'Vous recevez une proposition personnalisée. Vous pouvez réserver uniquement l\'hôtel ou compléter votre séjour avec les autres services disponibles, notamment les transferts et les déplacements sur place.',
+      ],
+      steps: [
+        'Vous nous transmettez vos dates et vos critères',
+        'Nous vérifions les options et disponibilités correspondant à votre demande',
+        'Vous recevez une proposition personnalisée avant de confirmer',
+      ],
+    },
+    faq: {
+      title: 'FAQ — Réserver un hôtel à Makkah',
+      items: [
+        {
+          question: 'Proposez-vous des hôtels proches du Haram à Makkah\u00a0?',
+          answer:
+            'Oui. Haramain Prestige sélectionne des hôtels à Makkah selon la proximité recherchée avec le Masjid al-Haram. La proposition dépend de vos dates, de votre budget et des disponibilités.',
+        },
+        {
+          question: 'Puis-je demander un hôtel 3, 4 ou 5 étoiles à Makkah\u00a0?',
+          answer:
+            'Oui. Vous pouvez indiquer la catégorie souhaitée dans votre demande. Nous recherchons ensuite les établissements disponibles correspondant à vos critères.',
+        },
+        {
+          question: 'Peut-on réserver une chambre avec vue sur la Kaaba\u00a0?',
+          answer:
+            'Oui, lorsque cette catégorie est proposée et disponible. Il est important de préciser que vous souhaitez une vue Kaaba afin que la catégorie exacte puisse être vérifiée avant réservation.',
+        },
+        {
+          question: 'Puis-je réserver uniquement l\'hôtel sans autre service\u00a0?',
+          answer:
+            'Oui. Vous pouvez demander uniquement votre hébergement à Makkah. Les transferts, chauffeurs et autres prestations sont complémentaires et restent facultatifs.',
+        },
+        {
+          question: 'Pourquoi les tarifs des hôtels à Makkah changent-ils selon les dates\u00a0?',
+          answer:
+            'Les prix et disponibilités sont variables selon l\'établissement, la période, la catégorie de chambre et la demande. C\'est pourquoi Haramain Prestige confirme les conditions correspondant à vos dates avant toute réservation.',
+        },
+        {
+          question: 'Comment obtenir un devis pour un hôtel à Makkah\u00a0?',
+          answer:
+            'Indiquez vos dates, le nombre de voyageurs, votre budget et vos préférences dans le formulaire de demande. Haramain Prestige revient ensuite vers vous avec une proposition adaptée aux options disponibles.',
+        },
+      ],
+    },
+    ctaBlock: {
+      eyebrow: 'VOTRE SÉJOUR À MAKKAH',
+      title: 'Recevez une sélection d\'hôtels adaptée à vos critères',
+      paragraph:
+        'Indiquez-nous vos dates, votre budget et la proximité souhaitée avec le Haram. Nous vous répondons avec une proposition personnalisée selon les disponibilités.',
+      ctaPrimary: 'Demander mon devis hôtel',
+      ctaSecondary: 'Écrire sur WhatsApp',
+    },
+  },
+
   meta: {
     home: {
       title: "Haramain Prestige – Réservation d'hôtels à Makkah & Madinah",
@@ -709,6 +816,11 @@ const fr: Translations = {
     notFound: {
       title: 'Page introuvable — Haramain Prestige',
       description: "La page que vous cherchez n'existe pas ou a été déplacée.",
+    },
+    hotelsMakkah: {
+      title: 'Hôtels à Makkah près du Haram | Haramain Prestige',
+      description:
+        'Trouvez votre hôtel à Makkah avec Haramain Prestige\u00a0: établissements sélectionnés près du Masjid al-Haram, tarifs négociés et accompagnement personnalisé.',
     },
   },
 };

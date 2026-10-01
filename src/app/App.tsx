@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import HomePage from '../pages/Home/HomePage';
 import AboutPage from '../pages/About/AboutPage';
+import HotelsMakkahPage from '../pages/HotelsMakkah/HotelsMakkahPage';
 import MentionsLegales from '../pages/Legal/MentionsLegales';
 import PolitiqueConfidentialite from '../pages/Legal/PolitiqueConfidentialite';
 import NotFound from '../pages/NotFound/NotFound';
@@ -24,6 +25,7 @@ function App() {
 
   if (page === 'home') return <HomePage />;
   if (page === 'about') return <AboutPage />;
+  if (page === 'hotelsMakkah') return <HotelsMakkahPage />;
   if (page === 'legal') return <MentionsLegales />;
   if (page === 'privacy') return <PolitiqueConfidentialite />;
   return <NotFound />;
