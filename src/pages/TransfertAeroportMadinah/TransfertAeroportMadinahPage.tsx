@@ -15,6 +15,7 @@ function TransfertAeroportMadinahPage() {
   const homeHref = pathFor('home');
   const transfertHref = pathFor('transfertAeroportMadinah');
   const hotelsMadinahHref = pathFor('hotelsMadinah');
+  const chauffeurHref = pathFor('chauffeurPriveMakkahMadinah');
   const quoteHref = `${homeHref}#devis`;
 
   return (
@@ -98,6 +99,10 @@ function TransfertAeroportMadinahPage() {
         eyebrow={page.reservationSection.eyebrow}
         title={page.reservationSection.title}
         paragraphs={page.reservationSection.paragraphs}
+        discoverLink={{
+          label: page.reservationSection.chauffeurLinkLabel,
+          href: chauffeurHref,
+        }}
       />
       <SeoSectionSteps
         id="fonctionnement-transfert-madinah"

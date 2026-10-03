@@ -36,7 +36,7 @@ const fr: Translations = {
     servicesMenu: [
       'Transfert Jeddah \u2013 Makkah',
       'Transfert aéroport Madinah',
-      'Chauffeurs & VTC',
+      'Chauffeur privé Makkah & Madinah',
       'Visites & accompagnement',
     ],
     hotelsMenuAria: 'Hôtels',
@@ -157,7 +157,7 @@ const fr: Translations = {
       {
         title: 'Chauffeurs & VTC',
         description:
-          'Des déplacements confortables, avec chauffeur disponible 7j/7 sur place.',
+          'Des déplacements organisés à Makkah et Madinah selon votre programme et vos besoins.',
       },
       {
         title: 'Visites & accompagnement',
@@ -171,7 +171,7 @@ const fr: Translations = {
         'Découvrir le transfert Jeddah \u2013 Makkah',
         'Découvrir le transfert à Madinah',
       ],
-      [],
+      ['Découvrir notre service chauffeur'],
       [],
     ],
   },
@@ -1095,6 +1095,7 @@ const fr: Translations = {
         "R\u00e9server votre transport avant votre arriv\u00e9e permet de pr\u00e9parer votre trajet dans le cadre global de votre s\u00e9jour et d\u2019\u00e9viter de devoir rechercher une solution une fois sur place.",
         "Haramain Prestige centralise votre demande et peut int\u00e9grer le transfert aux autres prestations de votre s\u00e9jour, notamment votre h\u00e9bergement \u00e0 Makkah lorsque vous nous confiez \u00e9galement cette r\u00e9servation.",
       ],
+      chauffeurLinkLabel: 'D\u00e9couvrir notre service chauffeur \u00e0 Makkah & Madinah',
     },
     makkahSection: {
       eyebrow: 'VOTRE S\u00c9JOUR \u00c0 MAKKAH',
@@ -1228,6 +1229,7 @@ const fr: Translations = {
         "Pr\u00e9parer votre transfert \u00e0 l\u2019avance permet d\u2019int\u00e9grer votre arriv\u00e9e \u00e0 Madinah dans l\u2019organisation g\u00e9n\u00e9rale de votre s\u00e9jour et d\u2019\u00e9viter de rechercher une solution au dernier moment.",
         "Haramain Prestige peut centraliser votre demande de transfert avec les autres prestations de votre s\u00e9jour lorsque vous nous confiez \u00e9galement votre h\u00e9bergement ou d\u2019autres d\u00e9placements.",
       ],
+      chauffeurLinkLabel: 'D\u00e9couvrir notre service chauffeur \u00e0 Makkah & Madinah',
     },
     fonctionnementSection: {
       eyebrow: 'COMMENT \u00c7A MARCHE\u00a0?',
@@ -1286,6 +1288,143 @@ const fr: Translations = {
     },
   },
 
+  chauffeurPriveMakkahMadinahPage: {
+    backHome: "Retour \u00e0 l\u2019accueil",
+    hero: {
+      eyebrow: 'SERVICE DE TRANSPORT',
+      title: 'Chauffeur priv\u00e9 \u00e0 Makkah & Madinah',
+      intro:
+        'Organisez vos d\u00e9placements locaux \u00e0 Makkah et Madinah avec un service de chauffeur adapt\u00e9 \u00e0 votre programme de s\u00e9jour.',
+      ctaPrimary: 'Faire une demande',
+      ctaSecondary: 'Voir comment \u00e7a marche',
+      imageAlt:
+        'Service de chauffeur priv\u00e9 pour vos d\u00e9placements \u00e0 Makkah et Madinah',
+    },
+    trajetPrincipalSection: {
+      eyebrow: 'D\u00c9PLACEMENTS SUR MESURE',
+      title: 'Vos d\u00e9placements \u00e0 Makkah et Madinah avec chauffeur',
+      paragraphs: [
+        "Haramain Prestige vous propose une solution de transport avec chauffeur pour vos d\u00e9placements \u00e0 Makkah et \u00e0 Madinah, selon votre programme de s\u00e9jour. Que vous souhaitiez vous rendre entre deux sites spirituels, rejoindre votre h\u00f4tel ou organiser un trajet sp\u00e9cifique, nous \u00e9tudions votre demande et vous transmettons une proposition adapt\u00e9e.",
+        "Ce service s\u2019adresse aux p\u00e8lerins et aux voyageurs qui souhaitent organiser leurs transports locaux \u00e0 l\u2019avance, sans avoir \u00e0 g\u00e9rer cela sur place. Votre confort et votre s\u00e9r\u00e9nit\u00e9 pendant votre s\u00e9jour sont au c\u0153ur de notre d\u00e9marche.",
+      ],
+    },
+    criteresSection: {
+      eyebrow: 'NOTRE APPROCHE',
+      title: 'Comment nous s\u00e9lectionnons les v\u00e9hicules et chauffeurs',
+      paragraphs: [
+        "Chaque prestataire retenu par Haramain Prestige est \u00e9valu\u00e9 selon des crit\u00e8res pr\u00e9cis\u00a0: v\u00e9hicule en bon \u00e9tat, chauffeur comp\u00e9tent et connaissant les lieux saints, et capacit\u00e9 \u00e0 honorer les horaires convenus.",
+      ],
+      criteriaLabel: 'NOS CRIT\u00c8RES',
+      criteria: [
+        'V\u00e9hicule adapt\u00e9 au nombre de voyageurs',
+        'Chauffeur connaissant les lieux et les acc\u00e8s',
+        'Prise en charge \u00e0 l\u2019horaire convenu',
+        'Communication pr\u00e9alable sur le point de rendez-vous',
+        'Validation de votre programme avant confirmation',
+      ],
+    },
+    makkahSection: {
+      eyebrow: 'D\u00c9PLACEMENTS \u00c0 MAKKAH',
+      title: 'Service de chauffeur pour vos d\u00e9placements \u00e0 Makkah',
+      paragraphs: [
+        "Makkah est une ville sacr\u00e9e dont les acc\u00e8s et les quartiers pr\u00e9sentent des sp\u00e9cificit\u00e9s importantes. Un chauffeur qui conna\u00eet les zones autoris\u00e9es, les routes d\u2019acc\u00e8s au Masjid al-Haram et la configuration de la ville est un atout pour votre s\u00e9jour.",
+        "Nous pouvons organiser vos d\u00e9placements locaux depuis votre h\u00f4tel vers diff\u00e9rents sites, selon votre planning. Transmettez-nous vos besoins \u00e0 l\u2019avance afin que la proposition corresponde \u00e0 votre s\u00e9jour.",
+      ],
+      makkahLinkLabel: 'Voir nos h\u00f4tels \u00e0 Makkah',
+    },
+    madinahSection: {
+      eyebrow: 'D\u00c9PLACEMENTS \u00c0 MADINAH',
+      title: 'Service de chauffeur pour vos d\u00e9placements \u00e0 Madinah',
+      paragraphs: [
+        "Madinah accueille des millions de visiteurs qui souhaitent se recueillir au Masjid an-Nabawi et d\u00e9couvrir les lieux importants de la ville. Disposer d\u2019un chauffeur sur place permet d\u2019organiser ces visites selon votre programme sans d\u00e9pendre des transports publics.",
+        "Que vous s\u00e9journiez pr\u00e8s du Masjid an-Nabawi ou dans un autre quartier, nous \u00e9tudions votre demande pour vous proposer une organisation adapt\u00e9e \u00e0 vos d\u00e9placements \u00e0 Madinah.",
+      ],
+      madinahLinkLabel: 'Voir nos h\u00f4tels \u00e0 Madinah',
+    },
+    entreVillesSection: {
+      eyebrow: 'MAKKAH \u2194 MADINAH',
+      title: 'D\u00e9placements entre Makkah et Madinah',
+      paragraphs: [
+        "Le trajet entre Makkah et Madinah est une \u00e9tape cl\u00e9 pour de nombreux p\u00e8lerins. Il peut s\u2019effectuer par diff\u00e9rents moyens, selon votre situation et vos pr\u00e9f\u00e9rences. Haramain Prestige peut \u00e9tudier cette option dans votre demande globale.",
+        "Si vous pr\u00e9voyez un s\u00e9jour dans les deux villes, indiquez-le lors de votre demande. Nous pourrons ainsi prendre en compte l\u2019ensemble de vos besoins de transport et vous proposer une organisation coh\u00e9rente.",
+      ],
+    },
+    chauffeurVsTransfertSection: {
+      eyebrow: 'COMPRENDRE NOS SERVICES',
+      title: 'Chauffeur priv\u00e9 ou transfert\u00a0: quelles diff\u00e9rences\u00a0?',
+      paragraphs: [
+        "Le transfert a\u00e9roport est un trajet ponctuel entre un a\u00e9roport et votre h\u00f4tel. Le service chauffeur couvre des d\u00e9placements plus larges pendant votre s\u00e9jour\u00a0: visites, trajets entre villes, courses diverses selon votre programme.",
+        "Ces deux services sont compl\u00e9mentaires et peuvent \u00eatre inclus dans votre demande globale chez Haramain Prestige. Consultez nos pages d\u00e9di\u00e9es aux transferts pour en savoir plus.",
+      ],
+      jeddahLinkLabel: 'Transfert a\u00e9roport Jeddah \u2013 Makkah',
+      madinahTransfertLinkLabel: 'Transfert a\u00e9roport Madinah',
+    },
+    anticipationSection: {
+      eyebrow: 'R\u00c9SERVATION \u00c0 L\u2019AVANCE',
+      title: 'Pourquoi organiser vos d\u00e9placements avant votre arriv\u00e9e\u00a0?',
+      paragraphs: [
+        "Organiser vos transports \u00e0 l\u2019avance vous permet de pr\u00e9parer votre s\u00e9jour sereinement et d\u2019\u00e9viter les impr\u00e9vus sur place, notamment pendant les p\u00e9riodes de forte affluence comme le Hajj ou le Ramadan.",
+        "En nous transmettant votre programme et vos besoins avant votre d\u00e9part, nous pouvons \u00e9tablir une proposition adapt\u00e9e et la valider avec vous dans les meilleures conditions.",
+      ],
+    },
+    fonctionnementSection: {
+      eyebrow: 'COMMENT \u00c7A MARCHE\u00a0?',
+      title: 'Comment r\u00e9server votre service de chauffeur\u00a0?',
+      paragraphs: [
+        "Pour demander un service de chauffeur avec Haramain Prestige, il vous suffit de nous transmettre votre programme et vos besoins. Nous \u00e9tudions votre demande et vous proposons une organisation adapt\u00e9e.",
+      ],
+      steps: [
+        "Transmettez votre demande via le formulaire ou WhatsApp avec vos dates, villes et besoins",
+        "Nous \u00e9tudions votre programme et vous contactons pour pr\u00e9ciser les d\u00e9tails",
+        "Nous vous soumettons une proposition adapt\u00e9e \u00e0 votre s\u00e9jour",
+        "Vous confirmez et nous finalisons l\u2019organisation selon votre programme",
+      ],
+    },
+    faq: {
+      title: 'Questions fr\u00e9quentes sur notre service chauffeur',
+      items: [
+        {
+          question: 'Le service chauffeur est-il disponible \u00e0 Makkah et Madinah\u00a0?',
+          answer:
+            "Oui, Haramain Prestige peut organiser des d\u00e9placements avec chauffeur dans les deux villes. Transmettez-nous votre programme et vos besoins pour que nous puissions \u00e9tudier votre demande.",
+        },
+        {
+          question: 'Puis-je r\u00e9server un chauffeur juste pour une journ\u00e9e\u00a0?',
+          answer:
+            "Nous \u00e9tudions chaque demande individuellement. Selon votre programme et vos besoins, nous vous proposerons une organisation adapt\u00e9e. Transmettez-nous les d\u00e9tails de votre s\u00e9jour pour recevoir une proposition.",
+        },
+        {
+          question: 'Puis-je combiner chauffeur et h\u00f4tel dans une seule demande\u00a0?',
+          answer:
+            "Oui, c\u2019est m\u00eame recommand\u00e9. En confiant l\u2019ensemble de votre s\u00e9jour \u00e0 Haramain Prestige, nous pouvons coordonner votre h\u00e9bergement et vos transports selon votre programme global.",
+        },
+        {
+          question: 'Comment puis-je demander un service de chauffeur\u00a0?',
+          answer:
+            "Utilisez notre formulaire de demande ou contactez-nous directement via WhatsApp. Pr\u00e9cisez vos dates, villes concern\u00e9es, type de d\u00e9placements et nombre de personnes.",
+        },
+        {
+          question: 'Le chauffeur parlera-t-il fran\u00e7ais\u00a0?',
+          answer:
+            "Nous ne pouvons pas garantir un chauffeur francophone dans tous les cas. Nous vous indiquerons les conditions de communication lors de la proposition.",
+        },
+        {
+          question: 'Quel est le d\u00e9lai pour soumettre une demande\u00a0?',
+          answer:
+            "Nous vous recommandons de soumettre votre demande le plus t\u00f4t possible avant votre d\u00e9part, afin d\u2019avoir le temps de valider ensemble les d\u00e9tails de l\u2019organisation.",
+        },
+      ],
+    },
+    ctaBlock: {
+      eyebrow: 'PR\u00cAT \u00c0 PARTIR\u00a0?',
+      title: 'Demandez votre service de chauffeur',
+      paragraph:
+        "Transmettez-nous votre programme et nous \u00e9tudions comment organiser vos d\u00e9placements \u00e0 Makkah et Madinah selon vos besoins.",
+      ctaPrimary: 'Faire une demande',
+      ctaSecondary: '\u00c9crire sur WhatsApp',
+    },
+  },
+
   meta: {
     home: {
       title: "Haramain Prestige – Réservation d'hôtels à Makkah & Madinah",
@@ -1335,6 +1474,11 @@ const fr: Translations = {
       title: 'Transfert a\u00e9roport Madinah \u2013 h\u00f4tel | Haramain Prestige',
       description:
         "Organisez votre transfert entre l'a\u00e9roport de Madinah et votre h\u00f4tel \u00e0 M\u00e9dine avec Haramain Prestige. Indiquez vos horaires et le nombre de voyageurs pour recevoir une proposition personnalis\u00e9e.",
+    },
+    chauffeurPriveMakkahMadinah: {
+      title: 'Chauffeur priv\u00e9 Makkah & Madinah | Haramain Prestige',
+      description:
+        "Organisez vos d\u00e9placements locaux \u00e0 Makkah et Madinah avec un service de chauffeur. Haramain Prestige \u00e9tudie votre demande et vous propose une organisation adapt\u00e9e \u00e0 votre programme.",
     },
   },
 };

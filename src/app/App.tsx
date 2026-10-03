@@ -6,6 +6,7 @@ import HotelsMadinahPage from '../pages/HotelsMadinah/HotelsMadinahPage';
 import ChambreVueKaabaPage from '../pages/ChambreVueKaaba/ChambreVueKaabaPage';
 import TransfertJeddahMakkahPage from '../pages/TransfertJeddahMakkah/TransfertJeddahMakkahPage';
 import TransfertAeroportMadinahPage from '../pages/TransfertAeroportMadinah/TransfertAeroportMadinahPage';
+import ChauffeurPriveMakkahMadinahPage from '../pages/ChauffeurPriveMakkahMadinah/ChauffeurPriveMakkahMadinahPage';
 import MentionsLegales from '../pages/Legal/MentionsLegales';
 import PolitiqueConfidentialite from '../pages/Legal/PolitiqueConfidentialite';
 import NotFound from '../pages/NotFound/NotFound';
@@ -41,6 +42,7 @@ function App() {
   if (page === 'chambreVueKaaba') return <ChambreVueKaabaPage />;
   if (page === 'transfertJeddahMakkah') return <TransfertJeddahMakkahPage />;
   if (page === 'transfertAeroportMadinah') return <TransfertAeroportMadinahPage />;
+  if (page === 'chauffeurPriveMakkahMadinah') return <ChauffeurPriveMakkahMadinahPage />;
   if (page === 'legal') return <MentionsLegales />;
   if (page === 'privacy') return <PolitiqueConfidentialite />;
   return <NotFound />;

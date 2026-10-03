@@ -85,7 +85,7 @@ function Header() {
   const servicesMenu = [
     { label: t.header.servicesMenu[0], href: pathFor('transfertJeddahMakkah') },
     { label: t.header.servicesMenu[1], href: pathFor('transfertAeroportMadinah') },
-    { label: t.header.servicesMenu[2], href: `${homeHref}#services` },
+    { label: t.header.servicesMenu[2], href: pathFor('chauffeurPriveMakkahMadinah') },
     { label: t.header.servicesMenu[3], href: `${homeHref}#services` },
   ];
 
@@ -552,7 +552,7 @@ function Header() {
 // gardé local ici pour ne pas coupler le Header aux slugs FR.
 function guessPageFromPath(
   pathname: string,
-): 'home' | 'about' | 'legal' | 'privacy' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' {
+): 'home' | 'about' | 'legal' | 'privacy' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' | 'chauffeurPriveMakkahMadinah' {
   const stripped = pathname.replace(/^\/ar-sa/, '').replace(/\/+$/, '') || '/';
   if (stripped === '/a-propos') return 'about';
   if (stripped === '/mentions-legales') return 'legal';
@@ -562,6 +562,7 @@ function guessPageFromPath(
   if (stripped === '/chambre-vue-kaaba') return 'chambreVueKaaba';
   if (stripped === '/transfert-aeroport-jeddah-makkah') return 'transfertJeddahMakkah';
   if (stripped === '/transfert-aeroport-madinah') return 'transfertAeroportMadinah';
+  if (stripped === '/chauffeur-prive-makkah-madinah') return 'chauffeurPriveMakkahMadinah';
   return 'home';
 }
 

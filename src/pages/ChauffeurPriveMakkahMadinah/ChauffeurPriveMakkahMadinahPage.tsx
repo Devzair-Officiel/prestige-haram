@@ -9,22 +9,26 @@ import heroImage from '../../assets/header-transfert-jeddah-makkah.webp';
 
 const SITE_ORIGIN = 'https://haramainprestige.com';
 
-function TransfertJeddahMakkahPage() {
+function ChauffeurPriveMakkahMadinahPage() {
   const { t, locale, pathFor } = useI18n();
-  const page = t.transfertJeddahMakkahPage;
+  const page = t.chauffeurPriveMakkahMadinahPage;
   const homeHref = pathFor('home');
-  const transfertHref = pathFor('transfertJeddahMakkah');
-  const hotelsMakkahHref = pathFor('hotelsMakkah');
   const chauffeurHref = pathFor('chauffeurPriveMakkahMadinah');
+  const hotelsMakkahHref = pathFor('hotelsMakkah');
+  const hotelsMadinahHref = pathFor('hotelsMadinah');
+  const transfertJeddahHref = pathFor('transfertJeddahMakkah');
+  const transfertMadinahHref = pathFor('transfertAeroportMadinah');
   const quoteHref = `${homeHref}#devis`;
 
   return (
     <SeoLandingPage
-      page="transfertJeddahMakkah"
-      metaTitle={t.meta.transfertJeddahMakkah.title}
-      metaDescription={t.meta.transfertJeddahMakkah.description}
+      page="chauffeurPriveMakkahMadinah"
+      metaTitle={t.meta.chauffeurPriveMakkahMadinah.title}
+      metaDescription={t.meta.chauffeurPriveMakkahMadinah.description}
       breadcrumbLabel={
-        locale === 'fr' ? 'Transfert Jeddah \u2013 Makkah' : 'التوصيل جدة \u2013 مكة'
+        locale === 'fr'
+          ? 'Chauffeur privé Makkah & Madinah'
+          : 'سائق خاص في مكة والمدينة'
       }
       hero={{
         backHomeLabel: page.backHome,
@@ -35,7 +39,7 @@ function TransfertJeddahMakkahPage() {
         ctaPrimary: { label: page.hero.ctaPrimary, href: quoteHref },
         ctaSecondary: {
           label: page.hero.ctaSecondary,
-          href: '#fonctionnement-transfert',
+          href: '#fonctionnement-chauffeur',
         },
         image: { src: heroImage, alt: page.hero.imageAlt },
       }}
@@ -58,16 +62,16 @@ function TransfertJeddahMakkahPage() {
         {
           name:
             locale === 'fr'
-              ? 'Transfert Jeddah \u2013 Makkah'
-              : 'التوصيل جدة \u2013 مكة',
-          url: SITE_ORIGIN + transfertHref,
+              ? 'Chauffeur privé Makkah & Madinah'
+              : 'سائق خاص في مكة والمدينة',
+          url: SITE_ORIGIN + chauffeurHref,
         },
       ]}
     >
       <SeoSectionText
-        eyebrow={page.trajetSection.eyebrow}
-        title={page.trajetSection.title}
-        paragraphs={page.trajetSection.paragraphs}
+        eyebrow={page.trajetPrincipalSection.eyebrow}
+        title={page.trajetPrincipalSection.title}
+        paragraphs={page.trajetPrincipalSection.paragraphs}
       />
       <SeoSectionCriteria
         eyebrow={page.criteresSection.eyebrow}
@@ -75,25 +79,6 @@ function TransfertJeddahMakkahPage() {
         paragraphs={page.criteresSection.paragraphs}
         criteriaLabel={page.criteresSection.criteriaLabel}
         criteria={page.criteresSection.criteria}
-      />
-      <SeoSectionText
-        eyebrow={page.arriveeSection.eyebrow}
-        title={page.arriveeSection.title}
-        paragraphs={page.arriveeSection.paragraphs}
-      />
-      <SeoSectionText
-        eyebrow={page.retourSection.eyebrow}
-        title={page.retourSection.title}
-        paragraphs={page.retourSection.paragraphs}
-      />
-      <SeoSectionText
-        eyebrow={page.reservationSection.eyebrow}
-        title={page.reservationSection.title}
-        paragraphs={page.reservationSection.paragraphs}
-        discoverLink={{
-          label: page.reservationSection.chauffeurLinkLabel,
-          href: chauffeurHref,
-        }}
       />
       <SeoSectionText
         eyebrow={page.makkahSection.eyebrow}
@@ -104,8 +89,42 @@ function TransfertJeddahMakkahPage() {
           href: hotelsMakkahHref,
         }}
       />
+      <SeoSectionText
+        eyebrow={page.madinahSection.eyebrow}
+        title={page.madinahSection.title}
+        paragraphs={page.madinahSection.paragraphs}
+        discoverLink={{
+          label: page.madinahSection.madinahLinkLabel,
+          href: hotelsMadinahHref,
+        }}
+      />
+      <SeoSectionText
+        eyebrow={page.entreVillesSection.eyebrow}
+        title={page.entreVillesSection.title}
+        paragraphs={page.entreVillesSection.paragraphs}
+      />
+      <SeoSectionText
+        eyebrow={page.chauffeurVsTransfertSection.eyebrow}
+        title={page.chauffeurVsTransfertSection.title}
+        paragraphs={page.chauffeurVsTransfertSection.paragraphs}
+        discoverLinks={[
+          {
+            label: page.chauffeurVsTransfertSection.jeddahLinkLabel,
+            href: transfertJeddahHref,
+          },
+          {
+            label: page.chauffeurVsTransfertSection.madinahTransfertLinkLabel,
+            href: transfertMadinahHref,
+          },
+        ]}
+      />
+      <SeoSectionText
+        eyebrow={page.anticipationSection.eyebrow}
+        title={page.anticipationSection.title}
+        paragraphs={page.anticipationSection.paragraphs}
+      />
       <SeoSectionSteps
-        id="fonctionnement-transfert"
+        id="fonctionnement-chauffeur"
         eyebrow={page.fonctionnementSection.eyebrow}
         title={page.fonctionnementSection.title}
         paragraphs={page.fonctionnementSection.paragraphs}
@@ -115,4 +134,4 @@ function TransfertJeddahMakkahPage() {
   );
 }
 
-export default TransfertJeddahMakkahPage;
+export default ChauffeurPriveMakkahMadinahPage;

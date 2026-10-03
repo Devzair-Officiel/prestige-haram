@@ -312,11 +312,56 @@ describe('detectRoute — transfertAeroportMadinah', () => {
   });
 });
 
+describe('localizedPath — chauffeurPriveMakkahMadinah', () => {
+  it('renvoie /chauffeur-prive-makkah-madinah en FR', () => {
+    expect(localizedPath('chauffeurPriveMakkahMadinah', 'fr')).toBe(
+      '/chauffeur-prive-makkah-madinah',
+    );
+  });
+
+  it('renvoie /ar-sa/chauffeur-prive-makkah-madinah en AR', () => {
+    expect(localizedPath('chauffeurPriveMakkahMadinah', 'ar-SA')).toBe(
+      '/ar-sa/chauffeur-prive-makkah-madinah',
+    );
+  });
+});
+
+describe('detectRoute — chauffeurPriveMakkahMadinah', () => {
+  it('détecte FR + chauffeurPriveMakkahMadinah', () => {
+    expect(detectRoute('/chauffeur-prive-makkah-madinah')).toEqual({
+      locale: 'fr',
+      page: 'chauffeurPriveMakkahMadinah',
+    });
+  });
+
+  it('détecte AR + chauffeurPriveMakkahMadinah', () => {
+    expect(detectRoute('/ar-sa/chauffeur-prive-makkah-madinah')).toEqual({
+      locale: 'ar-SA',
+      page: 'chauffeurPriveMakkahMadinah',
+    });
+  });
+
+  it('tolère le trailing slash FR', () => {
+    expect(detectRoute('/chauffeur-prive-makkah-madinah/')).toEqual({
+      locale: 'fr',
+      page: 'chauffeurPriveMakkahMadinah',
+    });
+  });
+
+  it('tolère le trailing slash AR', () => {
+    expect(detectRoute('/ar-sa/chauffeur-prive-makkah-madinah/')).toEqual({
+      locale: 'ar-SA',
+      page: 'chauffeurPriveMakkahMadinah',
+    });
+  });
+});
+
 describe('équivalence localizedPath ↔ detectRoute', () => {
   const pages: PageKey[] = [
     'home', 'about', 'legal', 'privacy',
     'hotelsMakkah', 'hotelsMadinah', 'chambreVueKaaba',
     'transfertJeddahMakkah', 'transfertAeroportMadinah',
+    'chauffeurPriveMakkahMadinah',
   ];
 
   it('round-trip FR : detectRoute(localizedPath(p, "fr")) → { fr, p }', () => {

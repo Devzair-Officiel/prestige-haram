@@ -21,6 +21,7 @@ const PATHS: Record<PageKey, string> = {
   chambreVueKaaba: '/chambre-vue-kaaba',
   transfertJeddahMakkah: '/transfert-aeroport-jeddah-makkah',
   transfertAeroportMadinah: '/transfert-aeroport-madinah',
+  chauffeurPriveMakkahMadinah: '/chauffeur-prive-makkah-madinah',
 };
 
 /** URL canonique locale-scoped. `home` en FR = "/", en AR = "/ar-sa/". */
@@ -60,6 +61,7 @@ function matchPage(path: string): PageKey | null {
   if (path === '/chambre-vue-kaaba') return 'chambreVueKaaba';
   if (path === '/transfert-aeroport-jeddah-makkah') return 'transfertJeddahMakkah';
   if (path === '/transfert-aeroport-madinah') return 'transfertAeroportMadinah';
+  if (path === '/chauffeur-prive-makkah-madinah') return 'chauffeurPriveMakkahMadinah';
   return null;
 }
 

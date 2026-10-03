@@ -52,7 +52,7 @@ function Services() {
   const CARD_HREFS: string[][] = [
     [],
     [pathFor('transfertJeddahMakkah'), pathFor('transfertAeroportMadinah')],
-    [],
+    [pathFor('chauffeurPriveMakkahMadinah')],
     [],
   ];
 

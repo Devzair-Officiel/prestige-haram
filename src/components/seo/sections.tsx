@@ -3,19 +3,38 @@ import { SectionEyebrow, SectionH2, BodyParagraph } from './primitives';
 import { HotelGridCard } from './HotelGridCard';
 import { handleSpaNav } from '../../i18n/utils';
 
+const DiscoverArrow = () => (
+  <svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true">
+    <path
+      d="M3 8h9M9 4l4 4-4 4"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 export function SeoSectionText({
   id,
   eyebrow,
   title,
   paragraphs,
   discoverLink,
+  discoverLinks,
 }: {
   id?: string;
   eyebrow?: string;
   title: string;
   paragraphs: string[];
   discoverLink?: { label: string; href: string };
+  discoverLinks?: { label: string; href: string }[];
 }) {
+  const links = [
+    ...(discoverLink ? [discoverLink] : []),
+    ...(discoverLinks ?? []),
+  ];
   return (
     <SeoSection id={id}>
       {eyebrow && <SectionEyebrow text={eyebrow} />}
@@ -23,10 +42,11 @@ export function SeoSectionText({
       {paragraphs.map((p, i) => (
         <BodyParagraph key={i}>{p}</BodyParagraph>
       ))}
-      {discoverLink && (
+      {links.map((link) => (
         <a
-          href={discoverLink.href}
-          onClick={(e) => handleSpaNav(e, discoverLink.href)}
+          key={link.href}
+          href={link.href}
+          onClick={(e) => handleSpaNav(e, link.href)}
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -38,19 +58,10 @@ export function SeoSectionText({
             textDecoration: 'none',
           }}
         >
-          {discoverLink.label}
-          <svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true">
-            <path
-              d="M3 8h9M9 4l4 4-4 4"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          {link.label}
+          <DiscoverArrow />
         </a>
-      )}
+      ))}
     </SeoSection>
   );
 }

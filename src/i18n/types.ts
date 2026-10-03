@@ -7,7 +7,7 @@ export type Locale = 'fr' | 'ar-SA';
 /** Direction textuelle induite par la locale. */
 export type Direction = 'ltr' | 'rtl';
 
-export type PageKey = 'home' | 'about' | 'legal' | 'privacy' | 'notFound' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah';
+export type PageKey = 'home' | 'about' | 'legal' | 'privacy' | 'notFound' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' | 'chauffeurPriveMakkahMadinah';
 
 /** Une entrée FAQ, utilisée pour le rendu ET le JSON-LD FAQPage. */
 export type FaqItem = {
@@ -504,6 +504,7 @@ export interface Translations {
       eyebrow: string;
       title: string;
       paragraphs: string[];
+      chauffeurLinkLabel: string;
     };
     makkahSection: {
       eyebrow: string;
@@ -569,6 +570,77 @@ export interface Translations {
       madinahLinkLabel: string;
     };
     reservationSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      chauffeurLinkLabel: string;
+    };
+    fonctionnementSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      steps: string[];
+    };
+    faq: {
+      title: string;
+      items: FaqItem[];
+    };
+    ctaBlock: {
+      eyebrow: string;
+      title: string;
+      paragraph: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+    };
+  };
+
+  chauffeurPriveMakkahMadinahPage: {
+    backHome: string;
+    hero: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+      imageAlt: string;
+    };
+    trajetPrincipalSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    criteresSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      criteriaLabel: string;
+      criteria: string[];
+    };
+    makkahSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      makkahLinkLabel: string;
+    };
+    madinahSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      madinahLinkLabel: string;
+    };
+    entreVillesSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    chauffeurVsTransfertSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      jeddahLinkLabel: string;
+      madinahTransfertLinkLabel: string;
+    };
+    anticipationSection: {
       eyebrow: string;
       title: string;
       paragraphs: string[];
