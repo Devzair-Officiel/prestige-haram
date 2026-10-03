@@ -34,8 +34,9 @@ const fr: Translations = {
       'Chambres avec vue Kaaba',
     ],
     servicesMenu: [
-      'Transferts aéroport',
-      'Chauffeurs & déplacements',
+      'Transfert Jeddah \u2013 Makkah',
+      'Transfert aéroport Madinah',
+      'Chauffeurs & VTC',
       'Visites & accompagnement',
     ],
     hotelsMenuAria: 'Hôtels',

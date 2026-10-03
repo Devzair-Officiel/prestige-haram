@@ -60,11 +60,12 @@ function Header() {
       index === 2 ? chambreVueKaabaHref :
       `${homeHref}#hotels`,
   }));
-  const transfertHref = pathFor('transfertJeddahMakkah');
-  const servicesMenu = t.header.servicesMenu.map((label, index) => ({
-    label,
-    href: index === 0 ? transfertHref : `${homeHref}#services`,
-  }));
+  const servicesMenu = [
+    { label: t.header.servicesMenu[0], href: pathFor('transfertJeddahMakkah') },
+    { label: t.header.servicesMenu[1], href: pathFor('transfertAeroportMadinah') },
+    { label: t.header.servicesMenu[2], href: `${homeHref}#services` },
+    { label: t.header.servicesMenu[3], href: `${homeHref}#services` },
+  ];
   const simpleLinks = [
     { label: t.header.navAbout, href: aboutHref },
     { label: t.header.navTestimonials, href: `${homeHref}#temoignages` },
