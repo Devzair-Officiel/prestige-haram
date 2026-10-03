@@ -48,6 +48,9 @@ function Header() {
   const [pathname, setPathname] = useState(
     typeof window !== 'undefined' ? window.location.pathname : '/',
   );
+  const [scrolled, setScrolled] = useState(
+    typeof window !== 'undefined' ? window.scrollY > 20 : false,
+  );
 
   useEffect(() => {
     const sync = () => setPathname(window.location.pathname);
@@ -57,6 +60,12 @@ function Header() {
       window.removeEventListener('popstate', sync);
       window.removeEventListener('haramain:navigate', sync);
     };
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const homeHref = pathFor('home');
@@ -186,10 +195,10 @@ function Header() {
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: 16,
-        background: 'rgba(20,17,14,0.82)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        borderBottom: '1px solid rgba(245,239,230,0.08)',
+        background: scrolled ? 'rgba(20,17,14,0.85)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(18px)' : 'none',
+        WebkitBackdropFilter: scrolled ? 'blur(18px)' : 'none',
+        borderBottom: `1px solid ${scrolled ? 'rgba(245,239,230,0.08)' : 'transparent'}`,
       }}
     >
       <a
