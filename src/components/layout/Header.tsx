@@ -45,6 +45,19 @@ function Header() {
   const { t, locale, otherLocale, pathFor, altPathFor } = useI18n();
   const [menu, setMenu] = useState<MenuKey>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [pathname, setPathname] = useState(
+    typeof window !== 'undefined' ? window.location.pathname : '/',
+  );
+
+  useEffect(() => {
+    const sync = () => setPathname(window.location.pathname);
+    window.addEventListener('popstate', sync);
+    window.addEventListener('haramain:navigate', sync);
+    return () => {
+      window.removeEventListener('popstate', sync);
+      window.removeEventListener('haramain:navigate', sync);
+    };
+  }, []);
 
   const homeHref = pathFor('home');
   const aboutHref = pathFor('about');
@@ -66,6 +79,21 @@ function Header() {
     { label: t.header.servicesMenu[2], href: `${homeHref}#services` },
     { label: t.header.servicesMenu[3], href: `${homeHref}#services` },
   ];
+
+  // true lorsque le chemin de href correspond au pathname courant.
+  // Les liens de type /{root}#section (témoignages, faq…) sont exclus :
+  // ils partagent tous le même chemin racine et ne désignent pas une page unique.
+  const isActivePath = (href: string): boolean => {
+    if (href.startsWith('#') || href.startsWith('http')) return false;
+    const [path] = href.split('#');
+    const resolved = path || homeHref;
+    if (resolved === homeHref && href !== homeHref) return false;
+    return pathname === resolved;
+  };
+
+  const hotelsActive = hotelsMenu.some((item) => isActivePath(item.href));
+  const servicesActive = servicesMenu.some((item) => isActivePath(item.href));
+
   const simpleLinks = [
     { label: t.header.navAbout, href: aboutHref },
     { label: t.header.navTestimonials, href: `${homeHref}#temoignages` },
@@ -229,8 +257,8 @@ function Header() {
         <a
           href={homeHref}
           onClick={(e) => handleInternalNav(e, homeHref)}
-          className="nav-link"
-          style={{ ...linkBase, color: '#F5EFE6' }}
+          className={`nav-link${isActivePath(homeHref) ? ' nav-link--active' : ''}`}
+          style={linkBase}
         >
           {t.header.navHome}
         </a>
@@ -244,7 +272,7 @@ function Header() {
         >
           <a
             href={`${homeHref}#hotels`}
-            className="nav-link"
+            className={`nav-link${hotelsActive ? ' nav-link--active' : ''}`}
             aria-haspopup="menu"
             aria-expanded={menu === 'hotels'}
             style={{
@@ -277,7 +305,7 @@ function Header() {
                   key={item.label}
                   href={item.href}
                   role="menuitem"
-                  className="nav-dropdown-item"
+                  className={`nav-dropdown-item${isActivePath(item.href) ? ' nav-dropdown-item--active' : ''}`}
                   onClick={(e) => handleInternalNav(e, item.href)}
                   style={dropdownItemStyle}
                 >
@@ -297,7 +325,7 @@ function Header() {
         >
           <a
             href={`${homeHref}#services`}
-            className="nav-link"
+            className={`nav-link${servicesActive ? ' nav-link--active' : ''}`}
             aria-haspopup="menu"
             aria-expanded={menu === 'services'}
             style={{
@@ -330,7 +358,8 @@ function Header() {
                   key={item.label}
                   href={item.href}
                   role="menuitem"
-                  className="nav-dropdown-item"
+                  className={`nav-dropdown-item${isActivePath(item.href) ? ' nav-dropdown-item--active' : ''}`}
+                  onClick={(e) => handleInternalNav(e, item.href)}
                   style={dropdownItemStyle}
                 >
                   {item.label}
@@ -345,7 +374,7 @@ function Header() {
             key={link.label}
             href={link.href}
             onClick={(e) => handleInternalNav(e, link.href)}
-            className="nav-link"
+            className={`nav-link${isActivePath(link.href) ? ' nav-link--active' : ''}`}
             style={linkBase}
           >
             {link.label}
@@ -458,7 +487,7 @@ function Header() {
           <a
             key={item.label}
             href={item.href}
-            className="mobile-nav-link"
+            className={`mobile-nav-link${isActivePath(item.href) ? ' mobile-nav-link--active' : ''}`}
             onClick={(e) => handleInternalNav(e, item.href)}
             style={{
               padding: '13px 6px',
