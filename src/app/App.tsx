@@ -11,6 +11,7 @@ import VisitesMadinahPage from '../pages/VisitesMadinah/VisitesMadinahPage';
 import VisitesMakkahPage from '../pages/VisitesMakkah/VisitesMakkahPage';
 import ServicesPage from '../pages/Services/ServicesPage';
 import HotelsPage from '../pages/Hotels/HotelsPage';
+import TestimonialsPage from '../pages/Testimonials/TestimonialsPage';
 import MentionsLegales from '../pages/Legal/MentionsLegales';
 import PolitiqueConfidentialite from '../pages/Legal/PolitiqueConfidentialite';
 import NotFound from '../pages/NotFound/NotFound';
@@ -51,6 +52,7 @@ function App() {
   if (page === 'visitesMakkah') return <VisitesMakkahPage />;
   if (page === 'services') return <ServicesPage />;
   if (page === 'hotels') return <HotelsPage />;
+  if (page === 'testimonials') return <TestimonialsPage />;
   if (page === 'legal') return <MentionsLegales />;
   if (page === 'privacy') return <PolitiqueConfidentialite />;
   return <NotFound />;

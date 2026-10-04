@@ -367,6 +367,7 @@ const fr: Translations = {
           "Réponse rapide, prix imbattables et équipe très professionnelle. Qu'Allah vous préserve.",
       },
     ],
+    discoverAll: 'Voir tous les témoignages',
   },
 
   faq: {
@@ -1511,6 +1512,11 @@ const fr: Translations = {
       description:
         'Découvrez l\'offre hôtelière Haramain Prestige à Makkah et Madinah. Indiquez vos dates, le nombre de voyageurs et vos critères pour recevoir une proposition adaptée à votre séjour.',
     },
+    testimonials: {
+      title: 'Témoignages — Haramain Prestige | Séjours à Makkah & Madinah',
+      description:
+        'Ils ont confié leur séjour à Makkah et Madinah à Haramain Prestige. Découvrez les retours de nos voyageurs.',
+    },
   },
 
   visitesMadinahPage: {
@@ -2007,6 +2013,34 @@ const fr: Translations = {
       paragraph:
         'Indiquez-nous vos dates, le nombre de voyageurs et vos critères d\'hébergement afin de recevoir une proposition correspondant à votre séjour.',
       ctaPrimary: 'Recevoir une proposition hôtel',
+      ctaSecondary: 'Écrire sur WhatsApp',
+    },
+  },
+
+  testimonialsPage: {
+    backHome: "Retour à l'accueil",
+    hero: {
+      eyebrow: 'TÉMOIGNAGES',
+      title: 'Ce que nos voyageurs disent de nous',
+      intro:
+        'Ils nous ont confié leur séjour à Makkah et Madinah. Voici ce qu\'ils en ont retenu.',
+      ctaPrimary: 'Recevoir une proposition',
+      imageAlt: 'Hôtel avec vue sur le Masjid al-Haram, Haramain Prestige',
+    },
+    introSection: {
+      eyebrow: 'ILS NOUS ONT FAIT CONFIANCE',
+      title: 'Des voyageurs qui nous recommandent',
+      paragraphs: [
+        'Chaque séjour est unique. Haramain Prestige accompagne des voyageurs depuis la France, la Belgique et d\'autres pays francophones dans l\'organisation de leur séjour à Makkah et Madinah.',
+        'Les témoignages présentés ici sont ceux de personnes ayant sollicité nos services pour leur hébergement, leurs transferts ou l\'organisation de leur voyage.',
+      ],
+    },
+    ctaBlock: {
+      eyebrow: 'VOTRE SÉJOUR',
+      title: 'Organiser votre voyage à Makkah ou Madinah',
+      paragraph:
+        'Transmettez-nous vos dates et vos besoins. Nous vous répondons avec une proposition adaptée à votre séjour.',
+      ctaPrimary: 'Demander une proposition',
       ctaSecondary: 'Écrire sur WhatsApp',
     },
   },

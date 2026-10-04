@@ -73,7 +73,7 @@ function Footer() {
     { label: t.footer.columns.navigation.items[2], href: pathFor('services') },
   ];
   const moreLinks = [
-    { label: t.footer.columns.more.items[0], href: `${homeHref}#temoignages` },
+    { label: t.footer.columns.more.items[0], href: pathFor('testimonials') },
     { label: t.footer.columns.more.items[1], href: `${homeHref}#faq` },
     { label: t.footer.columns.more.items[2], href: `${homeHref}#contact` },
   ];

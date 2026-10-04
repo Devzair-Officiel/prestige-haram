@@ -26,6 +26,7 @@ const PATHS: Record<PageKey, string> = {
   visitesMakkah: '/visites-makkah',
   services: '/services',
   hotels: '/hotels',
+  testimonials: '/temoignages',
 };
 
 /** URL canonique locale-scoped. `home` en FR = "/", en AR = "/ar-sa/". */
@@ -70,6 +71,7 @@ function matchPage(path: string): PageKey | null {
   if (path === '/visites-makkah') return 'visitesMakkah';
   if (path === '/services') return 'services';
   if (path === '/hotels') return 'hotels';
+  if (path === '/temoignages') return 'testimonials';
   return null;
 }
 

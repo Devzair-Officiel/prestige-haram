@@ -516,6 +516,46 @@ describe('detectRoute — hotels', () => {
   });
 });
 
+describe('localizedPath — testimonials', () => {
+  it('renvoie /temoignages en FR', () => {
+    expect(localizedPath('testimonials', 'fr')).toBe('/temoignages');
+  });
+
+  it('renvoie /ar-sa/temoignages en AR', () => {
+    expect(localizedPath('testimonials', 'ar-SA')).toBe('/ar-sa/temoignages');
+  });
+});
+
+describe('detectRoute — testimonials', () => {
+  it('détecte FR + testimonials pour /temoignages', () => {
+    expect(detectRoute('/temoignages')).toEqual({
+      locale: 'fr',
+      page: 'testimonials',
+    });
+  });
+
+  it('détecte AR + testimonials pour /ar-sa/temoignages', () => {
+    expect(detectRoute('/ar-sa/temoignages')).toEqual({
+      locale: 'ar-SA',
+      page: 'testimonials',
+    });
+  });
+
+  it('tolère le trailing slash FR', () => {
+    expect(detectRoute('/temoignages/')).toEqual({
+      locale: 'fr',
+      page: 'testimonials',
+    });
+  });
+
+  it('tolère le trailing slash AR', () => {
+    expect(detectRoute('/ar-sa/temoignages/')).toEqual({
+      locale: 'ar-SA',
+      page: 'testimonials',
+    });
+  });
+});
+
 describe('équivalence localizedPath ↔ detectRoute', () => {
   const pages: PageKey[] = [
     'home', 'about', 'legal', 'privacy',
@@ -523,7 +563,7 @@ describe('équivalence localizedPath ↔ detectRoute', () => {
     'transfertJeddahMakkah', 'transfertAeroportMadinah',
     'chauffeurPriveMakkahMadinah',
     'visitesMadinah', 'visitesMakkah',
-    'services', 'hotels',
+    'services', 'hotels', 'testimonials',
   ];
 
   it('round-trip FR : detectRoute(localizedPath(p, "fr")) → { fr, p }', () => {
