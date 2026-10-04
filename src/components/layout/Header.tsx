@@ -71,6 +71,7 @@ function Header() {
   const homeHref = pathFor('home');
   const aboutHref = pathFor('about');
   const testimonialsHref = pathFor('testimonials');
+  const contactHref = pathFor('contact');
 
   const hotelsHref = pathFor('hotels');
   const hotelsMakkahHref = pathFor('hotelsMakkah');
@@ -112,7 +113,7 @@ function Header() {
     { label: t.header.navAbout, href: aboutHref },
     { label: t.header.navTestimonials, href: testimonialsHref },
     { label: t.header.navFaq, href: `${homeHref}#faq` },
-    { label: t.header.navContact, href: `${homeHref}#contact` },
+    { label: t.header.navContact, href: contactHref },
   ];
   const mobileNav = [
     { label: t.header.navHome, href: homeHref },
@@ -121,7 +122,7 @@ function Header() {
     { label: t.header.navAbout, href: aboutHref },
     { label: t.header.navTestimonials, href: testimonialsHref },
     { label: t.header.navFaq, href: `${homeHref}#faq` },
-    { label: t.header.navContact, href: `${homeHref}#contact` },
+    { label: t.header.navContact, href: contactHref },
   ];
 
   useEffect(() => {
@@ -559,7 +560,7 @@ function Header() {
 // gardé local ici pour ne pas coupler le Header aux slugs FR.
 function guessPageFromPath(
   pathname: string,
-): 'home' | 'about' | 'legal' | 'privacy' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' | 'chauffeurPriveMakkahMadinah' | 'visitesMadinah' | 'visitesMakkah' | 'services' | 'hotels' | 'testimonials' {
+): 'home' | 'about' | 'legal' | 'privacy' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' | 'chauffeurPriveMakkahMadinah' | 'visitesMadinah' | 'visitesMakkah' | 'services' | 'hotels' | 'testimonials' | 'contact' {
   const stripped = pathname.replace(/^\/ar-sa/, '').replace(/\/+$/, '') || '/';
   if (stripped === '/a-propos') return 'about';
   if (stripped === '/mentions-legales') return 'legal';
@@ -575,6 +576,7 @@ function guessPageFromPath(
   if (stripped === '/services') return 'services';
   if (stripped === '/hotels') return 'hotels';
   if (stripped === '/temoignages') return 'testimonials';
+  if (stripped === '/contact') return 'contact';
   return 'home';
 }
 

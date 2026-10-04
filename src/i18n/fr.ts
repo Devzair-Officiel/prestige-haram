@@ -1517,6 +1517,11 @@ const fr: Translations = {
       description:
         'Ils ont confié leur séjour à Makkah et Madinah à Haramain Prestige. Découvrez les retours de nos voyageurs.',
     },
+    contact: {
+      title: 'Contact | Haramain Prestige',
+      description:
+        'Contactez Haramain Prestige pour votre séjour à Makkah et Madinah. Envoyez votre demande de devis ou échangez avec nous par WhatsApp ou par email.',
+    },
   },
 
   visitesMadinahPage: {
@@ -2013,6 +2018,94 @@ const fr: Translations = {
       paragraph:
         'Indiquez-nous vos dates, le nombre de voyageurs et vos critères d\'hébergement afin de recevoir une proposition correspondant à votre séjour.',
       ctaPrimary: 'Recevoir une proposition hôtel',
+      ctaSecondary: 'Écrire sur WhatsApp',
+    },
+  },
+
+  contactPage: {
+    backHome: "Retour à l'accueil",
+    hero: {
+      eyebrow: 'CONTACT',
+      title: 'Contactez Haramain Prestige',
+      intro:
+        'Vous préparez un séjour à Makkah ou Madinah\u00a0? Transmettez-nous vos dates, le nombre de voyageurs et les prestations dont vous avez besoin afin que nous puissions étudier votre demande.',
+      ctaPrimary: 'Faire une demande',
+      ctaSecondary: 'Nous écrire sur WhatsApp',
+      imageAlt: 'Hôtel avec vue sur le Masjid al-Haram à Makkah',
+    },
+    contactSection: {
+      eyebrow: 'NOUS CONTACTER',
+      title: 'Choisissez le moyen de contact qui vous convient',
+      whatsapp: {
+        title: 'WhatsApp',
+        text: 'Échangez directement avec Haramain Prestige au sujet de votre séjour ou de votre demande.',
+        phone: '+33\u00a07\u00a073\u00a015\u00a079\u00a002',
+        ctaLabel: 'Écrire sur WhatsApp',
+      },
+      email: {
+        title: 'Email',
+        text: 'Vous pouvez également nous transmettre votre demande ou vos questions par email.',
+        address: 'contact@haramainprestige.com',
+        ctaLabel: 'Envoyer un email',
+      },
+    },
+    infoSection: {
+      eyebrow: 'VOTRE DEMANDE',
+      title: 'Quelles informations nous transmettre\u00a0?',
+      intro:
+        'Pour faciliter l\'étude de votre demande, indiquez autant que possible les informations correspondant à votre séjour.',
+      items: [
+        'Dates du séjour',
+        'Makkah, Madinah ou les deux villes',
+        'Nombre de voyageurs',
+        'Services souhaités',
+        "Préférences d'hébergement si vous recherchez un hôtel",
+        'Toute demande particulière utile',
+      ],
+    },
+    discoverSection: {
+      eyebrow: 'DÉCOUVRIR',
+      title: 'Préparez votre séjour',
+      paragraph:
+        'Vous pouvez également consulter nos pages dédiées aux hôtels et aux services disponibles à Makkah et Madinah avant de nous transmettre votre demande.',
+      hotelsLink: 'Découvrir nos hôtels',
+      servicesLink: 'Découvrir nos services',
+      testimonialsLink: 'Lire les témoignages',
+    },
+    faq: {
+      title: 'Questions fréquentes — Contact',
+      items: [
+        {
+          question: 'Comment contacter Haramain Prestige\u00a0?',
+          answer:
+            'Vous pouvez utiliser le formulaire de demande, nous écrire sur WhatsApp ou nous contacter par email.',
+        },
+        {
+          question: 'Quelles informations faut-il transmettre\u00a0?',
+          answer:
+            'Indiquez notamment vos dates, la ville ou les villes concernées, le nombre de voyageurs et les prestations souhaitées.',
+        },
+        {
+          question: "Peut-on demander uniquement un hôtel\u00a0?",
+          answer: 'Oui. Vous pouvez transmettre une demande concernant uniquement votre hébergement.',
+        },
+        {
+          question: "Peut-on demander uniquement un transfert, un chauffeur ou des visites\u00a0?",
+          answer: 'Oui. Vous pouvez sélectionner uniquement les services dont vous avez besoin.',
+        },
+        {
+          question: 'Peut-on regrouper plusieurs besoins dans une même demande\u00a0?',
+          answer:
+            'Oui. Vous pouvez indiquer dans une seule demande les différentes prestations souhaitées pour votre séjour.',
+        },
+      ],
+    },
+    ctaBlock: {
+      eyebrow: 'VOTRE SÉJOUR',
+      title: 'Parlez-nous de votre projet',
+      paragraph:
+        'Transmettez-nous les informations concernant votre séjour afin que nous puissions étudier votre demande.',
+      ctaPrimary: 'Faire une demande',
       ctaSecondary: 'Écrire sur WhatsApp',
     },
   },

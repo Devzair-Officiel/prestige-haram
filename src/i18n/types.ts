@@ -7,7 +7,7 @@ export type Locale = 'fr' | 'ar-SA';
 /** Direction textuelle induite par la locale. */
 export type Direction = 'ltr' | 'rtl';
 
-export type PageKey = 'home' | 'about' | 'legal' | 'privacy' | 'notFound' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' | 'chauffeurPriveMakkahMadinah' | 'visitesMadinah' | 'visitesMakkah' | 'services' | 'hotels' | 'testimonials';
+export type PageKey = 'home' | 'about' | 'legal' | 'privacy' | 'notFound' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' | 'chauffeurPriveMakkahMadinah' | 'visitesMadinah' | 'visitesMakkah' | 'services' | 'hotels' | 'testimonials' | 'contact';
 
 /** Une entrée FAQ, utilisée pour le rendu ET le JSON-LD FAQPage. */
 export type FaqItem = {
@@ -916,6 +916,59 @@ export interface Translations {
       title: string;
       paragraphs: string[];
       steps: string[];
+    };
+    faq: {
+      title: string;
+      items: FaqItem[];
+    };
+    ctaBlock: {
+      eyebrow: string;
+      title: string;
+      paragraph: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+    };
+  };
+
+  contactPage: {
+    backHome: string;
+    hero: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+      imageAlt: string;
+    };
+    contactSection: {
+      eyebrow: string;
+      title: string;
+      whatsapp: {
+        title: string;
+        text: string;
+        phone: string;
+        ctaLabel: string;
+      };
+      email: {
+        title: string;
+        text: string;
+        address: string;
+        ctaLabel: string;
+      };
+    };
+    infoSection: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      items: string[];
+    };
+    discoverSection: {
+      eyebrow: string;
+      title: string;
+      paragraph: string;
+      hotelsLink: string;
+      servicesLink: string;
+      testimonialsLink: string;
     };
     faq: {
       title: string;

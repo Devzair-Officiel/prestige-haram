@@ -6,7 +6,7 @@ import TestimonialsGrid from '../../components/testimonials/TestimonialsGrid';
 import { useReveal } from '../../hooks/useReveal';
 import { usePageMetadata } from '../../hooks/usePageMetadata';
 import { useI18n } from '../../i18n';
-import heroImage from '../../assets/header-hotel-mekkah.webp';
+import heroImage from '../../assets/temoignage.webp';
 
 const SITE_ORIGIN = 'https://haramainprestige.com';
 

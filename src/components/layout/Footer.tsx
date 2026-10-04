@@ -75,7 +75,7 @@ function Footer() {
   const moreLinks = [
     { label: t.footer.columns.more.items[0], href: pathFor('testimonials') },
     { label: t.footer.columns.more.items[1], href: `${homeHref}#faq` },
-    { label: t.footer.columns.more.items[2], href: `${homeHref}#contact` },
+    { label: t.footer.columns.more.items[2], href: pathFor('contact') },
   ];
   const legalLinks = [
     { label: t.footer.columns.legal.items[0], href: pathFor('legal') },
