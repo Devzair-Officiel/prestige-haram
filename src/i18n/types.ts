@@ -7,7 +7,7 @@ export type Locale = 'fr' | 'ar-SA';
 /** Direction textuelle induite par la locale. */
 export type Direction = 'ltr' | 'rtl';
 
-export type PageKey = 'home' | 'about' | 'legal' | 'privacy' | 'notFound' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' | 'chauffeurPriveMakkahMadinah' | 'visitesMadinah' | 'visitesMakkah';
+export type PageKey = 'home' | 'about' | 'legal' | 'privacy' | 'notFound' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' | 'chauffeurPriveMakkahMadinah' | 'visitesMadinah' | 'visitesMakkah' | 'services';
 
 /** Une entrée FAQ, utilisée pour le rendu ET le JSON-LD FAQPage. */
 export type FaqItem = {
@@ -76,7 +76,7 @@ export interface Translations {
     ctaQuote: string;
     /** Labels du sous-menu Hôtels (ordre : Makkah, Madinah, Vue Kaaba). */
     hotelsMenu: string[];
-    /** Labels du sous-menu Services (ordre : Transferts, Chauffeurs, Visites). */
+    /** Labels du sous-menu Services (ordre : Transferts Jeddah, Transferts Madinah, Chauffeur, Visites Madinah, Visites Makkah). */
     servicesMenu: string[];
     hotelsMenuAria: string;
     servicesMenuAria: string;
@@ -172,6 +172,8 @@ export interface Translations {
     cards: { title: string; description: string }[];
     /** Libellés de liens par carte (ordre = cards). Tableau vide = pas de lien. */
     cardLinks: string[][];
+    /** Lien de maillage interne vers la page hub /services. */
+    discoverAll: string;
   };
 
   howItWorks: {
@@ -776,6 +778,70 @@ export interface Translations {
       paragraphs: string[];
       chauffeurLinkLabel: string;
       visitesMadinahLinkLabel: string;
+    };
+    fonctionnementSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      steps: string[];
+    };
+    faq: {
+      title: string;
+      items: FaqItem[];
+    };
+    ctaBlock: {
+      eyebrow: string;
+      title: string;
+      paragraph: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+    };
+  };
+
+  servicesPage: {
+    backHome: string;
+    hero: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+      imageAlt: string;
+    };
+    introSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    transfertsSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      jeddahLinkLabel: string;
+      madinahLinkLabel: string;
+    };
+    chauffeurSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      chauffeurLinkLabel: string;
+    };
+    visitesMadinahSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      visitesMadinahLinkLabel: string;
+    };
+    visitesMakkahSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      visitesMakkahLinkLabel: string;
+    };
+    multiSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
     };
     fonctionnementSection: {
       eyebrow: string;

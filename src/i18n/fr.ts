@@ -178,6 +178,7 @@ const fr: Translations = {
         'Visites à Makkah',
       ],
     ],
+    discoverAll: 'Découvrir tous nos services',
   },
 
   howItWorks: {
@@ -1498,6 +1499,11 @@ const fr: Translations = {
       description:
         'Découvrez les sites historiques de Makkah — Jabal al-Nour, Jabal Thawr, Arafat et plus. Haramain Prestige peut organiser un accompagnement selon les possibilités disponibles.',
     },
+    services: {
+      title: 'Services à Makkah & Madinah | Haramain Prestige',
+      description:
+        'Découvrez les services Haramain Prestige à Makkah et Madinah : transferts aéroport, chauffeur privé et organisation de visites selon votre programme.',
+    },
   },
 
   visitesMadinahPage: {
@@ -1746,6 +1752,127 @@ const fr: Translations = {
       paragraph:
         "Précisez les sites que vous souhaitez visiter, votre date de séjour et le nombre de personnes. Haramain Prestige étudie les possibilités disponibles et vous transmet une proposition.",
       ctaPrimary: 'Préciser ma demande',
+      ctaSecondary: 'Écrire sur WhatsApp',
+    },
+  },
+
+  servicesPage: {
+    backHome: "Retour à l'accueil",
+    hero: {
+      eyebrow: 'NOS SERVICES',
+      title: 'Nos services à Makkah et Madinah',
+      intro:
+        'Haramain Prestige vous accompagne dans l\u2019organisation de vos déplacements et de certaines visites à Makkah et Madinah. Transferts aéroport, chauffeur privé et visites peuvent être organisés selon votre programme et les informations communiquées dans votre demande.',
+      ctaPrimary: 'Demander une proposition',
+      ctaSecondary: 'Découvrir nos services',
+      imageAlt: 'Déplacements organisés à Makkah et Madinah',
+    },
+    introSection: {
+      eyebrow: 'VOS DÉPLACEMENTS',
+      title: 'Des services adaptés à votre programme',
+      paragraphs: [
+        'Selon votre séjour, vous pouvez avoir besoin d\u2019organiser votre arrivée depuis l\u2019aéroport, certains déplacements à Makkah ou Madinah, ou des visites vers différents lieux.',
+        'Vous pouvez demander un seul service ou regrouper plusieurs besoins dans une même demande.',
+      ],
+    },
+    transfertsSection: {
+      eyebrow: 'TRANSFERTS AÉROPORT',
+      title: 'Organiser votre arrivée et votre départ',
+      paragraphs: [
+        'Haramain Prestige peut étudier l\u2019organisation de votre transfert entre l\u2019aéroport et votre lieu d\u2019hébergement selon les informations communiquées dans votre demande.',
+        'Des pages dédiées permettent notamment de préparer votre transfert entre l\u2019aéroport de Jeddah et Makkah ou entre l\u2019aéroport de Madinah et votre hôtel.',
+      ],
+      jeddahLinkLabel: 'Transfert Jeddah \u2013 Makkah',
+      madinahLinkLabel: 'Transfert aéroport Madinah',
+    },
+    chauffeurSection: {
+      eyebrow: 'CHAUFFEUR PRIVÉ',
+      title: 'Organiser vos déplacements à Makkah et Madinah',
+      paragraphs: [
+        'Pour vos déplacements pendant le séjour, vous pouvez transmettre votre trajet, vos horaires, votre point de départ, votre destination et le nombre de voyageurs.',
+        'Haramain Prestige étudie ensuite les possibilités correspondant à votre demande.',
+      ],
+      chauffeurLinkLabel: 'Découvrir notre service chauffeur',
+    },
+    visitesMadinahSection: {
+      eyebrow: 'VISITES À MADINAH',
+      title: 'Organiser vos visites à Madinah',
+      paragraphs: [
+        'Vous pouvez nous indiquer les lieux que vous souhaitez découvrir pendant votre séjour à Madinah afin que votre programme puisse être étudié selon votre demande.',
+        'Masjid Quba, le Mont Uhud ou Masjid al-Qiblatayn peuvent notamment être mentionnés dans votre demande.',
+      ],
+      visitesMadinahLinkLabel: 'Découvrir les visites à Madinah',
+    },
+    visitesMakkahSection: {
+      eyebrow: 'VISITES À MAKKAH',
+      title: 'Organiser vos visites à Makkah',
+      paragraphs: [
+        'Vous pouvez également préciser les lieux que vous souhaitez découvrir à Makkah et dans ses environs afin qu\u2019ils soient pris en compte dans l\u2019étude de votre programme.',
+        'Arafat, Mina, Muzdalifah, Jabal al-Nour ou Jabal Thawr peuvent notamment être indiqués dans votre demande.',
+      ],
+      visitesMakkahLinkLabel: 'Découvrir les visites à Makkah',
+    },
+    multiSection: {
+      eyebrow: 'UNE SEULE DEMANDE',
+      title: 'Regroupez plusieurs services',
+      paragraphs: [
+        'Si votre séjour nécessite plusieurs prestations, vous pouvez regrouper dans une seule demande votre transfert aéroport, certains déplacements avec chauffeur et vos visites.',
+        'Haramain Prestige étudie les différentes étapes communiquées afin de vous transmettre une proposition correspondant à votre programme.',
+      ],
+    },
+    fonctionnementSection: {
+      eyebrow: 'COMMENT ÇA MARCHE\u00a0?',
+      title: 'Organiser vos services en quelques étapes',
+      paragraphs: [
+        'Décrivez les services dont vous avez besoin ainsi que les informations utiles concernant votre séjour. Haramain Prestige étudie ensuite votre demande avant de vous transmettre une proposition.',
+      ],
+      steps: [
+        'Vous indiquez vos dates, vos besoins et le nombre de voyageurs',
+        'Nous étudions les possibilités correspondant à votre demande',
+        'Vous recevez une proposition avant de confirmer l\u2019organisation',
+      ],
+    },
+    faq: {
+      title: 'Questions fréquentes — Services à Makkah & Madinah',
+      items: [
+        {
+          question: 'Quels services propose Haramain Prestige\u00a0?',
+          answer:
+            'Haramain Prestige propose l\u2019organisation de transferts aéroport, de déplacements avec chauffeur et de visites à Makkah et Madinah selon votre demande.',
+        },
+        {
+          question: 'Peut-on réserver plusieurs services en même temps\u00a0?',
+          answer:
+            'Oui, vous pouvez regrouper plusieurs prestations dans une même demande : transfert aéroport, chauffeur privé et visites peuvent être organisés ensemble selon votre programme.',
+        },
+        {
+          question: 'Peut-on réserver uniquement un transfert\u00a0?',
+          answer:
+            'Oui. Vous pouvez demander uniquement votre transfert aéroport sans autre prestation.',
+        },
+        {
+          question: 'Peut-on réserver uniquement un service chauffeur\u00a0?',
+          answer:
+            'Oui, selon votre demande et les possibilités disponibles correspondant à votre programme.',
+        },
+        {
+          question: 'Peut-on organiser des visites à Makkah ou Madinah\u00a0?',
+          answer:
+            'Oui. En indiquant les lieux souhaités et votre programme, Haramain Prestige étudie les possibilités correspondant à votre demande.',
+        },
+        {
+          question: 'Comment obtenir le tarif de ces services\u00a0?',
+          answer:
+            'Transmettez les informations correspondant à votre demande afin de recevoir une proposition adaptée aux prestations souhaitées.',
+        },
+      ],
+    },
+    ctaBlock: {
+      eyebrow: 'VOTRE PROGRAMME',
+      title: 'Organisez vos services à Makkah et Madinah',
+      paragraph:
+        'Indiquez-nous vos dates, le nombre de voyageurs et les services dont vous avez besoin afin de recevoir une proposition correspondant à votre demande.',
+      ctaPrimary: 'Demander une proposition',
       ctaSecondary: 'Écrire sur WhatsApp',
     },
   },

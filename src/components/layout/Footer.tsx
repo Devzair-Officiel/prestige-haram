@@ -70,10 +70,7 @@ function Footer() {
   const navigationLinks = [
     { label: t.footer.columns.navigation.items[0], href: pathFor('about') },
     { label: t.footer.columns.navigation.items[1], href: `${homeHref}#hotels` },
-    {
-      label: t.footer.columns.navigation.items[2],
-      href: `${homeHref}#services`,
-    },
+    { label: t.footer.columns.navigation.items[2], href: pathFor('services') },
   ];
   const moreLinks = [
     { label: t.footer.columns.more.items[0], href: `${homeHref}#temoignages` },

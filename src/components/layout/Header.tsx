@@ -82,6 +82,7 @@ function Header() {
       index === 2 ? chambreVueKaabaHref :
       `${homeHref}#hotels`,
   }));
+  const servicesHref = pathFor('services');
   const servicesMenu = [
     { label: t.header.servicesMenu[0], href: pathFor('transfertJeddahMakkah') },
     { label: t.header.servicesMenu[1], href: pathFor('transfertAeroportMadinah') },
@@ -102,7 +103,7 @@ function Header() {
   };
 
   const hotelsActive = hotelsMenu.some((item) => isActivePath(item.href));
-  const servicesActive = servicesMenu.some((item) => isActivePath(item.href));
+  const servicesActive = isActivePath(servicesHref) || servicesMenu.some((item) => isActivePath(item.href));
 
   const simpleLinks = [
     { label: t.header.navAbout, href: aboutHref },
@@ -113,7 +114,7 @@ function Header() {
   const mobileNav = [
     { label: t.header.navHome, href: homeHref },
     { label: t.header.navHotels, href: `${homeHref}#hotels` },
-    { label: t.header.navServices, href: `${homeHref}#services` },
+    { label: t.header.navServices, href: servicesHref },
     { label: t.header.navAbout, href: aboutHref },
     { label: t.header.navTestimonials, href: `${homeHref}#temoignages` },
     { label: t.header.navFaq, href: `${homeHref}#faq` },
@@ -334,7 +335,8 @@ function Header() {
           onBlur={(e) => handleGroupBlur(e, 'services')}
         >
           <a
-            href={`${homeHref}#services`}
+            href={servicesHref}
+            onClick={(e) => handleInternalNav(e, servicesHref)}
             className={`nav-link${servicesActive ? ' nav-link--active' : ''}`}
             aria-haspopup="menu"
             aria-expanded={menu === 'services'}
@@ -553,7 +555,7 @@ function Header() {
 // gardé local ici pour ne pas coupler le Header aux slugs FR.
 function guessPageFromPath(
   pathname: string,
-): 'home' | 'about' | 'legal' | 'privacy' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' | 'chauffeurPriveMakkahMadinah' | 'visitesMadinah' | 'visitesMakkah' {
+): 'home' | 'about' | 'legal' | 'privacy' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' | 'chauffeurPriveMakkahMadinah' | 'visitesMadinah' | 'visitesMakkah' | 'services' {
   const stripped = pathname.replace(/^\/ar-sa/, '').replace(/\/+$/, '') || '/';
   if (stripped === '/a-propos') return 'about';
   if (stripped === '/mentions-legales') return 'legal';
@@ -566,6 +568,7 @@ function guessPageFromPath(
   if (stripped === '/chauffeur-prive-makkah-madinah') return 'chauffeurPriveMakkahMadinah';
   if (stripped === '/visites-madinah') return 'visitesMadinah';
   if (stripped === '/visites-makkah') return 'visitesMakkah';
+  if (stripped === '/services') return 'services';
   return 'home';
 }
 

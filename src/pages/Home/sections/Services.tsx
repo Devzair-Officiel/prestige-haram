@@ -202,6 +202,34 @@ function Services() {
           </div>
         ))}
       </div>
+
+      <div style={{ textAlign: 'center', marginTop: 32 }}>
+        <a
+          href={pathFor('services')}
+          onClick={(e) => handleSpaNav(e, pathFor('services'))}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 7,
+            fontSize: 14,
+            fontWeight: 600,
+            color: '#E6C878',
+            textDecoration: 'none',
+          }}
+        >
+          {t.services.discoverAll}
+          <svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true">
+            <path
+              d="M3 8h9M9 4l4 4-4 4"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </a>
+      </div>
     </section>
   );
 }

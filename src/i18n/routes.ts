@@ -24,6 +24,7 @@ const PATHS: Record<PageKey, string> = {
   chauffeurPriveMakkahMadinah: '/chauffeur-prive-makkah-madinah',
   visitesMadinah: '/visites-madinah',
   visitesMakkah: '/visites-makkah',
+  services: '/services',
 };
 
 /** URL canonique locale-scoped. `home` en FR = "/", en AR = "/ar-sa/". */
@@ -66,6 +67,7 @@ function matchPage(path: string): PageKey | null {
   if (path === '/chauffeur-prive-makkah-madinah') return 'chauffeurPriveMakkahMadinah';
   if (path === '/visites-madinah') return 'visitesMadinah';
   if (path === '/visites-makkah') return 'visitesMakkah';
+  if (path === '/services') return 'services';
   return null;
 }
 
