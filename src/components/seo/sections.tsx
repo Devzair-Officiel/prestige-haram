@@ -42,26 +42,36 @@ export function SeoSectionText({
       {paragraphs.map((p, i) => (
         <BodyParagraph key={i}>{p}</BodyParagraph>
       ))}
-      {links.map((link) => (
-        <a
-          key={link.href}
-          href={link.href}
-          onClick={(e) => handleSpaNav(e, link.href)}
+      {links.length > 0 && (
+        <div
           style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 7,
-            fontSize: 13.5,
-            fontWeight: 600,
-            color: '#E6C878',
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '10px 18px',
             marginTop: 8,
-            textDecoration: 'none',
           }}
         >
-          {link.label}
-          <DiscoverArrow />
-        </a>
-      ))}
+          {links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={(e) => handleSpaNav(e, link.href)}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 7,
+                fontSize: 13.5,
+                fontWeight: 600,
+                color: '#E6C878',
+                textDecoration: 'none',
+              }}
+            >
+              {link.label}
+              <DiscoverArrow />
+            </a>
+          ))}
+        </div>
+      )}
     </SeoSection>
   );
 }
