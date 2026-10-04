@@ -1527,12 +1527,12 @@ const fr: Translations = {
       ],
       criteriaLabel: 'EXEMPLES DE SITES',
       criteria: [
-        'Masjid Quba — la première mosquée construite dans l\'islam',
-        'Mont Uhud — site de la Bataille d\'Uhud',
-        'Masjid al-Qiblatayn — la mosquée des deux qiblas',
-        'Autres lieux spirituels selon votre demande',
-        'Votre hôtel ou point de départ à préciser',
-        'Étapes supplémentaires à indiquer dans votre demande',
+        'Masjid Quba',
+        'Mont Uhud',
+        'Masjid al-Qiblatayn',
+        'Autres lieux selon votre demande',
+        'Votre hôtel ou point de départ',
+        'Étapes supplémentaires à préciser',
       ],
     },
     ziyaratSection: {
@@ -1586,7 +1586,7 @@ const fr: Translations = {
         {
           question: 'Proposez-vous des visites guidées à Madinah\u00a0?',
           answer:
-            "Haramain Prestige peut organiser un accompagnement pour vous aider à vous rendre sur les sites spirituels de Madinah, selon les possibilités disponibles. Précisez les lieux souhaités dans votre demande pour que nous puissions étudier les options.",
+            "Le contenu exact de la prestation dépend de la proposition qui vous est transmise. Si vous recherchez un accompagnement particulier ou des explications pendant les visites, précisez-le dans votre demande afin que nous puissions vous confirmer ce qui peut être proposé.",
         },
         {
           question: 'Quels sites peut-on visiter à Madinah\u00a0?',
@@ -1594,9 +1594,9 @@ const fr: Translations = {
             "Parmi les lieux souvent demandés : Masjid Quba, le Mont Uhud, Masjid al-Qiblatayn. D'autres sites peuvent être précisés dans votre demande. Haramain Prestige vérifie les possibilités selon votre programme.",
         },
         {
-          question: "Puis-je demander l'accès à tous les sites de Madinah\u00a0?",
+          question: 'Peut-on demander plusieurs lieux dans le même programme\u00a0?',
           answer:
-            "L'accès à certains sites peut être soumis à des conditions spécifiques, notamment pour les non-musulmans. Haramain Prestige vous indiquera les conditions d'accès pour les lieux que vous souhaitez visiter.",
+            "Oui. Vous pouvez indiquer plusieurs lieux dans votre demande. Leur intégration dans le programme dépendra des possibilités et des conditions applicables au moment de votre séjour.",
         },
         {
           question: 'Peut-on combiner visites et hôtel dans une seule demande\u00a0?',
@@ -1652,12 +1652,12 @@ const fr: Translations = {
       ],
       criteriaLabel: 'EXEMPLES DE SITES',
       criteria: [
-        'Arafat — la plaine du rassemblement',
-        'Mina — la vallée des tentes',
-        'Muzdalifah — étape du pèlerinage',
-        'Jabal al-Nour — la Grotte de Hiraa',
-        'Jabal Thawr — la Grotte de Thawr',
-        'Autres lieux spirituels selon votre demande',
+        'Arafat',
+        'Mina',
+        'Muzdalifah',
+        'Jabal al-Nour',
+        'Jabal Thawr',
+        'Autres lieux selon votre demande',
       ],
     },
     ziyaratSection: {
@@ -1672,8 +1672,8 @@ const fr: Translations = {
       eyebrow: 'ARAFAT · MINA · MUZDALIFAH',
       title: 'Les sites du pèlerinage : Arafat, Mina et Muzdalifah',
       paragraphs: [
-        "Arafat, Mina et Muzdalifah sont des étapes centrales du Hajj. En dehors de la période du pèlerinage, ces lieux peuvent être visités selon les possibilités disponibles et les conditions d'accès en vigueur au moment de votre séjour.",
-        "Si vous souhaitez vous rendre sur ces sites dans le cadre d'un séjour hors période de Hajj, précisez-le dans votre demande. Haramain Prestige vérifiera les conditions d'accès et vous indiquera les options envisageables.",
+        "Arafat, Mina et Muzdalifah occupent une place importante dans le déroulement du Hajj et font également partie des lieux que certains voyageurs souhaitent découvrir lors de leur séjour à Makkah.",
+        "Si vous souhaitez inclure ces lieux dans votre programme de visite, précisez-le dans votre demande. Leur intégration dépend des possibilités et des conditions applicables au moment de votre séjour.",
       ],
     },
     hotelSection: {
@@ -1714,14 +1714,14 @@ const fr: Translations = {
             "Haramain Prestige peut organiser un accompagnement pour vous aider à vous rendre sur des sites de Makkah au-delà du Haram, selon les possibilités disponibles. Précisez les lieux souhaités dans votre demande.",
         },
         {
-          question: 'Peut-on visiter Arafat et Mina en dehors du Hajj\u00a0?',
+          question: 'S\u2019agit-il d\u2019une visite guidée\u00a0?',
           answer:
-            "Ces sites peuvent être accessibles en dehors de la période du Hajj, selon les conditions d'accès en vigueur. Haramain Prestige vérifiera les conditions au moment de votre séjour et vous indiquera les options disponibles.",
+            "Le contenu exact de la prestation dépend de la proposition qui vous est transmise. Si vous recherchez un accompagnement particulier ou des explications pendant les visites, précisez-le dans votre demande afin que nous puissions vous confirmer ce qui peut être proposé.",
         },
         {
-          question: 'Peut-on visiter Jabal al-Nour (Grotte de Hiraa) lors d\'un séjour ordinaire\u00a0?',
+          question: 'Peut-on visiter Arafat, Mina, Muzdalifah ou Jabal al-Nour lors d\u2019un séjour à Makkah\u00a0?',
           answer:
-            "Oui, Jabal al-Nour est généralement accessible lors d'un séjour à Makkah. Précisez ce souhait dans votre demande d'accompagnement et Haramain Prestige étudiera comment l'intégrer à votre programme.",
+            "L'intégration de ces lieux à votre programme dépend des possibilités et des conditions applicables au moment de votre séjour. Précisez votre souhait dans votre demande afin qu'il puisse être pris en compte.",
         },
         {
           question: 'L\'accès à Makkah est-il ouvert à tous\u00a0?',
