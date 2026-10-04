@@ -53,7 +53,7 @@ function Services() {
     [],
     [pathFor('transfertJeddahMakkah'), pathFor('transfertAeroportMadinah')],
     [pathFor('chauffeurPriveMakkahMadinah')],
-    [],
+    [pathFor('visitesMadinah'), pathFor('visitesMakkah')],
   ];
 
   const services = t.services.cards.map((card, index) => ({

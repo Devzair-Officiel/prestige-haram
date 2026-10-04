@@ -7,7 +7,7 @@ export type Locale = 'fr' | 'ar-SA';
 /** Direction textuelle induite par la locale. */
 export type Direction = 'ltr' | 'rtl';
 
-export type PageKey = 'home' | 'about' | 'legal' | 'privacy' | 'notFound' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' | 'chauffeurPriveMakkahMadinah';
+export type PageKey = 'home' | 'about' | 'legal' | 'privacy' | 'notFound' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' | 'chauffeurPriveMakkahMadinah' | 'visitesMadinah' | 'visitesMakkah';
 
 /** Une entrée FAQ, utilisée pour le rendu ET le JSON-LD FAQPage. */
 export type FaqItem = {
@@ -335,6 +335,7 @@ export interface Translations {
       title: string;
       paragraphs: string[];
       discoverLabel: string;
+      visitesMakkahLinkLabel: string;
     };
     bookingSection: {
       eyebrow: string;
@@ -448,6 +449,7 @@ export interface Translations {
       title: string;
       paragraphs: string[];
       transfertDiscoverLabel: string;
+      visitesMadinahLinkLabel: string;
     };
     bookingSection: {
       eyebrow: string;
@@ -621,12 +623,14 @@ export interface Translations {
       title: string;
       paragraphs: string[];
       makkahLinkLabel: string;
+      visitesMakkahLinkLabel: string;
     };
     madinahSection: {
       eyebrow: string;
       title: string;
       paragraphs: string[];
       madinahLinkLabel: string;
+      visitesMadinahLinkLabel: string;
     };
     entreVillesSection: {
       eyebrow: string;
@@ -644,6 +648,134 @@ export interface Translations {
       eyebrow: string;
       title: string;
       paragraphs: string[];
+    };
+    fonctionnementSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      steps: string[];
+    };
+    faq: {
+      title: string;
+      items: FaqItem[];
+    };
+    ctaBlock: {
+      eyebrow: string;
+      title: string;
+      paragraph: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+    };
+  };
+
+  visitesMadinahPage: {
+    backHome: string;
+    hero: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+      imageAlt: string;
+    };
+    decouvrirSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    lieuxSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      criteriaLabel: string;
+      criteria: string[];
+    };
+    ziyaratSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    personalisationSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    hotelSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      hotelLinkLabel: string;
+    };
+    chauffeurSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      chauffeurLinkLabel: string;
+      visitesMakkahLinkLabel: string;
+    };
+    fonctionnementSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      steps: string[];
+    };
+    faq: {
+      title: string;
+      items: FaqItem[];
+    };
+    ctaBlock: {
+      eyebrow: string;
+      title: string;
+      paragraph: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+    };
+  };
+
+  visitesMakkahPage: {
+    backHome: string;
+    hero: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+      imageAlt: string;
+    };
+    decouvrirSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    lieuxSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      criteriaLabel: string;
+      criteria: string[];
+    };
+    ziyaratSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    hadjSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    hotelSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      hotelLinkLabel: string;
+    };
+    chauffeurSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      chauffeurLinkLabel: string;
+      visitesMadinahLinkLabel: string;
     };
     fonctionnementSection: {
       eyebrow: string;

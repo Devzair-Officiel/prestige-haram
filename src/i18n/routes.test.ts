@@ -356,12 +356,93 @@ describe('detectRoute — chauffeurPriveMakkahMadinah', () => {
   });
 });
 
+describe('localizedPath — visitesMadinah', () => {
+  it('renvoie /visites-madinah en FR', () => {
+    expect(localizedPath('visitesMadinah', 'fr')).toBe('/visites-madinah');
+  });
+
+  it('renvoie /ar-sa/visites-madinah en AR', () => {
+    expect(localizedPath('visitesMadinah', 'ar-SA')).toBe('/ar-sa/visites-madinah');
+  });
+});
+
+describe('detectRoute — visitesMadinah', () => {
+  it('détecte FR + visitesMadinah pour /visites-madinah', () => {
+    expect(detectRoute('/visites-madinah')).toEqual({
+      locale: 'fr',
+      page: 'visitesMadinah',
+    });
+  });
+
+  it('détecte AR + visitesMadinah pour /ar-sa/visites-madinah', () => {
+    expect(detectRoute('/ar-sa/visites-madinah')).toEqual({
+      locale: 'ar-SA',
+      page: 'visitesMadinah',
+    });
+  });
+
+  it('tolère le trailing slash FR', () => {
+    expect(detectRoute('/visites-madinah/')).toEqual({
+      locale: 'fr',
+      page: 'visitesMadinah',
+    });
+  });
+
+  it('tolère le trailing slash AR', () => {
+    expect(detectRoute('/ar-sa/visites-madinah/')).toEqual({
+      locale: 'ar-SA',
+      page: 'visitesMadinah',
+    });
+  });
+});
+
+describe('localizedPath — visitesMakkah', () => {
+  it('renvoie /visites-makkah en FR', () => {
+    expect(localizedPath('visitesMakkah', 'fr')).toBe('/visites-makkah');
+  });
+
+  it('renvoie /ar-sa/visites-makkah en AR', () => {
+    expect(localizedPath('visitesMakkah', 'ar-SA')).toBe('/ar-sa/visites-makkah');
+  });
+});
+
+describe('detectRoute — visitesMakkah', () => {
+  it('détecte FR + visitesMakkah pour /visites-makkah', () => {
+    expect(detectRoute('/visites-makkah')).toEqual({
+      locale: 'fr',
+      page: 'visitesMakkah',
+    });
+  });
+
+  it('détecte AR + visitesMakkah pour /ar-sa/visites-makkah', () => {
+    expect(detectRoute('/ar-sa/visites-makkah')).toEqual({
+      locale: 'ar-SA',
+      page: 'visitesMakkah',
+    });
+  });
+
+  it('tolère le trailing slash FR', () => {
+    expect(detectRoute('/visites-makkah/')).toEqual({
+      locale: 'fr',
+      page: 'visitesMakkah',
+    });
+  });
+
+  it('tolère le trailing slash AR', () => {
+    expect(detectRoute('/ar-sa/visites-makkah/')).toEqual({
+      locale: 'ar-SA',
+      page: 'visitesMakkah',
+    });
+  });
+});
+
 describe('équivalence localizedPath ↔ detectRoute', () => {
   const pages: PageKey[] = [
     'home', 'about', 'legal', 'privacy',
     'hotelsMakkah', 'hotelsMadinah', 'chambreVueKaaba',
     'transfertJeddahMakkah', 'transfertAeroportMadinah',
     'chauffeurPriveMakkahMadinah',
+    'visitesMadinah', 'visitesMakkah',
   ];
 
   it('round-trip FR : detectRoute(localizedPath(p, "fr")) → { fr, p }', () => {

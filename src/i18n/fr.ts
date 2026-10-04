@@ -37,7 +37,8 @@ const fr: Translations = {
       'Transfert Jeddah \u2013 Makkah',
       'Transfert aéroport Madinah',
       'Chauffeur privé Makkah & Madinah',
-      'Visites & accompagnement',
+      'Visites à Madinah',
+      'Visites à Makkah',
     ],
     hotelsMenuAria: 'Hôtels',
     servicesMenuAria: 'Services',
@@ -172,7 +173,10 @@ const fr: Translations = {
         'Découvrir le transfert à Madinah',
       ],
       ['Découvrir notre service chauffeur'],
-      [],
+      [
+        'Visites à Madinah',
+        'Visites à Makkah',
+      ],
     ],
   },
 
@@ -746,6 +750,7 @@ const fr: Translations = {
         'Si la vue Kaaba est importante pour votre séjour, indiquez-le dès votre demande de devis. Nous pourrons rechercher les options disponibles correspondant à ce critère et vous préciser la catégorie proposée avant confirmation.',
       ],
       discoverLabel: 'Découvrir les chambres avec vue sur la Kaaba',
+      visitesMakkahLinkLabel: 'Demander un accompagnement pour vos visites à Makkah',
     },
     bookingSection: {
       eyebrow: 'RÉSERVATION',
@@ -978,6 +983,7 @@ const fr: Translations = {
         'Haramain Prestige organise les deux étapes de votre séjour. Nous pouvons proposer un hôtel à Makkah et un hôtel à Madinah dans la même demande, ainsi que les transferts entre les deux villes si vous en avez besoin.',
       ],
       transfertDiscoverLabel: 'Organiser votre transfert depuis l\u2019a\u00e9roport de Madinah',
+      visitesMadinahLinkLabel: 'Demander un accompagnement pour vos visites à Madinah',
     },
     bookingSection: {
       eyebrow: 'RÉSERVATION',
@@ -1331,6 +1337,7 @@ const fr: Translations = {
         "Indiquez votre lieu de d\u00e9part, votre destination et l\u2019horaire souhait\u00e9 afin que Haramain Prestige puisse rechercher une solution correspondant \u00e0 votre demande.",
       ],
       makkahLinkLabel: 'Voir nos h\u00f4tels \u00e0 Makkah',
+      visitesMakkahLinkLabel: 'Visites à Makkah',
     },
     madinahSection: {
       eyebrow: 'D\u00c9PLACEMENTS \u00c0 MADINAH',
@@ -1340,6 +1347,7 @@ const fr: Translations = {
         "Vous pouvez int\u00e9grer ces d\u00e9placements \u00e0 une demande comprenant \u00e9galement votre h\u00e9bergement \u00e0 Madinah.",
       ],
       madinahLinkLabel: 'Voir nos h\u00f4tels \u00e0 Madinah',
+      visitesMadinahLinkLabel: 'Visites à Madinah',
     },
     entreVillesSection: {
       eyebrow: 'MAKKAH \u2194 MADINAH',
@@ -1479,6 +1487,266 @@ const fr: Translations = {
       title: 'Chauffeur priv\u00e9 Makkah & Madinah | Haramain Prestige',
       description:
         "Organisez vos d\u00e9placements locaux \u00e0 Makkah et Madinah avec un service de chauffeur. Haramain Prestige \u00e9tudie votre demande et vous propose une organisation adapt\u00e9e \u00e0 votre programme.",
+    },
+    visitesMadinah: {
+      title: 'Visites à Madinah : sites spirituels & accompagnement | Haramain Prestige',
+      description:
+        'Découvrez les sites spirituels de Madinah — Masjid Quba, Mont Uhud, Masjid al-Qiblatayn et plus. Haramain Prestige peut organiser un accompagnement selon les possibilités disponibles.',
+    },
+    visitesMakkah: {
+      title: 'Visites à Makkah : sites historiques & accompagnement | Haramain Prestige',
+      description:
+        'Découvrez les sites historiques de Makkah — Jabal al-Nour, Jabal Thawr, Arafat et plus. Haramain Prestige peut organiser un accompagnement selon les possibilités disponibles.',
+    },
+  },
+
+  visitesMadinahPage: {
+    backHome: "Retour à l'accueil",
+    hero: {
+      eyebrow: 'VISITES · MADINAH AL-MUNAWWARAH',
+      title: 'Visites à Madinah : découvrez les sites spirituels de la Ville du Prophète',
+      intro:
+        'Madinah abrite des sites de grande importance spirituelle que de nombreux pèlerins souhaitent visiter lors de leur séjour. Haramain Prestige peut, selon les possibilités disponibles, organiser un accompagnement pour vous permettre de vous rendre sur ces lieux dans de bonnes conditions.',
+      ctaPrimary: 'Préciser ma demande de visite',
+      ctaSecondary: 'Comment ça fonctionne\u00a0?',
+      imageAlt: 'Vue du Masjid an-Nabawi à Madinah',
+    },
+    decouvrirSection: {
+      eyebrow: 'MADINAH AL-MUNAWWARAH',
+      title: 'Visiter les sites spirituels de Madinah',
+      paragraphs: [
+        "Madinah est l'une des deux villes saintes de l'islam. Elle abrite le Masjid an-Nabawi, la Mosquée du Prophète Muhammad ﷺ, ainsi que d'autres sites d'une grande valeur spirituelle pour les pèlerins et les voyageurs qui s'y rendent.",
+        "Lors d'un séjour à Madinah, certains pèlerins souhaitent visiter des lieux emblématiques au-delà de la Mosquée du Prophète. Haramain Prestige peut, selon les possibilités disponibles, organiser un accompagnement pour vous aider à vous rendre sur ces sites dans de bonnes conditions.",
+      ],
+    },
+    lieuxSection: {
+      eyebrow: 'SITES À VISITER',
+      title: 'Quelques lieux emblématiques que vous pouvez demander à visiter',
+      paragraphs: [
+        'Ces sites peuvent être inclus dans votre demande d\'accompagnement, selon les possibilités disponibles. Précisez les lieux qui vous intéressent lors de votre demande.',
+      ],
+      criteriaLabel: 'EXEMPLES DE SITES',
+      criteria: [
+        'Masjid Quba — la première mosquée construite dans l\'islam',
+        'Mont Uhud — site de la Bataille d\'Uhud',
+        'Masjid al-Qiblatayn — la mosquée des deux qiblas',
+        'Autres lieux spirituels selon votre demande',
+        'Votre hôtel ou point de départ à préciser',
+        'Étapes supplémentaires à indiquer dans votre demande',
+      ],
+    },
+    ziyaratSection: {
+      eyebrow: 'VOTRE DEMANDE',
+      title: 'Comment demander un accompagnement pour vos visites à Madinah',
+      paragraphs: [
+        'Pour permettre à Haramain Prestige d\'étudier votre demande, précisez les sites que vous souhaitez visiter, la date envisagée, le nombre de personnes et votre point de départ (généralement votre hôtel). Plus votre demande est précise, mieux nous pouvons rechercher une solution correspondant à votre programme.',
+        "Haramain Prestige ne garantit pas un programme fixe ni un itinéraire prédéfini. Chaque demande est étudiée selon les possibilités disponibles au moment de votre séjour.",
+      ],
+    },
+    personalisationSection: {
+      eyebrow: 'SELON VOS BESOINS',
+      title: 'Un accompagnement adapté à votre séjour',
+      paragraphs: [
+        "Votre demande peut être intégrée à une organisation plus large de votre séjour : hébergement à Madinah, transfert depuis l'aéroport, déplacements entre Makkah et Madinah. Haramain Prestige étudie l'ensemble de votre programme pour vous proposer une organisation cohérente.",
+        "Si vous souhaitez visiter plusieurs sites lors d'une même journée, indiquez-le dans votre demande. Nous vérifions si cette organisation est réalisable selon les disponibilités et nous vous transmettons une proposition.",
+      ],
+    },
+    hotelSection: {
+      eyebrow: 'HÉBERGEMENT À MADINAH',
+      title: 'Combinez vos visites avec votre hôtel à Madinah',
+      paragraphs: [
+        "Si vous n'avez pas encore réservé votre hébergement à Madinah, Haramain Prestige peut également vous accompagner dans la recherche de votre hôtel. Nous sélectionnons des établissements proches du Masjid an-Nabawi selon vos critères et disponibilités.",
+      ],
+      hotelLinkLabel: 'Voir nos hôtels à Madinah',
+    },
+    chauffeurSection: {
+      eyebrow: 'DÉPLACEMENTS & TRANSPORT',
+      title: 'Service de chauffeur pour vos déplacements à Madinah',
+      paragraphs: [
+        "Pour vous rendre sur les sites spirituels de Madinah, un service de transport avec chauffeur peut être demandé. Haramain Prestige peut étudier cette option dans votre demande et vous proposer une organisation selon les possibilités disponibles.",
+      ],
+      chauffeurLinkLabel: 'Découvrir le service chauffeur',
+      visitesMakkahLinkLabel: 'Visites à Makkah',
+    },
+    fonctionnementSection: {
+      eyebrow: 'COMMENT ÇA MARCHE\u00a0?',
+      title: 'Comment organiser vos visites à Madinah avec Haramain Prestige',
+      paragraphs: [
+        "Transmettez-nous les informations concernant vos visites souhaitées. Nous étudions les possibilités disponibles et vous transmettons une proposition avant de confirmer l'organisation.",
+      ],
+      steps: [
+        'Vous précisez les sites souhaités, la date, le nombre de personnes et votre hôtel',
+        'Haramain Prestige étudie les possibilités disponibles pour votre demande',
+        'Vous recevez une proposition et confirmez l\'organisation selon vos besoins',
+      ],
+    },
+    faq: {
+      title: 'Questions fréquentes — Visites à Madinah',
+      items: [
+        {
+          question: 'Proposez-vous des visites guidées à Madinah\u00a0?',
+          answer:
+            "Haramain Prestige peut organiser un accompagnement pour vous aider à vous rendre sur les sites spirituels de Madinah, selon les possibilités disponibles. Précisez les lieux souhaités dans votre demande pour que nous puissions étudier les options.",
+        },
+        {
+          question: 'Quels sites peut-on visiter à Madinah\u00a0?',
+          answer:
+            "Parmi les lieux souvent demandés : Masjid Quba, le Mont Uhud, Masjid al-Qiblatayn. D'autres sites peuvent être précisés dans votre demande. Haramain Prestige vérifie les possibilités selon votre programme.",
+        },
+        {
+          question: "Puis-je demander l'accès à tous les sites de Madinah\u00a0?",
+          answer:
+            "L'accès à certains sites peut être soumis à des conditions spécifiques, notamment pour les non-musulmans. Haramain Prestige vous indiquera les conditions d'accès pour les lieux que vous souhaitez visiter.",
+        },
+        {
+          question: 'Peut-on combiner visites et hôtel dans une seule demande\u00a0?',
+          answer:
+            "Oui. Vous pouvez demander votre hébergement à Madinah, votre transfert depuis l'aéroport et un accompagnement pour vos visites dans la même demande. Haramain Prestige organise l'ensemble selon votre programme.",
+        },
+        {
+          question: 'Peut-on visiter les sites de Madinah le matin et ceux de Makkah un autre jour\u00a0?',
+          answer:
+            "Oui, si votre séjour inclut les deux villes. Précisez dans votre demande les étapes souhaitées à Madinah et à Makkah, et Haramain Prestige étudiera l'organisation selon votre programme global.",
+        },
+        {
+          question: 'Quel délai pour faire une demande de visite à Madinah\u00a0?',
+          answer:
+            "Nous vous recommandons de soumettre votre demande le plus tôt possible avant votre séjour. Cela nous permet d'étudier les possibilités disponibles et de vous transmettre une proposition dans de bonnes conditions.",
+        },
+      ],
+    },
+    ctaBlock: {
+      eyebrow: 'VOTRE SÉJOUR À MADINAH',
+      title: 'Demandez un accompagnement pour vos visites à Madinah',
+      paragraph:
+        "Précisez les sites que vous souhaitez visiter, votre date de séjour et le nombre de personnes. Haramain Prestige étudie les possibilités disponibles et vous transmet une proposition.",
+      ctaPrimary: 'Préciser ma demande',
+      ctaSecondary: 'Écrire sur WhatsApp',
+    },
+  },
+
+  visitesMakkahPage: {
+    backHome: "Retour à l'accueil",
+    hero: {
+      eyebrow: 'VISITES · MAKKAH AL-MUKARRAMAH',
+      title: 'Visites à Makkah : découvrez les sites historiques et spirituels de la ville sainte',
+      intro:
+        'Makkah abrite des lieux d\'une grande importance spirituelle et historique. Au-delà du Masjid al-Haram, certains pèlerins souhaitent visiter d\'autres sites emblématiques. Haramain Prestige peut, selon les possibilités disponibles, organiser un accompagnement pour ces visites.',
+      ctaPrimary: 'Préciser ma demande de visite',
+      ctaSecondary: 'Comment ça fonctionne\u00a0?',
+      imageAlt: 'Vue de Makkah',
+    },
+    decouvrirSection: {
+      eyebrow: 'MAKKAH AL-MUKARRAMAH',
+      title: 'Visiter les sites spirituels et historiques de Makkah',
+      paragraphs: [
+        "Makkah est la ville sainte de l'islam, destination du pèlerinage du Hajj et de l'Omra. Elle abrite le Masjid al-Haram et la Kaaba, mais également d'autres sites d'une grande valeur historique et spirituelle que certains pèlerins souhaitent visiter lors de leur séjour.",
+        "Haramain Prestige peut, selon les possibilités disponibles, vous aider à organiser un accompagnement pour vous rendre sur ces lieux. Précisez vos souhaits dans votre demande afin que nous puissions étudier les options correspondant à votre programme.",
+      ],
+    },
+    lieuxSection: {
+      eyebrow: 'SITES À VISITER',
+      title: 'Quelques lieux emblématiques que vous pouvez demander à visiter',
+      paragraphs: [
+        'Ces sites peuvent être inclus dans votre demande d\'accompagnement, selon les possibilités disponibles. Précisez les lieux qui vous intéressent lors de votre demande.',
+      ],
+      criteriaLabel: 'EXEMPLES DE SITES',
+      criteria: [
+        'Arafat — la plaine du rassemblement',
+        'Mina — la vallée des tentes',
+        'Muzdalifah — étape du pèlerinage',
+        'Jabal al-Nour — la Grotte de Hiraa',
+        'Jabal Thawr — la Grotte de Thawr',
+        'Autres lieux spirituels selon votre demande',
+      ],
+    },
+    ziyaratSection: {
+      eyebrow: 'VOTRE DEMANDE',
+      title: 'Comment demander un accompagnement pour vos visites à Makkah',
+      paragraphs: [
+        'Pour permettre à Haramain Prestige d\'étudier votre demande, précisez les sites que vous souhaitez visiter, la date envisagée, le nombre de personnes et votre hôtel à Makkah. Plus votre demande est détaillée, mieux nous pouvons rechercher une solution correspondant à votre programme.',
+        "Haramain Prestige ne garantit pas un programme fixe ni un itinéraire prédéfini. Chaque demande est étudiée selon les possibilités disponibles au moment de votre séjour.",
+      ],
+    },
+    hadjSection: {
+      eyebrow: 'ARAFAT · MINA · MUZDALIFAH',
+      title: 'Les sites du pèlerinage : Arafat, Mina et Muzdalifah',
+      paragraphs: [
+        "Arafat, Mina et Muzdalifah sont des étapes centrales du Hajj. En dehors de la période du pèlerinage, ces lieux peuvent être visités selon les possibilités disponibles et les conditions d'accès en vigueur au moment de votre séjour.",
+        "Si vous souhaitez vous rendre sur ces sites dans le cadre d'un séjour hors période de Hajj, précisez-le dans votre demande. Haramain Prestige vérifiera les conditions d'accès et vous indiquera les options envisageables.",
+      ],
+    },
+    hotelSection: {
+      eyebrow: 'HÉBERGEMENT À MAKKAH',
+      title: 'Combinez vos visites avec votre hôtel à Makkah',
+      paragraphs: [
+        "Si vous n'avez pas encore réservé votre hébergement à Makkah, Haramain Prestige peut également vous accompagner dans la recherche de votre hôtel. Nous sélectionnons des établissements proches du Masjid al-Haram selon vos critères et disponibilités.",
+      ],
+      hotelLinkLabel: 'Voir nos hôtels à Makkah',
+    },
+    chauffeurSection: {
+      eyebrow: 'DÉPLACEMENTS & TRANSPORT',
+      title: 'Service de chauffeur pour vos déplacements à Makkah',
+      paragraphs: [
+        "Pour vous rendre sur les sites spirituels et historiques de Makkah, un service de transport avec chauffeur peut être demandé. Certains sites, comme Arafat ou Jabal al-Nour, nécessitent un déplacement en véhicule depuis votre hôtel. Haramain Prestige peut étudier cette option dans votre demande selon les possibilités disponibles.",
+      ],
+      chauffeurLinkLabel: 'Découvrir le service chauffeur',
+      visitesMadinahLinkLabel: 'Visites à Madinah',
+    },
+    fonctionnementSection: {
+      eyebrow: 'COMMENT ÇA MARCHE\u00a0?',
+      title: 'Comment organiser vos visites à Makkah avec Haramain Prestige',
+      paragraphs: [
+        "Transmettez-nous les informations concernant vos visites souhaitées à Makkah. Nous étudions les possibilités disponibles et vous transmettons une proposition avant de confirmer l'organisation.",
+      ],
+      steps: [
+        'Vous précisez les sites souhaités, la date, le nombre de personnes et votre hôtel à Makkah',
+        'Haramain Prestige étudie les possibilités disponibles pour votre demande',
+        'Vous recevez une proposition et confirmez l\'organisation selon vos besoins',
+      ],
+    },
+    faq: {
+      title: 'Questions fréquentes — Visites à Makkah',
+      items: [
+        {
+          question: 'Proposez-vous des visites à Makkah en dehors du Masjid al-Haram\u00a0?',
+          answer:
+            "Haramain Prestige peut organiser un accompagnement pour vous aider à vous rendre sur des sites de Makkah au-delà du Haram, selon les possibilités disponibles. Précisez les lieux souhaités dans votre demande.",
+        },
+        {
+          question: 'Peut-on visiter Arafat et Mina en dehors du Hajj\u00a0?',
+          answer:
+            "Ces sites peuvent être accessibles en dehors de la période du Hajj, selon les conditions d'accès en vigueur. Haramain Prestige vérifiera les conditions au moment de votre séjour et vous indiquera les options disponibles.",
+        },
+        {
+          question: 'Peut-on visiter Jabal al-Nour (Grotte de Hiraa) lors d\'un séjour ordinaire\u00a0?',
+          answer:
+            "Oui, Jabal al-Nour est généralement accessible lors d'un séjour à Makkah. Précisez ce souhait dans votre demande d'accompagnement et Haramain Prestige étudiera comment l'intégrer à votre programme.",
+        },
+        {
+          question: 'L\'accès à Makkah est-il ouvert à tous\u00a0?',
+          answer:
+            "L'accès à Makkah est réservé aux musulmans. Haramain Prestige s'adresse aux pèlerins et aux voyageurs concernés. Si vous avez un doute sur les conditions d'accès, n'hésitez pas à nous contacter.",
+        },
+        {
+          question: 'Peut-on combiner visites à Makkah et hôtel dans une seule demande\u00a0?',
+          answer:
+            "Oui. Vous pouvez demander votre hébergement à Makkah, votre transfert depuis l'aéroport de Jeddah et un accompagnement pour vos visites dans la même demande. Haramain Prestige organise l'ensemble selon votre programme.",
+        },
+        {
+          question: 'Peut-on demander des visites à Makkah et à Madinah dans le même séjour\u00a0?',
+          answer:
+            "Oui. Si votre séjour inclut les deux villes, précisez vos souhaits pour Makkah et pour Madinah dans votre demande. Haramain Prestige étudiera l'organisation selon votre programme global.",
+        },
+      ],
+    },
+    ctaBlock: {
+      eyebrow: 'VOTRE SÉJOUR À MAKKAH',
+      title: 'Demandez un accompagnement pour vos visites à Makkah',
+      paragraph:
+        "Précisez les sites que vous souhaitez visiter, votre date de séjour et le nombre de personnes. Haramain Prestige étudie les possibilités disponibles et vous transmet une proposition.",
+      ctaPrimary: 'Préciser ma demande',
+      ctaSecondary: 'Écrire sur WhatsApp',
     },
   },
 };

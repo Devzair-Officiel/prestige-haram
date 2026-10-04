@@ -30,6 +30,7 @@ function HotelsMakkahPage() {
   const page = t.hotelsMakkahPage;
   const homeHref = pathFor('home');
   const hotelsMakkahHref = pathFor('hotelsMakkah');
+  const visitesMakkahHref = pathFor('visitesMakkah');
   const quoteHref = `${homeHref}#devis`;
 
   const makkahHotels = t.hotels.categories.makkah.hotels.map((h, i) => ({
@@ -100,10 +101,10 @@ function HotelsMakkahPage() {
         eyebrow={page.kaabaSection.eyebrow}
         title={page.kaabaSection.title}
         paragraphs={page.kaabaSection.paragraphs}
-        discoverLink={{
-          label: page.kaabaSection.discoverLabel,
-          href: pathFor('chambreVueKaaba'),
-        }}
+        discoverLinks={[
+          { label: page.kaabaSection.discoverLabel, href: pathFor('chambreVueKaaba') },
+          { label: page.kaabaSection.visitesMakkahLinkLabel, href: visitesMakkahHref },
+        ]}
       />
       <SeoSectionSteps
         eyebrow={page.bookingSection.eyebrow}

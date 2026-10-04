@@ -16,6 +16,8 @@ function ChauffeurPriveMakkahMadinahPage() {
   const chauffeurHref = pathFor('chauffeurPriveMakkahMadinah');
   const hotelsMakkahHref = pathFor('hotelsMakkah');
   const hotelsMadinahHref = pathFor('hotelsMadinah');
+  const visitesMakkahHref = pathFor('visitesMakkah');
+  const visitesMadinahHref = pathFor('visitesMadinah');
   const transfertJeddahHref = pathFor('transfertJeddahMakkah');
   const transfertMadinahHref = pathFor('transfertAeroportMadinah');
   const quoteHref = `${homeHref}#devis`;
@@ -84,19 +86,19 @@ function ChauffeurPriveMakkahMadinahPage() {
         eyebrow={page.makkahSection.eyebrow}
         title={page.makkahSection.title}
         paragraphs={page.makkahSection.paragraphs}
-        discoverLink={{
-          label: page.makkahSection.makkahLinkLabel,
-          href: hotelsMakkahHref,
-        }}
+        discoverLinks={[
+          { label: page.makkahSection.makkahLinkLabel, href: hotelsMakkahHref },
+          { label: page.makkahSection.visitesMakkahLinkLabel, href: visitesMakkahHref },
+        ]}
       />
       <SeoSectionText
         eyebrow={page.madinahSection.eyebrow}
         title={page.madinahSection.title}
         paragraphs={page.madinahSection.paragraphs}
-        discoverLink={{
-          label: page.madinahSection.madinahLinkLabel,
-          href: hotelsMadinahHref,
-        }}
+        discoverLinks={[
+          { label: page.madinahSection.madinahLinkLabel, href: hotelsMadinahHref },
+          { label: page.madinahSection.visitesMadinahLinkLabel, href: visitesMadinahHref },
+        ]}
       />
       <SeoSectionText
         eyebrow={page.entreVillesSection.eyebrow}

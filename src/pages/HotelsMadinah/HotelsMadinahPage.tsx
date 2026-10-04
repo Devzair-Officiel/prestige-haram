@@ -29,6 +29,7 @@ function HotelsMadinahPage() {
   const homeHref = pathFor('home');
   const hotelsMadinahHref = pathFor('hotelsMadinah');
   const transfertMadinahHref = pathFor('transfertAeroportMadinah');
+  const visitesMadinahHref = pathFor('visitesMadinah');
   const quoteHref = `${homeHref}#devis`;
 
   const madinahHotels = t.hotels.categories.madinah.hotels.map((h, i) => ({
@@ -104,10 +105,10 @@ function HotelsMadinahPage() {
         eyebrow={page.omraSection.eyebrow}
         title={page.omraSection.title}
         paragraphs={page.omraSection.paragraphs}
-        discoverLink={{
-          label: page.omraSection.transfertDiscoverLabel,
-          href: transfertMadinahHref,
-        }}
+        discoverLinks={[
+          { label: page.omraSection.transfertDiscoverLabel, href: transfertMadinahHref },
+          { label: page.omraSection.visitesMadinahLinkLabel, href: visitesMadinahHref },
+        ]}
       />
       <SeoSectionSteps
         eyebrow={page.bookingSection.eyebrow}
