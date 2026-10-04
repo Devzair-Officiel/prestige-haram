@@ -1905,7 +1905,7 @@ const fr: Translations = {
     },
     makkahSection: {
       eyebrow: 'MAKKAH AL-MUKARRAMAH',
-      title: 'Hôtels à Makkah près du Masjid al-Haram',
+      title: 'Choisir votre hôtel à Makkah',
       paragraphs: [
         'Pour votre séjour à Makkah, vous pouvez préciser les critères importants pour vous : dates, nombre de voyageurs, budget, type de chambre ou préférences concernant l\'emplacement.',
         'Haramain Prestige recherche ensuite des options correspondant à votre demande parmi les possibilités disponibles.',
@@ -1914,7 +1914,7 @@ const fr: Translations = {
     },
     madinahSection: {
       eyebrow: 'MADINAH AL-MUNAWWARAH',
-      title: 'Hôtels à Madinah près du Masjid an-Nabawi',
+      title: 'Choisir votre hôtel à Madinah',
       paragraphs: [
         'Pour votre séjour à Madinah, indiquez-nous vos dates, le nombre de voyageurs et les critères que vous souhaitez privilégier pour votre hébergement.',
         'Votre demande est étudiée selon les possibilités disponibles au moment de la recherche.',
