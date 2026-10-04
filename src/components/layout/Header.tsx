@@ -80,10 +80,9 @@ function Header() {
   const hotelsMenu = t.header.hotelsMenu.map((label, index) => ({
     label,
     href:
-      index === 0 ? hotelsHref :
-      index === 1 ? hotelsMakkahHref :
-      index === 2 ? hotelsMadinahHref :
-      index === 3 ? chambreVueKaabaHref :
+      index === 0 ? hotelsMakkahHref :
+      index === 1 ? hotelsMadinahHref :
+      index === 2 ? chambreVueKaabaHref :
       hotelsHref,
   }));
   const servicesHref = pathFor('services');
@@ -110,8 +109,8 @@ function Header() {
   const servicesActive = isActivePath(servicesHref) || servicesMenu.some((item) => isActivePath(item.href));
 
   const simpleLinks = [
-    { label: t.header.navAbout, href: aboutHref },
     { label: t.header.navTestimonials, href: testimonialsHref },
+    { label: t.header.navAbout, href: aboutHref },
     { label: t.header.navFaq, href: `${homeHref}#faq` },
     { label: t.header.navContact, href: contactHref },
   ];
@@ -119,8 +118,8 @@ function Header() {
     { label: t.header.navHome, href: homeHref },
     { label: t.header.navHotels, href: hotelsHref },
     { label: t.header.navServices, href: servicesHref },
-    { label: t.header.navAbout, href: aboutHref },
     { label: t.header.navTestimonials, href: testimonialsHref },
+    { label: t.header.navAbout, href: aboutHref },
     { label: t.header.navFaq, href: `${homeHref}#faq` },
     { label: t.header.navContact, href: contactHref },
   ];

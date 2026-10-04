@@ -6,6 +6,7 @@ function ContactCta() {
   const revealRef = useReveal<HTMLDivElement>();
   const { t, pathFor } = useI18n();
   const homeHref = pathFor('home');
+  const contactHref = pathFor('contact');
 
   return (
     <section id="contact" className="container-pad section-pad-y">
@@ -166,6 +167,23 @@ function ContactCta() {
                 </svg>
               </span>
               {t.contactCta.ctaSecondary}
+            </a>
+            <a
+              href={contactHref}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 7,
+                padding: '15px 22px',
+                borderRadius: 12,
+                border: '1px solid rgba(245,239,230,0.18)',
+                background: 'transparent',
+                color: 'rgba(248,242,232,0.65)',
+                fontWeight: 600,
+                fontSize: 14,
+              }}
+            >
+              {t.contactCta.ctaContact}
             </a>
           </div>
         </div>

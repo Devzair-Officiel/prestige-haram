@@ -29,7 +29,6 @@ const fr: Translations = {
     navContact: 'Contact',
     ctaQuote: 'Obtenir un devis',
     hotelsMenu: [
-      'Tous nos hôtels',
       'Hôtels à Makkah',
       'Hôtels à Madinah',
       'Chambres avec vue Kaaba',
@@ -433,6 +432,7 @@ const fr: Translations = {
     ctaSecondary: 'Écrire sur WhatsApp',
     ctaSecondaryAria:
       'Écrire à Haramain Prestige sur WhatsApp au +33 7 73 15 79 02',
+    ctaContact: 'Nous contacter',
     imageAlt: 'Masjid an-Nabawi à Madinah',
   },
 
@@ -1513,7 +1513,7 @@ const fr: Translations = {
         'Découvrez l\'offre hôtelière Haramain Prestige à Makkah et Madinah. Indiquez vos dates, le nombre de voyageurs et vos critères pour recevoir une proposition adaptée à votre séjour.',
     },
     testimonials: {
-      title: 'Témoignages — Haramain Prestige | Séjours à Makkah & Madinah',
+      title: 'Témoignages clients | Haramain Prestige',
       description:
         'Ils ont confié leur séjour à Makkah et Madinah à Haramain Prestige. Découvrez les retours de nos voyageurs.',
     },
@@ -2114,7 +2114,7 @@ const fr: Translations = {
     backHome: "Retour à l'accueil",
     hero: {
       eyebrow: 'TÉMOIGNAGES',
-      title: 'Ce que nos voyageurs disent de nous',
+      title: 'Témoignages de nos voyageurs',
       intro:
         'Ils nous ont confié leur séjour à Makkah et Madinah. Voici ce qu\'ils en ont retenu.',
       ctaPrimary: 'Recevoir une proposition',

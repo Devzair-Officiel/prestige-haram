@@ -233,7 +233,7 @@
     <xhtml:link rel="alternate" hreflang="ar-SA" href="https://haramainprestige.com/ar-sa/temoignages" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://haramainprestige.com/temoignages" />
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://haramainprestige.com/ar-sa/temoignages</loc>
@@ -241,7 +241,7 @@
     <xhtml:link rel="alternate" hreflang="ar-SA" href="https://haramainprestige.com/ar-sa/temoignages" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://haramainprestige.com/temoignages" />
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://haramainprestige.com/contact</loc>

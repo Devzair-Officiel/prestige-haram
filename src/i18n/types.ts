@@ -245,6 +245,7 @@ export interface Translations {
     ctaPrimary: string;
     ctaSecondary: string;
     ctaSecondaryAria: string;
+    ctaContact: string;
     imageAlt: string;
   };
 

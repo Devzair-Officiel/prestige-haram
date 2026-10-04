@@ -35,7 +35,6 @@ const arSA: Translations = {
     navContact: 'تواصل معنا',
     ctaQuote: 'اطلب عرض السعر',
     hotelsMenu: [
-      'جميع فنادقنا',
       'فنادق مكة المكرمة',
       'فنادق المدينة المنورة',
       'غرف بإطلالة على الكعبة المشرفة',
@@ -427,6 +426,7 @@ const arSA: Translations = {
     ctaSecondary: 'راسلونا على واتساب',
     ctaSecondaryAria:
       'التواصل مع Haramain Prestige عبر واتساب على الرقم +33 7 73 15 79 02',
+    ctaContact: 'تواصل معنا',
     imageAlt: 'المسجد النبوي في المدينة المنورة',
   },
 
@@ -1508,7 +1508,7 @@ const arSA: Translations = {
         'اكتشفوا خيارات الإقامة التي يمكن لـ Haramain Prestige البحث عنها في مكة المكرمة والمدينة المنورة وفق تواريخكم وعدد المسافرين ومعاييركم.',
     },
     testimonials: {
-      title: 'شهادات — Haramain Prestige | إقامات في مكة المكرمة والمدينة المنورة',
+      title: 'شهادات العملاء | Haramain Prestige',
       description:
         'لقد أسندوا رحلتهم إلى مكة المكرمة والمدينة المنورة إلى Haramain Prestige. اكتشف آراء مسافرينا.',
     },
@@ -2109,7 +2109,7 @@ const arSA: Translations = {
     backHome: 'العودة إلى الرئيسية',
     hero: {
       eyebrow: 'شهادات',
-      title: 'ما يقوله مسافرونا عنّا',
+      title: 'شهادات مسافرينا',
       intro:
         'لقد أسندوا إلينا رحلتهم إلى مكة المكرمة والمدينة المنورة. إليك ما احتفظوا به منها.',
       ctaPrimary: 'طلب اقتراح',
