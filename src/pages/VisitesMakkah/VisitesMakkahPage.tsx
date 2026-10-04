@@ -5,7 +5,7 @@ import {
   SeoSectionCriteria,
   SeoSectionSteps,
 } from '../../components/seo/sections';
-import heroImage from '../../assets/header-hotel-mekkah.webp';
+import heroImage from '../../assets/visite_mekkah.webp';
 
 const SITE_ORIGIN = 'https://haramainprestige.com';
 

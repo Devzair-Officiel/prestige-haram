@@ -5,7 +5,7 @@ import {
   SeoSectionCriteria,
   SeoSectionSteps,
 } from '../../components/seo/sections';
-import heroImage from '../../assets/masjid_nabawi.webp';
+import heroImage from '../../assets/visite_mdeinah.webp';
 
 const SITE_ORIGIN = 'https://haramainprestige.com';
 
