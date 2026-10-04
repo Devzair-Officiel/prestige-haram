@@ -7,7 +7,9 @@ import { FaqAccordion } from '../../components/seo/FaqAccordion';
 import { useReveal } from '../../hooks/useReveal';
 import { usePageMetadata } from '../../hooks/usePageMetadata';
 import { useI18n } from '../../i18n';
-import heroImage from '../../assets/contact.webp';
+import heroImage480 from '../../assets/contact-480.webp';
+import heroImage800 from '../../assets/contact-800.webp';
+import heroImage1200 from '../../assets/contact-1200.webp';
 
 const SITE_ORIGIN = 'https://haramainprestige.com';
 
@@ -256,11 +258,15 @@ function ContactPage() {
               }}
             >
               <img
-                src={heroImage}
+                src={heroImage1200}
                 alt={page.hero.imageAlt}
                 width={1200}
                 height={900}
+                fetchPriority="high"
+                loading="eager"
                 decoding="async"
+                srcSet={`${heroImage480} 480w, ${heroImage800} 800w, ${heroImage1200} 1200w`}
+                sizes="(max-width: 760px) calc(100vw - 32px), 50vw"
                 style={{
                   width: '100%',
                   height: '100%',

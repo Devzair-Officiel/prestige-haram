@@ -5,7 +5,9 @@ import {
   SeoSectionCriteria,
   SeoSectionSteps,
 } from '../../components/seo/sections';
-import heroImage from '../../assets/visite_mdeinah.webp';
+import heroImage480 from '../../assets/visite-madinah-480.webp';
+import heroImage800 from '../../assets/visite-madinah-800.webp';
+import heroImage1200 from '../../assets/visite-madinah-1200.webp';
 
 const SITE_ORIGIN = 'https://haramainprestige.com';
 
@@ -38,7 +40,12 @@ function VisitesMadinahPage() {
           label: page.hero.ctaSecondary,
           href: '#fonctionnement-visites-madinah',
         },
-        image: { src: heroImage, alt: page.hero.imageAlt },
+        image: {
+          src: heroImage1200,
+          alt: page.hero.imageAlt,
+          srcSet: `${heroImage480} 480w, ${heroImage800} 800w, ${heroImage1200} 1200w`,
+          sizes: '(max-width: 760px) calc(100vw - 32px), 50vw',
+        },
       }}
       faq={{ title: page.faq.title, items: page.faq.items }}
       finalCta={{

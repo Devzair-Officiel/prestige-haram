@@ -8,7 +8,7 @@ export type HeroConfig = {
   intro: string;
   ctaPrimary: { label: string; href: string };
   ctaSecondary: { label: string; href: string };
-  image: { src: string; alt: string };
+  image: { src: string; alt: string; srcSet?: string; sizes?: string };
 };
 
 export type FinalCtaConfig = {

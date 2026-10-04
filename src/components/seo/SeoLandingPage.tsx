@@ -265,7 +265,11 @@ export function SeoLandingPage({
                 alt={hero.image.alt}
                 width={1200}
                 height={900}
+                fetchPriority="high"
+                loading="eager"
                 decoding="async"
+                {...(hero.image.srcSet ? { srcSet: hero.image.srcSet } : {})}
+                {...(hero.image.sizes ? { sizes: hero.image.sizes } : {})}
                 style={{
                   width: '100%',
                   height: '100%',
