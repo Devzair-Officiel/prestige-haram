@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useReveal } from '../../../hooks/useReveal';
 import { useI18n } from '../../../i18n';
+import { navigateTo } from '../../../i18n/utils';
 import type { HotelItem } from '../../../i18n/types';
 import sheratonImage from '../../../assets/sheraton_jabal_al_kaaba.webp';
 import tilalImage from '../../../assets/tilal_jabal_al_kaaba.webp';
@@ -584,6 +585,7 @@ function Hotels() {
   const revealRef = useReveal<HTMLDivElement>();
   const { t, pathFor } = useI18n();
   const quoteHref = `${pathFor('home')}#devis`;
+  const hotelsHref = pathFor('hotels');
   const hotelsMakkahHref = pathFor('hotelsMakkah');
 
   return (
@@ -675,6 +677,27 @@ function Hotels() {
           />
         );
       })}
+
+      <div style={{ textAlign: 'center', marginTop: 40 }}>
+        <a
+          href={hotelsHref}
+          onClick={(e) => { e.preventDefault(); navigateTo(hotelsHref); }}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            fontSize: 13.5,
+            fontWeight: 600,
+            color: '#E6C878',
+            textDecoration: 'none',
+          }}
+        >
+          {t.hotels.discoverAll}
+          <span className="btn-arrow">
+            <ArrowIcon />
+          </span>
+        </a>
+      </div>
     </section>
   );
 }

@@ -476,6 +476,46 @@ describe('detectRoute — services', () => {
   });
 });
 
+describe('localizedPath — hotels', () => {
+  it('renvoie /hotels en FR', () => {
+    expect(localizedPath('hotels', 'fr')).toBe('/hotels');
+  });
+
+  it('renvoie /ar-sa/hotels en AR', () => {
+    expect(localizedPath('hotels', 'ar-SA')).toBe('/ar-sa/hotels');
+  });
+});
+
+describe('detectRoute — hotels', () => {
+  it('détecte FR + hotels pour /hotels', () => {
+    expect(detectRoute('/hotels')).toEqual({
+      locale: 'fr',
+      page: 'hotels',
+    });
+  });
+
+  it('détecte AR + hotels pour /ar-sa/hotels', () => {
+    expect(detectRoute('/ar-sa/hotels')).toEqual({
+      locale: 'ar-SA',
+      page: 'hotels',
+    });
+  });
+
+  it('tolère le trailing slash FR', () => {
+    expect(detectRoute('/hotels/')).toEqual({
+      locale: 'fr',
+      page: 'hotels',
+    });
+  });
+
+  it('tolère le trailing slash AR', () => {
+    expect(detectRoute('/ar-sa/hotels/')).toEqual({
+      locale: 'ar-SA',
+      page: 'hotels',
+    });
+  });
+});
+
 describe('équivalence localizedPath ↔ detectRoute', () => {
   const pages: PageKey[] = [
     'home', 'about', 'legal', 'privacy',
@@ -483,7 +523,7 @@ describe('équivalence localizedPath ↔ detectRoute', () => {
     'transfertJeddahMakkah', 'transfertAeroportMadinah',
     'chauffeurPriveMakkahMadinah',
     'visitesMadinah', 'visitesMakkah',
-    'services',
+    'services', 'hotels',
   ];
 
   it('round-trip FR : detectRoute(localizedPath(p, "fr")) → { fr, p }', () => {

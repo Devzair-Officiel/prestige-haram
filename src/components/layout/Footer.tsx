@@ -69,7 +69,7 @@ function Footer() {
   // seuls les libellés diffèrent.
   const navigationLinks = [
     { label: t.footer.columns.navigation.items[0], href: pathFor('about') },
-    { label: t.footer.columns.navigation.items[1], href: `${homeHref}#hotels` },
+    { label: t.footer.columns.navigation.items[1], href: pathFor('hotels') },
     { label: t.footer.columns.navigation.items[2], href: pathFor('services') },
   ];
   const moreLinks = [

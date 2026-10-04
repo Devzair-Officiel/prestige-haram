@@ -7,7 +7,7 @@ export type Locale = 'fr' | 'ar-SA';
 /** Direction textuelle induite par la locale. */
 export type Direction = 'ltr' | 'rtl';
 
-export type PageKey = 'home' | 'about' | 'legal' | 'privacy' | 'notFound' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' | 'chauffeurPriveMakkahMadinah' | 'visitesMadinah' | 'visitesMakkah' | 'services';
+export type PageKey = 'home' | 'about' | 'legal' | 'privacy' | 'notFound' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' | 'chauffeurPriveMakkahMadinah' | 'visitesMadinah' | 'visitesMakkah' | 'services' | 'hotels';
 
 /** Une entrée FAQ, utilisée pour le rendu ET le JSON-LD FAQPage. */
 export type FaqItem = {
@@ -200,6 +200,8 @@ export interface Translations {
     discoverMadinah: string;
     /** Lien de maillage interne vers la landing page Chambre vue Kaaba. */
     discoverKaaba: string;
+    /** Lien de maillage interne vers la page hub /hotels. */
+    discoverAll: string;
     categories: {
       makkah: { eyebrow: string; title: string; hotels: HotelItem[] };
       madinah: { eyebrow: string; title: string; hotels: HotelItem[] };
@@ -842,6 +844,70 @@ export interface Translations {
       eyebrow: string;
       title: string;
       paragraphs: string[];
+    };
+    fonctionnementSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      steps: string[];
+    };
+    faq: {
+      title: string;
+      items: FaqItem[];
+    };
+    ctaBlock: {
+      eyebrow: string;
+      title: string;
+      paragraph: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+    };
+  };
+
+  hotelsPage: {
+    backHome: string;
+    hero: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+      imageAlt: string;
+    };
+    introSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    makkahSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      makkahLinkLabel: string;
+    };
+    madinahSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      madinahLinkLabel: string;
+    };
+    kaabaSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      kaabaLinkLabel: string;
+    };
+    doubleSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+    };
+    criteresSection: {
+      eyebrow: string;
+      title: string;
+      paragraphs: string[];
+      criteriaLabel: string;
+      criteria: string[];
     };
     fonctionnementSection: {
       eyebrow: string;

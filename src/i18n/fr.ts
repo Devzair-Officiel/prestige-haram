@@ -29,6 +29,7 @@ const fr: Translations = {
     navContact: 'Contact',
     ctaQuote: 'Obtenir un devis',
     hotelsMenu: [
+      'Tous nos hôtels',
       'Hôtels à Makkah',
       'Hôtels à Madinah',
       'Chambres avec vue Kaaba',
@@ -218,6 +219,7 @@ const fr: Translations = {
     discoverMakkah: 'Découvrir tous les hôtels à Makkah',
     discoverMadinah: 'Découvrir tous les hôtels à Madinah',
     discoverKaaba: 'Découvrir les chambres avec vue Kaaba',
+    discoverAll: 'Découvrir tous nos hôtels',
     ctaAria: (categoryTitle: string) =>
       `Demander un devis pour un séjour — ${categoryTitle}`,
     prevAria: 'Voir les hôtels précédents',
@@ -1504,6 +1506,11 @@ const fr: Translations = {
       description:
         'Découvrez les services Haramain Prestige à Makkah et Madinah : transferts aéroport, chauffeur privé et organisation de visites selon votre programme.',
     },
+    hotels: {
+      title: 'Hôtels à Makkah & Madinah | Haramain Prestige',
+      description:
+        'Découvrez les hôtels Haramain Prestige à Makkah et Madinah : établissements sélectionnés près du Haram, tarifs négociés et accompagnement personnalisé.',
+    },
   },
 
   visitesMadinahPage: {
@@ -1873,6 +1880,133 @@ const fr: Translations = {
       paragraph:
         'Indiquez-nous vos dates, le nombre de voyageurs et les services dont vous avez besoin afin de recevoir une proposition correspondant à votre demande.',
       ctaPrimary: 'Demander une proposition',
+      ctaSecondary: 'Écrire sur WhatsApp',
+    },
+  },
+
+  hotelsPage: {
+    backHome: "Retour à l'accueil",
+    hero: {
+      eyebrow: 'HÔTELS · MAKKAH & MADINAH',
+      title: 'Hôtels à Makkah & Madinah : adresses sélectionnées près du Haram',
+      intro:
+        'Haramain Prestige sélectionne et propose des hôtels à Makkah et Madinah pour des séjours lors du Hajj, de la Omra ou d\'un voyage spirituel. Établissements situés à proximité du Masjid al-Haram et du Masjid an-Nabawi, à tous les budgets.',
+      ctaPrimary: 'Recevoir une proposition hôtel',
+      ctaSecondary: 'Voir nos adresses',
+      imageAlt: 'Vue sur le Masjid al-Haram depuis un hôtel de Makkah',
+    },
+    introSection: {
+      eyebrow: 'NOS HÔTELS',
+      title: 'Des hôtels sélectionnés à Makkah et Madinah',
+      paragraphs: [
+        'Haramain Prestige propose des hôtels à Makkah et Madinah adaptés aux séjours lors du Hajj, de la Omra ou d\'un voyage spirituel. Chaque établissement est sélectionné selon sa proximité avec les lieux de culte, son confort et sa disponibilité selon les dates demandées.',
+        'Notre sélection couvre différentes gammes tarifaires : des hôtels économiques aux adresses premium avec vue sur la Kaaba, en passant par des établissements milieu de gamme bien situés. Vous indiquez vos critères, nous étudions les disponibilités et vous transmettons une proposition.',
+      ],
+    },
+    makkahSection: {
+      eyebrow: 'MAKKAH AL-MUKARRAMAH',
+      title: 'Hôtels à Makkah près du Masjid al-Haram',
+      paragraphs: [
+        'Makkah concentre la majorité des séjours lors de la Omra ou du Hajj. Haramain Prestige propose des hôtels situés à différentes distances du Masjid al-Haram, selon vos préférences et votre budget.',
+        'Selon les dates et la disponibilité, il est possible de trouver des chambres standard, des suites familiales ou des chambres avec vue directe sur la Kaaba. Indiquez vos critères pour recevoir une proposition adaptée à votre séjour.',
+      ],
+      makkahLinkLabel: 'Voir tous les hôtels à Makkah',
+    },
+    madinahSection: {
+      eyebrow: 'MADINAH AL-MUNAWWARAH',
+      title: 'Hôtels à Madinah près du Masjid an-Nabawi',
+      paragraphs: [
+        'Madinah accueille les pèlerins souhaitant se recueillir près du Masjid an-Nabawi, la Mosquée du Prophète Muhammad ﷺ. Haramain Prestige propose des établissements à proximité de la Mosquée, à différents budgets.',
+        'Que vous séjourniez à Madinah en début ou en fin de voyage, une bonne localisation facilite l\'accès au Masjid an-Nabawi et aux sites environnants. Indiquez vos dates et vos besoins pour recevoir une proposition.',
+      ],
+      madinahLinkLabel: 'Voir tous les hôtels à Madinah',
+    },
+    kaabaSection: {
+      eyebrow: 'VUE SUR LA KAABA',
+      title: 'Chambres avec vue sur la Kaaba',
+      paragraphs: [
+        'Certains hôtels situés dans les tours autour du Masjid al-Haram proposent des chambres avec vue directe sur la Kaaba. Cette catégorie est très demandée et soumise à disponibilité selon les établissements et les dates.',
+        'Haramain Prestige vérifie les disponibilités des chambres avec vue Kaaba selon votre demande et vous transmet une proposition si cette catégorie est accessible à vos dates.',
+      ],
+      kaabaLinkLabel: 'Découvrir les chambres avec vue Kaaba',
+    },
+    doubleSection: {
+      eyebrow: 'MAKKAH & MADINAH',
+      title: 'Séjour combiné Makkah et Madinah',
+      paragraphs: [
+        'De nombreux pèlerins séjournent à la fois à Makkah et à Madinah lors d\'un même voyage. Haramain Prestige peut organiser les deux séjours dans une seule demande, en tenant compte de vos dates, du nombre de nuits dans chaque ville et de vos préférences.',
+        'Précisez les deux destinations, vos dates d\'arrivée et de départ, ainsi que vos critères pour recevoir une proposition globale pour votre séjour à Makkah et à Madinah.',
+      ],
+    },
+    criteresSection: {
+      eyebrow: 'CRITÈRES DE SÉLECTION',
+      title: 'Comment nous sélectionnons les hôtels',
+      paragraphs: [
+        'Haramain Prestige sélectionne les établissements proposés selon plusieurs critères déterminants pour la qualité d\'un séjour à Makkah ou Madinah.',
+      ],
+      criteriaLabel: 'NOS CRITÈRES',
+      criteria: [
+        'Proximité avec le Masjid al-Haram ou le Masjid an-Nabawi',
+        'Disponibilité d\'une navette vers le Haram',
+        'Catégorie adaptée : standard, familiale, vue Kaaba',
+        'Rapport qualité/prix selon le budget communiqué',
+        'Retours d\'expérience de voyageurs précédents',
+        'Fiabilité des confirmations et des disponibilités',
+      ],
+    },
+    fonctionnementSection: {
+      eyebrow: 'COMMENT ÇA MARCHE\u00a0?',
+      title: 'Réserver votre hôtel en quelques étapes',
+      paragraphs: [
+        'Indiquez vos dates, la ville souhaitée, le nombre de voyageurs et vos préférences. Haramain Prestige étudie les disponibilités et vous transmet une proposition adaptée à votre demande.',
+      ],
+      steps: [
+        'Vous indiquez vos dates, la destination et le nombre de voyageurs',
+        'Nous étudions les disponibilités correspondant à vos critères',
+        'Vous recevez une proposition avant de confirmer votre réservation',
+      ],
+    },
+    faq: {
+      title: 'Questions fréquentes — Hôtels à Makkah & Madinah',
+      items: [
+        {
+          question: 'Haramain Prestige propose-t-il des hôtels à Makkah et Madinah\u00a0?',
+          answer:
+            'Oui. Haramain Prestige propose des hôtels à Makkah et Madinah selon vos dates, votre budget et vos critères. Vous transmettez votre demande et nous étudions les disponibilités pour vous transmettre une proposition.',
+        },
+        {
+          question: 'Peut-on réserver un hôtel avec vue sur la Kaaba\u00a0?',
+          answer:
+            'Oui, selon la disponibilité. Les chambres avec vue Kaaba sont très demandées. Haramain Prestige vérifie les disponibilités selon vos dates et vous indique si cette catégorie est accessible.',
+        },
+        {
+          question: 'Peut-on réserver des hôtels dans les deux villes en même temps\u00a0?',
+          answer:
+            'Oui. Haramain Prestige peut organiser un séjour combiné Makkah et Madinah dans une seule demande. Indiquez vos dates pour chaque ville et le nombre de nuits souhaité.',
+        },
+        {
+          question: 'Les tarifs proposés sont-ils négociés\u00a0?',
+          answer:
+            'Haramain Prestige travaille avec des établissements partenaires et peut proposer des tarifs adaptés selon les disponibilités et la période.',
+        },
+        {
+          question: 'Comment obtenir une proposition hôtel\u00a0?',
+          answer:
+            'Transmettez vos dates, la ville souhaitée, le nombre de voyageurs, vos préférences et votre budget via le formulaire de devis. Haramain Prestige étudie votre demande et vous transmet une proposition.',
+        },
+        {
+          question: 'Peut-on réserver un hôtel sans réserver d\'autres services\u00a0?',
+          answer:
+            'Oui. Vous pouvez soumettre une demande uniquement pour un hôtel, sans inclure de transfert, de chauffeur ou de visites.',
+        },
+      ],
+    },
+    ctaBlock: {
+      eyebrow: 'VOTRE SÉJOUR',
+      title: 'Réservez votre hôtel à Makkah ou Madinah',
+      paragraph:
+        'Indiquez-nous vos dates, la destination, le nombre de voyageurs et vos préférences afin de recevoir une proposition adaptée à votre séjour.',
+      ctaPrimary: 'Recevoir une proposition hôtel',
       ctaSecondary: 'Écrire sur WhatsApp',
     },
   },

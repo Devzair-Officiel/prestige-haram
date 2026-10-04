@@ -71,16 +71,18 @@ function Header() {
   const homeHref = pathFor('home');
   const aboutHref = pathFor('about');
 
+  const hotelsHref = pathFor('hotels');
   const hotelsMakkahHref = pathFor('hotelsMakkah');
   const hotelsMadinahHref = pathFor('hotelsMadinah');
   const chambreVueKaabaHref = pathFor('chambreVueKaaba');
   const hotelsMenu = t.header.hotelsMenu.map((label, index) => ({
     label,
     href:
-      index === 0 ? hotelsMakkahHref :
-      index === 1 ? hotelsMadinahHref :
-      index === 2 ? chambreVueKaabaHref :
-      `${homeHref}#hotels`,
+      index === 0 ? hotelsHref :
+      index === 1 ? hotelsMakkahHref :
+      index === 2 ? hotelsMadinahHref :
+      index === 3 ? chambreVueKaabaHref :
+      hotelsHref,
   }));
   const servicesHref = pathFor('services');
   const servicesMenu = [
@@ -102,7 +104,7 @@ function Header() {
     return pathname === resolved;
   };
 
-  const hotelsActive = hotelsMenu.some((item) => isActivePath(item.href));
+  const hotelsActive = isActivePath(hotelsHref) || hotelsMenu.some((item) => isActivePath(item.href));
   const servicesActive = isActivePath(servicesHref) || servicesMenu.some((item) => isActivePath(item.href));
 
   const simpleLinks = [
@@ -113,7 +115,7 @@ function Header() {
   ];
   const mobileNav = [
     { label: t.header.navHome, href: homeHref },
-    { label: t.header.navHotels, href: `${homeHref}#hotels` },
+    { label: t.header.navHotels, href: hotelsHref },
     { label: t.header.navServices, href: servicesHref },
     { label: t.header.navAbout, href: aboutHref },
     { label: t.header.navTestimonials, href: `${homeHref}#temoignages` },
@@ -282,7 +284,8 @@ function Header() {
           onBlur={(e) => handleGroupBlur(e, 'hotels')}
         >
           <a
-            href={`${homeHref}#hotels`}
+            href={hotelsHref}
+            onClick={(e) => handleInternalNav(e, hotelsHref)}
             className={`nav-link${hotelsActive ? ' nav-link--active' : ''}`}
             aria-haspopup="menu"
             aria-expanded={menu === 'hotels'}
@@ -555,7 +558,7 @@ function Header() {
 // gardé local ici pour ne pas coupler le Header aux slugs FR.
 function guessPageFromPath(
   pathname: string,
-): 'home' | 'about' | 'legal' | 'privacy' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' | 'chauffeurPriveMakkahMadinah' | 'visitesMadinah' | 'visitesMakkah' | 'services' {
+): 'home' | 'about' | 'legal' | 'privacy' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' | 'chauffeurPriveMakkahMadinah' | 'visitesMadinah' | 'visitesMakkah' | 'services' | 'hotels' {
   const stripped = pathname.replace(/^\/ar-sa/, '').replace(/\/+$/, '') || '/';
   if (stripped === '/a-propos') return 'about';
   if (stripped === '/mentions-legales') return 'legal';
@@ -569,6 +572,7 @@ function guessPageFromPath(
   if (stripped === '/visites-madinah') return 'visitesMadinah';
   if (stripped === '/visites-makkah') return 'visitesMakkah';
   if (stripped === '/services') return 'services';
+  if (stripped === '/hotels') return 'hotels';
   return 'home';
 }
 
