@@ -42,7 +42,9 @@ function HotelsMadinahPage() {
       page="hotelsMadinah"
       metaTitle={t.meta.hotelsMadinah.title}
       metaDescription={t.meta.hotelsMadinah.description}
-      breadcrumbLabel={locale === 'fr' ? 'Hôtels à Madinah' : 'فنادق المدينة المنورة'}
+      breadcrumbLabel={
+        locale === 'fr' ? 'Hôtels à Madinah' : 'فنادق المدينة المنورة'
+      }
       hero={{
         backHomeLabel: page.backHome,
         backHomeHref: homeHref,
@@ -106,8 +108,14 @@ function HotelsMadinahPage() {
         title={page.omraSection.title}
         paragraphs={page.omraSection.paragraphs}
         discoverLinks={[
-          { label: page.omraSection.transfertDiscoverLabel, href: transfertMadinahHref },
-          { label: page.omraSection.visitesMadinahLinkLabel, href: visitesMadinahHref },
+          {
+            label: page.omraSection.transfertDiscoverLabel,
+            href: transfertMadinahHref,
+          },
+          {
+            label: page.omraSection.visitesMadinahLinkLabel,
+            href: visitesMadinahHref,
+          },
         ]}
       />
       <SeoSectionSteps

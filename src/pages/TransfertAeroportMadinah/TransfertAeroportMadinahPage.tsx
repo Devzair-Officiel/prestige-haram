@@ -24,7 +24,9 @@ function TransfertAeroportMadinahPage() {
       metaTitle={t.meta.transfertAeroportMadinah.title}
       metaDescription={t.meta.transfertAeroportMadinah.description}
       breadcrumbLabel={
-        locale === 'fr' ? 'Transfert aéroport Madinah' : 'التوصيل من مطار المدينة المنورة'
+        locale === 'fr'
+          ? 'Transfert aéroport Madinah'
+          : 'التوصيل من مطار المدينة المنورة'
       }
       hero={{
         backHomeLabel: page.backHome,

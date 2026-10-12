@@ -173,10 +173,7 @@ const fr: Translations = {
         'Découvrir le transfert à Madinah',
       ],
       ['Découvrir notre service chauffeur'],
-      [
-        'Visites à Madinah',
-        'Visites à Makkah',
-      ],
+      ['Visites à Madinah', 'Visites à Makkah'],
     ],
     discoverAll: 'Découvrir tous nos services',
   },
@@ -436,6 +433,22 @@ const fr: Translations = {
     imageAlt: 'Masjid an-Nabawi à Madinah',
   },
 
+  cookies: {
+    title: 'Votre choix pour la mesure d’audience',
+    description:
+      'Avec votre accord, Google Analytics nous aide à mesurer les pages consultées et les demandes de devis. Aucun outil analytique ne se charge avant votre accord. Refuser ne limite pas votre navigation. Vous pouvez retirer votre accord à tout moment via « Gérer les cookies ».',
+    privacyLink: 'Politique de confidentialité',
+    accept: 'Accepter',
+    refuse: 'Refuser',
+    manage: 'Gérer les cookies',
+    accepted:
+      'La mesure d’audience est activée. Pour retirer votre accord, choisissez « Refuser ».',
+    refused: 'La mesure d’audience est désactivée.',
+    close: 'Fermer',
+    storageNotice:
+      'Votre navigateur ne permet pas de mémoriser ce choix durablement. Il s’applique à cette visite ; votre choix pourra vous être redemandé.',
+  },
+
   footer: {
     logoAlt: 'Haramain Prestige',
     tagline:
@@ -572,9 +585,9 @@ const fr: Translations = {
         eyebrow: 'COOKIES',
         title: 'Utilisation des cookies',
         paragraphs: [
-          "Ce site ne dépose aucun cookie de sa propre initiative. Aucun cookie publicitaire, de mesure d'audience ou de suivi tiers n'est utilisé.",
+          'Google Analytics 4 mesure l’audience du site (pages consultées, clics de contact et demandes de devis confirmées), uniquement après votre consentement explicite. Avant acceptation ou en cas de refus, aucun script ni aucune requête Google Analytics n’est chargé. Aucune fonctionnalité publicitaire n’est activée.',
           "Les polices d'écriture sont auto-hébergées : les fichiers de fonte (Cormorant Garamond, Manrope, Noto Naskh Arabic) sont servis depuis notre propre domaine, sans requête vers Google Fonts ni transfert d'adresse IP à un tiers.",
-          'Vous pouvez à tout moment configurer votre navigateur pour bloquer ou supprimer les cookies déjà installés.',
+          'Votre décision est mémorisée dans le stockage local du navigateur. Le lien « Gérer les cookies », présent en pied de page, permet de la modifier ou de retirer votre consentement en choisissant « Refuser ». Les envois futurs sont alors bloqués et les cookies analytiques accessibles sont supprimés.',
         ],
       },
       {
@@ -614,7 +627,7 @@ const fr: Translations = {
         eyebrow: 'DONNÉES COLLECTÉES',
         title: 'Quelles informations recueillons-nous ?',
         paragraphs: [
-          'Nous collectons uniquement les données que vous nous transmettez volontairement via nos formulaires (demande de devis, prise de contact, WhatsApp).',
+          'Nous recueillons les données que vous nous transmettez volontairement via nos formulaires (demande de devis, prise de contact, WhatsApp). Avec votre accord distinct, Google Analytics recueille également des données techniques de navigation et des événements de mesure d’audience, décrits ci-dessous.',
         ],
         bullets: [
           'Nom et prénom',
@@ -633,6 +646,7 @@ const fr: Translations = {
           'Organiser et suivre votre séjour à Makkah & Madinah',
           'Vous contacter avant, pendant et après votre séjour',
           'Améliorer la qualité de nos services',
+          'Avec votre consentement analytique, mesurer l’audience et les interactions commerciales du site avec Google Analytics 4',
         ],
       },
       {
@@ -660,17 +674,19 @@ const fr: Translations = {
         eyebrow: 'DESTINATAIRES',
         title: 'Qui a accès à vos données ?',
         paragraphs: [
-          "Vos données sont accessibles uniquement à l'équipe de Haramain Prestige, dans la stricte limite de leurs missions. Aucune donnée n'est revendue ni transmise à des tiers à des fins commerciales.",
+          "Les données de vos demandes sont accessibles à l'équipe de Haramain Prestige, dans la stricte limite de ses missions. Elles ne sont ni revendues ni transmises à des tiers à des fins de prospection commerciale.",
           'Certaines données peuvent être transmises à nos partenaires hôteliers ou prestataires de transfert uniquement dans le cadre strict de la réservation de votre séjour (nom, dates, préférences), et avec votre accord.',
+          'Si vous acceptez la mesure d’audience, Google reçoit les données techniques nécessaires à Google Analytics 4. Les noms, e-mails, téléphones et messages des formulaires ne sont jamais transmis par notre intégration Analytics. Les conditions de traitement, les éventuels transferts internationaux et les paramètres du compte Google doivent être vérifiés par le responsable du site.',
         ],
       },
       {
         eyebrow: 'COOKIES',
         title: 'Cookies & traceurs',
         paragraphs: [
-          "Le site ne dépose aucun cookie de sa propre initiative. Aucun cookie publicitaire, de mesure d'audience tierce ou de traçage n'est utilisé.",
+          'Google Analytics 4 est utilisé uniquement avec votre consentement pour mesurer les pages vues, les clics WhatsApp, téléphone et e-mail, ainsi que les demandes de devis confirmées par notre serveur. Des cookies analytiques (_ga et _ga_…) peuvent alors être déposés. Aucun script ni aucune requête Google Analytics ne se charge avant acceptation ou après refus ; les fonctionnalités publicitaires restent désactivées.',
           "Les polices d'écriture (Cormorant Garamond, Manrope, Noto Naskh Arabic) sont auto-hébergées : les fichiers de fonte sont servis depuis notre propre domaine. Aucune requête n'est effectuée vers Google Fonts et aucune adresse IP n'est transmise à un tiers de ce fait.",
-          'Vous pouvez à tout moment configurer votre navigateur pour bloquer ou supprimer les cookies déjà installés.',
+          'Votre choix est conservé dans le stockage local de votre navigateur, avec un repli de refus pour la session si nécessaire. Vous pouvez accepter, refuser ou retirer votre consentement via « Gérer les cookies » en pied de page. Le retrait bloque les envois futurs et supprime les cookies analytiques accessibles ; il ne supprime pas rétroactivement les données déjà envoyées.',
+          'La durée de conservation des données dans Google Analytics, celle des cookies et les autres paramètres du compte doivent être vérifiés manuellement par le responsable du site ; aucune durée non vérifiée n’est annoncée ici.',
         ],
       },
       {
@@ -710,7 +726,7 @@ const fr: Translations = {
     backHome: "Retour à l'accueil",
     hero: {
       eyebrow: 'HÔTELS À MAKKAH · LA MECQUE',
-      title: 'Hôtels à Makkah : trouvez l\'hébergement adapté à votre séjour',
+      title: "Hôtels à Makkah : trouvez l'hébergement adapté à votre séjour",
       intro:
         'Haramain Prestige vous accompagne dans la recherche et la réservation de votre hôtel à Makkah (La Mecque). Nous sélectionnons des établissements selon votre budget, la proximité souhaitée avec le Masjid al-Haram, le niveau de confort et les besoins de votre séjour.',
       ctaPrimary: 'Recevoir une proposition personnalisée',
@@ -720,29 +736,29 @@ const fr: Translations = {
     hotelsSection: {
       title: 'Quelques hôtels à Makkah',
       intro:
-        'Voici une sélection d\'établissements déjà proposés par Haramain Prestige. Les disponibilités, catégories de chambres et tarifs varient selon vos dates\u00a0: nous vérifions chaque demande avant de vous transmettre une proposition.',
+        "Voici une sélection d'établissements déjà proposés par Haramain Prestige. Les disponibilités, catégories de chambres et tarifs varient selon vos dates\u00a0: nous vérifions chaque demande avant de vous transmettre une proposition.",
       ctaLabel: 'Demander les disponibilités',
     },
     haramSection: {
       eyebrow: 'PROXIMITÉ DU HARAM',
       title: 'Choisir un hôtel proche du Masjid al-Haram',
       paragraphs: [
-        'Pour un séjour à Makkah, la distance jusqu\'au Masjid al-Haram est souvent l\'un des premiers critères de choix. Mais une distance seule ne suffit pas toujours\u00a0: l\'accès réel, le quartier, le dénivelé, la présence d\'une navette et l\'entrée du Haram que vous utilisez peuvent également avoir un impact sur vos déplacements.',
-        'Haramain Prestige étudie votre demande en fonction de vos priorités afin de vous orienter vers des hôtels cohérents avec votre séjour, plutôt que de vous proposer une liste générique d\'établissements.',
+        "Pour un séjour à Makkah, la distance jusqu'au Masjid al-Haram est souvent l'un des premiers critères de choix. Mais une distance seule ne suffit pas toujours\u00a0: l'accès réel, le quartier, le dénivelé, la présence d'une navette et l'entrée du Haram que vous utilisez peuvent également avoir un impact sur vos déplacements.",
+        "Haramain Prestige étudie votre demande en fonction de vos priorités afin de vous orienter vers des hôtels cohérents avec votre séjour, plutôt que de vous proposer une liste générique d'établissements.",
       ],
       criteria: [
         'Proximité souhaitée avec le Masjid al-Haram',
         'Budget par chambre et par nuit',
-        'Catégorie d\'hôtel et niveau de confort',
+        "Catégorie d'hôtel et niveau de confort",
         'Voyage en couple, famille ou groupe',
-        'Besoin éventuel d\'une chambre avec vue sur la Kaaba',
+        "Besoin éventuel d'une chambre avec vue sur la Kaaba",
       ],
     },
     choiceSection: {
       eyebrow: 'SELON VOTRE SÉJOUR',
       title: 'Quel hôtel choisir à Makkah\u00a0?',
       paragraphs: [
-        'Il n\'existe pas un hôtel idéal pour tous les voyageurs. Une famille peut privilégier l\'espace, l\'accès et la simplicité des déplacements, tandis qu\'un couple peut rechercher un établissement premium ou une vue particulière. D\'autres voyageurs souhaitent surtout maîtriser leur budget tout en restant dans une zone pratique.',
+        "Il n'existe pas un hôtel idéal pour tous les voyageurs. Une famille peut privilégier l'espace, l'accès et la simplicité des déplacements, tandis qu'un couple peut rechercher un établissement premium ou une vue particulière. D'autres voyageurs souhaitent surtout maîtriser leur budget tout en restant dans une zone pratique.",
         'Notre rôle est de comparer les options disponibles à vos dates et de vous présenter une sélection adaptée à vos critères, avec un interlocuteur unique pour votre demande.',
       ],
     },
@@ -750,18 +766,20 @@ const fr: Translations = {
       eyebrow: 'VUE KAABA',
       title: 'Hôtel à Makkah avec vue sur la Kaaba',
       paragraphs: [
-        'Certaines catégories de chambres et suites offrent une vue sur la Kaaba ou sur le Masjid al-Haram. Cette caractéristique dépend de l\'établissement, de la catégorie exacte de chambre et des disponibilités au moment de la réservation.',
+        "Certaines catégories de chambres et suites offrent une vue sur la Kaaba ou sur le Masjid al-Haram. Cette caractéristique dépend de l'établissement, de la catégorie exacte de chambre et des disponibilités au moment de la réservation.",
         'Si la vue Kaaba est importante pour votre séjour, indiquez-le dès votre demande de devis. Nous pourrons rechercher les options disponibles correspondant à ce critère et vous préciser la catégorie proposée avant confirmation.',
       ],
       discoverLabel: 'Découvrir les chambres avec vue sur la Kaaba',
-      visitesMakkahLinkLabel: 'Demander un accompagnement pour vos visites à Makkah',
+      visitesMakkahLinkLabel:
+        'Demander un accompagnement pour vos visites à Makkah',
     },
     bookingSection: {
       eyebrow: 'RÉSERVATION',
-      title: 'Comment réserver votre hôtel à Makkah avec Haramain Prestige\u00a0?',
+      title:
+        'Comment réserver votre hôtel à Makkah avec Haramain Prestige\u00a0?',
       paragraphs: [
         'Vous nous indiquez vos dates, le nombre de voyageurs, le nombre de chambres, votre budget et vos préférences. Nous recherchons ensuite les options correspondant à votre demande auprès de notre réseau de partenaires.',
-        'Vous recevez une proposition personnalisée. Vous pouvez réserver uniquement l\'hôtel ou compléter votre séjour avec les autres services disponibles, notamment les transferts et les déplacements sur place.',
+        "Vous recevez une proposition personnalisée. Vous pouvez réserver uniquement l'hôtel ou compléter votre séjour avec les autres services disponibles, notamment les transferts et les déplacements sur place.",
       ],
       steps: [
         'Vous nous transmettez vos dates et vos critères',
@@ -778,7 +796,8 @@ const fr: Translations = {
             'Oui. Haramain Prestige sélectionne des hôtels à Makkah selon la proximité recherchée avec le Masjid al-Haram. La proposition dépend de vos dates, de votre budget et des disponibilités.',
         },
         {
-          question: 'Puis-je demander un hôtel 3, 4 ou 5 étoiles à Makkah\u00a0?',
+          question:
+            'Puis-je demander un hôtel 3, 4 ou 5 étoiles à Makkah\u00a0?',
           answer:
             'Oui. Vous pouvez indiquer la catégorie souhaitée dans votre demande. Nous recherchons ensuite les établissements disponibles correspondant à vos critères.',
         },
@@ -788,14 +807,16 @@ const fr: Translations = {
             'Oui, lorsque cette catégorie est proposée et disponible. Il est important de préciser que vous souhaitez une vue Kaaba afin que la catégorie exacte puisse être vérifiée avant réservation.',
         },
         {
-          question: 'Puis-je réserver uniquement l\'hôtel sans autre service\u00a0?',
+          question:
+            "Puis-je réserver uniquement l'hôtel sans autre service\u00a0?",
           answer:
             'Oui. Vous pouvez demander uniquement votre hébergement à Makkah. Les transferts, chauffeurs et autres prestations sont complémentaires et restent facultatifs.',
         },
         {
-          question: 'Pourquoi les tarifs des hôtels à Makkah changent-ils selon les dates\u00a0?',
+          question:
+            'Pourquoi les tarifs des hôtels à Makkah changent-ils selon les dates\u00a0?',
           answer:
-            'Les prix et disponibilités sont variables selon l\'établissement, la période, la catégorie de chambre et la demande. C\'est pourquoi Haramain Prestige confirme les conditions correspondant à vos dates avant toute réservation.',
+            "Les prix et disponibilités sont variables selon l'établissement, la période, la catégorie de chambre et la demande. C'est pourquoi Haramain Prestige confirme les conditions correspondant à vos dates avant toute réservation.",
         },
         {
           question: 'Comment obtenir un devis pour un hôtel à Makkah\u00a0?',
@@ -806,7 +827,7 @@ const fr: Translations = {
     },
     ctaBlock: {
       eyebrow: 'VOTRE SÉJOUR À MAKKAH',
-      title: 'Recevez une sélection d\'hôtels adaptée à vos critères',
+      title: "Recevez une sélection d'hôtels adaptée à vos critères",
       paragraph:
         'Indiquez-nous vos dates, votre budget et la proximité souhaitée avec le Haram. Nous vous répondons avec une proposition personnalisée selon les disponibilités.',
       ctaPrimary: 'Demander mon devis hôtel',
@@ -818,7 +839,8 @@ const fr: Translations = {
     backHome: "Retour à l'accueil",
     hero: {
       eyebrow: 'CHAMBRES & SUITES · VUE KAABA',
-      title: 'Chambre avec vue sur la Kaaba à Makkah : trouvez la catégorie adaptée',
+      title:
+        'Chambre avec vue sur la Kaaba à Makkah : trouvez la catégorie adaptée',
       intro:
         'Certaines chambres et suites à Makkah offrent une vue sur la Kaaba ou sur le Masjid al-Haram. Haramain Prestige vous accompagne pour identifier les établissements et les catégories de chambres correspondant à votre demande, selon vos dates, votre budget et les disponibilités.',
       ctaPrimary: 'Rechercher une chambre vue Kaaba',
@@ -841,7 +863,7 @@ const fr: Translations = {
       criteriaLabel: 'POINTS À VÉRIFIER',
       criteria: [
         'Catégorie exacte de chambre ou suite',
-        'Type de vue indiqué par l\'établissement',
+        "Type de vue indiqué par l'établissement",
         'Dates du séjour',
         'Nombre de voyageurs',
         'Budget',
@@ -850,17 +872,19 @@ const fr: Translations = {
     },
     viewDiffSection: {
       eyebrow: 'KAABA · HARAM · VILLE',
-      title: 'Vue Kaaba, vue Haram ou vue ville\u00a0: quelle différence\u00a0?',
+      title:
+        'Vue Kaaba, vue Haram ou vue ville\u00a0: quelle différence\u00a0?',
       paragraphs: [
         'Les établissements de Makkah peuvent proposer plusieurs types de vues. Une "vue Kaaba" désigne une catégorie depuis laquelle la Kaaba est visible selon les caractéristiques annoncées par l\'établissement. Une "vue Haram" peut offrir une vue sur le Masjid al-Haram sans garantir une vue directe sur la Kaaba.',
-        'Il est donc important de ne pas se baser uniquement sur le nom de l\'hôtel. La catégorie précise de la chambre doit être vérifiée avant la réservation.',
+        "Il est donc important de ne pas se baser uniquement sur le nom de l'hôtel. La catégorie précise de la chambre doit être vérifiée avant la réservation.",
       ],
     },
     priceSection: {
       eyebrow: 'TARIFS',
-      title: 'Pourquoi le tarif d\'une chambre avec vue sur la Kaaba peut-il varier\u00a0?',
+      title:
+        "Pourquoi le tarif d'une chambre avec vue sur la Kaaba peut-il varier\u00a0?",
       paragraphs: [
-        'Le tarif d\'une catégorie avec vue sur la Kaaba ou le Masjid al-Haram dépend notamment de l\'établissement, de la catégorie exacte, de la période du séjour et de la demande.',
+        "Le tarif d'une catégorie avec vue sur la Kaaba ou le Masjid al-Haram dépend notamment de l'établissement, de la catégorie exacte, de la période du séjour et de la demande.",
         'Les prix peuvent donc varier selon vos dates. Haramain Prestige vérifie les options disponibles au moment de votre demande afin de vous proposer une solution adaptée à votre budget.',
       ],
     },
@@ -868,14 +892,15 @@ const fr: Translations = {
       eyebrow: 'SELON VOTRE SÉJOUR',
       title: 'Comment choisir votre chambre avec vue sur la Kaaba\u00a0?',
       paragraphs: [
-        'Le choix dépend de vos priorités. Certains voyageurs recherchent avant tout une vue particulière, tandis que d\'autres privilégient la proximité avec le Haram, la superficie de la chambre, le niveau de confort ou le budget.',
-        'Indiquez-nous vos critères dès votre demande afin que nous puissions rechercher les catégories correspondant réellement à vos attentes plutôt que de vous proposer uniquement un nom d\'hôtel.',
+        "Le choix dépend de vos priorités. Certains voyageurs recherchent avant tout une vue particulière, tandis que d'autres privilégient la proximité avec le Haram, la superficie de la chambre, le niveau de confort ou le budget.",
+        "Indiquez-nous vos critères dès votre demande afin que nous puissions rechercher les catégories correspondant réellement à vos attentes plutôt que de vous proposer uniquement un nom d'hôtel.",
       ],
-      makkahLinkLabel: 'Découvrir notre sélection d\'hôtels à Makkah',
+      makkahLinkLabel: "Découvrir notre sélection d'hôtels à Makkah",
     },
     bookingSection: {
       eyebrow: 'RÉSERVATION',
-      title: 'Comment réserver une chambre avec vue sur la Kaaba avec Haramain Prestige\u00a0?',
+      title:
+        'Comment réserver une chambre avec vue sur la Kaaba avec Haramain Prestige\u00a0?',
       paragraphs: [
         'Indiquez vos dates, le nombre de voyageurs, votre budget et précisez que vous recherchez une chambre ou une suite avec vue sur la Kaaba.',
         'Nous vérifions ensuite les établissements et les catégories disponibles avant de vous transmettre une proposition. La catégorie exacte de chambre doit être confirmée avant la réservation.',
@@ -890,19 +915,22 @@ const fr: Translations = {
       title: 'FAQ — Chambre avec vue sur la Kaaba à Makkah',
       items: [
         {
-          question: 'Tous les hôtels proches du Haram proposent-ils des chambres avec vue sur la Kaaba\u00a0?',
+          question:
+            'Tous les hôtels proches du Haram proposent-ils des chambres avec vue sur la Kaaba\u00a0?',
           answer:
-            'Non. La proximité avec le Masjid al-Haram ne signifie pas automatiquement qu\'une chambre offre une vue sur la Kaaba. Cela dépend de l\'établissement, de son emplacement et surtout de la catégorie exacte de chambre.',
+            "Non. La proximité avec le Masjid al-Haram ne signifie pas automatiquement qu'une chambre offre une vue sur la Kaaba. Cela dépend de l'établissement, de son emplacement et surtout de la catégorie exacte de chambre.",
         },
         {
-          question: 'Toutes les chambres d\'un hôtel vue Kaaba ont-elles la même vue\u00a0?',
+          question:
+            "Toutes les chambres d'un hôtel vue Kaaba ont-elles la même vue\u00a0?",
           answer:
             'Non. Un même établissement peut proposer plusieurs catégories de chambres avec des orientations différentes. Il est donc important de vérifier la catégorie précise avant de réserver.',
         },
         {
-          question: 'Quelle est la différence entre une vue Kaaba et une vue Haram\u00a0?',
+          question:
+            'Quelle est la différence entre une vue Kaaba et une vue Haram\u00a0?',
           answer:
-            'Une catégorie annoncée avec vue Kaaba indique une vue sur la Kaaba selon les caractéristiques définies par l\'établissement. Une vue Haram peut concerner le Masjid al-Haram sans nécessairement offrir une vue directe sur la Kaaba.',
+            "Une catégorie annoncée avec vue Kaaba indique une vue sur la Kaaba selon les caractéristiques définies par l'établissement. Une vue Haram peut concerner le Masjid al-Haram sans nécessairement offrir une vue directe sur la Kaaba.",
         },
         {
           question: 'Peut-on réserver une suite avec vue sur la Kaaba\u00a0?',
@@ -910,9 +938,9 @@ const fr: Translations = {
             'Certains établissements peuvent proposer des suites dans des catégories avec vue sur la Kaaba ou le Masjid al-Haram. Les disponibilités et catégories doivent être vérifiées pour vos dates.',
         },
         {
-          question: 'Le prix d\'une chambre vue Kaaba est-il fixe\u00a0?',
+          question: "Le prix d'une chambre vue Kaaba est-il fixe\u00a0?",
           answer:
-            'Non. Les tarifs varient selon l\'établissement, la catégorie de chambre, les dates du séjour et la disponibilité.',
+            "Non. Les tarifs varient selon l'établissement, la catégorie de chambre, les dates du séjour et la disponibilité.",
         },
         {
           question: 'Comment demander une chambre avec vue sur la Kaaba\u00a0?',
@@ -935,7 +963,8 @@ const fr: Translations = {
     backHome: "Retour à l'accueil",
     hero: {
       eyebrow: 'HÔTELS À MADINAH · MÉDINE',
-      title: 'Hôtels à Madinah : trouvez l\'hébergement adapté à votre séjour à Médine',
+      title:
+        "Hôtels à Madinah : trouvez l'hébergement adapté à votre séjour à Médine",
       intro:
         'Haramain Prestige vous accompagne dans la recherche et la réservation de votre hôtel à Madinah (Médine). Nous sélectionnons des établissements selon votre budget, la proximité souhaitée avec le Masjid an-Nabawi, le niveau de confort et les besoins de votre séjour.',
       ctaPrimary: 'Recevoir une proposition personnalisée',
@@ -945,29 +974,29 @@ const fr: Translations = {
     hotelsSection: {
       title: 'Quelques hôtels à Madinah',
       intro:
-        'Voici une sélection d\'établissements déjà proposés par Haramain Prestige à Madinah. Les disponibilités, catégories de chambres et tarifs varient selon vos dates\u00a0: nous vérifions chaque demande avant de vous transmettre une proposition.',
+        "Voici une sélection d'établissements déjà proposés par Haramain Prestige à Madinah. Les disponibilités, catégories de chambres et tarifs varient selon vos dates\u00a0: nous vérifions chaque demande avant de vous transmettre une proposition.",
       ctaLabel: 'Demander les disponibilités',
     },
     nabawiSection: {
       eyebrow: 'PROXIMITÉ DU MASJID AN-NABAWI',
       title: 'Choisir un hôtel proche du Masjid an-Nabawi',
       paragraphs: [
-        'La distance jusqu\'au Masjid an-Nabawi est souvent le premier critère de choix à Madinah. Mais une distance seule ne suffit pas toujours\u00a0: l\'accès réel, le quartier, le chemin piéton et la porte de la Mosquée du Prophète que vous utilisez peuvent influencer vos déplacements quotidiens.',
+        "La distance jusqu'au Masjid an-Nabawi est souvent le premier critère de choix à Madinah. Mais une distance seule ne suffit pas toujours\u00a0: l'accès réel, le quartier, le chemin piéton et la porte de la Mosquée du Prophète que vous utilisez peuvent influencer vos déplacements quotidiens.",
         'Haramain Prestige étudie votre demande selon vos priorités et vous oriente vers des hôtels cohérents avec votre séjour, en tenant compte de votre budget et du niveau de confort souhaité.',
       ],
       criteria: [
         'Proximité souhaitée avec le Masjid an-Nabawi',
         'Budget par chambre et par nuit',
-        'Catégorie d\'hôtel et niveau de confort',
+        "Catégorie d'hôtel et niveau de confort",
         'Voyage en couple, famille ou groupe',
-        'Facilité d\'accès à pied au Masjid an-Nabawi',
+        "Facilité d'accès à pied au Masjid an-Nabawi",
       ],
     },
     choiceSection: {
       eyebrow: 'SELON VOTRE SÉJOUR',
       title: 'Quel hôtel choisir à Madinah\u00a0?',
       paragraphs: [
-        'Les besoins varient selon le type de séjour. Une famille avec enfants privilégiera souvent un accès simple et des espaces adaptés, tandis qu\'un voyageur seul ou un couple cherchera peut-être à maîtriser son budget tout en restant proche du Masjid an-Nabawi.',
+        "Les besoins varient selon le type de séjour. Une famille avec enfants privilégiera souvent un accès simple et des espaces adaptés, tandis qu'un voyageur seul ou un couple cherchera peut-être à maîtriser son budget tout en restant proche du Masjid an-Nabawi.",
         'Notre rôle est de comparer les options disponibles à vos dates et de vous présenter une sélection adaptée à vos critères, avec un interlocuteur unique pour votre demande.',
       ],
     },
@@ -976,25 +1005,28 @@ const fr: Translations = {
       title: 'Pourquoi la proximité du Masjid an-Nabawi compte',
       paragraphs: [
         'Madinah accueille le Masjid an-Nabawi, la Mosquée du Prophète Muhammad ﷺ. Pour de nombreux pèlerins, pouvoir se rendre facilement à la Mosquée plusieurs fois par jour — pour les prières obligatoires ou les prières surérogatoires — est un élément essentiel du séjour.',
-        'Un hôtel bien situé permet d\'organiser ses journées sereinement, sans dépendre d\'un transport à chaque déplacement. À l\'inverse, un établissement éloigné peut engendrer des frais supplémentaires ou une fatigue accrue. Haramain Prestige tient compte de cet équilibre dans chaque proposition.',
+        "Un hôtel bien situé permet d'organiser ses journées sereinement, sans dépendre d'un transport à chaque déplacement. À l'inverse, un établissement éloigné peut engendrer des frais supplémentaires ou une fatigue accrue. Haramain Prestige tient compte de cet équilibre dans chaque proposition.",
       ],
     },
     omraSection: {
       eyebrow: 'OMRA ET SÉJOUR À MADINAH',
       title: 'Séjour à Madinah dans le cadre de votre Omra',
       paragraphs: [
-        'De nombreux voyageurs choisissent d\'associer à leur Omra un séjour à Madinah avant ou après leur passage à Makkah. La durée du séjour à Madinah varie selon les voyageurs\u00a0: certains restent quelques jours, d\'autres davantage.',
+        "De nombreux voyageurs choisissent d'associer à leur Omra un séjour à Madinah avant ou après leur passage à Makkah. La durée du séjour à Madinah varie selon les voyageurs\u00a0: certains restent quelques jours, d'autres davantage.",
         'Haramain Prestige organise les deux étapes de votre séjour. Nous pouvons proposer un hôtel à Makkah et un hôtel à Madinah dans la même demande, ainsi que les transferts entre les deux villes si vous en avez besoin.',
       ],
-      transfertDiscoverLabel: 'Organiser votre transfert depuis l\u2019a\u00e9roport de Madinah',
-      visitesMadinahLinkLabel: 'Demander un accompagnement pour vos visites à Madinah',
+      transfertDiscoverLabel:
+        'Organiser votre transfert depuis l\u2019a\u00e9roport de Madinah',
+      visitesMadinahLinkLabel:
+        'Demander un accompagnement pour vos visites à Madinah',
     },
     bookingSection: {
       eyebrow: 'RÉSERVATION',
-      title: 'Comment réserver votre hôtel à Madinah avec Haramain Prestige\u00a0?',
+      title:
+        'Comment réserver votre hôtel à Madinah avec Haramain Prestige\u00a0?',
       paragraphs: [
         'Vous nous indiquez vos dates, le nombre de voyageurs, le nombre de chambres, votre budget et vos préférences. Nous recherchons ensuite les options correspondant à votre demande auprès de notre réseau de partenaires à Madinah.',
-        'Vous recevez une proposition personnalisée. Vous pouvez réserver uniquement l\'hôtel ou compléter votre séjour avec les autres services disponibles, notamment les transferts depuis l\'aéroport de Madinah et les déplacements entre Makkah et Madinah.',
+        "Vous recevez une proposition personnalisée. Vous pouvez réserver uniquement l'hôtel ou compléter votre séjour avec les autres services disponibles, notamment les transferts depuis l'aéroport de Madinah et les déplacements entre Makkah et Madinah.",
       ],
       steps: [
         'Vous nous transmettez vos dates et vos critères pour Madinah',
@@ -1006,12 +1038,14 @@ const fr: Translations = {
       title: 'FAQ — Réserver un hôtel à Madinah',
       items: [
         {
-          question: 'Proposez-vous des hôtels proches du Masjid an-Nabawi à Madinah\u00a0?',
+          question:
+            'Proposez-vous des hôtels proches du Masjid an-Nabawi à Madinah\u00a0?',
           answer:
             'Oui. Haramain Prestige sélectionne des hôtels à Madinah selon la proximité souhaitée avec le Masjid an-Nabawi. La proposition dépend de vos dates, de votre budget et des disponibilités.',
         },
         {
-          question: 'Puis-je réserver uniquement l\'hôtel à Madinah sans autre service\u00a0?',
+          question:
+            "Puis-je réserver uniquement l'hôtel à Madinah sans autre service\u00a0?",
           answer:
             'Oui. Vous pouvez demander uniquement votre hébergement à Madinah. Les transferts, chauffeurs et autres services restent facultatifs et peuvent être ajoutés selon vos besoins.',
         },
@@ -1021,14 +1055,16 @@ const fr: Translations = {
             'Oui. Haramain Prestige peut organiser les deux étapes de votre séjour en même temps\u00a0: hôtel à Makkah, hôtel à Madinah et transferts entre les deux villes. Vous pouvez indiquer les deux villes dans votre demande de devis.',
         },
         {
-          question: 'Puis-je demander un hôtel 3, 4 ou 5 étoiles à Madinah\u00a0?',
+          question:
+            'Puis-je demander un hôtel 3, 4 ou 5 étoiles à Madinah\u00a0?',
           answer:
             'Oui. Vous pouvez préciser la catégorie souhaitée dans votre demande. Nous recherchons ensuite les établissements disponibles correspondant à vos critères.',
         },
         {
-          question: 'Comment se passe le transfert depuis l\'aéroport de Madinah\u00a0?',
+          question:
+            "Comment se passe le transfert depuis l'aéroport de Madinah\u00a0?",
           answer:
-            'Nous organisons les transferts depuis l\'aéroport Prince Mohammad Bin Abdulaziz de Madinah vers votre hôtel. Ce service peut être ajouté à votre demande de devis.',
+            "Nous organisons les transferts depuis l'aéroport Prince Mohammad Bin Abdulaziz de Madinah vers votre hôtel. Ce service peut être ajouté à votre demande de devis.",
         },
         {
           question: 'Comment obtenir un devis pour un hôtel à Madinah\u00a0?',
@@ -1039,7 +1075,7 @@ const fr: Translations = {
     },
     ctaBlock: {
       eyebrow: 'VOTRE SÉJOUR À MADINAH',
-      title: 'Recevez une sélection d\'hôtels à Madinah adaptée à vos critères',
+      title: "Recevez une sélection d'hôtels à Madinah adaptée à vos critères",
       paragraph:
         'Indiquez-nous vos dates, votre budget et la proximité souhaitée avec le Masjid an-Nabawi. Nous vous répondons avec une proposition personnalisée selon les disponibilités.',
       ctaPrimary: 'Demander mon devis hôtel',
@@ -1051,7 +1087,8 @@ const fr: Translations = {
     backHome: "Retour à l'accueil",
     hero: {
       eyebrow: 'TRANSFERT A\u00c9ROPORT \u00b7 JEDDAH \u2192 MAKKAH',
-      title: 'Transfert a\u00e9roport Jeddah \u2013 Makkah\u00a0: organisez votre trajet vers La Mecque',
+      title:
+        'Transfert a\u00e9roport Jeddah \u2013 Makkah\u00a0: organisez votre trajet vers La Mecque',
       intro:
         "Haramain Prestige vous accompagne pour organiser votre transfert entre l'a\u00e9roport de Jeddah et Makkah (La Mecque). Transmettez-nous vos informations de voyage, le nombre de passagers et vos besoins afin que nous puissions vous proposer une solution adapt\u00e9e.",
       ctaPrimary: 'Demander mon transfert',
@@ -1060,9 +1097,10 @@ const fr: Translations = {
     },
     trajetSection: {
       eyebrow: 'DE JEDDAH \u00c0 MAKKAH',
-      title: "Un transfert organis\u00e9 depuis l'a\u00e9roport de Jeddah vers Makkah",
+      title:
+        "Un transfert organis\u00e9 depuis l'a\u00e9roport de Jeddah vers Makkah",
       paragraphs: [
-        "Apr\u00e8s votre arriv\u00e9e \u00e0 Jeddah, rejoindre votre h\u00e9bergement \u00e0 Makkah n\u00e9cessite d\u2019anticiper votre transport. Haramain Prestige peut organiser votre transfert selon les informations transmises dans votre demande.",
+        'Apr\u00e8s votre arriv\u00e9e \u00e0 Jeddah, rejoindre votre h\u00e9bergement \u00e0 Makkah n\u00e9cessite d\u2019anticiper votre transport. Haramain Prestige peut organiser votre transfert selon les informations transmises dans votre demande.',
         'Pour pr\u00e9parer la prestation, nous avons notamment besoin de conna\u00eetre votre date d\u2019arriv\u00e9e, les informations utiles li\u00e9es \u00e0 votre vol, le nombre de voyageurs et votre destination \u00e0 Makkah.',
       ],
     },
@@ -1084,10 +1122,11 @@ const fr: Translations = {
     },
     arriveeSection: {
       eyebrow: 'ARRIV\u00c9E EN ARABIE SAOUDITE',
-      title: "Pr\u00e9parer votre arriv\u00e9e \u00e0 l'a\u00e9roport de Jeddah",
+      title:
+        "Pr\u00e9parer votre arriv\u00e9e \u00e0 l'a\u00e9roport de Jeddah",
       paragraphs: [
-        "Pour limiter les impr\u00e9vus \u00e0 votre arriv\u00e9e, il est pr\u00e9f\u00e9rable d\u2019organiser votre transfert avant votre voyage. Les informations de vol permettent notamment d\u2019identifier le trajet concern\u00e9 et de pr\u00e9parer la prestation demand\u00e9e.",
-        "Si vos horaires ou vos informations de voyage changent, transmettez-nous les nouvelles donn\u00e9es afin que votre demande puisse \u00eatre r\u00e9\u00e9valu\u00e9e si n\u00e9cessaire.",
+        'Pour limiter les impr\u00e9vus \u00e0 votre arriv\u00e9e, il est pr\u00e9f\u00e9rable d\u2019organiser votre transfert avant votre voyage. Les informations de vol permettent notamment d\u2019identifier le trajet concern\u00e9 et de pr\u00e9parer la prestation demand\u00e9e.',
+        'Si vos horaires ou vos informations de voyage changent, transmettez-nous les nouvelles donn\u00e9es afin que votre demande puisse \u00eatre r\u00e9\u00e9valu\u00e9e si n\u00e9cessaire.',
       ],
     },
     retourSection: {
@@ -1095,31 +1134,35 @@ const fr: Translations = {
       title: "Transfert de Makkah vers l'a\u00e9roport de Jeddah",
       paragraphs: [
         "Le service peut \u00e9galement concerner votre trajet retour depuis Makkah vers l'a\u00e9roport de Jeddah. Indiquez votre horaire de vol et votre lieu de d\u00e9part afin que le transfert puisse \u00eatre organis\u00e9 en tenant compte de votre programme.",
-        "Il est conseill\u00e9 de pr\u00e9voir une marge adapt\u00e9e avant le d\u00e9part de votre vol. L\u2019heure de prise en charge doit \u00eatre d\u00e9termin\u00e9e selon votre situation, votre vol et les conditions du trajet.",
+        'Il est conseill\u00e9 de pr\u00e9voir une marge adapt\u00e9e avant le d\u00e9part de votre vol. L\u2019heure de prise en charge doit \u00eatre d\u00e9termin\u00e9e selon votre situation, votre vol et les conditions du trajet.',
       ],
     },
     reservationSection: {
       eyebrow: 'SERVICE PERSONNALIS\u00c9',
-      title: 'Pourquoi r\u00e9server votre transfert \u00e0 l\u2019avance\u00a0?',
+      title:
+        'Pourquoi r\u00e9server votre transfert \u00e0 l\u2019avance\u00a0?',
       paragraphs: [
-        "R\u00e9server votre transport avant votre arriv\u00e9e permet de pr\u00e9parer votre trajet dans le cadre global de votre s\u00e9jour et d\u2019\u00e9viter de devoir rechercher une solution une fois sur place.",
-        "Haramain Prestige centralise votre demande et peut int\u00e9grer le transfert aux autres prestations de votre s\u00e9jour, notamment votre h\u00e9bergement \u00e0 Makkah lorsque vous nous confiez \u00e9galement cette r\u00e9servation.",
+        'R\u00e9server votre transport avant votre arriv\u00e9e permet de pr\u00e9parer votre trajet dans le cadre global de votre s\u00e9jour et d\u2019\u00e9viter de devoir rechercher une solution une fois sur place.',
+        'Haramain Prestige centralise votre demande et peut int\u00e9grer le transfert aux autres prestations de votre s\u00e9jour, notamment votre h\u00e9bergement \u00e0 Makkah lorsque vous nous confiez \u00e9galement cette r\u00e9servation.',
       ],
-      chauffeurLinkLabel: 'D\u00e9couvrir notre service chauffeur \u00e0 Makkah & Madinah',
+      chauffeurLinkLabel:
+        'D\u00e9couvrir notre service chauffeur \u00e0 Makkah & Madinah',
     },
     makkahSection: {
       eyebrow: 'VOTRE S\u00c9JOUR \u00c0 MAKKAH',
-      title: 'Compl\u00e9tez votre transfert avec votre h\u00f4tel \u00e0 Makkah',
+      title:
+        'Compl\u00e9tez votre transfert avec votre h\u00f4tel \u00e0 Makkah',
       paragraphs: [
-        "Vous pouvez demander uniquement votre transfert ou nous confier \u00e9galement la recherche de votre h\u00e9bergement \u00e0 Makkah. Haramain Prestige peut ainsi prendre en compte les diff\u00e9rentes \u00e9tapes de votre s\u00e9jour dans une m\u00eame demande.",
+        'Vous pouvez demander uniquement votre transfert ou nous confier \u00e9galement la recherche de votre h\u00e9bergement \u00e0 Makkah. Haramain Prestige peut ainsi prendre en compte les diff\u00e9rentes \u00e9tapes de votre s\u00e9jour dans une m\u00eame demande.',
       ],
-      makkahLinkLabel: "D\u00e9couvrir nos h\u00f4tels \u00e0 Makkah",
+      makkahLinkLabel: 'D\u00e9couvrir nos h\u00f4tels \u00e0 Makkah',
     },
     fonctionnementSection: {
       eyebrow: 'COMMENT \u00c7A MARCHE\u00a0?',
-      title: 'Comment r\u00e9server votre transfert Jeddah \u2013 Makkah\u00a0?',
+      title:
+        'Comment r\u00e9server votre transfert Jeddah \u2013 Makkah\u00a0?',
       paragraphs: [
-        "Transmettez-nous les informations essentielles concernant votre trajet. Nous v\u00e9rifions ensuite les possibilit\u00e9s correspondant \u00e0 votre demande avant de vous transmettre une proposition.",
+        'Transmettez-nous les informations essentielles concernant votre trajet. Nous v\u00e9rifions ensuite les possibilit\u00e9s correspondant \u00e0 votre demande avant de vous transmettre une proposition.',
       ],
       steps: [
         'Vous nous transmettez vos informations de voyage',
@@ -1131,34 +1174,40 @@ const fr: Translations = {
       title: 'FAQ \u2014 Transfert a\u00e9roport Jeddah \u2013 Makkah',
       items: [
         {
-          question: "Peut-on r\u00e9server un transfert de l'a\u00e9roport de Jeddah vers Makkah\u00a0?",
+          question:
+            "Peut-on r\u00e9server un transfert de l'a\u00e9roport de Jeddah vers Makkah\u00a0?",
           answer:
-            "Oui. Haramain Prestige peut organiser votre transfert depuis l\u2019a\u00e9roport de Jeddah vers votre destination \u00e0 Makkah selon les informations et disponibilit\u00e9s correspondant \u00e0 votre demande.",
+            'Oui. Haramain Prestige peut organiser votre transfert depuis l\u2019a\u00e9roport de Jeddah vers votre destination \u00e0 Makkah selon les informations et disponibilit\u00e9s correspondant \u00e0 votre demande.',
         },
         {
-          question: "Peut-on r\u00e9server le trajet Makkah vers l'a\u00e9roport de Jeddah\u00a0?",
+          question:
+            "Peut-on r\u00e9server le trajet Makkah vers l'a\u00e9roport de Jeddah\u00a0?",
           answer:
-            "Oui. Vous pouvez \u00e9galement demander un transfert depuis Makkah vers l\u2019a\u00e9roport de Jeddah pour votre vol retour.",
+            'Oui. Vous pouvez \u00e9galement demander un transfert depuis Makkah vers l\u2019a\u00e9roport de Jeddah pour votre vol retour.',
         },
         {
-          question: 'Quelles informations faut-il transmettre pour r\u00e9server\u00a0?',
+          question:
+            'Quelles informations faut-il transmettre pour r\u00e9server\u00a0?',
           answer:
-            "Indiquez notamment votre date de transfert, les informations utiles de votre vol, le nombre de voyageurs et votre lieu de prise en charge ou de destination.",
+            'Indiquez notamment votre date de transfert, les informations utiles de votre vol, le nombre de voyageurs et votre lieu de prise en charge ou de destination.',
         },
         {
-          question: 'Peut-on r\u00e9server un transfert pour une famille ou un groupe\u00a0?',
+          question:
+            'Peut-on r\u00e9server un transfert pour une famille ou un groupe\u00a0?',
           answer:
-            "Oui. Pr\u00e9cisez le nombre de voyageurs dans votre demande afin qu\u2019une solution adapt\u00e9e puisse \u00eatre recherch\u00e9e selon les disponibilit\u00e9s.",
+            'Oui. Pr\u00e9cisez le nombre de voyageurs dans votre demande afin qu\u2019une solution adapt\u00e9e puisse \u00eatre recherch\u00e9e selon les disponibilit\u00e9s.',
         },
         {
-          question: "Puis-je r\u00e9server mon h\u00f4tel \u00e0 Makkah en m\u00eame temps que mon transfert\u00a0?",
+          question:
+            'Puis-je r\u00e9server mon h\u00f4tel \u00e0 Makkah en m\u00eame temps que mon transfert\u00a0?',
           answer:
-            "Oui. Vous pouvez demander votre transfert seul ou compl\u00e9ter votre demande avec une r\u00e9servation d\u2019h\u00f4tel \u00e0 Makkah et les autres services propos\u00e9s par Haramain Prestige.",
+            'Oui. Vous pouvez demander votre transfert seul ou compl\u00e9ter votre demande avec une r\u00e9servation d\u2019h\u00f4tel \u00e0 Makkah et les autres services propos\u00e9s par Haramain Prestige.',
         },
         {
-          question: 'Comment obtenir le tarif d\u2019un transfert Jeddah \u2013 Makkah\u00a0?',
+          question:
+            'Comment obtenir le tarif d\u2019un transfert Jeddah \u2013 Makkah\u00a0?',
           answer:
-            "Transmettez les informations de votre trajet dans votre demande. Haramain Prestige vous communiquera une proposition correspondant \u00e0 votre besoin et aux options disponibles.",
+            'Transmettez les informations de votre trajet dans votre demande. Haramain Prestige vous communiquera une proposition correspondant \u00e0 votre besoin et aux options disponibles.',
         },
       ],
     },
@@ -1166,7 +1215,7 @@ const fr: Translations = {
       eyebrow: 'VOTRE TRANSFERT',
       title: 'Organisez votre transfert entre Jeddah et Makkah',
       paragraph:
-        "Indiquez-nous votre date, vos informations de voyage et le nombre de passagers afin de recevoir une proposition adapt\u00e9e \u00e0 votre trajet.",
+        'Indiquez-nous votre date, vos informations de voyage et le nombre de passagers afin de recevoir une proposition adapt\u00e9e \u00e0 votre trajet.',
       ctaPrimary: 'Demander mon transfert',
       ctaSecondary: '\u00c9crire sur WhatsApp',
     },
@@ -1176,7 +1225,8 @@ const fr: Translations = {
     backHome: "Retour à l'accueil",
     hero: {
       eyebrow: 'TRANSFERT A\u00c9ROPORT \u00b7 MADINAH',
-      title: 'Transfert a\u00e9roport Madinah\u00a0: rejoignez votre h\u00f4tel \u00e0 M\u00e9dine sereinement',
+      title:
+        'Transfert a\u00e9roport Madinah\u00a0: rejoignez votre h\u00f4tel \u00e0 M\u00e9dine sereinement',
       intro:
         "Haramain Prestige vous accompagne pour organiser votre transfert entre l'a\u00e9roport de Madinah et votre h\u00e9bergement \u00e0 M\u00e9dine. Transmettez-nous vos informations de voyage, le nombre de passagers et votre destination afin que nous puissions rechercher une solution adapt\u00e9e.",
       ctaPrimary: 'Demander mon transfert',
@@ -1193,7 +1243,8 @@ const fr: Translations = {
     },
     criteresSection: {
       eyebrow: 'VOTRE DEMANDE',
-      title: 'Quelles informations transmettre pour votre transfert \u00e0 Madinah\u00a0?',
+      title:
+        'Quelles informations transmettre pour votre transfert \u00e0 Madinah\u00a0?',
       paragraphs: [
         'Plus votre demande est pr\u00e9cise, plus nous pouvons rechercher une solution correspondant \u00e0 votre trajet.',
       ],
@@ -1209,18 +1260,20 @@ const fr: Translations = {
     },
     aeroportSection: {
       eyebrow: 'A\u00c9ROPORT DE MADINAH',
-      title: 'Votre arriv\u00e9e \u00e0 l\u2019a\u00e9roport Prince Mohammad Bin Abdulaziz',
+      title:
+        'Votre arriv\u00e9e \u00e0 l\u2019a\u00e9roport Prince Mohammad Bin Abdulaziz',
       paragraphs: [
         "L'a\u00e9roport Prince Mohammad Bin Abdulaziz dessert Madinah et accueille de nombreux voyageurs se rendant dans la ville. Pr\u00e9parer votre transfert avant votre arriv\u00e9e permet d\u2019int\u00e9grer ce trajet \u00e0 l\u2019organisation g\u00e9n\u00e9rale de votre s\u00e9jour.",
-        "Si vos horaires ou vos informations de voyage changent, transmettez-nous les nouvelles donn\u00e9es afin que votre demande puisse \u00eatre adapt\u00e9e si n\u00e9cessaire.",
+        'Si vos horaires ou vos informations de voyage changent, transmettez-nous les nouvelles donn\u00e9es afin que votre demande puisse \u00eatre adapt\u00e9e si n\u00e9cessaire.',
       ],
     },
     retourSection: {
       eyebrow: 'H\u00d4TEL \u2192 A\u00c9ROPORT',
-      title: "Transfert de votre h\u00f4tel \u00e0 Madinah vers l'a\u00e9roport",
+      title:
+        "Transfert de votre h\u00f4tel \u00e0 Madinah vers l'a\u00e9roport",
       paragraphs: [
         "Le service peut \u00e9galement concerner votre trajet retour depuis votre h\u00f4tel \u00e0 Madinah vers l'a\u00e9roport. Indiquez votre horaire de vol et votre lieu de d\u00e9part afin que la prestation puisse \u00eatre organis\u00e9e selon votre programme.",
-        "L\u2019heure de prise en charge doit \u00eatre d\u00e9finie en fonction de votre vol, de votre lieu de d\u00e9part et des conditions du trajet.",
+        'L\u2019heure de prise en charge doit \u00eatre d\u00e9finie en fonction de votre vol, de votre lieu de d\u00e9part et des conditions du trajet.',
       ],
     },
     nabawiSection: {
@@ -1234,18 +1287,21 @@ const fr: Translations = {
     },
     reservationSection: {
       eyebrow: 'SERVICE PERSONNALIS\u00c9',
-      title: 'Pourquoi organiser votre transfert avant votre arriv\u00e9e\u00a0?',
+      title:
+        'Pourquoi organiser votre transfert avant votre arriv\u00e9e\u00a0?',
       paragraphs: [
-        "Pr\u00e9parer votre transfert \u00e0 l\u2019avance permet d\u2019int\u00e9grer votre arriv\u00e9e \u00e0 Madinah dans l\u2019organisation g\u00e9n\u00e9rale de votre s\u00e9jour et d\u2019\u00e9viter de rechercher une solution au dernier moment.",
-        "Haramain Prestige peut centraliser votre demande de transfert avec les autres prestations de votre s\u00e9jour lorsque vous nous confiez \u00e9galement votre h\u00e9bergement ou d\u2019autres d\u00e9placements.",
+        'Pr\u00e9parer votre transfert \u00e0 l\u2019avance permet d\u2019int\u00e9grer votre arriv\u00e9e \u00e0 Madinah dans l\u2019organisation g\u00e9n\u00e9rale de votre s\u00e9jour et d\u2019\u00e9viter de rechercher une solution au dernier moment.',
+        'Haramain Prestige peut centraliser votre demande de transfert avec les autres prestations de votre s\u00e9jour lorsque vous nous confiez \u00e9galement votre h\u00e9bergement ou d\u2019autres d\u00e9placements.',
       ],
-      chauffeurLinkLabel: 'D\u00e9couvrir notre service chauffeur \u00e0 Makkah & Madinah',
+      chauffeurLinkLabel:
+        'D\u00e9couvrir notre service chauffeur \u00e0 Makkah & Madinah',
     },
     fonctionnementSection: {
       eyebrow: 'COMMENT \u00c7A MARCHE\u00a0?',
-      title: "Comment r\u00e9server votre transfert depuis l'a\u00e9roport de Madinah\u00a0?",
+      title:
+        "Comment r\u00e9server votre transfert depuis l'a\u00e9roport de Madinah\u00a0?",
       paragraphs: [
-        "Transmettez-nous les informations essentielles concernant votre arriv\u00e9e ou votre d\u00e9part. Nous v\u00e9rifions ensuite les possibilit\u00e9s correspondant \u00e0 votre demande avant de vous transmettre une proposition.",
+        'Transmettez-nous les informations essentielles concernant votre arriv\u00e9e ou votre d\u00e9part. Nous v\u00e9rifions ensuite les possibilit\u00e9s correspondant \u00e0 votre demande avant de vous transmettre une proposition.',
       ],
       steps: [
         'Vous nous transmettez vos informations de voyage',
@@ -1257,34 +1313,38 @@ const fr: Translations = {
       title: 'FAQ \u2014 Transfert a\u00e9roport Madinah',
       items: [
         {
-          question: "Peut-on r\u00e9server un transfert depuis l'a\u00e9roport de Madinah\u00a0?",
+          question:
+            "Peut-on r\u00e9server un transfert depuis l'a\u00e9roport de Madinah\u00a0?",
           answer:
-            "Oui. Haramain Prestige peut organiser votre transfert depuis l\u2019a\u00e9roport de Madinah vers votre h\u00f4tel ou votre destination dans la ville selon les informations et disponibilit\u00e9s correspondant \u00e0 votre demande.",
+            'Oui. Haramain Prestige peut organiser votre transfert depuis l\u2019a\u00e9roport de Madinah vers votre h\u00f4tel ou votre destination dans la ville selon les informations et disponibilit\u00e9s correspondant \u00e0 votre demande.',
         },
         {
-          question: 'Peut-on r\u00e9server le transfert retour vers l\u2019a\u00e9roport\u00a0?',
+          question:
+            'Peut-on r\u00e9server le transfert retour vers l\u2019a\u00e9roport\u00a0?',
           answer:
-            "Oui. Vous pouvez \u00e9galement demander un transfert depuis votre h\u00f4tel \u00e0 Madinah vers l\u2019a\u00e9roport pour votre d\u00e9part.",
+            'Oui. Vous pouvez \u00e9galement demander un transfert depuis votre h\u00f4tel \u00e0 Madinah vers l\u2019a\u00e9roport pour votre d\u00e9part.',
         },
         {
           question: 'Quelles informations faut-il transmettre\u00a0?',
           answer:
-            "Indiquez notamment votre date de transfert, les informations utiles li\u00e9es \u00e0 votre vol, le nombre de voyageurs et votre h\u00f4tel ou adresse de destination.",
+            'Indiquez notamment votre date de transfert, les informations utiles li\u00e9es \u00e0 votre vol, le nombre de voyageurs et votre h\u00f4tel ou adresse de destination.',
         },
         {
-          question: 'Peut-on r\u00e9server un transfert pour une famille ou un groupe\u00a0?',
+          question:
+            'Peut-on r\u00e9server un transfert pour une famille ou un groupe\u00a0?',
           answer:
-            "Oui. Pr\u00e9cisez le nombre de voyageurs dans votre demande afin qu\u2019une solution adapt\u00e9e puisse \u00eatre recherch\u00e9e selon les disponibilit\u00e9s.",
+            'Oui. Pr\u00e9cisez le nombre de voyageurs dans votre demande afin qu\u2019une solution adapt\u00e9e puisse \u00eatre recherch\u00e9e selon les disponibilit\u00e9s.',
         },
         {
-          question: 'Puis-je r\u00e9server mon h\u00f4tel \u00e0 Madinah en m\u00eame temps\u00a0?',
+          question:
+            'Puis-je r\u00e9server mon h\u00f4tel \u00e0 Madinah en m\u00eame temps\u00a0?',
           answer:
-            "Oui. Vous pouvez demander uniquement votre transfert ou compl\u00e9ter votre demande avec une r\u00e9servation d\u2019h\u00f4tel \u00e0 Madinah et les autres services propos\u00e9s par Haramain Prestige.",
+            'Oui. Vous pouvez demander uniquement votre transfert ou compl\u00e9ter votre demande avec une r\u00e9servation d\u2019h\u00f4tel \u00e0 Madinah et les autres services propos\u00e9s par Haramain Prestige.',
         },
         {
           question: 'Comment obtenir le tarif du transfert\u00a0?',
           answer:
-            "Transmettez les informations de votre trajet dans votre demande. Haramain Prestige vous communiquera une proposition correspondant \u00e0 votre besoin et aux options disponibles.",
+            'Transmettez les informations de votre trajet dans votre demande. Haramain Prestige vous communiquera une proposition correspondant \u00e0 votre besoin et aux options disponibles.',
         },
       ],
     },
@@ -1292,17 +1352,18 @@ const fr: Translations = {
       eyebrow: 'VOTRE ARRIV\u00c9E \u00c0 MADINAH',
       title: "Organisez votre transfert depuis l'a\u00e9roport de Madinah",
       paragraph:
-        "Indiquez-nous votre date, vos informations de voyage, votre destination et le nombre de passagers afin de recevoir une proposition adapt\u00e9e.",
+        'Indiquez-nous votre date, vos informations de voyage, votre destination et le nombre de passagers afin de recevoir une proposition adapt\u00e9e.',
       ctaPrimary: 'Demander mon transfert',
       ctaSecondary: '\u00c9crire sur WhatsApp',
     },
   },
 
   chauffeurPriveMakkahMadinahPage: {
-    backHome: "Retour \u00e0 l\u2019accueil",
+    backHome: 'Retour \u00e0 l\u2019accueil',
     hero: {
       eyebrow: 'SERVICE DE TRANSPORT',
-      title: 'Chauffeur priv\u00e9 \u00e0 Makkah et Madinah\u00a0: organisez vos d\u00e9placements',
+      title:
+        'Chauffeur priv\u00e9 \u00e0 Makkah et Madinah\u00a0: organisez vos d\u00e9placements',
       intro:
         'Organisez vos d\u00e9placements locaux \u00e0 Makkah et Madinah avec un service de chauffeur adapt\u00e9 \u00e0 votre programme de s\u00e9jour.',
       ctaPrimary: 'Faire une demande',
@@ -1313,13 +1374,14 @@ const fr: Translations = {
       eyebrow: 'D\u00c9PLACEMENTS SUR MESURE',
       title: 'Vos d\u00e9placements \u00e0 Makkah et Madinah avec chauffeur',
       paragraphs: [
-        "Haramain Prestige vous propose une solution de transport avec chauffeur pour vos d\u00e9placements \u00e0 Makkah et \u00e0 Madinah, selon votre programme de s\u00e9jour. Que vous souhaitiez vous rendre entre deux sites spirituels, rejoindre votre h\u00f4tel ou organiser un trajet sp\u00e9cifique, nous \u00e9tudions votre demande et vous transmettons une proposition adapt\u00e9e.",
-        "Ce service s\u2019adresse aux p\u00e8lerins et aux voyageurs qui souhaitent organiser leurs transports locaux \u00e0 l\u2019avance, sans avoir \u00e0 g\u00e9rer cela sur place. Votre confort et votre s\u00e9r\u00e9nit\u00e9 pendant votre s\u00e9jour sont au c\u0153ur de notre d\u00e9marche.",
+        'Haramain Prestige vous propose une solution de transport avec chauffeur pour vos d\u00e9placements \u00e0 Makkah et \u00e0 Madinah, selon votre programme de s\u00e9jour. Que vous souhaitiez vous rendre entre deux sites spirituels, rejoindre votre h\u00f4tel ou organiser un trajet sp\u00e9cifique, nous \u00e9tudions votre demande et vous transmettons une proposition adapt\u00e9e.',
+        'Ce service s\u2019adresse aux p\u00e8lerins et aux voyageurs qui souhaitent organiser leurs transports locaux \u00e0 l\u2019avance, sans avoir \u00e0 g\u00e9rer cela sur place. Votre confort et votre s\u00e9r\u00e9nit\u00e9 pendant votre s\u00e9jour sont au c\u0153ur de notre d\u00e9marche.',
       ],
     },
     criteresSection: {
       eyebrow: 'VOTRE DEMANDE',
-      title: 'Quelles informations transmettre pour r\u00e9server un chauffeur\u00a0?',
+      title:
+        'Quelles informations transmettre pour r\u00e9server un chauffeur\u00a0?',
       paragraphs: [
         'Plus votre demande est pr\u00e9cise, plus il est simple de rechercher une solution correspondant \u00e0 votre programme.',
       ],
@@ -1337,8 +1399,8 @@ const fr: Translations = {
       eyebrow: 'D\u00c9PLACEMENTS \u00c0 MAKKAH',
       title: 'Service de chauffeur pour vos d\u00e9placements \u00e0 Makkah',
       paragraphs: [
-        "Pendant votre s\u00e9jour \u00e0 Makkah, certains d\u00e9placements peuvent n\u00e9cessiter une organisation pr\u00e9alable selon votre h\u00e9bergement et votre programme.",
-        "Indiquez votre lieu de d\u00e9part, votre destination et l\u2019horaire souhait\u00e9 afin que Haramain Prestige puisse rechercher une solution correspondant \u00e0 votre demande.",
+        'Pendant votre s\u00e9jour \u00e0 Makkah, certains d\u00e9placements peuvent n\u00e9cessiter une organisation pr\u00e9alable selon votre h\u00e9bergement et votre programme.',
+        'Indiquez votre lieu de d\u00e9part, votre destination et l\u2019horaire souhait\u00e9 afin que Haramain Prestige puisse rechercher une solution correspondant \u00e0 votre demande.',
       ],
       makkahLinkLabel: 'Voir nos h\u00f4tels \u00e0 Makkah',
       visitesMakkahLinkLabel: 'Visites à Makkah',
@@ -1347,8 +1409,8 @@ const fr: Translations = {
       eyebrow: 'D\u00c9PLACEMENTS \u00c0 MADINAH',
       title: 'Service de chauffeur pour vos d\u00e9placements \u00e0 Madinah',
       paragraphs: [
-        "Haramain Prestige peut \u00e9galement prendre en compte vos besoins de d\u00e9placement pendant votre s\u00e9jour \u00e0 Madinah. Votre demande doit pr\u00e9ciser le point de d\u00e9part, la destination, les horaires souhait\u00e9s et le nombre de voyageurs.",
-        "Vous pouvez int\u00e9grer ces d\u00e9placements \u00e0 une demande comprenant \u00e9galement votre h\u00e9bergement \u00e0 Madinah.",
+        'Haramain Prestige peut \u00e9galement prendre en compte vos besoins de d\u00e9placement pendant votre s\u00e9jour \u00e0 Madinah. Votre demande doit pr\u00e9ciser le point de d\u00e9part, la destination, les horaires souhait\u00e9s et le nombre de voyageurs.',
+        'Vous pouvez int\u00e9grer ces d\u00e9placements \u00e0 une demande comprenant \u00e9galement votre h\u00e9bergement \u00e0 Madinah.',
       ],
       madinahLinkLabel: 'Voir nos h\u00f4tels \u00e0 Madinah',
       visitesMadinahLinkLabel: 'Visites à Madinah',
@@ -1357,73 +1419,78 @@ const fr: Translations = {
       eyebrow: 'MAKKAH \u2194 MADINAH',
       title: 'D\u00e9placements entre Makkah et Madinah',
       paragraphs: [
-        "Le trajet entre Makkah et Madinah est une \u00e9tape cl\u00e9 pour de nombreux p\u00e8lerins. Il peut s\u2019effectuer par diff\u00e9rents moyens, selon votre situation et vos pr\u00e9f\u00e9rences. Haramain Prestige peut \u00e9tudier cette option dans votre demande globale.",
-        "Si vous pr\u00e9voyez un s\u00e9jour dans les deux villes, indiquez-le lors de votre demande. Nous pourrons ainsi prendre en compte l\u2019ensemble de vos besoins de transport et vous proposer une organisation coh\u00e9rente.",
+        'Le trajet entre Makkah et Madinah est une \u00e9tape cl\u00e9 pour de nombreux p\u00e8lerins. Il peut s\u2019effectuer par diff\u00e9rents moyens, selon votre situation et vos pr\u00e9f\u00e9rences. Haramain Prestige peut \u00e9tudier cette option dans votre demande globale.',
+        'Si vous pr\u00e9voyez un s\u00e9jour dans les deux villes, indiquez-le lors de votre demande. Nous pourrons ainsi prendre en compte l\u2019ensemble de vos besoins de transport et vous proposer une organisation coh\u00e9rente.',
       ],
     },
     chauffeurVsTransfertSection: {
       eyebrow: 'COMPRENDRE NOS SERVICES',
-      title: 'Chauffeur priv\u00e9 ou transfert\u00a0: quelles diff\u00e9rences\u00a0?',
+      title:
+        'Chauffeur priv\u00e9 ou transfert\u00a0: quelles diff\u00e9rences\u00a0?',
       paragraphs: [
-        "Le transfert a\u00e9roport est un trajet ponctuel entre un a\u00e9roport et votre h\u00f4tel. Le service chauffeur couvre des d\u00e9placements plus larges pendant votre s\u00e9jour\u00a0: visites, trajets entre villes, courses diverses selon votre programme.",
-        "Ces deux services sont compl\u00e9mentaires et peuvent \u00eatre inclus dans votre demande globale chez Haramain Prestige. Consultez nos pages d\u00e9di\u00e9es aux transferts pour en savoir plus.",
+        'Le transfert a\u00e9roport est un trajet ponctuel entre un a\u00e9roport et votre h\u00f4tel. Le service chauffeur couvre des d\u00e9placements plus larges pendant votre s\u00e9jour\u00a0: visites, trajets entre villes, courses diverses selon votre programme.',
+        'Ces deux services sont compl\u00e9mentaires et peuvent \u00eatre inclus dans votre demande globale chez Haramain Prestige. Consultez nos pages d\u00e9di\u00e9es aux transferts pour en savoir plus.',
       ],
       jeddahLinkLabel: 'Transfert a\u00e9roport Jeddah \u2013 Makkah',
       madinahTransfertLinkLabel: 'Transfert a\u00e9roport Madinah',
     },
     anticipationSection: {
       eyebrow: 'R\u00c9SERVATION \u00c0 L\u2019AVANCE',
-      title: 'Pourquoi organiser vos d\u00e9placements avant votre arriv\u00e9e\u00a0?',
+      title:
+        'Pourquoi organiser vos d\u00e9placements avant votre arriv\u00e9e\u00a0?',
       paragraphs: [
-        "Organiser vos transports \u00e0 l\u2019avance vous permet de pr\u00e9parer votre s\u00e9jour sereinement et d\u2019\u00e9viter les impr\u00e9vus sur place, notamment pendant les p\u00e9riodes de forte affluence comme le Hajj ou le Ramadan.",
-        "En nous transmettant votre programme et vos besoins avant votre d\u00e9part, nous pouvons \u00e9tablir une proposition adapt\u00e9e et la valider avec vous dans les meilleures conditions.",
+        'Organiser vos transports \u00e0 l\u2019avance vous permet de pr\u00e9parer votre s\u00e9jour sereinement et d\u2019\u00e9viter les impr\u00e9vus sur place, notamment pendant les p\u00e9riodes de forte affluence comme le Hajj ou le Ramadan.',
+        'En nous transmettant votre programme et vos besoins avant votre d\u00e9part, nous pouvons \u00e9tablir une proposition adapt\u00e9e et la valider avec vous dans les meilleures conditions.',
       ],
     },
     fonctionnementSection: {
       eyebrow: 'COMMENT \u00c7A MARCHE\u00a0?',
       title: 'Comment r\u00e9server votre service de chauffeur\u00a0?',
       paragraphs: [
-        "Pour demander un service de chauffeur avec Haramain Prestige, il vous suffit de nous transmettre votre programme et vos besoins. Nous \u00e9tudions votre demande et vous proposons une organisation adapt\u00e9e.",
+        'Pour demander un service de chauffeur avec Haramain Prestige, il vous suffit de nous transmettre votre programme et vos besoins. Nous \u00e9tudions votre demande et vous proposons une organisation adapt\u00e9e.',
       ],
       steps: [
-        "Transmettez votre demande via le formulaire ou WhatsApp avec vos dates, villes et besoins",
-        "Nous \u00e9tudions votre programme et vous contactons pour pr\u00e9ciser les d\u00e9tails",
-        "Nous vous soumettons une proposition adapt\u00e9e \u00e0 votre s\u00e9jour",
-        "Vous confirmez et nous finalisons l\u2019organisation selon votre programme",
+        'Transmettez votre demande via le formulaire ou WhatsApp avec vos dates, villes et besoins',
+        'Nous \u00e9tudions votre programme et vous contactons pour pr\u00e9ciser les d\u00e9tails',
+        'Nous vous soumettons une proposition adapt\u00e9e \u00e0 votre s\u00e9jour',
+        'Vous confirmez et nous finalisons l\u2019organisation selon votre programme',
       ],
     },
     faq: {
       title: 'Questions fr\u00e9quentes sur notre service chauffeur',
       items: [
         {
-          question: 'Le service chauffeur est-il disponible \u00e0 Makkah et Madinah\u00a0?',
+          question:
+            'Le service chauffeur est-il disponible \u00e0 Makkah et Madinah\u00a0?',
           answer:
-            "Oui, Haramain Prestige peut organiser des d\u00e9placements avec chauffeur dans les deux villes. Transmettez-nous votre programme et vos besoins pour que nous puissions \u00e9tudier votre demande.",
+            'Oui, Haramain Prestige peut organiser des d\u00e9placements avec chauffeur dans les deux villes. Transmettez-nous votre programme et vos besoins pour que nous puissions \u00e9tudier votre demande.',
         },
         {
-          question: 'Puis-je r\u00e9server un chauffeur juste pour une journ\u00e9e\u00a0?',
+          question:
+            'Puis-je r\u00e9server un chauffeur juste pour une journ\u00e9e\u00a0?',
           answer:
-            "Nous \u00e9tudions chaque demande individuellement. Selon votre programme et vos besoins, nous vous proposerons une organisation adapt\u00e9e. Transmettez-nous les d\u00e9tails de votre s\u00e9jour pour recevoir une proposition.",
+            'Nous \u00e9tudions chaque demande individuellement. Selon votre programme et vos besoins, nous vous proposerons une organisation adapt\u00e9e. Transmettez-nous les d\u00e9tails de votre s\u00e9jour pour recevoir une proposition.',
         },
         {
-          question: 'Puis-je combiner chauffeur et h\u00f4tel dans une seule demande\u00a0?',
+          question:
+            'Puis-je combiner chauffeur et h\u00f4tel dans une seule demande\u00a0?',
           answer:
-            "Oui, c\u2019est m\u00eame recommand\u00e9. En confiant l\u2019ensemble de votre s\u00e9jour \u00e0 Haramain Prestige, nous pouvons coordonner votre h\u00e9bergement et vos transports selon votre programme global.",
+            'Oui, c\u2019est m\u00eame recommand\u00e9. En confiant l\u2019ensemble de votre s\u00e9jour \u00e0 Haramain Prestige, nous pouvons coordonner votre h\u00e9bergement et vos transports selon votre programme global.',
         },
         {
           question: 'Comment puis-je demander un service de chauffeur\u00a0?',
           answer:
-            "Utilisez notre formulaire de demande ou contactez-nous directement via WhatsApp. Pr\u00e9cisez vos dates, villes concern\u00e9es, type de d\u00e9placements et nombre de personnes.",
+            'Utilisez notre formulaire de demande ou contactez-nous directement via WhatsApp. Pr\u00e9cisez vos dates, villes concern\u00e9es, type de d\u00e9placements et nombre de personnes.',
         },
         {
           question: 'Le chauffeur parlera-t-il fran\u00e7ais\u00a0?',
           answer:
-            "Nous ne pouvons pas garantir un chauffeur francophone dans tous les cas. Nous vous indiquerons les conditions de communication lors de la proposition.",
+            'Nous ne pouvons pas garantir un chauffeur francophone dans tous les cas. Nous vous indiquerons les conditions de communication lors de la proposition.',
         },
         {
           question: 'Quel est le d\u00e9lai pour soumettre une demande\u00a0?',
           answer:
-            "Nous vous recommandons de soumettre votre demande le plus t\u00f4t possible avant votre d\u00e9part, afin d\u2019avoir le temps de valider ensemble les d\u00e9tails de l\u2019organisation.",
+            'Nous vous recommandons de soumettre votre demande le plus t\u00f4t possible avant votre d\u00e9part, afin d\u2019avoir le temps de valider ensemble les d\u00e9tails de l\u2019organisation.',
         },
       ],
     },
@@ -1431,7 +1498,7 @@ const fr: Translations = {
       eyebrow: 'PR\u00cAT \u00c0 PARTIR\u00a0?',
       title: 'Demandez votre service de chauffeur',
       paragraph:
-        "Transmettez-nous votre programme et nous \u00e9tudions comment organiser vos d\u00e9placements \u00e0 Makkah et Madinah selon vos besoins.",
+        'Transmettez-nous votre programme et nous \u00e9tudions comment organiser vos d\u00e9placements \u00e0 Makkah et Madinah selon vos besoins.',
       ctaPrimary: 'Faire une demande',
       ctaSecondary: '\u00c9crire sur WhatsApp',
     },
@@ -1483,22 +1550,25 @@ const fr: Translations = {
         "Organisez votre transfert entre l'aéroport de Jeddah et Makkah avec Haramain Prestige. Indiquez vos horaires et le nombre de voyageurs pour recevoir une proposition personnalisée.",
     },
     transfertAeroportMadinah: {
-      title: 'Transfert a\u00e9roport Madinah \u2013 h\u00f4tel | Haramain Prestige',
+      title:
+        'Transfert a\u00e9roport Madinah \u2013 h\u00f4tel | Haramain Prestige',
       description:
         "Organisez votre transfert entre l'a\u00e9roport de Madinah et votre h\u00f4tel \u00e0 M\u00e9dine avec Haramain Prestige. Indiquez vos horaires et le nombre de voyageurs pour recevoir une proposition personnalis\u00e9e.",
     },
     chauffeurPriveMakkahMadinah: {
       title: 'Chauffeur priv\u00e9 Makkah & Madinah | Haramain Prestige',
       description:
-        "Organisez vos d\u00e9placements locaux \u00e0 Makkah et Madinah avec un service de chauffeur. Haramain Prestige \u00e9tudie votre demande et vous propose une organisation adapt\u00e9e \u00e0 votre programme.",
+        'Organisez vos d\u00e9placements locaux \u00e0 Makkah et Madinah avec un service de chauffeur. Haramain Prestige \u00e9tudie votre demande et vous propose une organisation adapt\u00e9e \u00e0 votre programme.',
     },
     visitesMadinah: {
-      title: 'Visites à Madinah : sites spirituels & accompagnement | Haramain Prestige',
+      title:
+        'Visites à Madinah : sites spirituels & accompagnement | Haramain Prestige',
       description:
         'Découvrez les sites spirituels de Madinah — Masjid Quba, Mont Uhud, Masjid al-Qiblatayn et plus. Haramain Prestige peut organiser un accompagnement selon les possibilités disponibles.',
     },
     visitesMakkah: {
-      title: 'Visites à Makkah : sites historiques & accompagnement | Haramain Prestige',
+      title:
+        'Visites à Makkah : sites historiques & accompagnement | Haramain Prestige',
       description:
         'Découvrez les sites historiques de Makkah — Jabal al-Nour, Jabal Thawr, Arafat et plus. Haramain Prestige peut organiser un accompagnement selon les possibilités disponibles.',
     },
@@ -1510,7 +1580,7 @@ const fr: Translations = {
     hotels: {
       title: 'Hôtels à Makkah & Madinah | Haramain Prestige',
       description:
-        'Découvrez l\'offre hôtelière Haramain Prestige à Makkah et Madinah. Indiquez vos dates, le nombre de voyageurs et vos critères pour recevoir une proposition adaptée à votre séjour.',
+        "Découvrez l'offre hôtelière Haramain Prestige à Makkah et Madinah. Indiquez vos dates, le nombre de voyageurs et vos critères pour recevoir une proposition adaptée à votre séjour.",
     },
     testimonials: {
       title: 'Témoignages clients | Haramain Prestige',
@@ -1528,7 +1598,8 @@ const fr: Translations = {
     backHome: "Retour à l'accueil",
     hero: {
       eyebrow: 'VISITES · MADINAH AL-MUNAWWARAH',
-      title: 'Visites à Madinah : découvrez les sites spirituels de la Ville du Prophète',
+      title:
+        'Visites à Madinah : découvrez les sites spirituels de la Ville du Prophète',
       intro:
         'Madinah abrite des sites de grande importance spirituelle que de nombreux pèlerins souhaitent visiter lors de leur séjour. Haramain Prestige peut, selon les possibilités disponibles, organiser un accompagnement pour vous permettre de vous rendre sur ces lieux dans de bonnes conditions.',
       ctaPrimary: 'Préciser ma demande de visite',
@@ -1547,7 +1618,7 @@ const fr: Translations = {
       eyebrow: 'SITES À VISITER',
       title: 'Quelques lieux emblématiques que vous pouvez demander à visiter',
       paragraphs: [
-        'Ces sites peuvent être inclus dans votre demande d\'accompagnement, selon les possibilités disponibles. Précisez les lieux qui vous intéressent lors de votre demande.',
+        "Ces sites peuvent être inclus dans votre demande d'accompagnement, selon les possibilités disponibles. Précisez les lieux qui vous intéressent lors de votre demande.",
       ],
       criteriaLabel: 'EXEMPLES DE SITES',
       criteria: [
@@ -1563,8 +1634,8 @@ const fr: Translations = {
       eyebrow: 'VOTRE DEMANDE',
       title: 'Comment demander un accompagnement pour vos visites à Madinah',
       paragraphs: [
-        'Pour permettre à Haramain Prestige d\'étudier votre demande, précisez les sites que vous souhaitez visiter, la date envisagée, le nombre de personnes et votre point de départ (généralement votre hôtel). Plus votre demande est précise, mieux nous pouvons rechercher une solution correspondant à votre programme.',
-        "Haramain Prestige ne garantit pas un programme fixe ni un itinéraire prédéfini. Chaque demande est étudiée selon les possibilités disponibles au moment de votre séjour.",
+        "Pour permettre à Haramain Prestige d'étudier votre demande, précisez les sites que vous souhaitez visiter, la date envisagée, le nombre de personnes et votre point de départ (généralement votre hôtel). Plus votre demande est précise, mieux nous pouvons rechercher une solution correspondant à votre programme.",
+        'Haramain Prestige ne garantit pas un programme fixe ni un itinéraire prédéfini. Chaque demande est étudiée selon les possibilités disponibles au moment de votre séjour.',
       ],
     },
     personalisationSection: {
@@ -1587,7 +1658,7 @@ const fr: Translations = {
       eyebrow: 'DÉPLACEMENTS & TRANSPORT',
       title: 'Service de chauffeur pour vos déplacements à Madinah',
       paragraphs: [
-        "Pour vous rendre sur les sites spirituels de Madinah, un service de transport avec chauffeur peut être demandé. Haramain Prestige peut étudier cette option dans votre demande et vous proposer une organisation selon les possibilités disponibles.",
+        'Pour vous rendre sur les sites spirituels de Madinah, un service de transport avec chauffeur peut être demandé. Haramain Prestige peut étudier cette option dans votre demande et vous proposer une organisation selon les possibilités disponibles.',
       ],
       chauffeurLinkLabel: 'Découvrir le service chauffeur',
       visitesMakkahLinkLabel: 'Visites à Makkah',
@@ -1601,7 +1672,7 @@ const fr: Translations = {
       steps: [
         'Vous précisez les sites souhaités, la date, le nombre de personnes et votre hôtel',
         'Haramain Prestige étudie les possibilités disponibles pour votre demande',
-        'Vous recevez une proposition et confirmez l\'organisation selon vos besoins',
+        "Vous recevez une proposition et confirmez l'organisation selon vos besoins",
       ],
     },
     faq: {
@@ -1610,7 +1681,7 @@ const fr: Translations = {
         {
           question: 'Proposez-vous des visites guidées à Madinah\u00a0?',
           answer:
-            "Le contenu exact de la prestation dépend de la proposition qui vous est transmise. Si vous recherchez un accompagnement particulier ou des explications pendant les visites, précisez-le dans votre demande afin que nous puissions vous confirmer ce qui peut être proposé.",
+            'Le contenu exact de la prestation dépend de la proposition qui vous est transmise. Si vous recherchez un accompagnement particulier ou des explications pendant les visites, précisez-le dans votre demande afin que nous puissions vous confirmer ce qui peut être proposé.',
         },
         {
           question: 'Quels sites peut-on visiter à Madinah\u00a0?',
@@ -1618,22 +1689,26 @@ const fr: Translations = {
             "Parmi les lieux souvent demandés : Masjid Quba, le Mont Uhud, Masjid al-Qiblatayn. D'autres sites peuvent être précisés dans votre demande. Haramain Prestige vérifie les possibilités selon votre programme.",
         },
         {
-          question: 'Peut-on demander plusieurs lieux dans le même programme\u00a0?',
+          question:
+            'Peut-on demander plusieurs lieux dans le même programme\u00a0?',
           answer:
-            "Oui. Vous pouvez indiquer plusieurs lieux dans votre demande. Leur intégration dans le programme dépendra des possibilités et des conditions applicables au moment de votre séjour.",
+            'Oui. Vous pouvez indiquer plusieurs lieux dans votre demande. Leur intégration dans le programme dépendra des possibilités et des conditions applicables au moment de votre séjour.',
         },
         {
-          question: 'Peut-on combiner visites et hôtel dans une seule demande\u00a0?',
+          question:
+            'Peut-on combiner visites et hôtel dans une seule demande\u00a0?',
           answer:
             "Oui. Vous pouvez demander votre hébergement à Madinah, votre transfert depuis l'aéroport et un accompagnement pour vos visites dans la même demande. Haramain Prestige organise l'ensemble selon votre programme.",
         },
         {
-          question: 'Peut-on visiter les sites de Madinah le matin et ceux de Makkah un autre jour\u00a0?',
+          question:
+            'Peut-on visiter les sites de Madinah le matin et ceux de Makkah un autre jour\u00a0?',
           answer:
             "Oui, si votre séjour inclut les deux villes. Précisez dans votre demande les étapes souhaitées à Madinah et à Makkah, et Haramain Prestige étudiera l'organisation selon votre programme global.",
         },
         {
-          question: 'Quel délai pour faire une demande de visite à Madinah\u00a0?',
+          question:
+            'Quel délai pour faire une demande de visite à Madinah\u00a0?',
           answer:
             "Nous vous recommandons de soumettre votre demande le plus tôt possible avant votre séjour. Cela nous permet d'étudier les possibilités disponibles et de vous transmettre une proposition dans de bonnes conditions.",
         },
@@ -1643,7 +1718,7 @@ const fr: Translations = {
       eyebrow: 'VOTRE SÉJOUR À MADINAH',
       title: 'Demandez un accompagnement pour vos visites à Madinah',
       paragraph:
-        "Précisez les sites que vous souhaitez visiter, votre date de séjour et le nombre de personnes. Haramain Prestige étudie les possibilités disponibles et vous transmet une proposition.",
+        'Précisez les sites que vous souhaitez visiter, votre date de séjour et le nombre de personnes. Haramain Prestige étudie les possibilités disponibles et vous transmet une proposition.',
       ctaPrimary: 'Préciser ma demande',
       ctaSecondary: 'Écrire sur WhatsApp',
     },
@@ -1653,9 +1728,10 @@ const fr: Translations = {
     backHome: "Retour à l'accueil",
     hero: {
       eyebrow: 'VISITES · MAKKAH AL-MUKARRAMAH',
-      title: 'Visites à Makkah : découvrez les sites historiques et spirituels de la ville sainte',
+      title:
+        'Visites à Makkah : découvrez les sites historiques et spirituels de la ville sainte',
       intro:
-        'Makkah abrite des lieux d\'une grande importance spirituelle et historique. Au-delà du Masjid al-Haram, certains pèlerins souhaitent visiter d\'autres sites emblématiques. Haramain Prestige peut, selon les possibilités disponibles, organiser un accompagnement pour ces visites.',
+        "Makkah abrite des lieux d'une grande importance spirituelle et historique. Au-delà du Masjid al-Haram, certains pèlerins souhaitent visiter d'autres sites emblématiques. Haramain Prestige peut, selon les possibilités disponibles, organiser un accompagnement pour ces visites.",
       ctaPrimary: 'Préciser ma demande de visite',
       ctaSecondary: 'Comment ça fonctionne\u00a0?',
       imageAlt: 'Vue de Makkah',
@@ -1665,14 +1741,14 @@ const fr: Translations = {
       title: 'Visiter les sites spirituels et historiques de Makkah',
       paragraphs: [
         "Makkah est la ville sainte de l'islam, destination du pèlerinage du Hajj et de l'Omra. Elle abrite le Masjid al-Haram et la Kaaba, mais également d'autres sites d'une grande valeur historique et spirituelle que certains pèlerins souhaitent visiter lors de leur séjour.",
-        "Haramain Prestige peut, selon les possibilités disponibles, vous aider à organiser un accompagnement pour vous rendre sur ces lieux. Précisez vos souhaits dans votre demande afin que nous puissions étudier les options correspondant à votre programme.",
+        'Haramain Prestige peut, selon les possibilités disponibles, vous aider à organiser un accompagnement pour vous rendre sur ces lieux. Précisez vos souhaits dans votre demande afin que nous puissions étudier les options correspondant à votre programme.',
       ],
     },
     lieuxSection: {
       eyebrow: 'SITES À VISITER',
       title: 'Quelques lieux emblématiques que vous pouvez demander à visiter',
       paragraphs: [
-        'Ces sites peuvent être inclus dans votre demande d\'accompagnement, selon les possibilités disponibles. Précisez les lieux qui vous intéressent lors de votre demande.',
+        "Ces sites peuvent être inclus dans votre demande d'accompagnement, selon les possibilités disponibles. Précisez les lieux qui vous intéressent lors de votre demande.",
       ],
       criteriaLabel: 'EXEMPLES DE SITES',
       criteria: [
@@ -1688,16 +1764,16 @@ const fr: Translations = {
       eyebrow: 'VOTRE DEMANDE',
       title: 'Comment demander un accompagnement pour vos visites à Makkah',
       paragraphs: [
-        'Pour permettre à Haramain Prestige d\'étudier votre demande, précisez les sites que vous souhaitez visiter, la date envisagée, le nombre de personnes et votre hôtel à Makkah. Plus votre demande est détaillée, mieux nous pouvons rechercher une solution correspondant à votre programme.',
-        "Haramain Prestige ne garantit pas un programme fixe ni un itinéraire prédéfini. Chaque demande est étudiée selon les possibilités disponibles au moment de votre séjour.",
+        "Pour permettre à Haramain Prestige d'étudier votre demande, précisez les sites que vous souhaitez visiter, la date envisagée, le nombre de personnes et votre hôtel à Makkah. Plus votre demande est détaillée, mieux nous pouvons rechercher une solution correspondant à votre programme.",
+        'Haramain Prestige ne garantit pas un programme fixe ni un itinéraire prédéfini. Chaque demande est étudiée selon les possibilités disponibles au moment de votre séjour.',
       ],
     },
     hadjSection: {
       eyebrow: 'ARAFAT · MINA · MUZDALIFAH',
       title: 'Les sites du pèlerinage : Arafat, Mina et Muzdalifah',
       paragraphs: [
-        "Arafat, Mina et Muzdalifah occupent une place importante dans le déroulement du Hajj et font également partie des lieux que certains voyageurs souhaitent découvrir lors de leur séjour à Makkah.",
-        "Si vous souhaitez inclure ces lieux dans votre programme de visite, précisez-le dans votre demande. Leur intégration dépend des possibilités et des conditions applicables au moment de votre séjour.",
+        'Arafat, Mina et Muzdalifah occupent une place importante dans le déroulement du Hajj et font également partie des lieux que certains voyageurs souhaitent découvrir lors de leur séjour à Makkah.',
+        'Si vous souhaitez inclure ces lieux dans votre programme de visite, précisez-le dans votre demande. Leur intégration dépend des possibilités et des conditions applicables au moment de votre séjour.',
       ],
     },
     hotelSection: {
@@ -1712,7 +1788,7 @@ const fr: Translations = {
       eyebrow: 'DÉPLACEMENTS & TRANSPORT',
       title: 'Service de chauffeur pour vos déplacements à Makkah',
       paragraphs: [
-        "Pour vous rendre sur les sites spirituels et historiques de Makkah, un service de transport avec chauffeur peut être demandé. Certains sites, comme Arafat ou Jabal al-Nour, nécessitent un déplacement en véhicule depuis votre hôtel. Haramain Prestige peut étudier cette option dans votre demande selon les possibilités disponibles.",
+        'Pour vous rendre sur les sites spirituels et historiques de Makkah, un service de transport avec chauffeur peut être demandé. Certains sites, comme Arafat ou Jabal al-Nour, nécessitent un déplacement en véhicule depuis votre hôtel. Haramain Prestige peut étudier cette option dans votre demande selon les possibilités disponibles.',
       ],
       chauffeurLinkLabel: 'Découvrir le service chauffeur',
       visitesMadinahLinkLabel: 'Visites à Madinah',
@@ -1726,39 +1802,43 @@ const fr: Translations = {
       steps: [
         'Vous précisez les sites souhaités, la date, le nombre de personnes et votre hôtel à Makkah',
         'Haramain Prestige étudie les possibilités disponibles pour votre demande',
-        'Vous recevez une proposition et confirmez l\'organisation selon vos besoins',
+        "Vous recevez une proposition et confirmez l'organisation selon vos besoins",
       ],
     },
     faq: {
       title: 'Questions fréquentes — Visites à Makkah',
       items: [
         {
-          question: 'Proposez-vous des visites à Makkah en dehors du Masjid al-Haram\u00a0?',
+          question:
+            'Proposez-vous des visites à Makkah en dehors du Masjid al-Haram\u00a0?',
           answer:
-            "Haramain Prestige peut organiser un accompagnement pour vous aider à vous rendre sur des sites de Makkah au-delà du Haram, selon les possibilités disponibles. Précisez les lieux souhaités dans votre demande.",
+            'Haramain Prestige peut organiser un accompagnement pour vous aider à vous rendre sur des sites de Makkah au-delà du Haram, selon les possibilités disponibles. Précisez les lieux souhaités dans votre demande.',
         },
         {
           question: 'S\u2019agit-il d\u2019une visite guidée\u00a0?',
           answer:
-            "Le contenu exact de la prestation dépend de la proposition qui vous est transmise. Si vous recherchez un accompagnement particulier ou des explications pendant les visites, précisez-le dans votre demande afin que nous puissions vous confirmer ce qui peut être proposé.",
+            'Le contenu exact de la prestation dépend de la proposition qui vous est transmise. Si vous recherchez un accompagnement particulier ou des explications pendant les visites, précisez-le dans votre demande afin que nous puissions vous confirmer ce qui peut être proposé.',
         },
         {
-          question: 'Peut-on visiter Arafat, Mina, Muzdalifah ou Jabal al-Nour lors d\u2019un séjour à Makkah\u00a0?',
+          question:
+            'Peut-on visiter Arafat, Mina, Muzdalifah ou Jabal al-Nour lors d\u2019un séjour à Makkah\u00a0?',
           answer:
             "L'intégration de ces lieux à votre programme dépend des possibilités et des conditions applicables au moment de votre séjour. Précisez votre souhait dans votre demande afin qu'il puisse être pris en compte.",
         },
         {
-          question: 'L\'accès à Makkah est-il ouvert à tous\u00a0?',
+          question: "L'accès à Makkah est-il ouvert à tous\u00a0?",
           answer:
             "L'accès à Makkah est réservé aux musulmans. Haramain Prestige s'adresse aux pèlerins et aux voyageurs concernés. Si vous avez un doute sur les conditions d'accès, n'hésitez pas à nous contacter.",
         },
         {
-          question: 'Peut-on combiner visites à Makkah et hôtel dans une seule demande\u00a0?',
+          question:
+            'Peut-on combiner visites à Makkah et hôtel dans une seule demande\u00a0?',
           answer:
             "Oui. Vous pouvez demander votre hébergement à Makkah, votre transfert depuis l'aéroport de Jeddah et un accompagnement pour vos visites dans la même demande. Haramain Prestige organise l'ensemble selon votre programme.",
         },
         {
-          question: 'Peut-on demander des visites à Makkah et à Madinah dans le même séjour\u00a0?',
+          question:
+            'Peut-on demander des visites à Makkah et à Madinah dans le même séjour\u00a0?',
           answer:
             "Oui. Si votre séjour inclut les deux villes, précisez vos souhaits pour Makkah et pour Madinah dans votre demande. Haramain Prestige étudiera l'organisation selon votre programme global.",
         },
@@ -1768,7 +1848,7 @@ const fr: Translations = {
       eyebrow: 'VOTRE SÉJOUR À MAKKAH',
       title: 'Demandez un accompagnement pour vos visites à Makkah',
       paragraph:
-        "Précisez les sites que vous souhaitez visiter, votre date de séjour et le nombre de personnes. Haramain Prestige étudie les possibilités disponibles et vous transmet une proposition.",
+        'Précisez les sites que vous souhaitez visiter, votre date de séjour et le nombre de personnes. Haramain Prestige étudie les possibilités disponibles et vous transmet une proposition.',
       ctaPrimary: 'Préciser ma demande',
       ctaSecondary: 'Écrire sur WhatsApp',
     },
@@ -1901,7 +1981,7 @@ const fr: Translations = {
       eyebrow: 'HÔTELS',
       title: 'Nos hôtels à Makkah et Madinah',
       intro:
-        'Haramain Prestige vous accompagne dans la recherche de votre hébergement à Makkah et Madinah selon vos dates, votre budget et les critères importants pour votre séjour. Vous pouvez nous confier la recherche d\'un hôtel dans une seule ville ou nous transmettre vos besoins pour les deux destinations.',
+        "Haramain Prestige vous accompagne dans la recherche de votre hébergement à Makkah et Madinah selon vos dates, votre budget et les critères importants pour votre séjour. Vous pouvez nous confier la recherche d'un hôtel dans une seule ville ou nous transmettre vos besoins pour les deux destinations.",
       ctaPrimary: 'Recevoir une proposition hôtel',
       ctaSecondary: 'Voir nos adresses',
       imageAlt: 'Vue sur le Masjid al-Haram depuis un hôtel de Makkah',
@@ -1910,7 +1990,7 @@ const fr: Translations = {
       eyebrow: 'VOTRE HÉBERGEMENT',
       title: 'Trouver un hôtel adapté à votre séjour',
       paragraphs: [
-        'Le choix de l\'hôtel dépend de plusieurs critères : vos dates, votre budget, le nombre de voyageurs, la ville de séjour et les préférences que vous souhaitez nous communiquer.',
+        "Le choix de l'hôtel dépend de plusieurs critères : vos dates, votre budget, le nombre de voyageurs, la ville de séjour et les préférences que vous souhaitez nous communiquer.",
         'Haramain Prestige étudie votre demande afin de rechercher des options correspondant aux informations transmises.',
       ],
     },
@@ -1918,7 +1998,7 @@ const fr: Translations = {
       eyebrow: 'MAKKAH AL-MUKARRAMAH',
       title: 'Choisir votre hôtel à Makkah',
       paragraphs: [
-        'Pour votre séjour à Makkah, vous pouvez préciser les critères importants pour vous : dates, nombre de voyageurs, budget, type de chambre ou préférences concernant l\'emplacement.',
+        "Pour votre séjour à Makkah, vous pouvez préciser les critères importants pour vous : dates, nombre de voyageurs, budget, type de chambre ou préférences concernant l'emplacement.",
         'Haramain Prestige recherche ensuite des options correspondant à votre demande parmi les possibilités disponibles.',
       ],
       makkahLinkLabel: 'Voir tous les hôtels à Makkah',
@@ -1946,12 +2026,13 @@ const fr: Translations = {
       title: 'Organiser vos hôtels à Makkah et Madinah dans une même demande',
       paragraphs: [
         'Si votre séjour comprend Makkah et Madinah, vous pouvez nous transmettre vos besoins pour les deux villes dans une seule demande.',
-        'Précisez les dates prévues dans chaque ville, le nombre de voyageurs et vos critères d\'hébergement afin que les recherches puissent être coordonnées.',
+        "Précisez les dates prévues dans chaque ville, le nombre de voyageurs et vos critères d'hébergement afin que les recherches puissent être coordonnées.",
       ],
     },
     criteresSection: {
       eyebrow: 'VOTRE DEMANDE',
-      title: 'Quelles informations transmettre pour rechercher votre hôtel\u00a0?',
+      title:
+        'Quelles informations transmettre pour rechercher votre hôtel\u00a0?',
       paragraphs: [
         'Plus les informations transmises sont précises, plus il est simple de rechercher des options correspondant à votre séjour.',
       ],
@@ -1996,7 +2077,8 @@ const fr: Translations = {
             'Oui. Vous pouvez transmettre une demande concernant uniquement votre séjour à Madinah.',
         },
         {
-          question: 'Peut-on organiser Makkah et Madinah dans la même demande\u00a0?',
+          question:
+            'Peut-on organiser Makkah et Madinah dans la même demande\u00a0?',
           answer:
             'Oui. Indiquez les dates prévues dans chaque ville ainsi que vos critères afin que les deux recherches puissent être étudiées dans une même demande.',
         },
@@ -2016,7 +2098,7 @@ const fr: Translations = {
       eyebrow: 'VOTRE HÉBERGEMENT',
       title: 'Recherchons votre hôtel à Makkah ou Madinah',
       paragraph:
-        'Indiquez-nous vos dates, le nombre de voyageurs et vos critères d\'hébergement afin de recevoir une proposition correspondant à votre séjour.',
+        "Indiquez-nous vos dates, le nombre de voyageurs et vos critères d'hébergement afin de recevoir une proposition correspondant à votre séjour.",
       ctaPrimary: 'Recevoir une proposition hôtel',
       ctaSecondary: 'Écrire sur WhatsApp',
     },
@@ -2053,7 +2135,7 @@ const fr: Translations = {
       eyebrow: 'VOTRE DEMANDE',
       title: 'Quelles informations nous transmettre\u00a0?',
       intro:
-        'Pour faciliter l\'étude de votre demande, indiquez autant que possible les informations correspondant à votre séjour.',
+        "Pour faciliter l'étude de votre demande, indiquez autant que possible les informations correspondant à votre séjour.",
       items: [
         'Dates du séjour',
         'Makkah, Madinah ou les deux villes',
@@ -2086,15 +2168,19 @@ const fr: Translations = {
             'Indiquez notamment vos dates, la ville ou les villes concernées, le nombre de voyageurs et les prestations souhaitées.',
         },
         {
-          question: "Peut-on demander uniquement un hôtel\u00a0?",
-          answer: 'Oui. Vous pouvez transmettre une demande concernant uniquement votre hébergement.',
+          question: 'Peut-on demander uniquement un hôtel\u00a0?',
+          answer:
+            'Oui. Vous pouvez transmettre une demande concernant uniquement votre hébergement.',
         },
         {
-          question: "Peut-on demander uniquement un transfert, un chauffeur ou des visites\u00a0?",
-          answer: 'Oui. Vous pouvez sélectionner uniquement les services dont vous avez besoin.',
+          question:
+            'Peut-on demander uniquement un transfert, un chauffeur ou des visites\u00a0?',
+          answer:
+            'Oui. Vous pouvez sélectionner uniquement les services dont vous avez besoin.',
         },
         {
-          question: 'Peut-on regrouper plusieurs besoins dans une même demande\u00a0?',
+          question:
+            'Peut-on regrouper plusieurs besoins dans une même demande\u00a0?',
           answer:
             'Oui. Vous pouvez indiquer dans une seule demande les différentes prestations souhaitées pour votre séjour.',
         },
@@ -2116,7 +2202,7 @@ const fr: Translations = {
       eyebrow: 'TÉMOIGNAGES',
       title: 'Témoignages de nos voyageurs',
       intro:
-        'Ils nous ont confié leur séjour à Makkah et Madinah. Voici ce qu\'ils en ont retenu.',
+        "Ils nous ont confié leur séjour à Makkah et Madinah. Voici ce qu'ils en ont retenu.",
       ctaPrimary: 'Recevoir une proposition',
       imageAlt: 'Hôtel avec vue sur le Masjid al-Haram, Haramain Prestige',
     },
@@ -2124,8 +2210,8 @@ const fr: Translations = {
       eyebrow: 'ILS NOUS ONT FAIT CONFIANCE',
       title: 'Des voyageurs qui nous recommandent',
       paragraphs: [
-        'Chaque séjour est unique. Haramain Prestige accompagne des voyageurs depuis la France, la Belgique et d\'autres pays francophones dans l\'organisation de leur séjour à Makkah et Madinah.',
-        'Les témoignages présentés ici sont ceux de personnes ayant sollicité nos services pour leur hébergement, leurs transferts ou l\'organisation de leur voyage.',
+        "Chaque séjour est unique. Haramain Prestige accompagne des voyageurs depuis la France, la Belgique et d'autres pays francophones dans l'organisation de leur séjour à Makkah et Madinah.",
+        "Les témoignages présentés ici sont ceux de personnes ayant sollicité nos services pour leur hébergement, leurs transferts ou l'organisation de leur voyage.",
       ],
     },
     ctaBlock: {

@@ -65,9 +65,11 @@ function matchPage(path: string): PageKey | null {
   if (path === '/hotels-makkah') return 'hotelsMakkah';
   if (path === '/hotels-madinah') return 'hotelsMadinah';
   if (path === '/chambre-vue-kaaba') return 'chambreVueKaaba';
-  if (path === '/transfert-aeroport-jeddah-makkah') return 'transfertJeddahMakkah';
+  if (path === '/transfert-aeroport-jeddah-makkah')
+    return 'transfertJeddahMakkah';
   if (path === '/transfert-aeroport-madinah') return 'transfertAeroportMadinah';
-  if (path === '/chauffeur-prive-makkah-madinah') return 'chauffeurPriveMakkahMadinah';
+  if (path === '/chauffeur-prive-makkah-madinah')
+    return 'chauffeurPriveMakkahMadinah';
   if (path === '/visites-madinah') return 'visitesMadinah';
   if (path === '/visites-makkah') return 'visitesMakkah';
   if (path === '/services') return 'services';

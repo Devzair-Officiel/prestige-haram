@@ -249,7 +249,18 @@ function Footer() {
           links={navigationLinks}
         />
         <LinkColumn title={t.footer.columns.more.title} links={moreLinks} />
-        <LinkColumn title={t.footer.columns.legal.title} links={legalLinks} />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <LinkColumn title={t.footer.columns.legal.title} links={legalLinks} />
+          <button
+            type="button"
+            className="cookie-manage"
+            onClick={() =>
+              window.dispatchEvent(new Event('haramain:manage-cookies'))
+            }
+          >
+            {t.cookies.manage}
+          </button>
+        </div>
       </div>
 
       <div

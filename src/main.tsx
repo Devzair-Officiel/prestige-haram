@@ -2,6 +2,8 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './app/App';
 import { I18nProvider } from './i18n';
+import CookieConsent from './components/ui/CookieConsent';
+import { initializeAnalytics } from './services/analytics';
 // Sous-set latin pour le français (aucun caractère hors U+00xx).
 import '@fontsource/cormorant-garamond/latin-600.css';
 import '@fontsource/cormorant-garamond/latin-700.css';
@@ -19,10 +21,13 @@ import '@fontsource/noto-naskh-arabic/arabic-600.css';
 import '@fontsource/noto-naskh-arabic/arabic-700.css';
 import './styles/global.css';
 
+initializeAnalytics();
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <I18nProvider>
       <App />
+      <CookieConsent />
     </I18nProvider>
   </StrictMode>,
 );

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import type { Locale, PageKey } from '../i18n/types';
 import { htmlLangOf, ogLocaleOf } from '../i18n/utils';
 import { localizedPath } from '../i18n/routes';
+import { trackCurrentPage } from '../services/analytics';
 
 const SITE_ORIGIN = 'https://haramainprestige.com';
 
@@ -162,5 +163,6 @@ export function usePageMetadata({
     // niveau global, mais on garantit ici la cohérence même si la page
     // est rendue hors Provider (tests, SSR partiel).
     document.documentElement.setAttribute('lang', htmlLangOf(locale));
+    trackCurrentPage();
   }, [title, description, page, locale, noindex]);
 }

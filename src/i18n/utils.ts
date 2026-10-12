@@ -43,7 +43,12 @@ export function handleSpaNav(
   e: { preventDefault(): void },
   href: string,
 ): void {
-  if (href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('//')) return;
+  if (
+    href.startsWith('http') ||
+    href.startsWith('mailto:') ||
+    href.startsWith('//')
+  )
+    return;
   if (href.startsWith('#')) return;
   e.preventDefault();
   navigateTo(href);

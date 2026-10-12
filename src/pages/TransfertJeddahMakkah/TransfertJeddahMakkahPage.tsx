@@ -24,7 +24,9 @@ function TransfertJeddahMakkahPage() {
       metaTitle={t.meta.transfertJeddahMakkah.title}
       metaDescription={t.meta.transfertJeddahMakkah.description}
       breadcrumbLabel={
-        locale === 'fr' ? 'Transfert Jeddah \u2013 Makkah' : 'التوصيل جدة \u2013 مكة'
+        locale === 'fr'
+          ? 'Transfert Jeddah \u2013 Makkah'
+          : 'التوصيل جدة \u2013 مكة'
       }
       hero={{
         backHomeLabel: page.backHome,

@@ -88,7 +88,10 @@ function ChauffeurPriveMakkahMadinahPage() {
         paragraphs={page.makkahSection.paragraphs}
         discoverLinks={[
           { label: page.makkahSection.makkahLinkLabel, href: hotelsMakkahHref },
-          { label: page.makkahSection.visitesMakkahLinkLabel, href: visitesMakkahHref },
+          {
+            label: page.makkahSection.visitesMakkahLinkLabel,
+            href: visitesMakkahHref,
+          },
         ]}
       />
       <SeoSectionText
@@ -96,8 +99,14 @@ function ChauffeurPriveMakkahMadinahPage() {
         title={page.madinahSection.title}
         paragraphs={page.madinahSection.paragraphs}
         discoverLinks={[
-          { label: page.madinahSection.madinahLinkLabel, href: hotelsMadinahHref },
-          { label: page.madinahSection.visitesMadinahLinkLabel, href: visitesMadinahHref },
+          {
+            label: page.madinahSection.madinahLinkLabel,
+            href: hotelsMadinahHref,
+          },
+          {
+            label: page.madinahSection.visitesMadinahLinkLabel,
+            href: visitesMadinahHref,
+          },
         ]}
       />
       <SeoSectionText

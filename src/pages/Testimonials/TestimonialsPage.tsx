@@ -99,7 +99,9 @@ function TestimonialsPage() {
                 {locale === 'fr' ? 'Accueil' : 'الرئيسية'}
               </a>
             </li>
-            <li aria-hidden="true" style={{ opacity: 0.35 }}>›</li>
+            <li aria-hidden="true" style={{ opacity: 0.35 }}>
+              ›
+            </li>
             <li aria-current="page" style={{ color: '#E6C878' }}>
               {locale === 'fr' ? 'Témoignages' : 'شهادات'}
             </li>
@@ -181,7 +183,12 @@ function TestimonialsPage() {
               >
                 {page.hero.ctaPrimary}
                 <span className="btn-arrow">
-                  <svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true">
+                  <svg
+                    width="13"
+                    height="13"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                  >
                     <path
                       d="M3 8h9M9 4l4 4-4 4"
                       stroke="currentColor"
@@ -381,7 +388,12 @@ function TestimonialsPage() {
               >
                 {page.ctaBlock.ctaPrimary}
                 <span className="btn-arrow">
-                  <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                  >
                     <path
                       d="M3 8h9M9 4l4 4-4 4"
                       stroke="currentColor"

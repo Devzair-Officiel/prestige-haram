@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useReveal } from '../../../hooks/useReveal';
 import { useI18n } from '../../../i18n';
+import { trackCommercialEvent } from '../../../services/analytics';
 
 type Toast = { type: 'success' | 'error'; message: string } | null;
 
@@ -462,6 +463,7 @@ function QuoteForm() {
                 error?: string;
               };
               if (res.ok && data.success) {
+                trackCommercialEvent('generate_lead');
                 setToast({
                   type: 'success',
                   message: q.toastSuccessMsg,

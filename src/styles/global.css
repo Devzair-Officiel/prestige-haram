@@ -81,6 +81,74 @@ textarea::placeholder {
   border-radius: 8px;
 }
 
+.cookie-consent {
+  position: fixed;
+  inset-inline: 16px;
+  bottom: 16px;
+  z-index: 10000;
+  max-width: 760px;
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  margin-inline: auto;
+  padding: clamp(18px, 4vw, 28px);
+  background: #1c1813;
+  color: #f5efe6;
+  border: 1px solid #b99c58;
+  border-radius: 16px;
+  box-shadow: 0 12px 48px #0009;
+  font-size: 14px;
+  text-align: start;
+}
+
+.cookie-consent h2 {
+  color: #e6c878;
+  font-size: 20px;
+  margin: 0 0 12px;
+}
+
+.cookie-consent p {
+  margin: 12px 0;
+}
+.cookie-consent a {
+  text-decoration: underline;
+}
+
+.cookie-consent-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.cookie-consent-actions button {
+  flex: 1 1 180px;
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 1px solid #e6c878;
+  border-radius: 8px;
+  background: #e6c878;
+  color: #14110e;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.cookie-consent-actions .cookie-consent-close {
+  flex: 0 1 auto;
+  color: #e6c878;
+  background: transparent;
+}
+
+.cookie-manage {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #c3bdb5;
+  font-size: 13px;
+  text-align: start;
+  align-self: flex-start;
+  text-decoration: underline;
+}
+
 /* ---------- Animations ---------- */
 .reveal {
   opacity: 0;

@@ -7,7 +7,24 @@ export type Locale = 'fr' | 'ar-SA';
 /** Direction textuelle induite par la locale. */
 export type Direction = 'ltr' | 'rtl';
 
-export type PageKey = 'home' | 'about' | 'legal' | 'privacy' | 'notFound' | 'hotelsMakkah' | 'hotelsMadinah' | 'chambreVueKaaba' | 'transfertJeddahMakkah' | 'transfertAeroportMadinah' | 'chauffeurPriveMakkahMadinah' | 'visitesMadinah' | 'visitesMakkah' | 'services' | 'hotels' | 'testimonials' | 'contact';
+export type PageKey =
+  | 'home'
+  | 'about'
+  | 'legal'
+  | 'privacy'
+  | 'notFound'
+  | 'hotelsMakkah'
+  | 'hotelsMadinah'
+  | 'chambreVueKaaba'
+  | 'transfertJeddahMakkah'
+  | 'transfertAeroportMadinah'
+  | 'chauffeurPriveMakkahMadinah'
+  | 'visitesMadinah'
+  | 'visitesMakkah'
+  | 'services'
+  | 'hotels'
+  | 'testimonials'
+  | 'contact';
 
 /** Une entrée FAQ, utilisée pour le rendu ET le JSON-LD FAQPage. */
 export type FaqItem = {
@@ -247,6 +264,19 @@ export interface Translations {
     ctaSecondaryAria: string;
     ctaContact: string;
     imageAlt: string;
+  };
+
+  cookies: {
+    title: string;
+    description: string;
+    privacyLink: string;
+    accept: string;
+    refuse: string;
+    manage: string;
+    accepted: string;
+    refused: string;
+    close: string;
+    storageNotice: string;
   };
 
   footer: {

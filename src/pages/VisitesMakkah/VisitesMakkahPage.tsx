@@ -106,8 +106,14 @@ function VisitesMakkahPage() {
         title={page.chauffeurSection.title}
         paragraphs={page.chauffeurSection.paragraphs}
         discoverLinks={[
-          { label: page.chauffeurSection.chauffeurLinkLabel, href: chauffeurHref },
-          { label: page.chauffeurSection.visitesMadinahLinkLabel, href: visitesMadinahHref },
+          {
+            label: page.chauffeurSection.chauffeurLinkLabel,
+            href: chauffeurHref,
+          },
+          {
+            label: page.chauffeurSection.visitesMadinahLinkLabel,
+            href: visitesMadinahHref,
+          },
         ]}
       />
       <SeoSectionSteps

@@ -65,7 +65,9 @@ function VisitesMadinahPage() {
         },
         {
           name:
-            locale === 'fr' ? 'Visites à Madinah' : 'الزيارات في المدينة المنورة',
+            locale === 'fr'
+              ? 'Visites à Madinah'
+              : 'الزيارات في المدينة المنورة',
           url: SITE_ORIGIN + visitesMadinahHref,
         },
       ]}
@@ -106,8 +108,14 @@ function VisitesMadinahPage() {
         title={page.chauffeurSection.title}
         paragraphs={page.chauffeurSection.paragraphs}
         discoverLinks={[
-          { label: page.chauffeurSection.chauffeurLinkLabel, href: chauffeurHref },
-          { label: page.chauffeurSection.visitesMakkahLinkLabel, href: visitesMakkahHref },
+          {
+            label: page.chauffeurSection.chauffeurLinkLabel,
+            href: chauffeurHref,
+          },
+          {
+            label: page.chauffeurSection.visitesMakkahLinkLabel,
+            href: visitesMakkahHref,
+          },
         ]}
       />
       <SeoSectionSteps

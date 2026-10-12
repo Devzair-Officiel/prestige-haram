@@ -43,7 +43,9 @@ function HotelsMakkahPage() {
       page="hotelsMakkah"
       metaTitle={t.meta.hotelsMakkah.title}
       metaDescription={t.meta.hotelsMakkah.description}
-      breadcrumbLabel={locale === 'fr' ? 'Hôtels à Makkah' : 'فنادق مكة المكرمة'}
+      breadcrumbLabel={
+        locale === 'fr' ? 'Hôtels à Makkah' : 'فنادق مكة المكرمة'
+      }
       hero={{
         backHomeLabel: page.backHome,
         backHomeHref: homeHref,
@@ -102,8 +104,14 @@ function HotelsMakkahPage() {
         title={page.kaabaSection.title}
         paragraphs={page.kaabaSection.paragraphs}
         discoverLinks={[
-          { label: page.kaabaSection.discoverLabel, href: pathFor('chambreVueKaaba') },
-          { label: page.kaabaSection.visitesMakkahLinkLabel, href: visitesMakkahHref },
+          {
+            label: page.kaabaSection.discoverLabel,
+            href: pathFor('chambreVueKaaba'),
+          },
+          {
+            label: page.kaabaSection.visitesMakkahLinkLabel,
+            href: visitesMakkahHref,
+          },
         ]}
       />
       <SeoSectionSteps

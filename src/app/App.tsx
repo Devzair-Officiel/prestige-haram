@@ -47,8 +47,10 @@ function App() {
   if (page === 'hotelsMadinah') return <HotelsMadinahPage />;
   if (page === 'chambreVueKaaba') return <ChambreVueKaabaPage />;
   if (page === 'transfertJeddahMakkah') return <TransfertJeddahMakkahPage />;
-  if (page === 'transfertAeroportMadinah') return <TransfertAeroportMadinahPage />;
-  if (page === 'chauffeurPriveMakkahMadinah') return <ChauffeurPriveMakkahMadinahPage />;
+  if (page === 'transfertAeroportMadinah')
+    return <TransfertAeroportMadinahPage />;
+  if (page === 'chauffeurPriveMakkahMadinah')
+    return <ChauffeurPriveMakkahMadinahPage />;
   if (page === 'visitesMadinah') return <VisitesMadinahPage />;
   if (page === 'visitesMakkah') return <VisitesMakkahPage />;
   if (page === 'services') return <ServicesPage />;

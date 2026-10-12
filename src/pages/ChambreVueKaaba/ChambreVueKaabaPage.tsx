@@ -12,11 +12,7 @@ import zamzamMakkahImage from '../../assets/zamzam_pullman_makkah.webp';
 
 const SITE_ORIGIN = 'https://haramainprestige.com';
 
-const KAABA_IMAGES = [
-  fairmontImage,
-  swissotelImage,
-  zamzamMakkahImage,
-];
+const KAABA_IMAGES = [fairmontImage, swissotelImage, zamzamMakkahImage];
 
 function ChambreVueKaabaPage() {
   const { t, locale, pathFor } = useI18n();
@@ -66,7 +62,8 @@ function ChambreVueKaabaPage() {
           url: SITE_ORIGIN + homeHref,
         },
         {
-          name: locale === 'fr' ? 'Chambre vue Kaaba' : 'غرفة بإطلالة على الكعبة',
+          name:
+            locale === 'fr' ? 'Chambre vue Kaaba' : 'غرفة بإطلالة على الكعبة',
           url: SITE_ORIGIN + chambreVueKaabaHref,
         },
       ]}

@@ -1,0 +1,269 @@
+// @vitest-environment jsdom
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import type { Root } from 'react-dom/client';
+
+let react: typeof import('react');
+let root: Root;
+let analytics: typeof import('./analytics');
+let I18nProvider: typeof import('../i18n').I18nProvider;
+let windowListeners: ReturnType<typeof vi.spyOn>;
+let documentListeners: ReturnType<typeof vi.spyOn>;
+
+function events(name: string): unknown[][] {
+  return (window.dataLayer || [])
+    .map((entry) => Array.from(entry as ArrayLike<unknown>))
+    .filter((entry) => entry[0] === 'event' && entry[1] === name);
+}
+
+beforeEach(async () => {
+  vi.resetModules();
+  vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT', true);
+  vi.stubGlobal(
+    'matchMedia',
+    vi.fn(() => ({ matches: true })),
+  );
+  vi.stubGlobal('scrollTo', vi.fn());
+  Object.defineProperty(HTMLElement.prototype, 'scrollIntoView', {
+    configurable: true,
+    value: vi.fn(),
+  });
+  localStorage.clear();
+  sessionStorage.clear();
+  history.replaceState({}, '', '/');
+  document.head.innerHTML = '';
+  document.body.innerHTML = '<div id="root"></div>';
+  window.dataLayer = [];
+  window.gtag = undefined;
+  windowListeners = vi.spyOn(window, 'addEventListener');
+  documentListeners = vi.spyOn(document, 'addEventListener');
+  react = await import('react');
+  const { createRoot } = await import('react-dom/client');
+  ({ I18nProvider } = await import('../i18n'));
+  analytics = await import('./analytics');
+  analytics.initializeAnalytics();
+  root = createRoot(document.getElementById('root')!);
+});
+
+afterEach(async () => {
+  await react.act(async () => root.unmount());
+  // Stop any pending load timer and restore module-installed listeners between tests.
+  analytics.setAnalyticsConsent('denied');
+  for (const [type, listener, options] of windowListeners.mock.calls)
+    window.removeEventListener(type, listener, options);
+  for (const [type, listener, options] of documentListeners.mock.calls)
+    document.removeEventListener(type, listener, options);
+  vi.restoreAllMocks();
+  vi.unstubAllGlobals();
+});
+
+describe('React SPA integration', () => {
+  it('tracks the committed titles once in StrictMode, including custom navigation, FR/AR and popstate', async () => {
+    const { default: App } = await import('../app/App');
+    const { navigateTo } = await import('../i18n/utils');
+    analytics.setAnalyticsConsent('granted');
+    document.querySelector('script')!.dispatchEvent(new Event('load'));
+    await react.act(async () => {
+      root.render(
+        <react.StrictMode>
+          <I18nProvider>
+            <App />
+          </I18nProvider>
+        </react.StrictMode>,
+      );
+    });
+    expect(events('page_view')).toHaveLength(1);
+    expect(events('page_view')[0][2]).toMatchObject({
+      page_title: document.title,
+      language: 'fr',
+    });
+    await react.act(async () => navigateTo('/#devis'));
+    expect(events('page_view')).toHaveLength(1);
+    await react.act(async () => navigateTo('/ar-sa/'));
+    expect(events('page_view')).toHaveLength(2);
+    expect(document.documentElement.dir).toBe('rtl');
+    expect(events('page_view')[1][2]).toMatchObject({
+      page_title: document.title,
+      language: 'ar-SA',
+    });
+    expect(
+      document.querySelector('link[rel="canonical"]')?.getAttribute('href'),
+    ).toBe('https://haramainprestige.com/ar-sa/');
+    expect(document.querySelectorAll('link[hreflang]')).toHaveLength(3);
+    await react.act(async () => navigateTo('/ar-sa/hotels-makkah'));
+    expect(events('page_view')).toHaveLength(3);
+    await react.act(async () => {
+      history.replaceState({}, '', '/');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    });
+    expect(events('page_view')).toHaveLength(4);
+    expect(document.documentElement.dir).toBe('ltr');
+    expect(events('page_view')[3][2]).toMatchObject({
+      page_referrer: window.location.origin + '/ar-sa/hotels-makkah',
+      page_title: document.title,
+    });
+  });
+
+  it('provides translated controls, keyboard management and withdrawal through the footer', async () => {
+    const { default: CookieConsent } =
+      await import('../components/ui/CookieConsent');
+    const { default: Footer } = await import('../components/layout/Footer');
+    await react.act(async () =>
+      root.render(
+        <react.StrictMode>
+          <I18nProvider>
+            <Footer />
+            <CookieConsent />
+          </I18nProvider>
+        </react.StrictMode>,
+      ),
+    );
+    const region = () => document.querySelector<HTMLElement>('.cookie-consent');
+    expect(region()?.getAttribute('aria-labelledby')).toBe(
+      'cookie-consent-title',
+    );
+    expect(region()?.textContent).toContain('Accepter');
+    await react.act(async () =>
+      region()!.querySelectorAll('button')[1].click(),
+    );
+    expect(region()).toBeNull();
+    expect(document.querySelector('script')).toBeNull();
+    const manage = document.querySelector<HTMLButtonElement>('.cookie-manage')!;
+    manage.focus();
+    await react.act(async () => manage.click());
+    expect(document.activeElement?.id).toBe('cookie-consent-title');
+    expect(region()?.textContent).toContain('désactivée');
+    await react.act(async () =>
+      region()!.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }),
+      ),
+    );
+    expect(region()).toBeNull();
+    expect(document.activeElement).toBe(manage);
+    await react.act(async () => manage.click());
+    await react.act(async () => region()!.querySelector('button')!.click());
+    expect(analytics.getAnalyticsConsent()).toBe('granted');
+    expect(document.querySelectorAll('script')).toHaveLength(1);
+    await react.act(async () => manage.click());
+    await react.act(async () =>
+      region()!.querySelectorAll('button')[1].click(),
+    );
+    expect(analytics.getAnalyticsConsent()).toBe('denied');
+    expect(window['ga-disable-G-00WDFD2SY7']).toBe(true);
+    await react.act(async () => {
+      history.replaceState({}, '', '/ar-sa/');
+      window.dispatchEvent(new Event('haramain:navigate'));
+      window.dispatchEvent(new Event('haramain:manage-cookies'));
+    });
+    expect(region()?.dir).toBe('rtl');
+    expect(region()?.textContent).toContain('قبول');
+    expect(region()?.textContent).toContain('رفض');
+    expect(document.querySelector('.cookie-manage')?.textContent).toBe(
+      'إدارة ملفات تعريف الارتباط',
+    );
+  });
+});
+
+describe('quote form conversions', () => {
+  it.each([
+    { ok: true, success: true, consent: 'granted', expected: 1 },
+    { ok: false, success: true, consent: 'granted', expected: 0 },
+    { ok: true, success: false, consent: 'granted', expected: 0 },
+    { ok: false, success: false, consent: 'granted', expected: 0 },
+    { ok: true, success: true, consent: 'denied', expected: 0 },
+    { ok: true, success: true, consent: null, expected: 0 },
+    { ok: true, success: true, consent: 'withdrawn', expected: 0 },
+  ] as const)(
+    'emits $expected lead for ok=$ok, success=$success, consent=$consent',
+    async (scenario) => {
+      const { default: QuoteForm } =
+        await import('../pages/Home/sections/QuoteForm');
+      if (scenario.consent === 'granted' || scenario.consent === 'withdrawn') {
+        analytics.setAnalyticsConsent('granted');
+        document.querySelector('script')!.dispatchEvent(new Event('load'));
+        if (scenario.consent === 'withdrawn')
+          analytics.setAnalyticsConsent('denied');
+      } else if (scenario.consent === 'denied')
+        analytics.setAnalyticsConsent('denied');
+      document.title = 'Devis';
+      analytics.trackCurrentPage();
+      const fetchMock = vi.fn().mockResolvedValue({
+        ok: scenario.ok,
+        json: async () => ({ success: scenario.success }),
+      });
+      vi.stubGlobal('fetch', fetchMock);
+      await react.act(async () =>
+        root.render(
+          <I18nProvider>
+            <QuoteForm />
+          </I18nProvider>,
+        ),
+      );
+      const form = document.querySelector('form')!;
+      vi.spyOn(form, 'checkValidity').mockReturnValue(true);
+      for (const [name, value] of Object.entries({
+        Nom: 'Private Name',
+        Email: 'private@example.com',
+        'Téléphone WhatsApp': '0612345678',
+        Message: 'Private message',
+      })) {
+        (form.elements.namedItem(name) as HTMLInputElement).value = value;
+      }
+      await react.act(async () => {
+        form.dispatchEvent(
+          new Event('submit', { bubbles: true, cancelable: true }),
+        );
+      });
+      expect(fetchMock).toHaveBeenCalledOnce();
+      expect(events('generate_lead')).toHaveLength(scenario.expected);
+      const serialized = JSON.stringify(window.dataLayer);
+      for (const value of [
+        'Private Name',
+        'private@example.com',
+        '0612345678',
+        'Private message',
+      ])
+        expect(serialized).not.toContain(value);
+    },
+  );
+
+  it.each(['network', 'invalid-json', 'validation', 'honeypot'])(
+    'does not count a lead after %s failure',
+    async (failure) => {
+      const { default: QuoteForm } =
+        await import('../pages/Home/sections/QuoteForm');
+      analytics.setAnalyticsConsent('granted');
+      document.querySelector('script')!.dispatchEvent(new Event('load'));
+      analytics.trackCurrentPage();
+      const fetchMock =
+        failure === 'network'
+          ? vi.fn().mockRejectedValue(new Error('Offline'))
+          : vi.fn().mockResolvedValue({
+              ok: true,
+              json: async () => {
+                throw new Error('Invalid JSON');
+              },
+            });
+      vi.stubGlobal('fetch', fetchMock);
+      await react.act(async () =>
+        root.render(
+          <I18nProvider>
+            <QuoteForm />
+          </I18nProvider>,
+        ),
+      );
+      const form = document.querySelector('form')!;
+      vi.spyOn(form, 'checkValidity').mockReturnValue(failure !== 'validation');
+      vi.spyOn(form, 'reportValidity').mockReturnValue(false);
+      if (failure === 'honeypot')
+        (form.elements.namedItem('website') as HTMLInputElement).value = 'spam';
+      await react.act(async () => {
+        form.dispatchEvent(
+          new Event('submit', { bubbles: true, cancelable: true }),
+        );
+      });
+      expect(events('generate_lead')).toHaveLength(0);
+      if (failure === 'validation' || failure === 'honeypot')
+        expect(fetchMock).not.toHaveBeenCalled();
+    },
+  );
+});

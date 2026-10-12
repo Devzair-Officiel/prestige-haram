@@ -508,7 +508,14 @@ function CategoryBlock({
             {title}
           </h3>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 16,
+            flexWrap: 'wrap',
+          }}
+        >
           {discoveryHref && discoveryLabel && (
             <a
               href={discoveryHref}
@@ -665,14 +672,22 @@ function Hotels() {
             nextAria={t.hotels.nextAria}
             showMoreLabel={t.hotels.showMore}
             discoveryHref={
-              key === 'makkah' ? hotelsMakkahHref :
-              key === 'madinah' ? pathFor('hotelsMadinah') :
-              key === 'kaaba' ? pathFor('chambreVueKaaba') : undefined
+              key === 'makkah'
+                ? hotelsMakkahHref
+                : key === 'madinah'
+                  ? pathFor('hotelsMadinah')
+                  : key === 'kaaba'
+                    ? pathFor('chambreVueKaaba')
+                    : undefined
             }
             discoveryLabel={
-              key === 'makkah' ? t.hotels.discoverMakkah :
-              key === 'madinah' ? t.hotels.discoverMadinah :
-              key === 'kaaba' ? t.hotels.discoverKaaba : undefined
+              key === 'makkah'
+                ? t.hotels.discoverMakkah
+                : key === 'madinah'
+                  ? t.hotels.discoverMadinah
+                  : key === 'kaaba'
+                    ? t.hotels.discoverKaaba
+                    : undefined
             }
           />
         );
@@ -681,7 +696,10 @@ function Hotels() {
       <div style={{ textAlign: 'center', marginTop: 40 }}>
         <a
           href={hotelsHref}
-          onClick={(e) => { e.preventDefault(); navigateTo(hotelsHref); }}
+          onClick={(e) => {
+            e.preventDefault();
+            navigateTo(hotelsHref);
+          }}
           style={{
             display: 'inline-flex',
             alignItems: 'center',

@@ -12,7 +12,10 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
         const itemId = `faq-item-${i}`;
         const panelId = `faq-panel-${i}`;
         return (
-          <div key={i} style={{ borderTop: '1px solid rgba(245,239,230,0.08)' }}>
+          <div
+            key={i}
+            style={{ borderTop: '1px solid rgba(245,239,230,0.08)' }}
+          >
             <h3 style={{ margin: 0 }}>
               <button
                 id={itemId}

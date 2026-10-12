@@ -7,7 +7,12 @@ import { usePageMetadata } from '../../hooks/usePageMetadata';
 import { useI18n } from '../../i18n';
 import { handleSpaNav } from '../../i18n/utils';
 import type { PageKey } from '../../i18n/types';
-import type { HeroConfig, FinalCtaConfig, FaqConfig, BreadcrumbItem } from './types';
+import type {
+  HeroConfig,
+  FinalCtaConfig,
+  FaqConfig,
+  BreadcrumbItem,
+} from './types';
 import { SectionEyebrow, SectionH2 } from './primitives';
 import { SeoSection } from './SeoSection';
 import { FaqAccordion } from './FaqAccordion';
@@ -39,7 +44,12 @@ export function SeoLandingPage({
   const heroRef = useReveal<HTMLDivElement>();
   const ctaRef = useReveal<HTMLDivElement>();
 
-  usePageMetadata({ title: metaTitle, description: metaDescription, page, locale });
+  usePageMetadata({
+    title: metaTitle,
+    description: metaDescription,
+    page,
+    locale,
+  });
 
   useEffect(() => {
     const breadcrumbId = `jsonld-breadcrumb-${page}`;
@@ -122,7 +132,9 @@ export function SeoLandingPage({
                 {locale === 'fr' ? 'Accueil' : 'الرئيسية'}
               </a>
             </li>
-            <li aria-hidden="true" style={{ opacity: 0.35 }}>›</li>
+            <li aria-hidden="true" style={{ opacity: 0.35 }}>
+              ›
+            </li>
             <li aria-current="page" style={{ color: '#E6C878' }}>
               {breadcrumbLabel}
             </li>
@@ -364,7 +376,12 @@ export function SeoLandingPage({
               >
                 {finalCta.ctaPrimary.label}
                 <span className="btn-arrow">
-                  <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                  >
                     <path
                       d="M3 8h9M9 4l4 4-4 4"
                       stroke="currentColor"

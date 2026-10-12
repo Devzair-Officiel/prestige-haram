@@ -2,6 +2,8 @@
 
 Base frontend React + TypeScript + Vite, exécutée dans Docker.
 
+Intégration GA4 et consentement : [documentation Analytics](docs/analytics.md).
+
 ## Prérequis
 
 - Docker

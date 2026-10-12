@@ -1,9 +1,6 @@
 import { useI18n } from '../../i18n';
 import { SeoLandingPage } from '../../components/seo/SeoLandingPage';
-import {
-  SeoSectionText,
-  SeoSectionSteps,
-} from '../../components/seo/sections';
+import { SeoSectionText, SeoSectionSteps } from '../../components/seo/sections';
 import heroImage480 from '../../assets/services-480.webp';
 import heroImage800 from '../../assets/services-800.webp';
 import heroImage1200 from '../../assets/services-1200.webp';
@@ -79,8 +76,14 @@ function ServicesPage() {
         title={page.transfertsSection.title}
         paragraphs={page.transfertsSection.paragraphs}
         discoverLinks={[
-          { label: page.transfertsSection.jeddahLinkLabel, href: transfertJeddahHref },
-          { label: page.transfertsSection.madinahLinkLabel, href: transfertMadinahHref },
+          {
+            label: page.transfertsSection.jeddahLinkLabel,
+            href: transfertJeddahHref,
+          },
+          {
+            label: page.transfertsSection.madinahLinkLabel,
+            href: transfertMadinahHref,
+          },
         ]}
       />
       <SeoSectionText

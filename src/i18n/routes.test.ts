@@ -104,9 +104,7 @@ describe('localizedPath — hotelsMakkah', () => {
   });
 
   it('renvoie /ar-sa/hotels-makkah en AR', () => {
-    expect(localizedPath('hotelsMakkah', 'ar-SA')).toBe(
-      '/ar-sa/hotels-makkah',
-    );
+    expect(localizedPath('hotelsMakkah', 'ar-SA')).toBe('/ar-sa/hotels-makkah');
   });
 });
 
@@ -362,7 +360,9 @@ describe('localizedPath — visitesMadinah', () => {
   });
 
   it('renvoie /ar-sa/visites-madinah en AR', () => {
-    expect(localizedPath('visitesMadinah', 'ar-SA')).toBe('/ar-sa/visites-madinah');
+    expect(localizedPath('visitesMadinah', 'ar-SA')).toBe(
+      '/ar-sa/visites-madinah',
+    );
   });
 });
 
@@ -402,7 +402,9 @@ describe('localizedPath — visitesMakkah', () => {
   });
 
   it('renvoie /ar-sa/visites-makkah en AR', () => {
-    expect(localizedPath('visitesMakkah', 'ar-SA')).toBe('/ar-sa/visites-makkah');
+    expect(localizedPath('visitesMakkah', 'ar-SA')).toBe(
+      '/ar-sa/visites-makkah',
+    );
   });
 });
 
@@ -598,12 +600,22 @@ describe('detectRoute — contact', () => {
 
 describe('équivalence localizedPath ↔ detectRoute', () => {
   const pages: PageKey[] = [
-    'home', 'about', 'legal', 'privacy',
-    'hotelsMakkah', 'hotelsMadinah', 'chambreVueKaaba',
-    'transfertJeddahMakkah', 'transfertAeroportMadinah',
+    'home',
+    'about',
+    'legal',
+    'privacy',
+    'hotelsMakkah',
+    'hotelsMadinah',
+    'chambreVueKaaba',
+    'transfertJeddahMakkah',
+    'transfertAeroportMadinah',
     'chauffeurPriveMakkahMadinah',
-    'visitesMadinah', 'visitesMakkah',
-    'services', 'hotels', 'testimonials', 'contact',
+    'visitesMadinah',
+    'visitesMakkah',
+    'services',
+    'hotels',
+    'testimonials',
+    'contact',
   ];
 
   it('round-trip FR : detectRoute(localizedPath(p, "fr")) → { fr, p }', () => {

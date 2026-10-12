@@ -1,7 +1,13 @@
 import type { ReactNode } from 'react';
 import { useReveal } from '../../hooks/useReveal';
 
-export function SeoSection({ children, id }: { children: ReactNode; id?: string }) {
+export function SeoSection({
+  children,
+  id,
+}: {
+  children: ReactNode;
+  id?: string;
+}) {
   const ref = useReveal<HTMLDivElement>();
   return (
     <section
