@@ -1,8 +1,14 @@
 import { detectRoute, localizedPath } from '../i18n/routes';
 
 export const MEASUREMENT_ID = 'G-00WDFD2SY7';
-export const CONSENT_KEY = 'haramain:analytics-consent:v1';
+export const CONSENT_KEY = 'haramain:analytics-consent:v2';
+const LEGACY_CONSENT_KEY = 'haramain:analytics-consent:v1';
 export type AnalyticsConsent = 'granted' | 'denied' | null;
+type ConsentRecord = {
+  decision: Exclude<AnalyticsConsent, null>;
+  decidedAt: number;
+  expiresAt: number;
+};
 type CommercialEvent =
   'click_whatsapp' | 'click_phone' | 'click_email' | 'generate_lead';
 type Page = {
@@ -29,22 +35,132 @@ const denied = {
 const subscribers = new Set<() => void>();
 let initialized = false;
 let consent: AnalyticsConsent = null;
+let consentRecord: ConsentRecord | null = null;
+let expiryTimer: ReturnType<typeof setTimeout> | undefined;
 let configured = false;
 let script: HTMLScriptElement | null = null;
 let loadTimer: ReturnType<typeof setTimeout> | undefined;
 let currentPage: Page | null = null;
 let lastPageLocation: string | null = null;
 let pendingEvents: { name: CommercialEvent; page: Page }[] = [];
+const UTM_KEYS = [
+  'utm_source',
+  'utm_medium',
+  'utm_campaign',
+  'utm_id',
+  'utm_content',
+  'utm_term',
+] as const;
+let campaign: URLSearchParams | null = null;
 
-function readConsent(): AnalyticsConsent {
+/** Calendar months in UTC, clamped to the last day of the target month. */
+function sixMonthsAfter(timestamp: number): number {
+  const date = new Date(timestamp);
+  const day = date.getUTCDate();
+  date.setUTCDate(1);
+  date.setUTCMonth(date.getUTCMonth() + 6);
+  const lastDay = new Date(
+    Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 0),
+  ).getUTCDate();
+  date.setUTCDate(Math.min(day, lastDay));
+  return date.getTime();
+}
+
+function parseConsent(raw: string | null): ConsentRecord | null {
   try {
-    // A session refusal takes priority if persistent storage became read-only.
-    if (sessionStorage.getItem(CONSENT_KEY) === 'denied') return 'denied';
-    const saved = localStorage.getItem(CONSENT_KEY);
-    return saved === 'granted' || saved === 'denied' ? saved : null;
+    const record = JSON.parse(raw || 'null') as ConsentRecord | null;
+    if (
+      !record ||
+      !['granted', 'denied'].includes(record.decision) ||
+      !Number.isSafeInteger(record.decidedAt) ||
+      record.decidedAt < 0 ||
+      record.decidedAt > Date.now() ||
+      !Number.isSafeInteger(record.expiresAt) ||
+      record.expiresAt !== sixMonthsAfter(record.decidedAt) ||
+      Date.now() >= record.expiresAt
+    )
+      return null;
+    return {
+      decision: record.decision,
+      decidedAt: record.decidedAt,
+      expiresAt: record.expiresAt,
+    };
   } catch {
     return null;
   }
+}
+
+function readConsent(): ConsentRecord | null {
+  let latest: ConsentRecord | null = null;
+  for (const storage of ['localStorage', 'sessionStorage'] as const) {
+    try {
+      const record = parseConsent(window[storage].getItem(CONSENT_KEY));
+      if (
+        record &&
+        (!latest ||
+          record.decidedAt > latest.decidedAt ||
+          (record.decidedAt === latest.decidedAt &&
+            record.decision === 'denied'))
+      )
+        latest = record;
+    } catch {
+      /* Try the other storage when one is unavailable. */
+    }
+  }
+  return latest;
+}
+
+function scheduleConsentExpiry(): void {
+  clearTimeout(expiryTimer);
+  if (!consentRecord) return;
+  // Browser timers overflow above ~24.8 days. Re-arm until the real deadline.
+  expiryTimer = setTimeout(
+    () => {
+      ensureConsentValid();
+      scheduleConsentExpiry();
+    },
+    Math.min(consentRecord.expiresAt - Date.now(), 2147483647),
+  );
+}
+
+function ensureConsentValid(): void {
+  if (!consentRecord) return;
+  if (
+    Date.now() < consentRecord.expiresAt &&
+    Date.now() >= consentRecord.decidedAt
+  )
+    return;
+  const renewed = readConsent();
+  if (renewed) {
+    applyConsent(renewed);
+    return;
+  }
+  applyConsent(null);
+}
+
+/** Marketing labels only: no free text, addresses, encodings or phone-like digits. */
+function rememberCampaign(): void {
+  if (campaign || consent === 'denied') return;
+  const url = new URL(window.location.href);
+  if (!detectRoute(url.pathname).page || url.search.length > 4096) return;
+  const valid = new URLSearchParams();
+  for (const key of UTM_KEYS) {
+    const values = url.searchParams.getAll(key);
+    const value = values[0];
+    if (
+      values.length !== 1 ||
+      !value ||
+      value.length > 64 ||
+      !/^[a-z0-9]+(?:[_-][a-z0-9]+)*$/i.test(value) ||
+      value.replace(/\D/g, '').length >= 7 ||
+      /(?:^|[_-])(?:phone|telephone|tel|mobile|name|nom|prenom|address|adresse|customer|client|user)(?:$|[_-])/i.test(
+        value,
+      )
+    )
+      continue;
+    valid.set(key, value);
+  }
+  if (valid.size) campaign = valid;
 }
 
 function command(...args: unknown[]): void {
@@ -55,7 +171,7 @@ function setDisabled(disabled: boolean): void {
   window['ga-disable-G-00WDFD2SY7'] = disabled;
 }
 
-/** Known, public route only. Queries, fragments and unknown paths are omitted. */
+/** Known public routes, plus the in-memory validated campaign for measured pages. */
 function safeLocation(href: string, referrer = false): string {
   try {
     const url = new URL(href);
@@ -63,24 +179,27 @@ function safeLocation(href: string, referrer = false): string {
     if (referrer && url.origin !== window.location.origin)
       return url.origin + '/';
     const { page, locale } = detectRoute(url.pathname);
-    return (
+    const location =
       url.origin +
-      (page ? localizedPath(page, locale) : localizedPath('notFound', locale))
-    );
+      (page ? localizedPath(page, locale) : localizedPath('notFound', locale));
+    return !referrer && page && campaign ? `${location}?${campaign}` : location;
   } catch {
     return '';
   }
 }
 
 function sendPageView(): void {
+  ensureConsentValid();
   if (consent !== 'granted' || !configured || !currentPage) return;
-  if (lastPageLocation === currentPage.page_location) return;
+  const route = currentPage.page_location.split('?')[0];
+  if (lastPageLocation === route) return;
   command('set', currentPage);
   command('event', 'page_view', { ...currentPage, send_to: MEASUREMENT_ID });
-  lastPageLocation = currentPage.page_location;
+  lastPageLocation = route;
 }
 
 function activate(): void {
+  ensureConsentValid();
   if (consent !== 'granted') return;
   setDisabled(false);
   command('consent', 'update', { ...denied, analytics_storage: 'granted' });
@@ -106,6 +225,7 @@ function activate(): void {
   };
   tag.onerror = fail;
   tag.onload = () => {
+    ensureConsentValid();
     if (script !== tag || consent !== 'granted') return;
     clearTimeout(loadTimer);
     configured = true;
@@ -154,9 +274,15 @@ function clearAnalyticsCookies(): void {
   }
 }
 
-function applyConsent(next: AnalyticsConsent): void {
+function applyConsent(record: ConsentRecord | null): void {
+  consentRecord = record;
+  const next = record?.decision || null;
   consent = next;
+  scheduleConsentExpiry();
   if (next === 'granted') {
+    rememberCampaign();
+    if (currentPage)
+      currentPage.page_location = safeLocation(window.location.href);
     activate();
   } else {
     // Consent Mode alone permits cookieless pings; disable the property first.
@@ -164,6 +290,9 @@ function applyConsent(next: AnalyticsConsent): void {
     command('consent', 'update', denied);
     pendingEvents = [];
     lastPageLocation = null;
+    campaign = null;
+    if (currentPage)
+      currentPage.page_location = safeLocation(window.location.href);
     if (!configured && script) {
       clearTimeout(loadTimer);
       script.remove();
@@ -186,7 +315,19 @@ export function initializeAnalytics(): void {
     window.dataLayer!.push(arguments);
   };
   command('consent', 'default', denied);
+  // Undated v1 decisions cannot establish a valid consent period.
+  for (const storage of ['localStorage', 'sessionStorage'] as const) {
+    try {
+      window[storage].removeItem(LEGACY_CONSENT_KEY);
+    } catch {
+      /* Storage unavailable. */
+    }
+  }
   applyConsent(readConsent());
+  rememberCampaign();
+  window.addEventListener('focus', ensureConsentValid);
+  window.addEventListener('pageshow', ensureConsentValid);
+  document.addEventListener('visibilitychange', ensureConsentValid);
   document.addEventListener('click', (event) => {
     if (event.defaultPrevented || !(event.target instanceof Element)) return;
     const anchor = event.target.closest('a[href]');
@@ -201,14 +342,12 @@ export function initializeAnalytics(): void {
       trackCommercialEvent('click_whatsapp');
   });
   window.addEventListener('storage', (event) => {
+    if (event.storageArea && event.storageArea !== window.localStorage) return;
     if (event.key === CONSENT_KEY || event.key === null) {
       // Use the external decision directly, including withdrawal in another tab.
-      const next =
-        event.newValue === 'granted'
-          ? 'granted'
-          : event.newValue === 'denied'
-            ? 'denied'
-            : null;
+      const next = parseConsent(event.newValue);
+      if (next && consentRecord && next.decidedAt < consentRecord.decidedAt)
+        return;
       try {
         sessionStorage.removeItem(CONSENT_KEY);
       } catch {
@@ -234,31 +373,42 @@ export function subscribeAnalyticsConsent(notify: () => void): () => void {
 export function setAnalyticsConsent(
   next: Exclude<AnalyticsConsent, null>,
 ): boolean {
+  const decidedAt = Date.now();
+  const record: ConsentRecord = {
+    decision: next,
+    decidedAt,
+    expiresAt: sixMonthsAfter(decidedAt),
+  };
+  const serialized = JSON.stringify(record);
   let saved = false;
   try {
-    localStorage.setItem(CONSENT_KEY, next);
+    localStorage.setItem(CONSENT_KEY, serialized);
     saved = true;
   } catch {
     /* Private browsing or storage policy. */
   }
   try {
-    sessionStorage.setItem(CONSENT_KEY, next);
+    sessionStorage.setItem(CONSENT_KEY, serialized);
   } catch {
     /* Storage unavailable. */
   }
-  applyConsent(next);
+  applyConsent(record);
   return saved;
 }
 
 /** Called after React commits the page's title and metadata, including FR/AR changes. */
 export function trackCurrentPage(): void {
+  ensureConsentValid();
+  rememberCampaign();
   const location = safeLocation(window.location.href);
-  const changed = currentPage?.page_location !== location;
+  const changed =
+    currentPage?.page_location.split('?')[0] !== location.split('?')[0];
   currentPage = {
     page_location: location,
     page_title: document.title,
     page_referrer: changed
-      ? currentPage?.page_location || safeLocation(document.referrer, true)
+      ? currentPage?.page_location.split('?')[0] ||
+        safeLocation(document.referrer, true)
       : currentPage?.page_referrer || '',
     language: detectRoute(window.location.pathname).locale,
   };
@@ -266,12 +416,14 @@ export function trackCurrentPage(): void {
 }
 
 function sendCommercialEvent(name: CommercialEvent, page: Page): void {
+  ensureConsentValid();
   if (consent !== 'granted' || !configured) return;
   command('event', name, { ...page, send_to: MEASUREMENT_ID });
 }
 
 /** No arbitrary parameters, link targets or form values can enter analytics. */
 export function trackCommercialEvent(name: CommercialEvent): void {
+  ensureConsentValid();
   if (consent !== 'granted' || !currentPage) return;
   if (configured) sendCommercialEvent(name, currentPage);
   else if (script) pendingEvents.push({ name, page: { ...currentPage } });

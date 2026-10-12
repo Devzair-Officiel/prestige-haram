@@ -436,7 +436,7 @@ const fr: Translations = {
   cookies: {
     title: 'Votre choix pour la mesure d’audience',
     description:
-      'Avec votre accord, Google Analytics nous aide à mesurer les pages consultées et les demandes de devis. Aucun outil analytique ne se charge avant votre accord. Refuser ne limite pas votre navigation. Vous pouvez retirer votre accord à tout moment via « Gérer les cookies ».',
+      'Avec votre accord, Google Analytics nous aide à mesurer les pages consultées et les demandes de devis. Aucun outil analytique ne se charge avant votre accord. Refuser ne limite pas votre navigation. Votre choix vaut six mois, puis nous vous le redemandons. Vous pouvez retirer votre accord à tout moment via « Gérer les cookies ».',
     privacyLink: 'Politique de confidentialité',
     accept: 'Accepter',
     refuse: 'Refuser',
@@ -587,7 +587,7 @@ const fr: Translations = {
         paragraphs: [
           'Google Analytics 4 mesure l’audience du site (pages consultées, clics de contact et demandes de devis confirmées), uniquement après votre consentement explicite. Avant acceptation ou en cas de refus, aucun script ni aucune requête Google Analytics n’est chargé. Aucune fonctionnalité publicitaire n’est activée.',
           "Les polices d'écriture sont auto-hébergées : les fichiers de fonte (Cormorant Garamond, Manrope, Noto Naskh Arabic) sont servis depuis notre propre domaine, sans requête vers Google Fonts ni transfert d'adresse IP à un tiers.",
-          'Votre décision est mémorisée dans le stockage local du navigateur. Le lien « Gérer les cookies », présent en pied de page, permet de la modifier ou de retirer votre consentement en choisissant « Refuser ». Les envois futurs sont alors bloqués et les cookies analytiques accessibles sont supprimés.',
+          'Votre décision, son horodatage et son expiration sont mémorisés dans le stockage local du navigateur pour six mois calendaires, que vous acceptiez ou refusiez. Après expiration, votre choix est redemandé avant toute nouvelle collecte. Le lien « Gérer les cookies », présent en pied de page, permet de modifier votre décision ou de retirer votre consentement en choisissant « Refuser ». Les envois futurs sont alors bloqués et les cookies analytiques accessibles sont supprimés.',
         ],
       },
       {
@@ -685,7 +685,8 @@ const fr: Translations = {
         paragraphs: [
           'Google Analytics 4 est utilisé uniquement avec votre consentement pour mesurer les pages vues, les clics WhatsApp, téléphone et e-mail, ainsi que les demandes de devis confirmées par notre serveur. Des cookies analytiques (_ga et _ga_…) peuvent alors être déposés. Aucun script ni aucune requête Google Analytics ne se charge avant acceptation ou après refus ; les fonctionnalités publicitaires restent désactivées.',
           "Les polices d'écriture (Cormorant Garamond, Manrope, Noto Naskh Arabic) sont auto-hébergées : les fichiers de fonte sont servis depuis notre propre domaine. Aucune requête n'est effectuée vers Google Fonts et aucune adresse IP n'est transmise à un tiers de ce fait.",
-          'Votre choix est conservé dans le stockage local de votre navigateur, avec un repli de refus pour la session si nécessaire. Vous pouvez accepter, refuser ou retirer votre consentement via « Gérer les cookies » en pied de page. Le retrait bloque les envois futurs et supprime les cookies analytiques accessibles ; il ne supprime pas rétroactivement les données déjà envoyées.',
+          'Votre choix et ses dates sont conservés dans le stockage local de votre navigateur pour six mois calendaires, avec un repli pour la session si nécessaire. Cette durée s’applique à l’acceptation comme au refus et chaque nouveau choix explicite la renouvelle. Après expiration, la collecte s’arrête et votre choix est redemandé. Vous pouvez accepter, refuser ou retirer votre consentement via « Gérer les cookies » en pied de page. Le retrait bloque les envois futurs et supprime les cookies analytiques accessibles ; il ne supprime pas rétroactivement les données déjà envoyées.',
+          'Les paramètres de campagne utm_source, utm_medium, utm_campaign, utm_id, utm_content et utm_term sont filtrés pour ne conserver que des libellés marketing courts. La campagne peut être gardée temporairement en mémoire pendant la navigation avant votre choix, sans stockage de suivi ni transmission à Google avant votre acceptation. Les autres paramètres d’URL et les valeurs identifiées comme sensibles sont écartés.',
           'La durée de conservation des données dans Google Analytics, celle des cookies et les autres paramètres du compte doivent être vérifiés manuellement par le responsable du site ; aucune durée non vérifiée n’est annoncée ici.',
         ],
       },

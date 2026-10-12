@@ -25,14 +25,40 @@ et AR, avec RTL et commandes clavier natives. Le panneau de gestion reçoit le
 focus ; Échap le ferme sans modifier un choix enregistré et rend le focus au
 bouton d’ouverture. Accepter et Refuser ont la même présentation.
 
-La décision est enregistrée sous `haramain:analytics-consent:v1` dans
-`localStorage`. Un refus de session dans `sessionStorage` prévaut si le stockage
-persistant devient non modifiable. Si l’écriture échoue, la bannière le signale.
+La décision est enregistrée sous `haramain:analytics-consent:v2` dans
+`localStorage`, sous la forme `{ decision, decidedAt, expiresAt }` (horodatages en
+millisecondes). Elle vaut **six mois calendaires**, pour Accepter comme Refuser.
+Le calcul utilise UTC, conserve l’heure et borne le jour à la fin du mois cible :
+le 31 août 2026 expire le 28 février 2027. Cette durée est un choix de gestion du
+site, pas une obligation légale universelle ni la durée de conservation GA4.
+
+Chaque nouvelle décision explicite renouvelle la période ; naviguer ou recharger
+ne la prolonge pas. Les anciens choix `v1`, sans date vérifiable, sont ignorés
+et retirés au mieux. Un enregistrement corrompu, futur, expiré ou dont
+l’expiration ne correspond pas aux six mois est ignoré. La bannière réapparaît
+et aucune ancienne acceptation ne permet de charger GA4.
+
+Une copie datée dans `sessionStorage` sert de repli si le stockage persistant
+est indisponible. Le choix valide le plus récent prévaut ; en cas d’égalité,
+le refus est prioritaire. Si l’écriture persistante échoue, la bannière le signale.
+Les événements `storage` synchronisent les choix entre onglets ; une ancienne
+acceptation ne remplace pas un retrait plus récent. Un effacement du stockage
+ou un choix invalide reçu d’un autre onglet remet la décision en attente.
+
+L’expiration est surveillée par un minuteur réarmé (pour éviter la limite des
+minuteurs du navigateur), au retour au premier plan et avant tout envoi, chargement
+ou traitement d’événement en attente. À l’échéance, le module désactive GA4,
+réaffiche la bannière, vide les événements en attente et nettoie les cookies
+analytiques accessibles. Le renouvellement réutilise la balise déjà chargée.
+Les horodatages dépendent de l’horloge du navigateur ; un recul avant la date
+du choix invalide celui-ci. Un navigateur totalement suspendu exécute le contrôle
+à sa reprise ; les événements applicatifs vérifient aussi l’échéance directement.
+
 Le retrait active d’abord `ga-disable-G-00WDFD2SY7`, met à jour Consent Mode,
 annule les événements en attente et supprime les cookies `_ga` / `_ga_*`
 accessibles, en testant les domaines parents et chemins courants. Une décision
-retirée reste refusée après rechargement ; les changements de stockage sont aussi
-pris en compte dans les autres onglets.
+retirée reste refusée après rechargement jusqu’à son expiration ou à un nouveau
+choix explicite.
 
 Le JavaScript Google déjà exécuté ne peut pas être déchargé ; le mécanisme
 officiel de désactivation empêche ses futurs envois. Une requête déjà partie
@@ -52,12 +78,56 @@ de route publique génèrent une vue manuelle ; StrictMode, les ancres et les
 variantes de paramètres de requête ne produisent pas de doublon.
 
 Les paramètres sont `page_location`, `page_title`, `page_referrer`, `language` et
-`send_to`. Les URL locales sont limitées aux routes publiques connues, sans
-paramètres ni fragments ; les routes inconnues deviennent `/404` ou `/ar-sa/404`
-uniquement dans les mesures. Le premier référent externe est réduit à son
-origine ; ensuite le référent est la précédente page SPA. Ces filtres réduisent
-la précision des campagnes/référents au profit de la confidentialité. Les
-canonical, hreflang, sitemap et statuts HTTP ne sont pas modifiés.
+`send_to`. Les URL locales restent limitées aux routes publiques connues ; les
+routes inconnues deviennent `/404` ou `/ar-sa/404` uniquement dans les mesures.
+Les fragments sont supprimés. Le premier référent externe est réduit à son
+origine ; ensuite le référent est la précédente page SPA, sans paramètres.
+Les canonical, hreflang, sitemap et statuts HTTP ne sont pas modifiés.
+
+## Campagnes UTM et confidentialité
+
+Seuls `utm_source`, `utm_medium`, `utm_campaign`, `utm_id`, `utm_content` et
+`utm_term` peuvent figurer dans `page_location`. Chaque valeur doit :
+
+- contenir de 1 à 64 caractères ASCII alphanumériques, avec éventuellement des
+  séparateurs simples `_` ou `-` entre groupes ; la casse est conservée ;
+- contenir moins de sept chiffres au total (même séparés), pour écarter les
+  numéros de téléphone et autres longues séquences numériques ;
+- ne pas contenir de marqueurs personnels identifiables tels que `phone`,
+  `nom`, `prenom`, `address`, `customer` ou `user` comme mots séparés.
+
+Les paramètres dupliqués, inconnus, vides et les valeurs non conformes sont
+écartés, sans troncature ni décodage récursif. Les espaces, points, `@`, `+`,
+barres obliques, caractères Unicode et encodages résiduels sont donc rejetés.
+Au-delà de 4096 caractères de requête, aucun UTM n’est retenu. Ces limites peuvent
+rejeter des libellés marketing légitimes, notamment des identifiants numériques
+longs ; employer des libellés courts comme `hotels_madinah` ou `story-1`.
+Le support marketing `utm_medium=email` reste autorisé pour les newsletters ;
+une adresse e-mail est rejetée par ses caractères non autorisés.
+Aucun filtre syntaxique ne peut reconnaître un nom personnel déguisé en libellé
+marketing : les créateurs de campagnes doivent utiliser exclusivement des
+libellés non personnels, sans identifiant de destinataire ou de client.
+
+La première campagne validée d’une route connue est gardée **uniquement en
+mémoire du document**, sans cookie, stockage de suivi ni requête Google avant
+acceptation. Une navigation SPA sans UTM, y compris vers l’arabe, conserve cette
+campagne ; les balises internes ultérieures ne la remplacent pas et ne sont pas
+fusionnées avec elle. À l’acceptation, la page courante porte les UTM validés dans
+les paramètres de configuration GA4 et dans son unique `page_view`. Les pages
+suivantes et événements commerciaux utilisent la même campagne dans leur URL
+analytique. Aucun paramètre libre de campagne n’est ajouté aux événements.
+GA4 lit les UTM dans `page_location`, comme décrit dans sa
+[documentation sur les sources de trafic](https://support.google.com/analytics/answer/11242841?hl=fr).
+`send_page_view: false` est conservé.
+
+Le refus, le retrait et l’expiration effacent la campagne en mémoire. Aucun
+événement ni aucune attribution n’est envoyé pour un visiteur qui refuse.
+Une acceptation ultérieure peut lire les UTM encore présents dans l’URL courante,
+mais ne restaure pas une campagne effacée après une navigation sans UTM.
+Un rechargement avant consentement après avoir quitté l’URL balisée perd aussi
+cette attribution, puisque celle-ci n’a pas été persistée. Aucun historique des
+pages consultées avant acceptation n’est rejoué. La déduplication utilise la
+route sans paramètres : changer seulement l’ancre ou les UTM ne crée pas de vue.
 
 | Événement        | Déclenchement                                  | Événement clé conseillé |
 | ---------------- | ---------------------------------------------- | ----------------------- |
@@ -87,7 +157,7 @@ acceptation ne sont jamais rejouées.
 3. Vérifier la conservation GA4, les durées des cookies, les accès au compte,
    les filtres du trafic interne, Google signals/publicité, les conditions Google
    et les éventuels transferts. Compléter les mentions après vérification ;
-   aucune durée ni configuration du compte n’a été supposée.
+   la validité de six mois concerne uniquement le choix du visiteur, pas ces durées GA4.
 
 ## Vérification
 
@@ -141,73 +211,33 @@ nécessaires selon la documentation Google, sans ouvrir globalement les scripts.
 Sources : [Consent Mode basique](https://developers.google.com/tag-platform/security/concepts/consent-mode),
 [pages vues manuelles](https://developers.google.com/analytics/devguides/collection/ga4/views),
 [désactivation et confidentialité](https://developers.google.com/tag-platform/security/guides/privacy),
-[directives CSP](https://developers.google.com/tag-platform/security/guides/csp).
+[directives CSP](https://developers.google.com/tag-platform/security/guides/csp),
+[configuration des campagnes](https://developers.google.com/analytics/devguides/collection/ga4/reference/config).
 
-## Validation livrée
+## Validation de ces deux améliorations
 
-- `npm run build` : réussi ; avertissement Vite non bloquant sur le bundle principal de plus de 500 kB.
-- `npm run lint` : réussi.
-- `npm run test` : 118 tests réussis, dont 30 ajoutés pour cette intégration.
-- `npm run format:check` et `git diff --check` : réussis.
-- Contrôle Chrome local en FR desktop (1440 × 1000) et AR mobile (390 × 844) :
-  bannière dans la fenêtre, refus/rechargement, acceptation unique, navigation,
-  ancre, retour arrière, clic e-mail et retrait validés, sans erreur JavaScript.
-  Le transport Google était simulé ; aucune donnée de test envoyée à GA4.
-- `npm audit` signale trois vulnérabilités élevées sur des dépendances de
-  développement déjà présentes dans le verrou initial (`brace-expansion`,
-  `js-yaml`, `source-map-js`). Leur mise à jour est distincte de l’intégration.
+`npm run build`, `npm run lint`, `npm run test`, `npm run format:check` et
+`git diff --check` ont réussi. La suite comprend **180 tests**, dont **62 ajoutés**
+pour ces améliorations. Le build conserve l’avertissement Vite non bloquant sur
+le bundle principal de plus de 500 kB. Les suites couvrent les campagnes
+valides et sensibles, l’acceptation différée, les refus, FR/AR et StrictMode,
+les fins de mois et années bissextiles, l’échéance exacte, l’expiration en session,
+les anciens formats, données invalides, stockages indisponibles et plusieurs
+onglets. Les tests du formulaire et des événements commerciaux restent actifs.
+Les transports Google et l’API de devis sont simulés : Temps réel, DebugView et
+l’attribution dans les rapports doivent être vérifiés manuellement après livraison.
 
-Les vérifications Temps réel / DebugView, les paramètres du compte et le
-déploiement restent à effectuer par le responsable du site.
-
-## Fichiers livrés
-
-Intégration, textes, tests et documentation :
+Fichiers concernés par cette amélioration ciblée :
 
 ```text
-README.md
-docs/analytics.md
-package.json
-package-lock.json
-src/main.tsx
 src/services/analytics.ts
 src/services/analytics.test.ts
 src/services/analytics.integration.test.tsx
-src/components/ui/CookieConsent.tsx
-src/components/layout/Footer.tsx
-src/hooks/usePageMetadata.ts
-src/pages/Home/sections/QuoteForm.tsx
-src/i18n/types.ts
 src/i18n/fr.ts
 src/i18n/ar-SA.ts
-src/styles/global.css
+docs/analytics.md
 ```
 
-Corrections Prettier uniquement pour faire passer le contrôle global existant :
-
-```text
-index.html
-src/app/App.tsx
-src/components/layout/Header.tsx
-src/components/seo/FaqAccordion.tsx
-src/components/seo/SeoLandingPage.tsx
-src/components/seo/SeoSection.tsx
-src/i18n/routes.test.ts
-src/i18n/routes.ts
-src/i18n/utils.ts
-src/pages/ChambreVueKaaba/ChambreVueKaabaPage.tsx
-src/pages/ChauffeurPriveMakkahMadinah/ChauffeurPriveMakkahMadinahPage.tsx
-src/pages/Contact/ContactPage.tsx
-src/pages/Home/sections/Hotels.tsx
-src/pages/Home/sections/Services.tsx
-src/pages/HotelsMadinah/HotelsMadinahPage.tsx
-src/pages/HotelsMakkah/HotelsMakkahPage.tsx
-src/pages/Services/ServicesPage.tsx
-src/pages/Testimonials/TestimonialsPage.tsx
-src/pages/TransfertAeroportMadinah/TransfertAeroportMadinahPage.tsx
-src/pages/TransfertJeddahMakkah/TransfertJeddahMakkahPage.tsx
-src/pages/VisitesMadinah/VisitesMadinahPage.tsx
-src/pages/VisitesMakkah/VisitesMakkahPage.tsx
-```
-
-Les fichiers PHP, Docker/Nginx, sitemap et robots.txt sont inchangés.
+Aucune dépendance ajoutée. Les composants, routes SEO, fichiers PHP,
+Docker/Nginx, sitemap et robots.txt sont inchangés. Aucune modification distante
+GA4 ni aucun déploiement n’est effectué.

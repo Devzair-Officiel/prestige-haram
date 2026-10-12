@@ -17,6 +17,7 @@ function events(name: string): unknown[][] {
 
 beforeEach(async () => {
   vi.resetModules();
+  vi.useFakeTimers({ toFake: ['Date', 'setTimeout', 'clearTimeout'] });
   vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT', true);
   vi.stubGlobal(
     'matchMedia',
@@ -53,15 +54,117 @@ afterEach(async () => {
   for (const [type, listener, options] of documentListeners.mock.calls)
     document.removeEventListener(type, listener, options);
   vi.restoreAllMocks();
+  vi.clearAllTimers();
+  vi.useRealTimers();
   vi.unstubAllGlobals();
 });
 
 describe('React SPA integration', () => {
+  it('keeps a landing UTM campaign through delayed consent and preserves SEO in FR/AR', async () => {
+    const { default: App } = await import('../app/App');
+    const { default: CookieConsent } =
+      await import('../components/ui/CookieConsent');
+    const { navigateTo } = await import('../i18n/utils');
+    history.replaceState(
+      {},
+      '',
+      '/?utm_source=instagram&utm_medium=social&utm_campaign=hotels_madinah&email=private@example.com',
+    );
+    await react.act(async () =>
+      root.render(
+        <react.StrictMode>
+          <I18nProvider>
+            <App />
+            <CookieConsent />
+          </I18nProvider>
+        </react.StrictMode>,
+      ),
+    );
+    await react.act(async () => navigateTo('/hotels-madinah'));
+    await react.act(async () => navigateTo('/ar-sa/hotels-madinah'));
+    expect(events('page_view')).toHaveLength(0);
+    expect(document.querySelector('#haramain-ga4')).toBeNull();
+    expect(localStorage.length).toBe(0);
+    expect(sessionStorage.length).toBe(0);
+    await react.act(async () =>
+      document
+        .querySelector<HTMLButtonElement>('.cookie-consent button')!
+        .click(),
+    );
+    document.querySelector('#haramain-ga4')!.dispatchEvent(new Event('load'));
+    expect(events('page_view')).toHaveLength(1);
+    expect(events('page_view')[0][2]).toMatchObject({
+      page_location:
+        window.location.origin +
+        '/ar-sa/hotels-madinah?utm_source=instagram&utm_medium=social&utm_campaign=hotels_madinah',
+      page_title: document.title,
+      language: 'ar-SA',
+    });
+    expect(
+      document.querySelector('link[rel="canonical"]')?.getAttribute('href'),
+    ).toBe('https://haramainprestige.com/ar-sa/hotels-madinah');
+    expect(document.querySelectorAll('link[hreflang]')).toHaveLength(3);
+    expect(JSON.stringify(window.dataLayer)).not.toContain(
+      'private@example.com',
+    );
+    await react.act(async () => navigateTo('/ar-sa/hotels-madinah#devis'));
+    expect(events('page_view')).toHaveLength(1);
+    await react.act(async () => navigateTo('/hotels-madinah'));
+    expect(events('page_view')).toHaveLength(2);
+    expect(document.querySelectorAll('#haramain-ga4')).toHaveLength(1);
+  });
+
+  it.each(['fr', 'ar-SA'] as const)(
+    'reopens the %s banner on expiry and renews with no second script',
+    async (locale) => {
+      const { default: CookieConsent } =
+        await import('../components/ui/CookieConsent');
+      const { default: Footer } = await import('../components/layout/Footer');
+      history.replaceState({}, '', locale === 'fr' ? '/' : '/ar-sa/');
+      vi.setSystemTime(new Date('2026-01-31T10:00:00.000Z'));
+      analytics.trackCurrentPage();
+      analytics.setAnalyticsConsent('granted');
+      document.querySelector('#haramain-ga4')!.dispatchEvent(new Event('load'));
+      await react.act(async () =>
+        root.render(
+          <I18nProvider>
+            <Footer />
+            <CookieConsent />
+          </I18nProvider>,
+        ),
+      );
+      expect(document.querySelector('.cookie-consent')).toBeNull();
+      const { expiresAt } = JSON.parse(
+        localStorage.getItem(analytics.CONSENT_KEY)!,
+      );
+      await react.act(async () =>
+        vi.advanceTimersByTime(expiresAt - Date.now()),
+      );
+      const panel = document.querySelector<HTMLElement>('.cookie-consent')!;
+      expect(panel).not.toBeNull();
+      expect(panel.dir).toBe(locale === 'fr' ? 'ltr' : 'rtl');
+      expect(panel.textContent).toContain(
+        locale === 'fr' ? 'Accepter' : 'قبول',
+      );
+      expect(analytics.getAnalyticsConsent()).toBeNull();
+      analytics.trackCommercialEvent('generate_lead');
+      expect(events('generate_lead')).toHaveLength(0);
+      await react.act(async () => panel.querySelector('button')!.click());
+      expect(document.querySelector('.cookie-consent')).toBeNull();
+      expect(analytics.getAnalyticsConsent()).toBe('granted');
+      expect(document.querySelectorAll('#haramain-ga4')).toHaveLength(1);
+      expect(events('page_view')).toHaveLength(2);
+      expect(
+        JSON.parse(localStorage.getItem(analytics.CONSENT_KEY)!),
+      ).toMatchObject({ decidedAt: expiresAt });
+    },
+  );
+
   it('tracks the committed titles once in StrictMode, including custom navigation, FR/AR and popstate', async () => {
     const { default: App } = await import('../app/App');
     const { navigateTo } = await import('../i18n/utils');
     analytics.setAnalyticsConsent('granted');
-    document.querySelector('script')!.dispatchEvent(new Event('load'));
+    document.querySelector('#haramain-ga4')!.dispatchEvent(new Event('load'));
     await react.act(async () => {
       root.render(
         <react.StrictMode>
@@ -126,7 +229,7 @@ describe('React SPA integration', () => {
       region()!.querySelectorAll('button')[1].click(),
     );
     expect(region()).toBeNull();
-    expect(document.querySelector('script')).toBeNull();
+    expect(document.querySelector('#haramain-ga4')).toBeNull();
     const manage = document.querySelector<HTMLButtonElement>('.cookie-manage')!;
     manage.focus();
     await react.act(async () => manage.click());
@@ -179,7 +282,9 @@ describe('quote form conversions', () => {
         await import('../pages/Home/sections/QuoteForm');
       if (scenario.consent === 'granted' || scenario.consent === 'withdrawn') {
         analytics.setAnalyticsConsent('granted');
-        document.querySelector('script')!.dispatchEvent(new Event('load'));
+        document
+          .querySelector('#haramain-ga4')!
+          .dispatchEvent(new Event('load'));
         if (scenario.consent === 'withdrawn')
           analytics.setAnalyticsConsent('denied');
       } else if (scenario.consent === 'denied')
@@ -232,7 +337,7 @@ describe('quote form conversions', () => {
       const { default: QuoteForm } =
         await import('../pages/Home/sections/QuoteForm');
       analytics.setAnalyticsConsent('granted');
-      document.querySelector('script')!.dispatchEvent(new Event('load'));
+      document.querySelector('#haramain-ga4')!.dispatchEvent(new Event('load'));
       analytics.trackCurrentPage();
       const fetchMock =
         failure === 'network'
