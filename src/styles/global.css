@@ -86,7 +86,7 @@ textarea::placeholder {
   inset-inline: 16px;
   bottom: 16px;
   z-index: 10000;
-  max-width: 760px;
+  max-width: 1260px;
   max-height: calc(100dvh - 32px);
   overflow-y: auto;
   margin-inline: auto;
@@ -121,7 +121,9 @@ textarea::placeholder {
 }
 
 .cookie-consent-actions button {
-  flex: 1 1 180px;
+  flex: 0 1 140px;
+  min-width: 112px;
+  max-width: 100%;
   min-height: 44px;
   padding: 10px 18px;
   border: 1px solid #e6c878;
@@ -134,8 +136,21 @@ textarea::placeholder {
 
 .cookie-consent-actions .cookie-consent-close {
   flex: 0 1 auto;
+  min-width: 0;
   color: #e6c878;
   background: transparent;
+}
+
+@media (max-width: 480px) {
+  .cookie-consent-actions {
+    gap: 8px;
+  }
+
+  .cookie-consent-actions button {
+    flex-basis: 112px;
+    min-width: 96px;
+    padding-inline: 14px;
+  }
 }
 
 .cookie-manage {
