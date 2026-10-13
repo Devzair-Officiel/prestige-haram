@@ -49,6 +49,7 @@ beforeEach(async () => {
   sessionStorage.clear();
   document.head.innerHTML = '';
   document.body.innerHTML = '';
+  vi.spyOn(document, 'referrer', 'get').mockReturnValue('');
   history.replaceState({}, '', '/');
   window.dataLayer = [];
   window.gtag = undefined;
@@ -391,6 +392,9 @@ describe('validated marketing campaigns', () => {
   it.each(['instagram', 'facebook', 'whatsapp', 'newsletter'])(
     'attributes a %s arrival using only the six allowed parameters',
     (source) => {
+      vi.spyOn(document, 'referrer', 'get').mockReturnValue(
+        `https://www.${source}.com/private@example.com?phone=0612345678#private`,
+      );
       const medium = source === 'newsletter' ? 'email' : 'social';
       history.replaceState(
         {},
@@ -410,6 +414,7 @@ describe('validated marketing campaigns', () => {
         `/hotels-madinah?utm_source=${source}&utm_medium=${medium}&utm_campaign=hotels_madinah&utm_id=hp2026&utm_content=story-1&utm_term=hotel_madinah`;
       expect(events('page_view')[0][2]).toMatchObject({
         page_location: expected,
+        page_referrer: `https://www.${source}.com/`,
       });
       expect(commands().find(([name]) => name === 'config')?.[2]).toMatchObject(
         { page_location: expected, send_page_view: false },
@@ -420,14 +425,25 @@ describe('validated marketing campaigns', () => {
       });
       expect(JSON.stringify(commands())).not.toMatch(/private|gclid|#devis/);
       expect(localStorage.getItem(analytics.CONSENT_KEY)).not.toContain('utm_');
+      view('/contact');
+      expect(events('page_view')[1][2]).toMatchObject({
+        page_location: window.location.origin + '/contact',
+        page_referrer: window.location.origin + '/hotels-madinah',
+      });
+      expect(JSON.stringify(events('page_view')[1])).not.toMatch(
+        /utm_|campaign_/,
+      );
     },
   );
 
   it('preserves the landing campaign across FR/AR navigation before acceptance', () => {
+    vi.spyOn(document, 'referrer', 'get').mockReturnValue(
+      'https://www.instagram.com/private?email=private@example.com#private',
+    );
     history.replaceState(
       {},
       '',
-      '/?utm_source=instagram&utm_medium=social&utm_campaign=omra_2026',
+      '/?utm_source=instagram&utm_medium=social&utm_campaign=omra_2026&utm_id=hp2026&utm_content=story-1&utm_term=hotel_madinah',
     );
     analytics.initializeAnalytics();
     analytics.trackCurrentPage();
@@ -440,23 +456,289 @@ describe('validated marketing campaigns', () => {
     loadTag();
     expect(events('page_view')).toHaveLength(1);
     expect(events('page_view')[0][2]).toMatchObject({
-      page_location:
-        window.location.origin +
-        '/ar-sa/hotels-madinah?utm_source=instagram&utm_medium=social&utm_campaign=omra_2026',
-      page_referrer: window.location.origin + '/hotels-madinah',
+      page_location: window.location.origin + '/ar-sa/hotels-madinah',
+      page_referrer: 'https://www.instagram.com/',
+      campaign_source: 'instagram',
+      campaign_medium: 'social',
+      campaign_name: 'omra_2026',
+      campaign_id: 'hp2026',
+      campaign_content: 'story-1',
+      campaign_term: 'hotel_madinah',
       language: 'ar-SA',
     });
+    expect(commands().find(([name]) => name === 'config')?.[2]).toMatchObject({
+      page_location: window.location.origin + '/ar-sa/hotels-madinah',
+      page_referrer: 'https://www.instagram.com/',
+    });
+    analytics.trackCommercialEvent('generate_lead');
+    expect(events('generate_lead')).toHaveLength(1);
+    expect(JSON.stringify(events('generate_lead'))).not.toMatch(
+      /utm_|campaign_/,
+    );
     view('/ar-sa/hotels-madinah#devis');
     view('/ar-sa/hotels-madinah?utm_source=facebook');
     expect(events('page_view')).toHaveLength(1);
     view('/');
     expect(events('page_view')).toHaveLength(2);
     expect(events('page_view')[1][2]).toMatchObject({
-      page_location:
-        window.location.origin +
-        '/?utm_source=instagram&utm_medium=social&utm_campaign=omra_2026',
+      page_location: window.location.origin + '/',
       page_referrer: window.location.origin + '/ar-sa/hotels-madinah',
     });
+    expect(JSON.stringify(events('page_view')[1])).not.toMatch(
+      /utm_|campaign_/,
+    );
+    for (const entry of commands().filter(([name]) => name !== 'event'))
+      expect(JSON.stringify(entry)).not.toMatch(/campaign_/);
+    expect(JSON.stringify(commands())).not.toContain('private');
+  });
+
+  it.each([
+    [
+      'https://www.google.com/search?q=private@example.com#private',
+      'https://www.google.com/',
+    ],
+    [
+      'https://www.instagram.com/private?phone=0612345678',
+      'https://www.instagram.com/',
+    ],
+    ['', ''],
+    ['not-a-url', ''],
+    ['javascript:private', ''],
+  ])(
+    'preserves the cleaned initial referrer %j through delayed consent without UTM',
+    (referrer, expected) => {
+      vi.spyOn(document, 'referrer', 'get').mockReturnValue(referrer);
+      analytics.initializeAnalytics();
+      view('/');
+      view('/hotels-makkah');
+      view('/ar-sa/contact');
+      expect(document.querySelector('script')).toBeNull();
+      expect(events()).toEqual([]);
+      analytics.setAnalyticsConsent('granted');
+      loadTag();
+      expect(events('page_view')).toHaveLength(1);
+      expect(events('page_view')[0][2]).toMatchObject({
+        page_location: window.location.origin + '/ar-sa/contact',
+        page_referrer: expected,
+      });
+      expect(commands().find(([name]) => name === 'config')?.[2]).toMatchObject(
+        {
+          page_referrer: expected,
+        },
+      );
+      view('/contact');
+      expect(events('page_view')[1][2]).toMatchObject({
+        page_location: window.location.origin + '/contact',
+        page_referrer: window.location.origin + '/ar-sa/contact',
+      });
+      expect(JSON.stringify(commands())).not.toMatch(
+        /private|0612345678|campaign_|utm_/,
+      );
+    },
+  );
+
+  it('uses the initial source when navigation continues while the tag is loading', () => {
+    vi.spyOn(document, 'referrer', 'get').mockReturnValue(
+      'https://www.instagram.com/private',
+    );
+    history.replaceState({}, '', '/?utm_source=instagram&utm_medium=social');
+    analytics.initializeAnalytics();
+    analytics.trackCurrentPage();
+    analytics.setAnalyticsConsent('granted');
+    view('/hotels-madinah');
+    analytics.trackCommercialEvent('generate_lead');
+    view('/ar-sa/contact');
+    loadTag();
+    expect(events('page_view')).toHaveLength(1);
+    expect(events('page_view')[0][2]).toMatchObject({
+      page_location: window.location.origin + '/ar-sa/contact',
+      page_referrer: 'https://www.instagram.com/',
+      campaign_source: 'instagram',
+      campaign_medium: 'social',
+    });
+    expect(events('generate_lead')).toHaveLength(1);
+    expect(events('generate_lead')[0][2]).toMatchObject({
+      page_location: window.location.origin + '/hotels-madinah',
+    });
+    expect(JSON.stringify(events('generate_lead'))).not.toMatch(
+      /utm_|campaign_/,
+    );
+  });
+
+  it('does not override or merge a different valid campaign actually on the measured page', () => {
+    history.replaceState(
+      {},
+      '',
+      '/?utm_source=instagram&utm_medium=social&utm_campaign=original',
+    );
+    analytics.initializeAnalytics();
+    analytics.trackCurrentPage();
+    view('/contact?utm_source=newsletter&utm_medium=email');
+    analytics.setAnalyticsConsent('granted');
+    loadTag();
+    expect(events('page_view')[0][2]).toMatchObject({
+      page_location:
+        window.location.origin +
+        '/contact?utm_source=newsletter&utm_medium=email',
+    });
+    expect(JSON.stringify(commands())).not.toMatch(
+      /instagram|original|campaign_/,
+    );
+    view('/hotels-makkah?utm_source=facebook&utm_campaign=current');
+    expect(events('page_view')[1][2]).toMatchObject({
+      page_location:
+        window.location.origin +
+        '/hotels-makkah?utm_source=facebook&utm_campaign=current',
+      page_referrer: window.location.origin + '/contact',
+    });
+    view('/');
+    expect(events('page_view')[2][2]).toMatchObject({
+      page_location: window.location.origin + '/',
+    });
+    expect(JSON.stringify(events('page_view')[2])).not.toMatch(
+      /utm_|campaign_/,
+    );
+  });
+
+  it('consumes deferred campaign overrides once without changing conversions or URL history', () => {
+    history.replaceState(
+      {},
+      '',
+      '/?utm_source=instagram&utm_medium=social&utm_campaign=omra',
+    );
+    analytics.initializeAnalytics();
+    analytics.trackCurrentPage();
+    view('/contact?email=private@example.com#devis');
+    const actualLocation = window.location.href;
+    analytics.setAnalyticsConsent('granted');
+    loadTag();
+    expect(window.location.href).toBe(actualLocation);
+    analytics.setAnalyticsConsent('granted');
+    view('/contact#devis');
+    view('/contact?utm_source=facebook');
+    view('/contact');
+    expect(events('page_view')).toHaveLength(1);
+    for (const name of [
+      'click_whatsapp',
+      'click_phone',
+      'click_email',
+      'generate_lead',
+    ] as const) {
+      analytics.trackCommercialEvent(name);
+      expect(events(name)).toHaveLength(1);
+      expect(events(name)[0][2]).toMatchObject({
+        page_location: window.location.origin + '/contact',
+      });
+      expect(JSON.stringify(events(name))).not.toMatch(/utm_|campaign_/);
+    }
+    view('/ar-sa/');
+    // Returning to a genuinely tagged URL keeps its tags, without a cached override.
+    view('/?utm_source=instagram&utm_medium=social&utm_campaign=omra');
+    view('/#devis');
+    expect(events('page_view')).toHaveLength(3);
+    expect(events('page_view')[2][2]).toMatchObject({
+      page_location:
+        window.location.origin +
+        '/?utm_source=instagram&utm_medium=social&utm_campaign=omra',
+      page_referrer: window.location.origin + '/ar-sa/',
+    });
+    expect(
+      events('page_view').filter(
+        (entry) => 'campaign_source' in (entry[2] as object),
+      ),
+    ).toHaveLength(1);
+    for (const entry of commands().filter(([name]) => name !== 'event'))
+      expect(JSON.stringify(entry)).not.toMatch(/campaign_/);
+    expect(JSON.stringify(commands())).not.toContain('private@example.com');
+  });
+
+  it('keeps the source through a failed load but discards it on withdrawal', () => {
+    vi.spyOn(document, 'referrer', 'get').mockReturnValue(
+      'https://www.instagram.com/private',
+    );
+    history.replaceState({}, '', '/?utm_source=instagram');
+    analytics.initializeAnalytics();
+    analytics.trackCurrentPage();
+    analytics.setAnalyticsConsent('granted');
+    document.querySelector('script')!.dispatchEvent(new Event('error'));
+    view('/contact');
+    analytics.setAnalyticsConsent('granted');
+    loadTag();
+    expect(events('page_view')[0][2]).toMatchObject({
+      page_location: window.location.origin + '/contact',
+      page_referrer: 'https://www.instagram.com/',
+      campaign_source: 'instagram',
+    });
+    analytics.setAnalyticsConsent('denied');
+    view('/ar-sa/');
+    analytics.trackCommercialEvent('generate_lead');
+    expect(events()).toHaveLength(1);
+    analytics.setAnalyticsConsent('granted');
+    expect(events('page_view')[1][2]).toMatchObject({
+      page_location: window.location.origin + '/ar-sa/',
+      page_referrer: '',
+    });
+    expect(JSON.stringify(events('page_view')[1])).not.toMatch(
+      /instagram|campaign_|utm_/,
+    );
+  });
+
+  it.each(['denied', 'expired'] as const)(
+    'discards unmeasured acquisition after consent is %s during tag loading',
+    (decision) => {
+      vi.spyOn(document, 'referrer', 'get').mockReturnValue(
+        'https://www.google.com/search?q=private',
+      );
+      history.replaceState({}, '', '/?utm_source=instagram');
+      analytics.initializeAnalytics();
+      analytics.trackCurrentPage();
+      analytics.setAnalyticsConsent('granted');
+      const oldTag = document.querySelector('script')!;
+      analytics.trackCommercialEvent('generate_lead');
+      view('/contact');
+      if (decision === 'denied') analytics.setAnalyticsConsent('denied');
+      else {
+        const { expiresAt } = JSON.parse(
+          localStorage.getItem(analytics.CONSENT_KEY)!,
+        );
+        vi.setSystemTime(expiresAt);
+      }
+      // No further navigation: even the current page snapshot must forget the source.
+      analytics.trackCommercialEvent('click_email');
+      oldTag.dispatchEvent(new Event('load'));
+      expect(events()).toHaveLength(0);
+      analytics.setAnalyticsConsent('granted');
+      loadTag();
+      expect(events('page_view')[0][2]).toMatchObject({
+        page_location: window.location.origin + '/contact',
+        page_referrer: '',
+      });
+      expect(JSON.stringify(commands())).not.toMatch(
+        /google.com|instagram|campaign_|utm_|private/,
+      );
+      expect(events('generate_lead')).toHaveLength(0);
+    },
+  );
+
+  it('filters all six deferred campaign fields with the same privacy rules as page URLs', () => {
+    history.replaceState(
+      {},
+      '',
+      '/?utm_source=instagram&utm_medium=social&utm_campaign=private%40example.com&utm_id=0612345678&utm_content=user_jean&utm_term=story--1',
+    );
+    analytics.initializeAnalytics();
+    analytics.trackCurrentPage();
+    view('/contact?token=private');
+    analytics.setAnalyticsConsent('granted');
+    loadTag();
+    expect(events('page_view')[0][2]).toMatchObject({
+      page_location: window.location.origin + '/contact',
+      campaign_source: 'instagram',
+      campaign_medium: 'social',
+    });
+    expect(JSON.stringify(commands())).not.toMatch(
+      /private|0612345678|user_jean|story--1|campaign_name|campaign_id|campaign_content|campaign_term/,
+    );
   });
 
   it.each([

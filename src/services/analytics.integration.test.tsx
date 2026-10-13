@@ -32,6 +32,7 @@ beforeEach(async () => {
   sessionStorage.clear();
   history.replaceState({}, '', '/');
   document.head.innerHTML = '';
+  vi.spyOn(document, 'referrer', 'get').mockReturnValue('');
   document.body.innerHTML = '<div id="root"></div>';
   window.dataLayer = [];
   window.gtag = undefined;
@@ -41,7 +42,6 @@ beforeEach(async () => {
   const { createRoot } = await import('react-dom/client');
   ({ I18nProvider } = await import('../i18n'));
   analytics = await import('./analytics');
-  analytics.initializeAnalytics();
   root = createRoot(document.getElementById('root')!);
 });
 
@@ -70,6 +70,10 @@ describe('React SPA integration', () => {
       '',
       '/?utm_source=instagram&utm_medium=social&utm_campaign=hotels_madinah&email=private@example.com',
     );
+    vi.spyOn(document, 'referrer', 'get').mockReturnValue(
+      'https://www.instagram.com/private?email=private@example.com',
+    );
+    analytics.initializeAnalytics();
     await react.act(async () =>
       root.render(
         <react.StrictMode>
@@ -94,9 +98,11 @@ describe('React SPA integration', () => {
     document.querySelector('#haramain-ga4')!.dispatchEvent(new Event('load'));
     expect(events('page_view')).toHaveLength(1);
     expect(events('page_view')[0][2]).toMatchObject({
-      page_location:
-        window.location.origin +
-        '/ar-sa/hotels-madinah?utm_source=instagram&utm_medium=social&utm_campaign=hotels_madinah',
+      page_location: window.location.origin + '/ar-sa/hotels-madinah',
+      page_referrer: 'https://www.instagram.com/',
+      campaign_source: 'instagram',
+      campaign_medium: 'social',
+      campaign_name: 'hotels_madinah',
       page_title: document.title,
       language: 'ar-SA',
     });
@@ -111,6 +117,13 @@ describe('React SPA integration', () => {
     expect(events('page_view')).toHaveLength(1);
     await react.act(async () => navigateTo('/hotels-madinah'));
     expect(events('page_view')).toHaveLength(2);
+    expect(events('page_view')[1][2]).toMatchObject({
+      page_location: window.location.origin + '/hotels-madinah',
+      page_referrer: window.location.origin + '/ar-sa/hotels-madinah',
+    });
+    expect(JSON.stringify(events('page_view')[1])).not.toMatch(
+      /utm_|campaign_/,
+    );
     expect(document.querySelectorAll('#haramain-ga4')).toHaveLength(1);
   });
 
@@ -122,6 +135,7 @@ describe('React SPA integration', () => {
       const { default: Footer } = await import('../components/layout/Footer');
       history.replaceState({}, '', locale === 'fr' ? '/' : '/ar-sa/');
       vi.setSystemTime(new Date('2026-01-31T10:00:00.000Z'));
+      analytics.initializeAnalytics();
       analytics.trackCurrentPage();
       analytics.setAnalyticsConsent('granted');
       document.querySelector('#haramain-ga4')!.dispatchEvent(new Event('load'));
@@ -163,6 +177,7 @@ describe('React SPA integration', () => {
   it('tracks the committed titles once in StrictMode, including custom navigation, FR/AR and popstate', async () => {
     const { default: App } = await import('../app/App');
     const { navigateTo } = await import('../i18n/utils');
+    analytics.initializeAnalytics();
     analytics.setAnalyticsConsent('granted');
     document.querySelector('#haramain-ga4')!.dispatchEvent(new Event('load'));
     await react.act(async () => {
@@ -210,6 +225,7 @@ describe('React SPA integration', () => {
     const { default: CookieConsent } =
       await import('../components/ui/CookieConsent');
     const { default: Footer } = await import('../components/layout/Footer');
+    analytics.initializeAnalytics();
     await react.act(async () =>
       root.render(
         <react.StrictMode>
@@ -280,6 +296,7 @@ describe('quote form conversions', () => {
     async (scenario) => {
       const { default: QuoteForm } =
         await import('../pages/Home/sections/QuoteForm');
+      analytics.initializeAnalytics();
       if (scenario.consent === 'granted' || scenario.consent === 'withdrawn') {
         analytics.setAnalyticsConsent('granted');
         document
@@ -336,6 +353,7 @@ describe('quote form conversions', () => {
     async (failure) => {
       const { default: QuoteForm } =
         await import('../pages/Home/sections/QuoteForm');
+      analytics.initializeAnalytics();
       analytics.setAnalyticsConsent('granted');
       document.querySelector('#haramain-ga4')!.dispatchEvent(new Event('load'));
       analytics.trackCurrentPage();

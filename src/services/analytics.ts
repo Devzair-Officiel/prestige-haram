@@ -42,15 +42,16 @@ let script: HTMLScriptElement | null = null;
 let loadTimer: ReturnType<typeof setTimeout> | undefined;
 let currentPage: Page | null = null;
 let lastPageLocation: string | null = null;
+let initialReferrer = '';
 let pendingEvents: { name: CommercialEvent; page: Page }[] = [];
-const UTM_KEYS = [
-  'utm_source',
-  'utm_medium',
-  'utm_campaign',
-  'utm_id',
-  'utm_content',
-  'utm_term',
-] as const;
+const CAMPAIGN_FIELDS = {
+  utm_source: 'campaign_source',
+  utm_medium: 'campaign_medium',
+  utm_campaign: 'campaign_name',
+  utm_id: 'campaign_id',
+  utm_content: 'campaign_content',
+  utm_term: 'campaign_term',
+} as const;
 let campaign: URLSearchParams | null = null;
 
 /** Calendar months in UTC, clamped to the last day of the target month. */
@@ -139,12 +140,10 @@ function ensureConsentValid(): void {
 }
 
 /** Marketing labels only: no free text, addresses, encodings or phone-like digits. */
-function rememberCampaign(): void {
-  if (campaign || consent === 'denied') return;
-  const url = new URL(window.location.href);
-  if (!detectRoute(url.pathname).page || url.search.length > 4096) return;
+function validatedCampaign(url: URL): URLSearchParams {
   const valid = new URLSearchParams();
-  for (const key of UTM_KEYS) {
+  if (!detectRoute(url.pathname).page || url.search.length > 4096) return valid;
+  for (const key of Object.keys(CAMPAIGN_FIELDS)) {
     const values = url.searchParams.getAll(key);
     const value = values[0];
     if (
@@ -160,6 +159,13 @@ function rememberCampaign(): void {
       continue;
     valid.set(key, value);
   }
+  return valid;
+}
+
+/** Retain only the first valid campaign until the first consented measurement. */
+function rememberCampaign(): void {
+  if (campaign || lastPageLocation || consent === 'denied') return;
+  const valid = validatedCampaign(new URL(window.location.href));
   if (valid.size) campaign = valid;
 }
 
@@ -171,7 +177,7 @@ function setDisabled(disabled: boolean): void {
   window['ga-disable-G-00WDFD2SY7'] = disabled;
 }
 
-/** Known public routes, plus the in-memory validated campaign for measured pages. */
+/** Known public routes, with only validated UTM actually present in this URL. */
 function safeLocation(href: string, referrer = false): string {
   try {
     const url = new URL(href);
@@ -182,7 +188,8 @@ function safeLocation(href: string, referrer = false): string {
     const location =
       url.origin +
       (page ? localizedPath(page, locale) : localizedPath('notFound', locale));
-    return !referrer && page && campaign ? `${location}?${campaign}` : location;
+    const tags = !referrer && page ? validatedCampaign(url) : null;
+    return tags?.size ? `${location}?${tags}` : location;
   } catch {
     return '';
   }
@@ -193,9 +200,28 @@ function sendPageView(): void {
   if (consent !== 'granted' || !configured || !currentPage) return;
   const route = currentPage.page_location.split('?')[0];
   if (lastPageLocation === route) return;
-  command('set', currentPage);
-  command('event', 'page_view', { ...currentPage, send_to: MEASUREMENT_ID });
+  currentPage.page_referrer = lastPageLocation || initialReferrer;
+  // Event scope only: config/set would persist these overrides on later hits.
+  // Real UTM on the measured URL take precedence; never merge two campaigns.
+  const deferredCampaign =
+    !lastPageLocation && !new URL(currentPage.page_location).search
+      ? campaign
+      : null;
+  const campaignParameters: Record<string, string> = {};
+  if (deferredCampaign)
+    for (const [key, field] of Object.entries(CAMPAIGN_FIELDS)) {
+      const value = deferredCampaign.get(key);
+      if (value) campaignParameters[field] = value;
+    }
+  command('set', { ...currentPage });
+  command('event', 'page_view', {
+    ...currentPage,
+    ...campaignParameters,
+    send_to: MEASUREMENT_ID,
+  });
   lastPageLocation = route;
+  campaign = null;
+  initialReferrer = '';
 }
 
 function activate(): void {
@@ -230,14 +256,14 @@ function activate(): void {
     clearTimeout(loadTimer);
     configured = true;
     command('js', new Date());
-    if (currentPage) command('set', currentPage);
+    if (currentPage) command('set', { ...currentPage });
     command('config', MEASUREMENT_ID, {
       send_page_view: false,
       allow_google_signals: false,
       allow_ad_personalization_signals: false,
       // Do not forward raw document.location/referrer even before the first render.
       page_location: safeLocation(window.location.href),
-      page_referrer: safeLocation(document.referrer, true),
+      page_referrer: lastPageLocation || initialReferrer,
     });
     sendPageView();
     for (const event of pendingEvents)
@@ -291,8 +317,11 @@ function applyConsent(record: ConsentRecord | null): void {
     pendingEvents = [];
     lastPageLocation = null;
     campaign = null;
-    if (currentPage)
+    initialReferrer = '';
+    if (currentPage) {
       currentPage.page_location = safeLocation(window.location.href);
+      currentPage.page_referrer = '';
+    }
     if (!configured && script) {
       clearTimeout(loadTimer);
       script.remove();
@@ -324,6 +353,8 @@ export function initializeAnalytics(): void {
     }
   }
   applyConsent(readConsent());
+  if (consent !== 'denied')
+    initialReferrer = safeLocation(document.referrer, true);
   rememberCampaign();
   window.addEventListener('focus', ensureConsentValid);
   window.addEventListener('pageshow', ensureConsentValid);
@@ -401,15 +432,14 @@ export function trackCurrentPage(): void {
   ensureConsentValid();
   rememberCampaign();
   const location = safeLocation(window.location.href);
-  const changed =
-    currentPage?.page_location.split('?')[0] !== location.split('?')[0];
+  const route = location.split('?')[0];
   currentPage = {
     page_location: location,
     page_title: document.title,
-    page_referrer: changed
-      ? currentPage?.page_location.split('?')[0] ||
-        safeLocation(document.referrer, true)
-      : currentPage?.page_referrer || '',
+    page_referrer:
+      lastPageLocation === route
+        ? currentPage?.page_referrer || ''
+        : lastPageLocation || initialReferrer,
     language: detectRoute(window.location.pathname).locale,
   };
   sendPageView();
